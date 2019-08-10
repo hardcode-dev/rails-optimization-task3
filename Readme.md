@@ -62,7 +62,7 @@
 ### bonus
 *Советую приступать к бонусу только после завершения основной части ДЗ.*
 
-В качестве бонуса нужно справиться с файлами `1M.json` (`codename mega`) и `10M.json` (`codename hardcore`)
+В качестве бонуса нужно справиться с импортом файлов `1M.json` (`codename mega`) и `10M.json` (`codename hardcore`)
 
 - [mega](https://www.dropbox.com/s/mhc2pzgtt4bp485/1M.json.gz?dl=1)
 - [hardcore](https://www.dropbox.com/s/h08yke5phz0qzbx/10M.json.gz?dl=1)
