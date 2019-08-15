@@ -1,20 +1,35 @@
+# frozen_string_literal: true
+
 class Bus < ApplicationRecord
-  MODELS = [
-    'Икарус',
-    'Мерседес',
-    'Сканиа',
-    'Буханка',
-    'УАЗ',
-    'Спринтер',
-    'ГАЗ',
-    'ПАЗ',
-    'Вольво',
-    'Газель',
+  MODELS = %w[
+    Икарус
+    Мерседес
+    Сканиа
+    Буханка
+    УАЗ
+    Спринтер
+    ГАЗ
+    ПАЗ
+    Вольво
+    Газель
+  ].freeze
+
+  SERVICES = [
+    'WiFi', # 0
+    'Туалет',                      # 1
+    'Работающий туалет',           # 2
+    'Ремни безопасности',          # 3
+    'Кондиционер общий',           # 4
+    'Кондиционер Индивидуальный',  # 5
+    'Телевизор общий',             # 6
+    'Телевизор индивидуальный',    # 7
+    'Стюардесса',                  # 8
+    'Можно не печатать билет'      # 9
   ].freeze
 
   has_many :trips
-  has_and_belongs_to_many :services, join_table: :buses_services
 
   validates :number, presence: true, uniqueness: true
-  validates :model, inclusion: { in: MODELS }
+
+  enum model: MODELS
 end
