@@ -1,34 +1,44 @@
+# frozen_string_literal: true
+
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
+desc 'Run import data on DB'
 task :reload_json, [:file_name] => :environment do |_task, args|
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
     City.delete_all
     Bus.delete_all
-    Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
 
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+    # Import cities
+    City.import(fetch_cities(json))
+    Bus.import(fetch_buses(json))
+    Trip.import(fetch_trips(json))
+  end
+end
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-    end
+def fetch_cities(json)
+  json.inject(Set.new) { |s, v| s.add v['from'] }.map { |city| City.new(name: city) }
+end
+
+def fetch_buses(json)
+  json.inject(Set.new) { |s, v| s.add v['bus'] }.map do |bus|
+    Bus.new(number: bus['number'],
+            model: bus['model'],
+            services: bus['services'].map { |service| Bus::SERVICES.index(service) })
+  end
+end
+
+def fetch_trips(json)
+  json.map do |trip|
+    Trip.new(
+      from: City.find_by_name(trip['from']),
+      to: City.find_by_name(trip['to']),
+      start_time: trip['start_time'],
+      duration_minutes: trip['duration_minutes'],
+      price_cents: trip['price_cents'],
+      bus: Bus.find_by_number(trip['bus']['number'])
+    )
   end
 end
