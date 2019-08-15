@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 # Наивная загрузка данных из json-файла в БД
-# rake reload_json[fixtures/small.json]
+# rake reload_json[fixtures/large.json]
+
 desc 'Run import data on DB'
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read(args.file_name))
+  json = Oj.load(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
     City.delete_all
