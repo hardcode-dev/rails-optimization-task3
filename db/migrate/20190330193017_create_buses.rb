@@ -1,8 +1,9 @@
 class CreateBuses < ActiveRecord::Migration[5.2]
   def change
     create_table :buses do |t|
-      t.string :number
-      t.string :model
+      t.string  :number
+      t.integer :model
+      t.integer :services, array: true
     end
   end
 end

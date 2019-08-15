@@ -10,26 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2019_03_30_193017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
-    t.string "model"
-  end
-
-  create_table "buses_services", force: :cascade do |t|
-    t.integer "bus_id"
-    t.integer "service_id"
+    t.integer "model"
+    t.integer "services", array: true
   end
 
   create_table "cities", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "services", force: :cascade do |t|
     t.string "name"
   end
 
