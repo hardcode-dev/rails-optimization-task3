@@ -28,3 +28,16 @@
 * В модели Bus колонка model имее так же статические данные. Изменим тип данных на int. И воспользуемся макросом Enum.
 ![erd](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/ERD2.png)
 
+После того как таск был переписан с помощью activerecord-import. Результаты теста стали такие
+
+####Результаты
+
+| File   |    Finished in |
+|:------:|:--------------:|
+| small  |       1.42 sec | 
+| medium |      11.74 sec | 
+| large  |    2 min 5 sec | 
+
+По крайней мере я дождался. В бюджет не уложился. Оптимизируем дальше.
+
+
