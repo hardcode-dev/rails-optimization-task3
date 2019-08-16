@@ -15,7 +15,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     # Import cities
     City.import(fetch_cities(json))
     Bus.import(fetch_buses(json))
-    Trip.import(fetch_trips(json))
+    Trip.import(fetch_trips(json), validate: false, no_returning: true)
   end
 end
 
@@ -34,12 +34,20 @@ end
 def fetch_trips(json)
   json.map do |trip|
     Trip.new(
-      from: City.find_by_name(trip['from']),
-      to: City.find_by_name(trip['to']),
-      start_time: trip['start_time'],
+      from: cities.detect { |city| city.name == trip['from'] },
+      to:   cities.detect { |city| city.name == trip['to'] },
+      start_time:       trip['start_time'],
       duration_minutes: trip['duration_minutes'],
-      price_cents: trip['price_cents'],
-      bus: Bus.find_by_number(trip['bus']['number'])
+      price_cents:      trip['price_cents'],
+      bus:  buses.detect { |bus| bus.number == trip['bus']['number'] }
     )
   end
+end
+
+def cities
+  @cities ||= City.all
+end
+
+def buses
+  @buses ||= Bus.all
 end
