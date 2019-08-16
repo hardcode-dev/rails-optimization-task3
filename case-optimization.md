@@ -20,13 +20,13 @@
 Для импорта данных воспользуемся библиотекой `activerecord-import`
 
 Что бы понять что вообще происходит нарисовал ERD
-![erd](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/ERD.png)
+![erd](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/ERD.png)
 
 ####Выявил ряд проблем
 * Таблица services лишняя. Запись/обновление/удаление производиться не будет. Значит смело можно удалять таблицу и модель. А данные засунуть как минимум в массив. Тем более их мало. А в таблице будем Bus будем хранить массив индексов сервисов. Соответственно львинная доля запросов уйдет сама. Минус этого усложниться логика в представлениях. И мб проще и быстрее в массиве сразу хранить строки. Пока не знаю. Тесты покажут.
 
 * В модели Bus колонка model имее так же статические данные. Изменим тип данных на int. И воспользуемся макросом Enum.
-![erd](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/ERD2.png)
+![erd](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/ERD2.png)
 
 Так же заменил стандартный json на oj.
 После того как таск был переписан с помощью activerecord-import. Результаты теста стали такие
@@ -50,6 +50,19 @@
 
 #### Решение
 
-Одним запросом закешировать нужные данные.
+Одним запросом закешировать нужные данные. Upsert + active-record import пока не осилил. В Rails 6 это будет бомба фича!
 
 В бюджет уложился. Большой был импортирован за 41.97 секунды.
+
+## Оптимизация приложения
+Естественно всё падает. 
+![fail](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/no_service_no_gain.png)
+
+После запуска приложения первым, что у нас упало это отсутствие класс Service.
+Фиксим паршелы.
+
+Удалил паршл _service.html.erb. А в _services.html.erb вывел показ услуг автобуса. 
+И вообще меньше паршлов быстрей отдача страницы. Да и хелперы будут актуальней если верстки мало.
+
+Страница запустилась. Пора собирать метрику.
+![it`s working](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/its_ok.png)
