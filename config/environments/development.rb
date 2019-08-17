@@ -1,9 +1,24 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  Bullet.enable = true
+  Bullet.console = true # stacktraces here
+  Bullet.add_footer = true
+  Bullet.bullet_logger = true # log/bullet.log, stacktraces here
+  Bullet.rails_logger = true
 
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
-  # since you don't have to restart the web server when you make code changes.
+  # Bullet.alert = true
+  # Bullet.growl = true
+  # Bullet.xmpp = { :account  => 'bullets_account@jabber.org',
+  #                 :password => 'bullets_password_for_jabber',
+  #                 :receiver => 'your_account@jabber.org',
+  #                 :show_online_status => true }
+  # Bullet.honeybadger = true
+  # Bullet.bugsnag = true
+  # Bullet.airbrake = true
+  # Bullet.rollbar = true
+  # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
+  # Bullet.stacktrace_excludes = [ 'their_gem', 'their_middleware' ]
+  # Bullet.slack = { webhook_url: 'http://some.slack.url', channel: '#default', username: 'notifier' }
+
   config.cache_classes = false
 
   # Do not eager load code on boot.
