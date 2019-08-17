@@ -12,7 +12,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Bus.delete_all
     Trip.delete_all
 
-    # Import cities
     City.import(fetch_cities(json))
     Bus.import(fetch_buses(json))
     Trip.import(fetch_trips(json), validate: false, no_returning: true)

@@ -66,3 +66,20 @@
 
 Страница запустилась. Пора собирать метрику.
 ![it`s working](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/its_ok.png)
+
+
+- [x] `rack-mini-profiler` -e production
+
+Отдача страницы за 1,5 секунды
+
+ ![rmp](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/mrp.png)
+
+- [x] `rails panel`
+
+ ![rails panel](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/r_panel.png)
+ 
+- [x] `bullet` -e development
+Подключаем депортамент советчиков при работе с БД. 
+
+ ![bullet](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/bullet.png)
+- [ ] `explain` запросов Пока PGHero не смог.
