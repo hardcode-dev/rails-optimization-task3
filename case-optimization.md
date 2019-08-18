@@ -93,8 +93,42 @@
 ### Проблема 1
 N + 1 При получении всех автобусов в маршруте. На это нам указывает все и bullet намекает использовать includes 
 После не большоего апдейта в контроллере время загрузки страницы уменьшилась на 1 секунду 
-`Trip.includes(:bus).where(from: @from, to: @to).order(:start_time)`
+`Trip.preload(:bus).where(from: @from, to: @to).order(:start_time)`
+Воспользовался preload так как нет выборки по соединительной таблице.
 
-####Результыта
+####Результат
+~ 560 ms - 650ms
 
+ 
+###Собираем метрику
+* rack-mini-profile
  ![rmp](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/includes.png)
+  ![rmp](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-1.png)
+  
+* Советчик bullet потерял хрустальный шар =(
+* rails panel
+
+   ![rp](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rp-1.png)
+   
+ ### Проблема 2
+ 
+ Ужасно долгий рендеринг паршлов. (Так как они загружаются в цикле колекций)
+    ![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/renders.png)
+        ![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rp-2.png)
+        ![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rp-3.png)
+        
+* Удалил паршл с разделительной полосой и сервисы. Оставил один паршл для Рейсов.
+       
+* В представлении отправляется лишний запрос для получения кол-ва рейсов. count заменяем на size
+
+`<%= "В расписании #{@trips.size} рейсов" %>`
+
+* Кешируем саму коллекцию.
+
+В дев окружении открытие странице занело менее 3х секунд
+![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-3.png)
+
+####Результат
+        
+![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-2.png)
+
