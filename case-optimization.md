@@ -171,4 +171,11 @@ task-4_development=# explain SELECT trips.* FROM "trips" WHERE "trips"."from_id"
 За одно нужно поправить создание отношений в таблице trips. Это добавит нужные индексы и обеспечит целостность данных.
 ![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-5.png)
 
-
+ ### Проблема 4
+ 
+ В данный медленной отдачей страницы является рендер представления из большого кол-ва элементов DOM.
+ 
+ ![render](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rp-4.png)
+ 
+ Тут в помощь либо lazy load либо пагинация. зависит от постановки задач.
+ 

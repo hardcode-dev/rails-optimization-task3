@@ -1,7 +1,17 @@
 class TripsController < ApplicationController
   def index
-    @from = City.find_by_name!(params[:from])
-    @to = City.find_by_name!(params[:to])
-    @trips = Trip.preload(:bus).where(from: @from, to: @to).order(:start_time)
+    @trips = Trip.preload(:bus).where(from: from, to: to).order(:start_time)
+  end
+
+  private
+
+  helper_method :from, :to
+
+  def from
+    @from ||= City.find_by_name!(params[:from])
+  end
+
+  def to
+    @to ||= City.find_by_name!(params[:to])
   end
 end
