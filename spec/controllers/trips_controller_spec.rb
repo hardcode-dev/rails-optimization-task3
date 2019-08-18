@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe TripsController, type: :controller do
   let!(:trip) { create(:trip) }
-  describe 'GET #автобусы/Самара/Москва' do
 
+  describe 'GET #автобусы/Самара/Москва' do
     before do
       get :index, params: { from: 'Москва', to: 'Вигодощи' }
     end
