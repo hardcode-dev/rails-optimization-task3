@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe TripsController, type: :controller do
   let!(:trip) { create(:trip) }
 

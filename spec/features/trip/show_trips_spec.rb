@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature ' Show trips and buses for selected cities' do
   let!(:trip) { create(:trip) }
 
