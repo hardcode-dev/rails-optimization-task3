@@ -87,3 +87,14 @@
 ----
 Напишем тесты чтобы быт увереным что ни чего не сломал. 
 Написал unit test на контроллер и acceptance test
+
+####Начинаем поиск проблем
+
+### Проблема 1
+N + 1 При получении всех автобусов в маршруте. На это нам указывает все и bullet намекает использовать includes 
+После не большоего апдейта в контроллере время загрузки страницы уменьшилась на 1 секунду 
+`Trip.includes(:bus).where(from: @from, to: @to).order(:start_time)`
+
+####Результыта
+
+ ![rmp](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/includes.png)
