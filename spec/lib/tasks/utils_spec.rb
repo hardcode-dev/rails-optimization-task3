@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'rake reload_json', :rake do
   subject { Rake.application.invoke_task 'reload_json[fixtures/large.json]' }

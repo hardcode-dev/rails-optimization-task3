@@ -30,8 +30,12 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
+  gem "capybara"
+  gem 'rspec-rails'
   gem 'rspec-benchmark'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

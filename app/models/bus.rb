@@ -12,6 +12,7 @@ class Bus < ApplicationRecord
     ПАЗ
     Вольво
     Газель
+    ЛиАЗ
   ].freeze
 
   SERVICES = [
