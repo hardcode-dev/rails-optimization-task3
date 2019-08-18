@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(version: 2019_03_30_193017) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "from_id"
-    t.integer "to_id"
+    t.integer "from_id", null: false
+    t.integer "to_id", null: false
     t.string "start_time"
     t.integer "duration_minutes"
     t.integer "price_cents"
-    t.integer "bus_id"
+    t.bigint "bus_id"
+    t.index ["bus_id"], name: "index_trips_on_bus_id"
     t.index ["from_id", "to_id", "start_time"], name: "index_trips_on_from_id_and_to_id_and_start_time"
   end
 

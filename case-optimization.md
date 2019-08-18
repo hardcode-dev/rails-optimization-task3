@@ -132,3 +132,43 @@ N + 1 При получении всех автобусов в маршруте.
         
 ![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-2.png)
 
+ ### Проблема 3
+ 
+ Основная точка роста по прежнему остаётся sql запрос для получения данных. 
+ В схеме нет индексов.
+ Так как задание тестовое. И таблицы на проде нет. Буду изменять существующие миграции.
+ 
+ Сохраним план проблемного запроса
+ ```cassandraql
+explain SELECT trips.* FROM "trips" WHERE "trips"."from_id" = 143 AND "trips"."to_id" = 142 ORDER BY "trips"."start_time" ASC;
+                           QUERY PLAN                            
+-----------------------------------------------------------------
+ Sort  (cost=2382.18..2384.61 rows=971 width=34)
+   Sort Key: start_time
+   ->  Seq Scan on trips  (cost=0.00..2334.00 rows=971 width=34)
+         Filter: ((from_id = 143) AND (to_id = 142))
+(4 строки)
+
+```
+Добавлю составной индекс. C алгоритмом concurrently, чтобы не блокировать основную таблицу пока создаётся индекс.
+
+`add_index :trips, [:from_id, :to_id, :start_time], algorithm: :concurrently`
+
+```cassandraql
+task-4_development=# explain SELECT trips.* FROM "trips" WHERE "trips"."from_id" = 143 AND "trips"."to_id" = 142 ORDER BY "trips"."start_time" ASC;
+                                                  QUERY PLAN                                                  
+--------------------------------------------------------------------------------------------------------------
+ Index Scan using index_trips_on_from_id_and_to_id_and_start_time on trips  (cost=0.42..8.41 rows=1 width=34)
+   Index Cond: ((from_id = 143) AND (to_id = 142))
+(2 строки)
+```
+####Результат
+        
+![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-4.png)
+
+Загрузка страницы и время на запрос уменьшился до 6 ms
+
+За одно нужно поправить создание отношений в таблице trips. Это добавит нужные индексы и обеспечит целостность данных.
+![renders](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/rmp-5.png)
+
+
