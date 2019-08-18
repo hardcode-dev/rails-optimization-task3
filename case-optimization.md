@@ -83,3 +83,7 @@
 
  ![bullet](https://raw.githubusercontent.com/VidgarVii/rails-optimization-2-task3/optimize/fixtures/images/bullet.png)
 - [ ] `explain` запросов Пока PGHero не смог.
+
+----
+Напишем тесты чтобы быт увереным что ни чего не сломал. 
+Написал unit test на контроллер и acceptance test
