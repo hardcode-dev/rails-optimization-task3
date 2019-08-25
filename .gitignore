@@ -1,0 +1,6 @@
+.DS_Store
+.byebug_history
+.idea/
+.env.development
+log/
+tmp/

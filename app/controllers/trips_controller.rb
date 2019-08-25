@@ -2,7 +2,6 @@ class TripsController < ApplicationController
   def index
     @from  = City[params[:from]]
     @to    = City[params[:to]]
-    # @trips = Trip.includes(bus: :bus_services).where(from: @from, to: @to).order(:start_time)
     @trips = Trip.connection.execute("
       SELECT * FROM (
         SELECT t.id, t.start_time, t.duration_minutes, t.price_cents, t.bus_id,
