@@ -1,4 +1,6 @@
-class Service < ApplicationRecord
+class BusService < ApplicationRecord
+  include Dictionary
+
   SERVICES = [
     'WiFi',
     'Туалет',
@@ -12,7 +14,7 @@ class Service < ApplicationRecord
     'Можно не печатать билет',
   ].freeze
 
-  has_and_belongs_to_many :buses, join_table: :buses_services
+  belongs_to :bus
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }

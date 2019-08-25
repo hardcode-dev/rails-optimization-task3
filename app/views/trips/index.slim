@@ -1,0 +1,30 @@
+h1
+  = "Автобусы #{@from.name} – #{@to.name}"
+h2
+  = "В расписании #{@trips.count} рейсов"
+- @trips.each do |trip|
+  ul
+    li= "Отправление: #{trip['start_time']}"
+    li= "Прибытие: #{(Time.parse(trip['start_time']) + trip['duration_minutes'].minutes).strftime('%H:%M')}"
+    li= "В пути: #{trip['duration_minutes'] / 60}ч. #{trip['duration_minutes'] % 60} мин."
+    li= "Цена: #{trip['price_cents'] / 100}р. #{trip['price_cents'] % 100} коп."
+    li= "Автобус: #{Bus::MODELS[trip['bus_model'].to_i]} №#{trip['bus_number']}"
+    - if trip['bus_services'].present?
+      li Сервисы в автобусе:
+      ul
+        - trip['bus_services'][1..-2].split(',').uniq.each do |service_id|
+          li= BusService::SERVICES[service_id.to_i]
+  | ====================================================
+/ - @trips.each do |trip|
+/   ul
+/     li= "Отправление: #{trip.start_time}"
+/     li= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}"
+/     li= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60} мин."
+/     li= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100} коп."
+/     li= "Автобус: #{trip.bus.model} №#{trip.bus.number}"
+/     - if trip.bus.bus_services.present?
+/       li Сервисы в автобусе:
+/       ul
+/         - trip.bus.bus_services.each do |service|
+/           li= BusService::SERVICES[service.service_id]
+/   | ====================================================

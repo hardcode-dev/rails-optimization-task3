@@ -1,4 +1,6 @@
 class City < ApplicationRecord
+  include Dictionary
+
   validates :name, presence: true, uniqueness: true
   validate :name_has_no_spaces
 
