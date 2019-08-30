@@ -3,6 +3,7 @@
 require_relative '../test_helper'
 require 'minitest/autorun'
 require 'populate_database'
+require 'benchmark'
 
 class PopulateDatabaseTest < Minitest::Test
 
@@ -44,5 +45,12 @@ class PopulateDatabaseTest < Minitest::Test
     assert_equal 1, Bus.count
     assert_equal 2, Service.count
     assert_equal 10, Trip.count
+  end
+
+  def test_work_time
+    time = Benchmark.realtime {
+      PopulateDatabase.call(file_path: 'fixtures/small.json')
+    }
+    assert_operator 0.5, :>, time.real
   end
 end
