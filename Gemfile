@@ -18,6 +18,10 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'ruby-prof'
+  gem 'meta_request'
+  # gem 'bullet'
+  gem 'pghero'
+  gem 'pg_query', '>= 0.9.0'
 end
 
 group :test do
