@@ -24,6 +24,8 @@ group :development do
   gem 'memory_profiler'
   gem 'stackprof', '>= 0.2.9'
   gem 'flamegraph'
+
+  gem 'meta_request'
 end
 
 group :test do

@@ -1,4 +1,4 @@
 class BusesService < ApplicationRecord
-  belongs_to :bus
-  belongs_to :service
+  belongs_to :bus, touch: true
+  belongs_to :service, touch: true
 end
