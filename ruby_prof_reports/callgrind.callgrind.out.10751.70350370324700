@@ -1,0 +1,22 @@
+events: wall_time
+
+fl=
+fn=Kernel::sleep
+0 31
+
+fl=
+fn=Kernel::loop
+0 3
+cfl=
+cfn=Kernel::sleep
+calls=1 301
+301 19652582
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/abstract/connection_pool.rb
+fn=ActiveRecord/ConnectionAdapters/ConnectionPool/Reaper::run
+300 5
+cfl=
+cfn=Kernel::loop
+calls=1 300
+300 19652585
+

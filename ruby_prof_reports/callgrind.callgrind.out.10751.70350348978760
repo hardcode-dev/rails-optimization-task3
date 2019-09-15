@@ -1,0 +1,170 @@
+events: wall_time
+
+fl=
+fn=IO::select^
+0 262
+
+fl=
+fn=IO::popen^
+0 5120
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task3/(eval)
+fn=FSEvent::watcher_path^
+1 9
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+fn=FSEvent::open_pipe
+139 19
+cfl=
+cfn=Kernel::class
+calls=1 140
+140 1
+cfl=/Users/ineedjet/Projects/rails-optimization-2-task3/(eval)
+cfn=FSEvent::watcher_path^
+calls=1 140
+140 9
+cfl=
+cfn=IO::popen^
+calls=1 140
+140 5120
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+fn=FSEvent::run
+38 25
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+cfn=FSEvent::open_pipe
+calls=1 39
+39 5148
+cfl=
+cfn=IO::select^
+calls=1 44
+44 19597872
+
+fl=
+fn=Kernel::nil?
+0 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+fn=Logger::add
+455 4
+cfl=
+cfn=Kernel::nil?
+calls=1 457
+457 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+fn=Logger::debug
+490 9
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::add
+calls=1 491
+491 7
+
+fl=
+fn=Kernel::public_send
+0 6
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::debug
+calls=1 0
+0 15
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+fn=Listen::logger^
+2 5
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+fn=Listen/Logger::debug^
+27 7
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen::logger^
+calls=2 28
+28 5
+cfl=
+cfn=Kernel::public_send
+calls=1 28
+28 21
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::_log^
+135 8
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen/Logger::debug^
+calls=1 136
+136 33
+
+fl=
+fn=Kernel::class
+0 8
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::_log
+117 8
+cfl=
+cfn=Kernel::class
+calls=1 118
+118 7
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+cfn=Listen/Adapter/Base::_log^
+calls=1 118
+118 40
+
+fl=
+fn=Module::to_s
+0 4
+
+fl=
+fn=Proc::inspect
+0 13
+cfl=
+cfn=Module::to_s
+calls=1 0
+0 4
+
+fl=
+fn=String::inspect
+0 14
+
+fl=
+fn=Array::inspect
+0 11
+cfl=
+cfn=String::inspect
+calls=4 0
+0 14
+
+fl=
+fn=Kernel::inspect
+0 37
+cfl=
+cfn=Array::inspect
+calls=2 0
+0 26
+cfl=
+cfn=Proc::inspect
+calls=1 0
+0 16
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+fn=Listen/Adapter/Darwin::_run_worker
+69 14
+cfl=
+cfn=Kernel::inspect
+calls=1 70
+70 79
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+cfn=Listen/Adapter/Base::_log
+calls=1 70
+70 56
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+cfn=FSEvent::run
+calls=1 71
+71 19603045
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/internals/thread_pool.rb
+fn=Listen/Internals/ThreadPool::add^
+6 14
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+cfn=Listen/Adapter/Darwin::_run_worker
+calls=1 81
+81 19603195
+

@@ -1,0 +1,90 @@
+events: wall_time
+
+fl=
+fn=Kernel::sleep^
+0 44
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/config.rb
+fn=Listen/Event/Config::sleep
+18 3
+cfl=
+cfn=Kernel::sleep^
+calls=1 19
+19 19761060
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/config.rb
+fn=Listen/Event/Config::stopped?
+42 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+fn=Listen/Event/Processor::_check_stopped
+50 3
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/config.rb
+cfn=Listen/Event/Config::stopped?
+calls=1 51
+51 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+fn=Listen/Event/Processor::_sleep
+57 3
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+cfn=Listen/Event/Processor::_check_stopped
+calls=1 58
+58 5
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/config.rb
+cfn=Listen/Event/Config::sleep
+calls=1 59
+59 19761063
+
+fl=
+fn=Thread/Queue::empty?
+0 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/forwardable.rb
+fn=Listen/Event/Queue::empty?
+221 4
+cfl=
+cfn=Thread/Queue::empty?
+calls=1 230
+230 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+fn=Listen/Event/Processor::_wait_until_events
+82 12
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/forwardable.rb
+cfn=Listen/Event/Queue::empty?
+calls=1 84
+84 6
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+cfn=Listen/Event/Processor::_sleep
+calls=1 84
+84 19761071
+
+fl=
+fn=Kernel::loop
+0 4
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+cfn=Listen/Event/Processor::_wait_until_events
+calls=1 16
+16 19761088
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+fn=Listen/Event/Processor::loop_for
+12 3
+cfl=
+cfn=Kernel::loop
+calls=1 15
+15 19761092
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/loop.rb
+fn=Listen/Event/Loop::_wait_for_changes
+84 2
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/processor.rb
+cfn=Listen/Event/Processor::loop_for
+calls=1 84
+84 19761095
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/event/loop.rb
+fn=Listen/Event/Loop::_wait_until_resumed
+97 3
+

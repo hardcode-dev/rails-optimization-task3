@@ -1,0 +1,742 @@
+events: wall_time
+
+fl=
+fn=IO::select^
+0 72
+
+fl=
+fn=IO::popen^
+0 2084
+
+fl=/Users/ineedjet/Projects/rails-optimization-2-task3/(eval)
+fn=FSEvent::watcher_path^
+1 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+fn=FSEvent::open_pipe
+139 14
+cfl=
+cfn=Kernel::class
+calls=1 140
+140 0
+cfl=/Users/ineedjet/Projects/rails-optimization-2-task3/(eval)
+cfn=FSEvent::watcher_path^
+calls=1 140
+140 2
+cfl=
+cfn=IO::popen^
+calls=1 140
+140 2084
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+fn=FSEvent::run
+38 20
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+cfn=FSEvent::open_pipe
+calls=1 39
+39 2101
+cfl=
+cfn=IO::select^
+calls=1 44
+44 1183134
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+fn=Logger::debug
+490 5
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::add
+calls=1 491
+491 1
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+fn=Listen/Logger::debug^
+27 3
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen::logger^
+calls=2 28
+28 1
+cfl=
+cfn=Kernel::public_send
+calls=1 28
+28 8
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::_log^
+135 5
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen/Logger::debug^
+calls=1 136
+136 11
+
+fl=
+fn=Kernel::class
+0 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::_log
+117 4
+cfl=
+cfn=Kernel::class
+calls=1 118
+118 1
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+cfn=Listen/Adapter/Base::_log^
+calls=1 118
+118 16
+
+fl=
+fn=Module::to_s
+0 2
+
+fl=
+fn=Proc::inspect
+0 8
+cfl=
+cfn=Module::to_s
+calls=1 0
+0 2
+
+fl=
+fn=String::inspect
+0 6
+
+fl=
+fn=Array::inspect
+0 8
+cfl=
+cfn=String::inspect
+calls=4 0
+0 6
+
+fl=
+fn=Kernel::inspect
+0 15
+cfl=
+cfn=Array::inspect
+calls=2 0
+0 14
+cfl=
+cfn=Proc::inspect
+calls=1 0
+0 10
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+fn=Listen/Adapter/Darwin::_run_worker
+69 8
+cfl=
+cfn=Kernel::inspect
+calls=1 70
+70 39
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+cfn=Listen/Adapter/Base::_log
+calls=1 70
+70 21
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rb-fsevent-0.10.3/lib/rb-fsevent/fsevent.rb
+cfn=FSEvent::run
+calls=1 71
+71 1185255
+
+fl=
+fn=Kernel::tap
+0 16
+cfl=
+cfn=Thread/Queue::<<
+calls=9 7
+7 3
+
+fl=
+fn=Thread::initialize
+0 121
+
+fl=
+fn=Thread::new^
+0 107
+cfl=
+cfn=Thread::initialize
+calls=9 0
+0 121
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/internals/thread_pool.rb
+fn=Listen/Internals/ThreadPool::add^
+5 10
+cfl=
+cfn=Thread::new^
+calls=9 6
+6 229
+cfl=
+cfn=Kernel::tap
+calls=9 6
+6 20
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+fn=Listen/Adapter/Darwin::_run_workers_in_background
+77 2
+cfl=
+cfn=Array::each
+calls=1 78
+78 267
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+fn=Listen/Adapter/Darwin::_to_array
+85 6
+cfl=
+cfn=Thread/Queue::empty?
+calls=10 87
+87 2
+cfl=
+cfn=Thread/Queue::pop
+calls=9 87
+87 2
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+fn=Listen/Adapter/Darwin::_run
+49 4
+cfl=
+cfn=Thread/Queue::pop
+calls=1 50
+50 1
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+cfn=Listen/Adapter/Darwin::_to_array
+calls=1 54
+54 9
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+cfn=Listen/Adapter/Darwin::_run_workers_in_background
+calls=1 54
+54 269
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+cfn=Listen/Adapter/Darwin::_run_worker
+calls=1 55
+55 1185323
+
+fl=
+fn=Thread/Queue::initialize
+0 4
+
+fl=
+fn=NilClass::nil?
+0 3
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::initialize
+93 17
+cfl=
+cfn=Class::new
+calls=9 94
+94 6
+cfl=
+cfn=NilClass::nil?
+calls=9 96
+96 3
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/symlink_detector.rb
+fn=Listen/Record/SymlinkDetector::initialize
+22 10
+cfl=
+cfn=Class::new
+calls=9 23
+23 37
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::_auto_hash
+73 9
+cfl=
+cfn=Class::new
+calls=9 74
+74 15
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::build
+60 53
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::_auto_hash
+calls=9 61
+61 24
+cfl=
+cfn=Class::new
+calls=27 65
+65 81
+cfl=
+cfn=Thread/Queue::<<
+calls=9 67
+67 4
+cfl=
+cfn=Thread/Queue::empty?
+calls=54 68
+68 12
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::_fast_build_dir
+calls=45 68
+68 74197
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::start
+76 16
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+cfn=Listen/Adapter/Base::_timed
+calls=9 76
+76 74633
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/darwin.rb
+cfn=Listen/Adapter/Darwin::_run
+calls=1 76
+76 1185606
+
+fl=
+fn=Kernel::nil?
+0 4
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+fn=Logger::add
+455 14
+cfl=
+cfn=Kernel::nil?
+calls=11 457
+457 4
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+fn=Logger::info
+524 13
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::add
+calls=10 525
+525 16
+
+fl=
+fn=Kernel::public_send
+0 16
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::info
+calls=10 0
+0 29
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/logger.rb
+cfn=Logger::debug
+calls=1 0
+0 6
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+fn=Listen::logger^
+2 39
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+fn=Listen/Logger::info^
+27 23
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen::logger^
+calls=20 28
+28 49
+cfl=
+cfn=Kernel::public_send
+calls=10 28
+28 44
+
+fl=
+fn=Kernel::format
+0 55
+
+fl=
+fn=Time::initialize
+0 11
+
+fl=
+fn=Time::now^
+0 24
+cfl=
+cfn=Time::initialize
+calls=19 0
+0 11
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/adapter/base.rb
+fn=Listen/Adapter/Base::_timed
+104 50
+cfl=
+cfn=Time::now^
+calls=19 104
+104 35
+cfl=
+cfn=Time::to_f
+calls=19 104
+104 45
+cfl=
+cfn=Kernel::format
+calls=10 105
+105 55
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/logger.rb
+cfn=Listen/Logger::info^
+calls=10 105
+105 115
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::build
+calls=9 76
+76 74371
+
+fl=
+fn=File::realpath^
+0 915
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::real_path
+41 40
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::sys_path
+calls=20 42
+42 70
+cfl=
+cfn=File::realpath^
+calls=20 42
+42 72050
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::initialize
+8 40
+
+fl=
+fn=Array::map
+0 43
+cfl=
+cfn=Class::new
+calls=41 19
+19 76
+
+fl=
+fn=Array::-
+0 28
+
+fl=
+fn=Hash::merge
+0 30
+
+fl=
+fn=Hash::initialize
+0 19
+
+fl=
+fn=Class::new
+0 106
+cfl=
+cfn=Hash::initialize
+calls=44 0
+0 19
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::initialize
+calls=50 0
+0 40
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/symlink_detector.rb
+cfn=Listen/Record/SymlinkDetector::initialize
+calls=9 0
+0 46
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::initialize
+calls=9 0
+0 26
+cfl=
+cfn=Thread/Queue::initialize
+calls=9 0
+0 4
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::_fast_update_file
+79 106
+cfl=
+cfn=Array::include?
+calls=33 80
+80 13
+cfl=
+cfn=Class::new
+calls=15 74
+74 15
+cfl=
+cfn=Hash::merge
+calls=33 74
+74 30
+
+fl=
+fn=File/Stat::mode
+0 9
+
+fl=
+fn=Integer::fdiv
+0 17
+
+fl=
+fn=Time::to_f
+0 69
+cfl=
+cfn=Integer::fdiv
+calls=52 0
+0 17
+
+fl=
+fn=File/Stat::mtime
+0 28
+
+fl=
+fn=File::lstat^
+0 357
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::meta
+23 82
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::sys_path
+calls=33 24
+24 113
+cfl=
+cfn=File::lstat^
+calls=33 24
+24 39516
+cfl=
+cfn=File/Stat::mtime
+calls=33 25
+25 28
+cfl=
+cfn=Time::to_f
+calls=33 25
+25 41
+cfl=
+cfn=File/Stat::mode
+calls=33 25
+25 9
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::_fast_try_file
+112 40
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::meta
+calls=33 113
+113 39789
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::_fast_update_file
+calls=33 113
+113 165
+
+fl=
+fn=SystemCallError::===^
+0 17
+
+fl=
+fn=Exception::backtrace
+0 10
+
+fl=
+fn=Exception::exception
+0 8
+
+fl=
+fn=Exception::initialize
+0 20
+
+fl=
+fn=SystemCallError::initialize
+0 161
+cfl=
+cfn=Exception::initialize
+calls=33 0
+0 20
+
+fl=
+fn=Dir::open^
+0 2198
+cfl=
+cfn=SystemCallError::initialize
+calls=33 0
+0 181
+cfl=
+cfn=Exception::exception
+calls=33 0
+0 8
+cfl=
+cfn=Exception::backtrace
+calls=33 0
+0 10
+
+fl=
+fn=Dir::entries^
+0 558
+cfl=
+cfn=Dir::open^
+calls=53 0
+0 2724
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::_entries
+52 63
+cfl=
+cfn=Dir::entries^
+calls=53 53
+53 3282
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::sys_path
+36 96
+cfl=
+cfn=Array::compact
+calls=106 38
+38 34
+cfl=
+cfn=File::join^
+calls=106 38
+38 203
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::_join
+47 56
+cfl=
+cfn=Array::compact
+calls=53 48
+48 17
+cfl=
+cfn=File::join^
+calls=44 49
+49 62
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::children
+16 129
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::_join
+calls=53 17
+17 134
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::sys_path
+calls=53 18
+18 150
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::_entries
+calls=53 18
+18 3345
+cfl=
+cfn=Array::-
+calls=20 18
+18 28
+cfl=
+cfn=Array::map
+calls=20 18
+18 119
+
+fl=
+fn=Thread/Queue::pop
+0 23
+
+fl=
+fn=Thread/Queue::empty?
+0 21
+
+fl=
+fn=Array::include?
+0 27
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::add_dir
+16 42
+cfl=
+cfn=Array::include?
+calls=21 17
+17 14
+cfl=
+cfn=Class::new
+calls=11 74
+74 11
+
+fl=
+fn=File::join^
+0 286
+
+fl=
+fn=Array::compact
+0 62
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+fn=Listen/Record/Entry::record_dir_key
+32 26
+cfl=
+cfn=Array::compact
+calls=21 33
+33 11
+cfl=
+cfn=File::join^
+calls=21 33
+33 21
+
+fl=
+fn=Thread/Queue::<<
+0 20
+
+fl=
+fn=Array::each
+0 53
+cfl=
+cfn=Thread/Queue::<<
+calls=44 104
+104 14
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/internals/thread_pool.rb
+cfn=Listen/Internals/ThreadPool::add^
+calls=9 81
+81 258
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+fn=Listen/Record::_fast_build_dir
+104 148
+cfl=
+cfn=Array::each
+calls=21 104
+104 57
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::record_dir_key
+calls=21 105
+105 58
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::add_dir
+calls=21 105
+105 66
+cfl=
+cfn=Thread/Queue::pop
+calls=53 101
+101 20
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::children
+calls=53 102
+102 3906
+cfl=
+cfn=SystemCallError::===^
+calls=33 102
+102 17
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record.rb
+cfn=Listen/Record::_fast_try_file
+calls=33 107
+107 39993
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/symlink_detector.rb
+cfn=Listen/Record/SymlinkDetector::verify_unwatched!
+calls=20 103
+103 72252
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::add
+348 24
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::include?
+253 19
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+fn=Set::add?
+360 30
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::include?
+calls=21 361
+361 19
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::add
+calls=21 361
+361 24
+
+fl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/symlink_detector.rb
+fn=Listen/Record/SymlinkDetector::verify_unwatched!
+28 40
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/2.6.0/set.rb
+cfn=Set::add?
+calls=21 28
+28 72
+cfl=/Users/ineedjet/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/listen-3.1.5/lib/listen/record/entry.rb
+cfn=Listen/Record/Entry::real_path
+calls=20 27
+27 72160
+
