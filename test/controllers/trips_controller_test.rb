@@ -10,6 +10,6 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     get URI.encode('/автобусы/Самара/Москва')
 
     assert_response :success
-    assert @response.body.include? BODY
+    assert @response.body.delete("\n").delete("  ").include? BODY.delete("\n").delete("  ")
   end
 end
