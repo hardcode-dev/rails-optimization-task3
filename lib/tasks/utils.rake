@@ -10,25 +10,38 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Trip.delete_all
     ActiveRecord::Base.connection.execute('delete from buses_services;')
 
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
-
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
+    services = []
+    Service::SERVICES.each do |service|
+      services << Service.new(name: service)
     end
+    Service.import services
+    services = Service.all.inject({}) { |hash, el| hash[el.name] = el; hash; }
+
+    cities = CiteService.new
+    buses = BusService.new(services)
+    json.each do |trip|
+      cities.check_city(trip['from'])
+      cities.check_city(trip['to'])
+      buses.check_bus(trip['bus']['number'], model: trip['bus']['model'], service: trip['bus']['services'])
+    end
+    City.import cities.get_array
+    Bus.import buses.get_array
+
+    tripes = []
+    json.each do |trip|
+      from = cities.check_city(trip['from'])
+      to = cities.check_city(trip['to'])
+      bus = buses.check_bus(trip['bus']['number'])
+
+      tripes << Trip.new(
+                  from: from,
+                  to: to,
+                  bus: bus,
+                  start_time: trip['start_time'],
+                  duration_minutes: trip['duration_minutes'],
+                  price_cents: trip['price_cents'],
+                )
+    end
+    Trip.import tripes
   end
 end
