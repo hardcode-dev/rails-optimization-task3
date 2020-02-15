@@ -6,13 +6,19 @@ RSpec.describe JsonLoadService do
   subject { JsonLoadService.call(file_name) }
   describe "small file parse" do
     let(:file_name) { "small.json" }
-    it { expect { JsonLoadService.call(file_name) }.to perform_under(60).sec.warmup(2).times.sample(3).times }
+    it { expect { subject }.to perform_under(60).sec.warmup(2).times.sample(3).times }
   end
 
   describe "medium file parse" do
     let(:file_name) { "medium.json" }
 
-    it {expect { JsonLoadService.call(file_name) }.to perform_under(60).sec.warmup(2).times.sample(2).times }
+    it {expect { subject }.to perform_under(60).sec.warmup(2).times.sample(2).times }
+  end
+
+  describe "large file parse" do
+    let(:file_name) { "large.json" }
+
+    it {expect { subject }.to perform_under(30).sec.warmup(2).times.sample(2).times }
   end
 
   describe "consistents" do
