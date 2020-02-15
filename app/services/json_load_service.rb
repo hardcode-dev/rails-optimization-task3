@@ -2,23 +2,24 @@
 
 class JsonLoadService
   def self.call(file_name)
-    json = JSON.parse(File.read("fixtures/#{file_name}"))
+    puts Time.now
+    json = Oj.load(File.read("fixtures/#{file_name}"))
 
     # dictionary - forward!
-    services = Set.new
     cities = Set.new
     buses = Set.new
 
-
-
     json.each do |trip|
-      trip['bus']['services'].each { |name| services << { name: name } }
       cities << { name: trip['to'] }
       cities << { name: trip['from'] }
-      buses  << { number: trip['bus']['number'], model: trip['bus']['model'] }
+
+      buses  << {
+                  number: trip['bus']['number'],
+                  model: trip['bus']['model'],
+                  services: trip['bus']['services'].map {|name| Bus::SERVICES.index(name) }
+                }
     end
 
-    Service.import services.to_a
     City.import cities.to_a
     Bus.import buses.to_a
 
@@ -27,18 +28,21 @@ class JsonLoadService
 
     trips = Set.new
     json.each do |trip|
-      from_id = cities_dictionary.find_by(name: trip['from']).id
-      to_id =   cities_dictionary.find_by(name: trip['to']).id
-      bus_id =  buses_dictionary.find_by(number: trip['bus']['number']).id
+      from = cities_dictionary.detect { |city| city.name == trip['from'] }
+      to =   cities_dictionary.detect { |city| city.name == trip['to'] }
+      bus =  buses_dictionary.detect { |bus| trip['bus']['number'] == bus.number }
+
       trips << {
-        from_id: from_id,
-        to_id: to_id,
-        bus_id: bus_id,
+        from_id: from.id,
+        to_id: to.id,
+        bus_id: bus.id,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents']
       }
     end
-    Trip.import trips.to_a
+
+    Trip.import trips.to_a, validate: false, no_returning: true
+    puts Time.now
   end
 end
