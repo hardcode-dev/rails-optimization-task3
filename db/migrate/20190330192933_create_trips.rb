@@ -10,6 +10,6 @@ class CreateTrips < ActiveRecord::Migration[5.2]
       t.integer :price_cents
       t.references :bus
     end
-    add_index :trips, [:from_id, :to_id], algorithm: :concurrently
+    add_index :trips, [:from_id, :to_id, :start_time], algorithm: :concurrently
   end
 end
