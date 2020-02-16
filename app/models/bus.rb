@@ -27,7 +27,7 @@ class Bus < ApplicationRecord
 
   has_many :trips
 
-  validates :number, presence: true, uniqueness: true
+  validates :number, presence: true
   validates :model, inclusion: { in: MODELS }
   validates :services, array_inclusion: { in: SERVICES }
 end
