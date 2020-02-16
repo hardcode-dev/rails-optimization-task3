@@ -36,7 +36,7 @@
 
 Время обработки:
 
-*файл 1М.json - 3 минуты 54 секунды*
+*файл 1М.json - 3 минуты 15 секунд*
 `размеры таблиц после обработки 1M.json:`
   task-4_development=# SELECT schemaname,relname,n_live_tup
                         FROM pg_stat_user_tables
@@ -47,28 +47,27 @@
                        public     | trips                |    1000000
                        public     | buses_services       |      34034
                        public     | buses                |       9950
-                       public     | cities               |         98
+                       public     | cities               |         99
                        public     | services             |         10
                        public     | schema_migrations    |          2
                        public     | ar_internal_metadata |          0
                       (7 rows)
 
-*файл 10M.json - 45 минут 45 секунд*
+*файл 10M.json - 45 минут 45 секунд* - хоть не совсем чистый эксперимент, так как я в браузере лазил
 `размеры таблиц после обработки 10M.json:`
   schemaname |       relname        | n_live_tup
   ------------+----------------------+------------
   public     | trips                |   10000000
   public     | buses_services       |      34025
   public     | buses                |       9950
-  public     | cities               |         98
+  public     | cities               |         99
   public     | services             |         10
   public     | schema_migrations    |          2
   public     | ar_internal_metadata |          0
   (7 rows)
 
-
 Интересно, что при потоковой обработке, файл `fixtures/large.json` обработался за *18 секунд*
-
+_автобусов и городов реально не хватает или где-то теряются_?
 
 <!-- # Задание №3
 

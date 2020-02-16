@@ -5,7 +5,7 @@ class ImportService
 
   def initialize(file_name)
     @file_name = file_name
-    @bar = ProgressBar.new(100000)
+    @bar = ProgressBar.new(1000000)
     @connection = PG::Connection.open(:dbname => 'task-4_development', port: 5432, user: ENV['PG_USERNAME'], password: ENV['PG_PASSWORD'])
 
     @cities = {}
@@ -19,6 +19,7 @@ class ImportService
   def call
     read_file
     import_cities
+    binding.pry
     import_buses
     ActiveRecord::Base.connection.execute('INSERT INTO buses_services ("bus_id","service_id") VALUES ' << buses_services_values.uniq.join(',') )
   end
@@ -26,13 +27,13 @@ class ImportService
   private
 
   def import_cities
-    cities_array = cities.keys.uniq.map { |name| City.new(name: name) }
-    City.import(['name'], cities_array)
+    cities_array_values = cities.keys.map { |name| "('" << name << "')" }.join(',')
+    ActiveRecord::Base.connection.execute('INSERT INTO cities ("name") VALUES ' << cities_array_values )
   end
 
   def import_buses
-    buses_array = buses.keys.uniq.map { |data| Bus.new(number: data[0], model: data[1]) }
-    Bus.import(['number', 'model'], buses_array)
+    buses_array_values = buses.keys.map { |data| "('" << data[0] << "','" << data[1] << "')" }.join(',')
+    ActiveRecord::Base.connection.execute('INSERT INTO buses ("number","model") VALUES ' << buses_array_values )
   end
 
   def import_services
@@ -69,8 +70,6 @@ class ImportService
     end
 
     record_bus_services(bus_id, trip['bus']['services'])
-
-    # ...
 
     # стримим подготовленный чанк данных в postgres
     connection.put_copy_data("#{from_id};#{to_id};#{trip['start_time']};#{trip['duration_minutes']};#{trip['price_cents']};#{bus_id}\n")
