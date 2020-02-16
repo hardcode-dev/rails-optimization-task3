@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_165331) do
+ActiveRecord::Schema.define(version: 2020_02_16_212210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,19 @@ ActiveRecord::Schema.define(version: 2020_02_16_165331) do
   end
 
   create_table "buses_services", force: :cascade do |t|
-    t.integer "bus_id"
-    t.integer "service_id"
+    t.bigint "bus_id"
+    t.bigint "service_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bus_id", "service_id"], name: "index_buses_services_on_bus_id_and_service_id"
+    t.index ["bus_id"], name: "index_buses_services_on_bus_id"
+    t.index ["service_id", "bus_id"], name: "index_buses_services_on_service_id_and_bus_id"
+    t.index ["service_id"], name: "index_buses_services_on_service_id"
   end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name"
   end
 
   create_table "services", force: :cascade do |t|
@@ -44,4 +49,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_165331) do
     t.integer "bus_id"
   end
 
+  add_foreign_key "buses_services", "buses"
+  add_foreign_key "buses_services", "services"
 end
