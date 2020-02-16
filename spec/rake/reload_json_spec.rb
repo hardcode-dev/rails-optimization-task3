@@ -20,7 +20,7 @@ RSpec.describe 'reload_json', type: :rake do
       OpenStruct.new(start_time: '21:30', duration_minutes: 183, price_cents: 846)
     ]
   end
-  let(:correct_services) { [OpenStruct.new(name: 'Туалет'), OpenStruct.new(name: 'WiFi')] }
+  # let(:correct_services) { [OpenStruct.new(name: 'Туалет'), OpenStruct.new(name: 'WiFi')] }
 
   context 'for cities' do
     it 'should clean previous cities' do
@@ -95,7 +95,7 @@ RSpec.describe 'reload_json', type: :rake do
           end
 
           services.each do |service|
-            expect(correct_services).to include service
+            expect(Service::SERVICES).to include service.name
           end
         end
       end
@@ -103,25 +103,18 @@ RSpec.describe 'reload_json', type: :rake do
   end
 
   context 'for services' do
-    it 'should clean previous services' do
-      Service.create(name: 'Ремни безопасности')
-      subject.invoke('spec/fixtures/example.json')
-
-      expect(Service.exists?(name: 'Ремни безопасности')).to be_falsy
-    end
-
     context 'data import' do
       before do
         subject.invoke('spec/fixtures/example.json')
       end
 
-      it 'should correctly load all services' do
-        expect(Service.count).to eq correct_services.size
+      it 'should load all services defined in Service::SERVICES' do
+        expect(Service.count).to eq Service::SERVICES.size
       end
 
       it 'should load services with correct attributes' do
-        correct_services.each do |correct_service|
-          expect(Service.exists?(name: correct_service.name)).to be_truthy
+        Service::SERVICES.each do |correct_service_name|
+          expect(Service.exists?(name: correct_service_name)).to be_truthy
         end
       end
 
