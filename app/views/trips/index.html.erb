@@ -5,12 +5,13 @@
   <%= "В расписании #{@trips.count} рейсов" %>
 </h2>
 
+
 <% @trips.each do |trip| %>
   <ul>
     <%= render "trip", trip: trip %>
-    <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
-    <% end %>
+    <%= render "services", services: trip.bus.services %>
   </ul>
   <%= render "delimiter" %>
 <% end %>
+
+<%# <%= will_paginate @trips %> %>
