@@ -2,3 +2,8 @@
 /tmp
 /log
 /public
+data_large.txt
+profile*
+result.json
+.idea
+.DS_Store
