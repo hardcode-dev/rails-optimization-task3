@@ -8,7 +8,7 @@ module DbImport
     puts "Runtime: #{time.real.round(2)} seconds | MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 
-  def import(filename = 'fixtures/medium.json')
+  def import(filename = 'fixtures/large.json')
     data = File.join(Rails.root, "#{filename}")
     json = JSON.parse(File.read(data))
 
