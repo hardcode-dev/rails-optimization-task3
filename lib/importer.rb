@@ -54,12 +54,16 @@ class Importer
 
   end
 
+  TRIPS_BATCH_SIZE = 100
 
   def import(file_name)
     json = JSON.parse(File.read(file_name))
 
 
     puts Time.now.to_f
+
+    trips = []
+
     ActiveRecord::Base.transaction do
 
 
@@ -69,15 +73,13 @@ class Importer
         from = city_by_name(trip['from'])
         to = city_by_name(trip['to'])
 
-        services = trip['bus']['services'].collect(&method(:service_by_name))
-
         bus = Bus.find_or_create_by!(number: trip['bus']['number']) do |b|
           b.model = trip['bus']['model']
-          b.services = services
+          b.services = trip['bus']['services'].collect(&method(:service_by_name))
         end
 
 
-        Trip.create!(
+        trips << Trip.new(
             from: from,
             to: to,
             bus: bus,
@@ -85,7 +87,19 @@ class Importer
             duration_minutes: trip['duration_minutes'],
             price_cents: trip['price_cents'],
         )
+
+
+        if trips.count > TRIPS_BATCH_SIZE
+          Trip.import trips
+          trips = []
+        end
+
+
       end
+
+
+      Trip.import trips
+
     end
     puts Time.now.to_f
   end

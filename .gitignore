@@ -7,3 +7,7 @@ profile*
 result.json
 .idea
 .DS_Store
+/callstack.html
+/flat.txt
+/graph.html
+/graphviz.dot

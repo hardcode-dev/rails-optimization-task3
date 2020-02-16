@@ -73,6 +73,43 @@ real	0m7.476s
 user	0m5.287s
 sys	0m0.644s
 
+Так как новые сервисы и модели автобусов переписывают старые, то можно пойти с конца файла и просто сохранить первые с конца как вилдные
+
+    real	0m5.450s
+    user	0m4.410s
+    sys	0m0.408s
+
+
+
+### Ваша находка №3
+
+Будем импортить пачками с помощью ActiveRecord-import
+Начнем с trips
+
+
+        trips << Trip.new(
+            from: from,
+            to: to,
+            bus: bus,
+            start_time: trip['start_time'],
+            duration_minutes: trip['duration_minutes'],
+            price_cents: trip['price_cents'],
+        )
+
+
+        if trips.count > TRIPS_BATCH_SIZE
+          Trip.import trips
+          trips = []
+        end
+
+Время импорта большого файла почти уложилось в минуту
+
+    real	1m21.265s
+    user	1m4.696s
+    sys	0m4.158s
+
+
+
 ## Результаты
 
 
