@@ -1,4 +1,6 @@
 class Service < ApplicationRecord
+  include Dbclear
+
   SERVICES = [
     'WiFi',
     'Туалет',

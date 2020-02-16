@@ -1,4 +1,6 @@
 class Trip < ApplicationRecord
+  include Dbclear
+
   HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
 
   belongs_to :from, class_name: 'City'

@@ -2,3 +2,8 @@
 /tmp
 /log
 /public
+.editorconfig
+.generators
+.rakeTasks
+.ruby-gemset
+.idea
