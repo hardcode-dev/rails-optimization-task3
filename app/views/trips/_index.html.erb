@@ -1,0 +1,26 @@
+<h1>
+  <%= "Автобусы #{@from.name} – #{@to.name}" %>
+</h1>
+<h2>
+  <%= "В расписании #{@trips.length} рейсов" %>
+</h2>
+
+<% @trips.each do |trip| %>
+  <ul class="trip">
+    <li><%= "Отправление: #{trip.start_time}" %></li>
+    <li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
+    <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
+    <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
+    <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+
+    <% if trip.bus.services.present? %>
+      <li>Сервисы в автобусе:</li>
+      <% trip.bus.services.each do |service| %>
+        <ul>
+          <li><%= "#{service.name}" %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </ul>
+  ====================================================
+<% end %>
