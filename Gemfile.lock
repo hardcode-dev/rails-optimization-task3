@@ -36,6 +36,8 @@ GEM
     activerecord-explain-analyze (0.1.0)
       activerecord (>= 4)
       pg
+    activerecord-import (1.0.4)
+      activerecord (>= 3.2)
     activestorage (5.2.3)
       actionpack (= 5.2.3)
       activerecord (= 5.2.3)
@@ -166,6 +168,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-explain-analyze
+  activerecord-import
   bootsnap (>= 1.1.0)
   byebug
   listen (>= 3.0.5, < 3.2)

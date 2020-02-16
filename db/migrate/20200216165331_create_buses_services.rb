@@ -3,6 +3,7 @@ class CreateBusesServices < ActiveRecord::Migration[5.2]
     create_table :buses_services do |t|
       t.integer :bus_id
       t.integer :service_id
+      t.timestamps
     end
   end
 end
