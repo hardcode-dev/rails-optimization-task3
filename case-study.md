@@ -110,6 +110,30 @@ sys	0m0.644s
 
 
 
+
+### Ваша находка №4 
+
+StackProf показал что 83% времени мы в find_or_create_by
+А у нас всего 1 место такое
+
+    bus = Bus.find_or_create_by!(number: trip['bus']['number']) do |b|
+      b.model = trip['bus']['model']
+      b.services = trip['bus']['services'].collect(&method(:service_by_name))
+    end
+
+Для проверки я убрал строку с сервисами 
+
+    b.services = trip['bus']['services'].collect(&method(:service_by_name))
+
+Все еще 73% в find_by внутри find_or_create_by ну выбора нет попробуем накапливать данные по автобусам в памяти
+
+Результат ожидаем рост в почти 3 раза и тесты сходятся
+
+    real	0m30.706s
+    user	0m26.815s
+    sys	0m0.707s
+
+
 ## Результаты
 
 

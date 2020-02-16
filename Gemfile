@@ -11,6 +11,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'rspec-rails'
   gem 'ruby-prof', require: false
+  gem 'stackprof'
 end
 
 gem 'activerecord-import'
