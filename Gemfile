@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.9'
   gem 'ruby-prof'
   gem 'rack-mini-profiler'
+  gem 'bullet'
 end
 
 group :development do
