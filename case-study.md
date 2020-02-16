@@ -11,5 +11,10 @@
 ## Вникаем в детали системы, чтобы найти главные точки роста
 
 * Задача 1
-    - импорт medium.json PGHERO 46,629 раз запрос SELECT  "services".* FROM "services" WHERE "services"."name" = $1 LIMIT $2
+    - импорт medium.json PGHERO показал 46,629 раз запрос SELECT  "services".* FROM "services" WHERE "services"."name" = $1 LIMIT $2
+    - рефакторю модели
+    - использую на импорте гем activerecord-import
 
+## Результаты
+* Задача 1
+    - В результате проделанной оптимизации наконец удалось обработать файл `large.json` без валидации "Summary: DURATION in sec = 27.62, MEMORY usage = 347 MB", с валидацией "Summary: DURATION in sec = 37.74, MEMORY usage = 348 MB"

@@ -1,44 +1,75 @@
 module DbImport
   module_function
 
-  def call_with_benchmark
-    time = Benchmark.measure do
-      yield
-    end
-    puts "Runtime: #{time.real.round(2)} seconds | MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+  def prepare
+    City.clear
+    Bus.clear
+    Service.clear
+    Trip.clear
+    BusesServices.clear
+  end
+
+  def set
+    Set.new
   end
 
   def import(filename = 'fixtures/large.json')
-    data = File.join(Rails.root, "#{filename}")
-    json = JSON.parse(File.read(data))
+    json = Oj.load(File.read(File.join(Rails.root, filename.to_s)))
 
     ActiveRecord::Base.transaction do
-      City.clear
-      Bus.clear
-      Service.clear
-      Trip.clear
-      ActiveRecord::Base.connection.execute('TRUNCATE TABLE buses_services;')
+      prepare # clear DB content
+
+      uniq_cities = set
+      uniq_buses = set
+
+      services = Service::SERVICES.map { |i| Service.new(name: i) }
+
+      Service.import services
+
+      services_dictionary = services.each_with_object({}) { |e, a| a[e.name] = e }
 
       json.each do |trip|
-        from = City.find_or_create_by(name: trip['from'])
-        to = City.find_or_create_by(name: trip['to'])
-        services = []
-        trip['bus']['services'].each do |service|
-          s = Service.find_or_create_by(name: service)
-          services << s
-        end
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+        uniq_cities << { name: trip['to'] }
+        uniq_cities << { name: trip['from'] }
 
-        Trip.create!(
-          from: from,
-          to: to,
-          bus: bus,
+        uniq_buses << {
+          number: trip['bus']['number'],
+          model: trip['bus']['model'],
+          services: trip['bus']['services'].map { |name| services_dictionary[name].id }
+        }
+      end
+
+      buses = []
+      uniq_buses.to_a.map do |i|
+        bus = Bus.new(number: i[:number], model: i[:model])
+        i[:services].each { |j| bus.buses_services.build(service_id: j) }
+        buses << bus
+      end
+
+      cities = []
+      uniq_cities.to_a.map do |i|
+        city = City.new(name: i[:name])
+        cities << city
+      end
+
+      Bus.import buses
+      BusesServices
+        .import buses.map { |i| i.buses_services.map { |j| { service_id: j.service_id, bus_id: i.id } } }.flatten
+      City.import cities
+
+      trips = []
+      json.each do |trip|
+        trips << {
+          from_id: cities.detect { |i| i.name == trip['from'] }.id,
+          to_id: cities.detect { |i| i.name == trip['to'] }.id,
+          bus_id: buses.detect { |i| trip['bus']['number'] == i.number }.id,
           start_time: trip['start_time'],
           duration_minutes: trip['duration_minutes'],
-          price_cents: trip['price_cents'],
-        )
+          price_cents: trip['price_cents']
+        }
       end
+
+      Trip.import trips, validate: false
     end
   end
 end
