@@ -17,6 +17,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.9'
   gem 'ruby-prof'
+  gem 'rack-mini-profiler'
 end
 
 group :development do
