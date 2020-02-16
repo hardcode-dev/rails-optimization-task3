@@ -6,3 +6,4 @@
 .rspec
 .rvmrc
 .env
+.DS_Store
