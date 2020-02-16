@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_122504) do
+ActiveRecord::Schema.define(version: 2020_02_16_134752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -21,11 +21,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_122504) do
     t.string "model"
     t.string "services", array: true
     t.index ["number"], name: "index_buses_on_number", unique: true
-  end
-
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.index ["name"], name: "index_cities_on_name", unique: true
   end
 
   create_table "pghero_query_stats", force: :cascade do |t|
@@ -49,12 +44,12 @@ ActiveRecord::Schema.define(version: 2020_02_16_122504) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "from_id"
-    t.integer "to_id"
     t.string "start_time"
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.string "from"
+    t.string "to"
   end
 
 end

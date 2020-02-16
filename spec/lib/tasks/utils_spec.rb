@@ -7,7 +7,6 @@ describe 'reload_json.rake' do
 
   describe 'Clean up' do
     it 'should clean up DB on execution' do
-      expect(City).to receive(:delete_all)
       expect(Bus).to receive(:delete_all)
       expect(Trip).to receive(:delete_all)
 
@@ -20,7 +19,6 @@ describe 'reload_json.rake' do
       Rake::Task['reload_json'].execute(args.new(file_fixture('test.json')))
 
       expect(Bus.count).to eq 49
-      expect(City.count).to eq 10
       expect(Trip.count).to eq 50
     end
   end
