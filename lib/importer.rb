@@ -65,14 +65,17 @@ class Importer
 
       cleanup
 
-      json.each do |trip|
+      json.reverse_each do |trip|
         from = city_by_name(trip['from'])
         to = city_by_name(trip['to'])
 
         services = trip['bus']['services'].collect(&method(:service_by_name))
 
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+        bus = Bus.find_or_create_by!(number: trip['bus']['number']) do |b|
+          b.model = trip['bus']['model']
+          b.services = services
+        end
+
 
         Trip.create!(
             from: from,
