@@ -4,7 +4,7 @@ RSpec.describe "Check buses", :type => :request do
 
   it "shows direction moscow-samara" do
 
-    Importer.import('fixtures/example.json')
+    Importer.new.import('fixtures/example.json')
 
     get URI.escape("/автобусы/Самара/Москва")
 
