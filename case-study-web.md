@@ -233,5 +233,12 @@ Avg: .02172 что еще в 8 раз быстрее ( итого 190+ раз о
 
 ## Защита от регрессии производительности
 
+Для защиты от регресии я написал rspec тест который ограничивает N+1и создание лишних запросов
 
+      it "query limit" do
+    
+        Importer.new.import('fixtures/example.json')
+        expect { get URI.escape("/автобусы/Самара/Москва") }.not_to exceed_query_limit(3)
+    
+      end
 
