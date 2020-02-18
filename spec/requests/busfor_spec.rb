@@ -19,9 +19,13 @@ RSpec.describe "Check buses", :type => :request do
   it "query limit" do
 
     Importer.new.import('fixtures/example.json')
-    
+
     expect { get URI.escape("/автобусы/Самара/Москва") }.not_to exceed_query_limit(3)
 
+  end
+
+  it 'import performance test ' do
+    expect { Importer.new.import('fixtures/example.json') }.to perform_under(40).ms.warmup(1).times.sample(10).times
   end
 
 end

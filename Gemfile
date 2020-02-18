@@ -15,6 +15,7 @@ group :development, :test do
   gem 'stackprof'
   gem 'bullet'
   gem 'meta_request'
+  gem 'rspec-benchmark'
 end
 
 gem 'activerecord-import'

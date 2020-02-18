@@ -72,7 +72,6 @@ class Importer
     json = JSON.parse(File.read(file_name))
 
 
-    puts Time.now.to_f
 
     trips = []
 
@@ -111,6 +110,5 @@ class Importer
       Trip.import trips
 
     end
-    puts Time.now.to_f
   end
 end
