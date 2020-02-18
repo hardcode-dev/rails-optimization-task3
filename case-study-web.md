@@ -124,6 +124,50 @@ USE eager loading detected
 Наконец SELECT "services".* FROM "services" WHERE "services"."id" IN тоже поиск по праймари кею не уверен что можно оптимизировать
 
 
+### Ваша находка №3 
+Тут очень много рендеринга партиалов, мы сейчас это оптимизируем но надо перейти на production env так как есть большая разница в работе с партиалами на dev и productions
+
+
+Помогать определять среднее время нам будет простенький скрипт 
+https://gist.github.com/kevindees/a24dd20d81e974e2a72cbf03c2550c80
+
+Avg: .90188c
+
+Делаем так 
+    
+    <li>Сервисы в автобусе:</li>
+    <ul>
+      <%= render partial: 'service', collection: services %>
+    </ul>
+    
+Avg: .65505
+
+
+Дальше я убрал часть партиалов с целью оптимизации и получил вот такой парттиал _trip
+
+    <ul>
+      <li><%= "Отправление: #{trip.start_time}" %></li>
+      <li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
+      <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
+      <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
+      <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+    
+      <% if trip.bus.services.present? %>
+        <li>Сервисы в автобусе:</li>
+        <ul>
+          <%= render partial: 'service', collection: trip.bus.services %>
+        </ul>
+      <% end %>
+    </ul>
+    
+    ====================================================
+    
+Это уже работает за 
+Avg: .42295    
+    
+
+
+
 ## Результаты
 
 
