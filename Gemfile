@@ -12,6 +12,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'ruby-prof', require: false
   gem 'stackprof'
+  gem 'bullet'
 end
 
 gem 'activerecord-import'
