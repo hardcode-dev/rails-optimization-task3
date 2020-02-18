@@ -13,6 +13,7 @@ group :development, :test do
   gem 'ruby-prof', require: false
   gem 'stackprof'
   gem 'bullet'
+  gem 'meta_request'
 end
 
 gem 'activerecord-import'
