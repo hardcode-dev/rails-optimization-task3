@@ -29,4 +29,31 @@ class Trip < ApplicationRecord
       },
     }
   end
+
+
+  def self.get_data(from_id, to_id)
+
+    result = ActiveRecord::Base.connection.execute <<-SQL
+select t.start_time,
+       t.duration_minutes,
+       t.price_cents,
+       b.model,
+       b.number,
+       ARRAY(SELECT name
+             FROM services s,
+                  buses_services bs
+             where bs.service_id = s.id
+               and bs.bus_id = b.id) as services
+
+from trips t,
+     buses b
+
+where b.id = t.bus_id
+and t.from_id = #{from_id.to_i}
+and t.to_id = #{to_id.to_i}
+order by start_time asc
+    SQL
+
+    result.to_a
+  end
 end

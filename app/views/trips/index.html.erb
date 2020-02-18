@@ -2,7 +2,7 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.load.length} рейсов" %>
+  <%= "В расписании #{@trips.length} рейсов" %>
 </h2>
 
 <%= render partial: 'trip', collection: @trips %>

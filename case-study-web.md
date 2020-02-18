@@ -13,7 +13,7 @@
 время загрузки страницы http://localhost:3000/автобусы/Самара/Москва
 
 Начали мы с вот такой метрики 
-Completed 200 OK in 17979ms (Views: 16614.2ms | ActiveRecord: 1354.8ms)
+Completed 200 OK in 12979ms (Views: 16614.2ms | ActiveRecord: 1354.8ms)
 
 
 ## Гарантия корректности работы оптимизированной программы
@@ -173,10 +173,65 @@ Flame Graph от rack-mini-profile слабо читаемый, что по па
  => 1023.7979999510571 
 2.6.3 :009 > Benchmark.ms{ 100000.times{ Time.strptime("13:31", '%H:%M') } }
  => 596.5980000328273 
+ 
+ Avg: .40014 хотя тут моржет быть и погрешность (впрочем тестовая выборка 30 загрузок)
 
+
+### Ваша находка №4
+
+Flamegraph из прошлого пункта показявает что много времени в создании моделей, GarbageCollector и прочем, а что если все это выкинуть ?
+
+В общем я написал что-то типа такого 
+
+      def self.get_data(from_id, to_id)
+    
+        result = ActiveRecord::Base.connection.execute <<-SQL
+    select t.start_time,
+           t.duration_minutes,
+           t.price_cents,
+           b.model,
+           b.number,
+           ARRAY(SELECT name
+                 FROM services s,
+                      buses_services bs
+                 where bs.service_id = s.id
+                   and bs.bus_id = b.id) as services
+    
+    from trips t,
+         buses b
+    
+    where b.id = t.bus_id
+    and t.from_id = #{from_id.to_i}
+    and t.to_id = #{to_id.to_i}
+    order by start_time asc
+        SQL
+    
+        result.to_a
+      end
+
+
+Мне не понравилось в итоге работать с массивом так как пришлось сделать `trip['services'].delete('{}"').split(',')` но я решил что в рамках MVP сойдет
+
+Avg: .18735 что в 5.5 раз меньше того что мы получили после оптимизации SQL когда добрались до партиалов
+
+Если еще поставить 
+    Rails.logger.level = :fatal
+То будет 
+
+Avg: .16043    
+    
 
 ## Результаты
 
+Мы конечно офигеть как круто тут наоптимизировали сначала в 4 раза SQL методами потом еще в 6 раз путем манипуляций с рендерингом
+Итого аж в 24 раза в production environment но выводить все трипы в одну страницу это все равно неправильно так как создает огромную нагрузку на браузер пользователя а не только на сервер 
+Поэтому нужна паджинация. Простейший вывод по 20 записей позволит получить нам сумасшедшие 
+
+Avg: .02172 что еще в 8 раз быстрее ( итого 190+ раз оптимизация )
+
+
 
 ## Защита от регрессии производительности
+
+
 
