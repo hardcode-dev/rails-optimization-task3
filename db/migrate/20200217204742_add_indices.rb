@@ -4,5 +4,6 @@ class AddIndices < ActiveRecord::Migration[5.2]
   def change
     add_index :cities, :name, algorithm: :concurrently
     add_index :buses, :number, algorithm: :concurrently
+    add_index :trips, [:from_id, :to_id], algorithm: :concurrently
   end
 end

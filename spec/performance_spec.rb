@@ -6,9 +6,9 @@ RSpec.configure do |config|
 end
 
 describe 'Performance' do
-  it 'works under 1 min' do
+  it 'works under 2 sec' do
     expect {
       system 'rake reload_json[fixtures/small.json]'
-    }.to perform_under(5).sec
+    }.to perform_under(2).sec
   end
 end

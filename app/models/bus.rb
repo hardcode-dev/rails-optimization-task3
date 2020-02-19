@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Bus < ApplicationRecord
   MODELS = [
     'Икарус',
@@ -11,7 +9,7 @@ class Bus < ApplicationRecord
     'ГАЗ',
     'ПАЗ',
     'Вольво',
-    'Газель',
+    'Газель'
   ].freeze
 
   has_many :trips

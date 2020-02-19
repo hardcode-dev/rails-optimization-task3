@@ -29,4 +29,24 @@ class Trip < ApplicationRecord
       },
     }
   end
+
+  def arrival_time
+    (Time.parse(self.start_time) + self.duration_minutes.minutes).strftime('%H:%M')
+  end
+
+  def travel_hours
+    self.duration_minutes / 60
+  end
+
+  def travel_minutes
+    self.duration_minutes % 60
+  end
+
+  def price_rubles
+    self.price_cents / 100
+  end
+
+  def price_kopecks
+    self.price_cents % 100
+  end
 end

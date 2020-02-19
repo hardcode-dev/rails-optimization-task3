@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_204742) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.index ["from_id", "to_id"], name: "index_trips_on_from_id_and_to_id"
   end
 
 end
