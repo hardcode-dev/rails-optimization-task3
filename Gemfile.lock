@@ -44,11 +44,17 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (3.0.3)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     arel (9.0.0)
     bindex (0.6.0)
     bootsnap (1.4.2)
       msgpack (~> 1.0)
     builder (3.2.3)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -134,6 +140,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uniform_notifier (1.13.0)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -148,7 +155,9 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  annotate
   bootsnap (>= 1.1.0)
+  bullet
   byebug
   listen (>= 3.0.5, < 3.2)
   meta_request
