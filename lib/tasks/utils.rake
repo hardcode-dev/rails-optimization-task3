@@ -8,7 +8,9 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
   model_servicies_size = Service::SERVICES.size
 
   cities = []
+  db_cities = []
   servicies = []
+  db_servicies = []
 
   File.open(args.file_name) do |ff|
     nesting = 0
@@ -34,14 +36,14 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
 
           if cities.index(from).nil?
             cities << from
-            City.create!(name: from)
+            db_cities << City.new(name: from)
           end
 
           to = trip['to']
 
           if cities.index(to).nil?
             cities << to
-            City.create!(name: to)
+            db_cities << City.new(name: to)
           end
           # end import cities
 
@@ -51,7 +53,7 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
               next if servicies.index(to).present?
 
               servicies << service
-              Service.create!(name: service)
+              db_servicies << Service.new(name: service)
             end
           end
           # end import servicies
@@ -64,6 +66,9 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
       end
     end
   end
+  City.import db_cities
+  Service.import db_servicies
+
   puts "#{increment} records"
   puts "#{Time.now - start_time} sec"
 end
