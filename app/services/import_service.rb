@@ -10,6 +10,5 @@ class ImportService
   attr_reader :trip
 
   def call
-    binding.pry
   end
 end

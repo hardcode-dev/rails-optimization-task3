@@ -20,6 +20,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request'
   gem 'bullet'
+  gem 'strong_migrations'
 end
 
 group :test do
@@ -31,3 +32,5 @@ gem 'activerecord-import'
 gem 'progress_bar'
 gem 'oj'
 gem 'annotate'
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'

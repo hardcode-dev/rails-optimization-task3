@@ -40,6 +40,8 @@ end
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
+  start_time = Time.now
+  increment = 0
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
@@ -50,6 +52,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     ActiveRecord::Base.connection.execute('delete from buses_services;')
 
     json.each do |trip|
+      increment += 1
       from = City.find_or_create_by(name: trip['from'])
       to = City.find_or_create_by(name: trip['to'])
       services = []
@@ -70,4 +73,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       )
     end
   end
+  puts "#{increment} records"
+  puts "#{Time.now - start_time} sec"
 end
