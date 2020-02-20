@@ -1,8 +1,11 @@
 desc 'Import data from json file'
 task :optim_reload_json, [:file_name] => :environment do |_task, args|
   start_time = Time.now
-  %w[City Bus Service Trip].each { |model| model.classify.constantize.delete_all }
-  Buses::Service.delete_all
+
+  [City, Bus, Service, Trip, Buses::Service].each do |model|
+    ActiveRecord::Base.connection.execute("TRUNCATE #{model.table_name} RESTART IDENTITY")
+  end
+
   puts "Cleared tables #{Time.now - start_time} sec"
   increment = 0
   model_servicies_size = Service::SERVICES.size
