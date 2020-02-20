@@ -18,4 +18,8 @@ class Bus < ApplicationRecord
 
   validates :number, presence: true, uniqueness: true
   validates :model, inclusion: { in: MODELS }
+
+  def services_names
+    services.pluck(:name)
+  end
 end

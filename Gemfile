@@ -21,6 +21,7 @@ group :development, :test do
   gem 'rspec-benchmark'
   gem 'pghero'
   gem 'pry'
+  gem 'rack-mini-profiler'
 end
 
 group :development do
