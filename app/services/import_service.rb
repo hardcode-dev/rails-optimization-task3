@@ -1,11 +1,15 @@
 class ImportService
+  def self.call(*args)
+    new(*args).call
+  end
+
   def initialize(trip)
     @trip = trip
   end
 
   attr_reader :trip
 
-  def perform
-    print "#{trip}\n\n"
+  def call
+    binding.pry
   end
 end
