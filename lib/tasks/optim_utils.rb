@@ -1,6 +1,7 @@
 task :reload_json, [:file_name] => :environment do |_task, args|
   start_time = Time.now
   %w[City Bus Service Trip].each { |model| model.classify.constantize.delete_all }
+  Buses::Service.delete_all
   puts "Cleared tables #{Time.now - start_time} sec"
   increment = 0
 
