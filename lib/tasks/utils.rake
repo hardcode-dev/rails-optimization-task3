@@ -5,6 +5,10 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
   Buses::Service.delete_all
   puts "Cleared tables #{Time.now - start_time} sec"
   increment = 0
+  model_servicies_size = Service::SERVICES.size
+
+  cities = []
+  servicies = []
 
   File.open(args.file_name) do |ff|
     nesting = 0
@@ -23,7 +27,35 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
           trip = Oj.load(str)
           # my_import(trip)
           # puts trip
-          ImportService.new(trip).call
+          # ImportService.new(trip).call
+
+          # import cities
+          from = trip['from']
+
+          if cities.index(from).nil?
+            cities << from
+            City.create!(name: from)
+          end
+
+          to = trip['to']
+
+          if cities.index(to).nil?
+            cities << to
+            City.create!(name: to)
+          end
+          # end import cities
+
+          # import servicies
+          if servicies.size < model_servicies_size
+            trip['bus']['services'].each do |service|
+              next if servicies.index(to).present?
+
+              servicies << service
+              Service.create!(name: service)
+            end
+          end
+          # end import servicies
+
           increment += 1
           str = +""
         end
