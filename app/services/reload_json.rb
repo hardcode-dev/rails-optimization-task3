@@ -77,7 +77,7 @@ class ReloadJson
       end
 
       # importing buses_services and trips data to database
-      BusesService.import [:bus_id, :service_id], buses_services
+      BusesService.import [:bus_id, :service_id], buses_services.uniq!
       Trip.import [:from_id, :to_id, :start_time, :duration_minutes, :price_cents, :bus_id], trips
     end
   end
