@@ -1,15 +1,10 @@
 require 'rails_helper'
-require 'rspec-benchmark'
 
-RSpec.configure do |config|
-  config.include RSpec::Benchmark::Matchers
-end
-
-describe 'reload_json[fixtures/medium.json]' do
-  it 'works under 10 s' do
+describe 'reload_json[fixtures/large.json]' do
+  it 'works under 1 min' do
     expect {
-      ReloadJson.new('fixtures/medium.json').call
-    }.to perform_under(10).sec.warmup(0).times.sample(1).times
+      ReloadJson.new('fixtures/large.json').call
+    }.to perform_under(60).sec.warmup(1).times.sample(10).times
   end
 end
 
