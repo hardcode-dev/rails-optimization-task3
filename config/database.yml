@@ -20,7 +20,8 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  password: "12345678"
+  user: <%= ENV.fetch("RAILS_OPTIMIZATION_PG_USER") { ENV.fetch("USER") } %>
+  password: <%= ENV.fetch("RAILS_OPTIMIZATION_PG_PASSWORD") { '12345678' } %>
 
 development:
   <<: *default
@@ -59,10 +60,6 @@ development:
 test:
   <<: *default
   database: task-4_test
-  pool: 5
-  username: oleg
-  host: localhost
-  port: 5432
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
