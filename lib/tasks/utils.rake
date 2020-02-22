@@ -18,8 +18,9 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
 
   buses = []
   db_buses = []
-
   db_buses_services = []
+
+  db_trips = []
 
   File.open(args.file_name) do |ff|
     nesting = 0
@@ -45,18 +46,26 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
 
           if cities.index(from).nil?
             cities << from
-            db_cities << City.new(name: from)
+
+            db_cities << City.new(
+              id: cities.index(from) + 1,
+              name: from
+            )
           end
 
           to = trip['to']
 
           if cities.index(to).nil?
             cities << to
-            db_cities << City.new(name: to)
+
+            db_cities << City.new(
+              id: cities.index(to) + 1,
+              name: to
+            )
           end
           # end import cities
 
-          # import buses
+          # import buses & db_buses_services
           bus_number = trip['bus']['number']
 
           if buses.index(bus_number).nil?
@@ -86,13 +95,16 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
           end
           # end import buses
 
-
-
-          # import buses_services
-          # bus_service =
-          # db_buses_services <<
-          # end import buses_services
-
+          # import trips
+          db_trips << Trip.new(
+            bus_id: buses.index(bus_number) + 1,
+            from_id: cities.index(from) + 1,
+            to_id: cities.index(to) + 1,
+            start_time: trip['start_time'],
+            duration_minutes: trip['duration_minutes'],
+            price_cents: trip['price_cents'],
+          )
+          # end import trips
 
           increment += 1
           str = +""
@@ -106,6 +118,7 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
   Service.import db_servicies
   Bus.import db_buses
   Buses::Service.import db_buses_services
+  Trip.import db_trips
 
   puts "#{increment} records"
   puts "#{Time.now - start_time} sec"
