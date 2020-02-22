@@ -19,6 +19,8 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
   buses = []
   db_buses = []
 
+  db_buses_services = []
+
   File.open(args.file_name) do |ff|
     nesting = 0
     str = +""
@@ -54,25 +56,43 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
           end
           # end import cities
 
-          # import servicies
-          if servicies.size < model_servicies_size
-            trip['bus']['services'].each do |service|
-              next if servicies.index(to).present?
-
-              servicies << service
-              db_servicies << Service.new(name: service)
-            end
-          end
-          # end import servicies
-
           # import buses
           bus_number = trip['bus']['number']
 
           if buses.index(bus_number).nil?
             buses << bus_number
-            db_buses << Bus.new(number: bus_number, model: trip['bus']['model'])
+
+            db_buses << Bus.new(
+              id: buses.index(bus_number) + 1,
+              number: bus_number,
+              model: trip['bus']['model']
+            )
+
+            trip['bus']['services'].each do |service|
+              if servicies.size < model_servicies_size && servicies.index(service).nil?
+                servicies << service
+
+                db_servicies << Service.new(
+                  id: servicies.index(service) + 1,
+                  name: service
+                )
+              end
+
+              db_buses_services << Buses::Service.new(
+                bus_id: buses.index(bus_number) + 1,
+                service_id: servicies.index(service) + 1
+              )
+            end
           end
           # end import buses
+
+
+
+          # import buses_services
+          # bus_service =
+          # db_buses_services <<
+          # end import buses_services
+
 
           increment += 1
           str = +""
@@ -85,11 +105,11 @@ task :optim_reload_json, [:file_name] => :environment do |_task, args|
   City.import db_cities
   Service.import db_servicies
   Bus.import db_buses
+  Buses::Service.import db_buses_services
 
   puts "#{increment} records"
   puts "#{Time.now - start_time} sec"
 end
-
 
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
