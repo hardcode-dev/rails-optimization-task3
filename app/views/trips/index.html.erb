@@ -12,11 +12,11 @@
     <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
     <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
     <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
-    <% if trip.bus.services.present? %>
+    <% unless trip.bus.service_names.empty? %>
       <li>Сервисы в автобусе:</li>
       <ul>
-        <% trip.bus.services.each do |service| %>
-          <li><%= "#{service.name}" %></li>
+        <% trip.bus.service_names.each do |service| %>
+          <li><%= "#{service}" %></li>
         <% end %>
       </ul>
     <% end %>

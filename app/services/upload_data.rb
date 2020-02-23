@@ -22,8 +22,9 @@ class UploadData
       # handle buses
       next if bus_numbers[trip['bus']['number']].present?
       buses << Bus.new(
-        number:   trip['bus']['number'],
-        model:    trip['bus']['model']
+        number:        trip['bus']['number'],
+        model:         trip['bus']['model'],
+        service_names: trip['bus']['services']
       )
       bus_numbers[trip['bus']['number']] = 1
     end
