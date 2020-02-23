@@ -9,7 +9,7 @@ class UploadData
       services << { name: service }
     end
     Service.import services
-    uploaded_services = Service.all.inject({}) { |acc, elem| acc.merge!(elem.name => elem) }
+    uploaded_services = Service.all.inject({}) { |acc, elem| acc.merge!(elem.name => elem.id) }
     # uploaded_services == {"Ремни безопасности"=> Service, ...}
 
     cities = Set.new
@@ -23,8 +23,7 @@ class UploadData
       next if bus_numbers[trip['bus']['number']].present?
       buses << Bus.new(
         number:   trip['bus']['number'],
-        model:    trip['bus']['model'],
-        services: trip['bus']['services'].map { |service| uploaded_services[service] }
+        model:    trip['bus']['model']
       )
       bus_numbers[trip['bus']['number']] = 1
     end
@@ -36,8 +35,13 @@ class UploadData
     uploaded_buses = result.results.inject({}) { |acc, elem| acc.merge!(elem[1] => elem[0]) }    
 
     trips = []
+    buses_services = Set.new
     until json.empty?
       trip = json.shift
+
+      trip['bus']['services'].each do |service|
+        buses_services << { bus_id: uploaded_buses[trip['bus']['number']], service_id: uploaded_services[service] }
+      end
       trips << {
         bus_id:           uploaded_buses[trip['bus']['number']],
         from_id:          uploaded_cities[trip['from']],
@@ -47,6 +51,7 @@ class UploadData
         price_cents:      trip['price_cents']
       }
     end
+    BusesService.import [:bus_id, :service_id], buses_services.to_a
     Trip.import trips
   end
 end
