@@ -1,0 +1,30 @@
+events: wall_time
+
+fl=
+fn=Thread::[]
+0 4
+
+fl=
+fn=Thread::current^
+0 7
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rack-mini-profiler-1.1.6/lib/mini_profiler/storage/file_store.rb
+fn=Rack/MiniProfiler/FileStore::initialize
+82 39
+cfl=
+cfn=Thread::current^
+calls=8 82
+82 7
+cfl=
+cfn=Thread::[]
+calls=8 82
+82 4
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rack-mini-profiler-1.1.6/lib/mini_profiler/storage/file_store.rb
+cfn=Kernel::sleep
+calls=8 81
+81 75711078
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/rack-mini-profiler-1.1.6/lib/mini_profiler/storage/file_store.rb
+fn=Kernel::sleep
+81 141
+
