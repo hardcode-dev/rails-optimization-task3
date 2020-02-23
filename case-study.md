@@ -11,6 +11,11 @@
 Бюджет метрики - large файл с данными должен загружаться быстрее минуты
 
 Для второй части необходимо провести оптимизацию вывод информации
+После загрузки данных был произведен просмотр страницы
+
+результаты времени выполнение для large данных
+Rendered trips/index.html.erb within layouts/application (3082.9ms)
+Completed 200 OK in 3703ms (Views: 3358.3ms | ActiveRecord: 302.6ms)
 
 ## Feedback-Loop
 Вот как я построил `feedback_loop` для проверки загрузки данных:
@@ -18,6 +23,14 @@
 - проверить время загрузки
 - внести изменения в алгоритм
 - повторить
+
+`feedback_loop` для оптимизации вывода информации:
+- предварительная проверка через bullet
+- цикличная проверка через PgHero
+  - поиск точки роста
+  - модификация (добавление индексов, оптимизация запросов)
+  - проверка результата
+  - повторение
 
 ## Находка 1
 Раздумия над алгоритмом загрузки показали, что:
@@ -51,3 +64,54 @@
 результат
   - время обработки визуально не изменилось, но должно быть чуточку быстрее, особенно на гигантских данных
   - последние данные по времени загрузки - 22 секунды
+
+## Находка 2
+- сообщение от bullet
+USE eager loading detected
+  Trip => [:bus]
+  Add to your query: .includes([:bus])
+
+- добавил .includes(:bus)
+- сообщение от bullet
+USE eager loading detected
+  Bus => [:services]
+  Add to your query: .includes([:services])
+- изменил на .includes(bus: :services)
+- результат:
+  - выполняется всего 6 запросов в БД
+  - много рендеринга паршиалов
+  - загрузка из БД ускорилась в 10 раз
+  - рендеринг в 2 раза
+Rendered trips/index.html.erb within layouts/application (1825.6ms)
+Completed 200 OK in 1862ms (Views: 1802.2ms | ActiveRecord: 38.3ms)
+
+## Находка 3
+- теперь пора добавлять индексы для поиска
+  - для поиска города по имени
+  - для поиска маршрутов по двум полям, from/to, составной
+  - для маршрутов отдельные индексы для bus_id и для start_time
+  - составной индекс для таблицы buses_services
+
+Результаты PgHero (после внесение изменений в конфиг pg, для сбора статистики)
+No long running queries
+Connections healthy 7
+Vacuuming healthy
+No columns near integer overflow
+No invalid indexes or constraints
+No duplicate indexes
+No slow queries
+
+Space вкладка
+- индексы для bus_id и start_time в trips бесполезные, надо удалить
+
+Queries вкладка
+- основные запросы - на создание индексов и какие-то рельсовые
+- запросы для улучшения
+  - 8 мс 4 раза - получение маршрутов
+  - 8 мс 4 раза - подсчет count для маршрутов (изменить на size, думаю лишний запрос)
+  - остальное незначительно
+
+результат:
+  - загрузка из БД ускорилась в 3 раза, общее ускорение БД - 30 раз
+Rendered trips/index.html.erb within layouts/application (1771.6ms)
+Completed 200 OK in 1784ms (Views: 1769.6ms | ActiveRecord: 12.7ms)
