@@ -6,6 +6,8 @@ class Trip < ApplicationRecord
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
   belongs_to :bus
+  has_many :buses_services, through: :bus
+  has_many :services, through: :buses_services
 
   validates :from, presence: true
   validates :to, presence: true
