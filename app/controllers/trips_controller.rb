@@ -20,7 +20,7 @@ class TripsController < ApplicationController
       LEFT OUTER JOIN buses_services ON buses_services.bus_id = buses.id
       LEFT OUTER JOIN services ON buses_services.service_id = services.id
       WHERE trips.from_id = #{@from.id} AND trips.to_id = #{@to.id}
-      ORDER BY trips.start_time, trips.id ASC"
+      ORDER BY trips.start_time ASC, trips.id, service_name"
   end
 
 end

@@ -16,18 +16,20 @@
     <% if prev_trip.nil? || trip['id'] != prev_trip['id'] %>
       <%= render "trip", trip: trip %>
       <li>Сервисы в автобусе:</li>
+      <ul>
     <% end %>
 
-    <ul>
-      <%= trip['service_name'] %>
-    </ul>
+       <li><%= trip['service_name'] %></li>
 
     <% next_trip = @trips[i + 1] %>
 
     <% if next_trip.nil? || trip['id'] != next_trip['id'] %>
-      <div>====================================================</div>
+      </ul>
     <% end %>
 
     <% i += 1%>
   </ul>
+  <% if next_trip.nil? || trip['id'] != next_trip['id'] %>
+    <div>====================================================</div>
+  <% end %>
 <% end %>
