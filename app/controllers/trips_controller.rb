@@ -8,15 +8,13 @@ class TripsController < ApplicationController
     @trips = ActiveRecord::Base.connection.execute(sql_query).to_a
   end
 
-  # binding.pry
-
   private
 
   def sql_query
     "SELECT trips.*,
       buses.model,
       buses.number,
-      services.name
+      services.name as service_name
       FROM trips
       INNER JOIN buses ON buses.id = trips.bus_id
       LEFT OUTER JOIN buses_services ON buses_services.bus_id = buses.id
@@ -26,7 +24,3 @@ class TripsController < ApplicationController
   end
 
 end
-
-# Trip.select('trips.*, buses.model, buses.number, services.name').joins(:bus).joins("LEFT OUTER JOIN buses_services ON buses_services.bus_id = buses.id").joins("LEFT OUTER JOIN services ON buses_services.service_id = services.id").where(from: @from, to: @to).order(:start_time).limit(3)
-
-

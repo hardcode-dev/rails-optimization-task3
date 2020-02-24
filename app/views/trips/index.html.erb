@@ -5,20 +5,27 @@
   <%= "В расписании #{@trip_count} рейсов" %>
 </h2>
 
-
-<% prev_trip_id = nil %>
-
 <% trip_size = @trips.size %>
 <% i = 0 %>
 
 <% while i < trip_size %>
   <ul>
     <% trip = @trips[i] %>
+    <% prev_trip = @trips[i - 1] %>
+
+    <% if prev_trip.nil? || trip['id'] != prev_trip['id'] %>
+      <%= render "trip", trip: trip %>
+      <li>Сервисы в автобусе:</li>
+    <% end %>
+
+    <ul>
+      <%= trip['service_name'] %>
+    </ul>
+
     <% next_trip = @trips[i + 1] %>
 
     <% if next_trip.nil? || trip['id'] != next_trip['id'] %>
-      <%= render "trip", trip: trip %>
-      ====================================================
+      <div>====================================================</div>
     <% end %>
 
     <% i += 1%>
