@@ -7,6 +7,8 @@ class ReloadJson
     reload_json
   end
 
+  private
+
   def reload_json
     json = Oj.load(File.read(@file_name))
 
