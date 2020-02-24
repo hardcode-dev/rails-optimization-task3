@@ -2,15 +2,25 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trip_count} рейсов" %>
 </h2>
 
-<% @trips.each do |trip| %>
+
+<% prev_trip_id = nil %>
+
+<% trip_size = @trips.size %>
+<% i = 0 %>
+
+<% while i < trip_size %>
   <ul>
-    <%= render "trip", trip: trip %>
-    <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
+    <% trip = @trips[i] %>
+    <% next_trip = @trips[i + 1] %>
+
+    <% if next_trip.nil? || trip['id'] != next_trip['id'] %>
+      <%= render "trip", trip: trip %>
+      ====================================================
     <% end %>
+
+    <% i += 1%>
   </ul>
-  <%= render "delimiter" %>
 <% end %>
