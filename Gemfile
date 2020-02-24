@@ -15,6 +15,9 @@ end
 
 group :development do
   gem "annotate", "~> 3.1"
+  gem 'meta_request'
+  gem 'bullet'
+  gem 'active_record_doctor'
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -30,7 +33,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "rack-mini-profiler", "~> 1.1"
+gem 'rack-mini-profiler', require: false
 
 gem "stackprof", "~> 0.2.15"
 
@@ -40,3 +43,6 @@ gem "ruby-prof", "~> 1.2"
 
 gem "activerecord-import", "~> 1.0"
 
+gem "pghero", "~> 2.4"
+
+gem "pg_query", "~> 1.2"
