@@ -1,33 +1,40 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ImportData, type: :service do
   describe "populate db" do
-    data = JSON.parse(File.read('spec/data.json'), symbolize_names: true)
+    data = JSON.parse(File.read("spec/data.json"), symbolize_names: true)
 
-    ImportData.new('spec/data.json').exec
+    ImportData.new("spec/data.json").exec
 
-    cities = data.map{|el| [el[:to], el[:from]]}.flatten.uniq
-    bus_services = data.map{|el| el[:bus][:services]}.flatten.uniq
-    buses = data.map{|el| el[:bus][:number]}.flatten.uniq
+    data.each do |trip|
+      from = City.where(name: trip[:from])
+      to = City.where(name: trip[:to])
 
-    models = data.inject({}) do |acc,val|
-      acc[val[:bus][:number]] = {
-        model: val[:bus][:model],
-        services: val[:bus][:services],
-      }
-      acc
-    end
+      it { expect(from).to exist }
+      it { expect(to).to exist }
 
-    it { expect(City.count).to eq(cities.size) }
-    it { expect(Service.count).to eq bus_services.size }
-    it { expect(Bus.count).to eq buses.size }
-    it { expect(Trip.count).to eq data.size }
+      trip[:bus][:services].each do |service|
+        it { expect(Service.where(name: service)).to exist }
+      end
 
-    Bus.find_each do |bus|
-      it { expect(bus.model).to eq models[bus.number][:model] }
-      it {
-        expect(bus.services.map(&:name)).to eq models[bus.number][:services]
-      }
+      buses = Bus.where(number: trip[:bus][:number])
+      bus = buses.first
+
+      it { expect(buses).to exist }
+      it { expect(bus.try(:model)).to eq trip[:bus][:model] }
+
+      it { expect(bus&.services.map(&:name)).to match_array trip[:bus][:services] }
+
+      trips = Trip.where(
+        from_id: from.first.id,
+        to_id: to.first.id,
+        bus_id: bus.id,
+        start_time: trip[:start_time],
+        duration_minutes: trip[:duration_minutes],
+        price_cents: trip[:price_cents],
+      )
+
+      it { expect(trips).to exist }
     end
   end
 end
