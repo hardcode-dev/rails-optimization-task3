@@ -1,17 +1,11 @@
-require 'ruby-prof'
+require 'benchmark'
 
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  profile = RubyProf.profile do
-    ImportData.new(JSON.parse(File.read(args.file_name), symbolize_names: true)).exec
+  time = Benchmark.realtime do
+    ImportData.new(args.file_name).exec
   end
 
-
-  printer1 = RubyProf::GraphHtmlPrinter.new(result)
-  printer1.print(File.open("ruby_prof_reports/graph.html", "w+"))
-
-  printer = RubyProf::FlatPrinter.new(result)
-  printer.print(STDOUT)
+  puts "Finish in #{time.round(2)}"
 end
-#     data = JSON.parse(File.read('spec/data.json'), symbolize_names: true)
