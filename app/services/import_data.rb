@@ -60,10 +60,10 @@ class ImportData
   private
 
   def parse_id(dict, hash_key)
-    to_id = send(dict)[hash_key]
+    to_id = dict[hash_key]
     if !to_id
-      to_id = send(dict).size + 1
-      send(dict)[hash_key] = to_id
+      to_id = dict.size + 1
+      dict[hash_key] = to_id
     end
     to_id
   end
@@ -79,15 +79,15 @@ class ImportData
       trip["services"].each do |service|
         service_id = buses_services.size + 1
         buses_services[service_id] = bus_id
-        parse_id :services, service
+        parse_id services, service
       end
     end
     find_bus
   end
 
   def import(trip)
-    from_id = parse_id(:cities, trip["from"])
-    to_id = parse_id(:cities, trip["to"])
+    from_id = parse_id(cities, trip["from"])
+    to_id = parse_id(cities, trip["to"])
     bus = bus_number(trip["bus"])
 
     # стримим подготовленный чанк данных в postgres
