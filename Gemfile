@@ -25,6 +25,8 @@ group :development do
   # For call-stack profiling flamegraphs
   gem 'flamegraph'
   gem 'stackprof'
+  # rails panel
+  gem 'meta_request'
 end
 
 group :test do
