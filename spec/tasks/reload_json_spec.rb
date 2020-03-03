@@ -23,8 +23,9 @@ describe 'reload json task' do
 
   it 'creates all instances' do
     expect(City.count).to eq 2
-    expect(Service.count).to eq 2
+    expect(Service.count).to eq 10
     expect(Bus.count).to eq 1
+    expect(BusesServices.count).to eq 2
     expect(Trip.count).to eq 10
   end
 
