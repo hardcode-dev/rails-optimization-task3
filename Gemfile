@@ -27,6 +27,8 @@ group :development do
   gem 'stackprof'
   # rails panel
   gem 'meta_request'
+
+  gem "bullet"
 end
 
 group :test do
