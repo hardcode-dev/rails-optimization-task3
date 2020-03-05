@@ -1,6 +1,10 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
+
+desc 'Загрузка данных из файла'
 task :reload_json, [:file_name] => :environment do |_task, args|
+  desc 'Загрузка данных из файла'
+  start_time = Time.now
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
@@ -31,4 +35,5 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       )
     end
   end
+  puts "Execution time #{Time.now - start_time} "
 end
