@@ -1,11 +1,20 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 
+desc 'Очистка запросов в pg_hero'
+task :empty_pghero_query_stats => :environment do
+  # puts ActiveRecord::Base.connection.execute('delete from pg_statements').inspect
+
+  puts ActiveRecord::Base.connection.execute('delete from pghero_query_stats').inspect
+end
+
 desc 'Загрузка данных из файла'
 task :reload_json, [:file_name] => :environment do |_task, args|
-  desc 'Загрузка данных из файла'
-  start_time = Time.now
-  json = JSON.parse(File.read(args.file_name))
+  time  = []; i = 0
+  time[i] = Time.now; i += 1
+  json = Oj.load(File.read(args.file_name))
+  time[i] = Time.now; i += 1
+  puts "json = JSON.parse(File.read(args.file_name)) #{time[-1] - time[-2]}"
 
   ActiveRecord::Base.transaction do
     City.delete_all
@@ -13,27 +22,32 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Service.delete_all
     Trip.delete_all
     ActiveRecord::Base.connection.execute('delete from buses_services;')
+    trips_array  = []
 
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+    json.each_with_index do |trip, index|
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
+      from = City.find_cached_or_create(trip['from'])
+      to = City.find_cached_or_create(trip['to'])
+
+      bus = Bus.find_cached_or_create(trip['bus'])
+
+      trip_hash = {
+        from_id: from.id,
+        to_id: to.id,
+        bus_id: bus.id,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
+        price_cents: trip['price_cents']
+      }
+      trips_array << trip_hash
+      if i%1000 == 999
+        Trip.import(trips_array)
+        puts i
+        trips_array =[]
+      end
     end
+    Trip.import(trips_array)
+    # Bus.save_bus_service_cache
   end
-  puts "Execution time #{Time.now - start_time} "
+  puts "Execution time #{Time.now - time[0]} "
 end
