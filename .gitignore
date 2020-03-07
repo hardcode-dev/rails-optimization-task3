@@ -9,3 +9,4 @@ ruby_prof_reports/
 .rubocop.yml
 /docker-valgrind-massif/
 /stackprof_reports/
+1M.json
