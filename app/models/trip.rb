@@ -3,7 +3,7 @@ class Trip < ApplicationRecord
 
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
-  belongs_to :bus
+  belongs_to :bus, :foreign_key => [:number, :model]
 
   validates :from, presence: true
   validates :to, presence: true

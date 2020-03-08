@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2020_03_08_003123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "buses", force: :cascade do |t|
-    t.string "number"
-    t.string "model"
+  create_table "buses", primary_key: ["number", "model"], force: :cascade do |t|
+    t.string "number", null: false
+    t.string "model", null: false
+    t.index ["number", "model"], name: "index_buses_on_number_and_model", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|
     t.integer "bus_id"
     t.integer "service_id"
+    t.string "model"
+    t.string "number"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -40,6 +43,10 @@ ActiveRecord::Schema.define(version: 2019_03_30_193044) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.string "model"
+    t.string "number"
   end
 
+  add_foreign_key "buses_services", "buses", column: "model", primary_key: "model", name: "buses_services_fk"
+  add_foreign_key "trips", "buses", column: "model", primary_key: "model", name: "trips_fk"
 end
