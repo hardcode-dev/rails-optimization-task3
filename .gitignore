@@ -10,3 +10,4 @@ ruby_prof_reports/
 /docker-valgrind-massif/
 /stackprof_reports/
 1M.json
+.byebug_history

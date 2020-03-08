@@ -4,18 +4,12 @@
 desc 'Очистка запросов в pg_hero'
 task :empty_pghero_query_stats => :environment do
   # puts ActiveRecord::Base.connection.execute('delete from pg_statements').inspect
-
   puts ActiveRecord::Base.connection.execute('delete from pghero_query_stats').inspect
 end
 
 desc 'Загрузка данных из файла'
 task :reload_json, [:file_name] => :environment do |_task, args|
-  time  = []; i = 0
-  time[i] = Time.now; i += 1
   json = Oj.load(File.read(args.file_name))
-  time[i] = Time.now; i += 1
-  puts "json = JSON.parse(File.read(args.file_name)) #{time[-1] - time[-2]}"
-
   ActiveRecord::Base.transaction do
     City.delete_all
     Bus.delete_all
@@ -28,7 +22,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
       from = City.find_cached_or_create(trip['from'])
       to = City.find_cached_or_create(trip['to'])
-
       bus = Bus.find_cached_or_create(trip['bus'])
 
       trip_hash = {
@@ -40,14 +33,11 @@ task :reload_json, [:file_name] => :environment do |_task, args|
         price_cents: trip['price_cents']
       }
       trips_array << trip_hash
-      if i%1000 == 999
+      if index%1000 == 999
         Trip.import(trips_array)
-        puts i
         trips_array =[]
       end
     end
     Trip.import(trips_array)
-    # Bus.save_bus_service_cache
   end
-  puts "Execution time #{Time.now - time[0]} "
 end
