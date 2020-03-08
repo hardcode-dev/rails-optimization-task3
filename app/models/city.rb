@@ -7,7 +7,7 @@ class City < ApplicationRecord
   end
 
   def self.find_cached_or_create(name)
-    name = name.gsub(' ','')
+    #name = name.gsub(' ','')
     @all_cities ||= City.all.map{|city| [city.name, city]}.to_h
     @all_cities[name] ||= City.create!(name:name)
   end
