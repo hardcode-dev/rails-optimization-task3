@@ -1,14 +1,9 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 
-desc 'Очистка запросов в pg_hero'
-task :empty_pghero_query_stats => :environment do
-  # puts ActiveRecord::Base.connection.execute('delete from pg_statements').inspect
-  puts ActiveRecord::Base.connection.execute('delete from pghero_query_stats').inspect
-end
-
 desc 'Загрузка данных из файла'
 task :reload_json, [:file_name] => :environment do |_task, args|
+  time1 = Time.now
   json = Oj.load(File.read(args.file_name))
   ActiveRecord::Base.transaction do
     City.delete_all
@@ -34,10 +29,11 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       }
       trips_array << trip_hash
       if index%1000 == 999
-        Trip.import(trips_array)
+        Trip.import(trips_array, validate: true, validate_uniqueness: true)
         trips_array =[]
       end
     end
-    Trip.import(trips_array)
+    Trip.import(trips_array, validate: true, validate_uniqueness: true)
   end
+  puts "Imported in #{Time.now - time1}"
 end
