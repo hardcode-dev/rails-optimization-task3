@@ -22,6 +22,7 @@ gem 'meta_request'
 
 gem 'activerecord-import', require: false
 gem 'composite_primary_keys', '=11.2.0'
+gem 'oj'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

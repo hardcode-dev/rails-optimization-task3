@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_003123) do
+ActiveRecord::Schema.define(version: 2020_03_08_114605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2020_03_08_003123) do
   end
 
   create_table "buses_services", force: :cascade do |t|
-    t.integer "bus_id"
     t.integer "service_id"
     t.string "model"
     t.string "number"
@@ -42,7 +41,6 @@ ActiveRecord::Schema.define(version: 2020_03_08_003123) do
     t.string "start_time"
     t.integer "duration_minutes"
     t.integer "price_cents"
-    t.integer "bus_id"
     t.string "model"
     t.string "number"
   end

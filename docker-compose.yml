@@ -13,17 +13,17 @@ services:
     ports:
       - "15432:5432"
 
-#  pghero:
-#    image: ankane/pghero
-#    ports:
-#      - "8080:8080"
-#    environment:
-##      DATABASE_URL: "postgres://elreg:elreg@172.16.101.62:5432/fgiski_preproduction"
-#      DATABASE_URL: "postgres://rails:password@db-postgresql:5432/task-4_development"
-#    tty: true
-#    stdin_open: true
-#    depends_on:
-#      - db-postgresql
+  pghero:
+    image: ankane/pghero
+    ports:
+      - "8080:8080"
+    environment:
+#      DATABASE_URL: "postgres://elreg:elreg@172.16.101.62:5432/fgiski_preproduction"
+      DATABASE_URL: "postgres://rails:password@db-postgresql:5432/task-4_development"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db-postgresql
 
   # schedule app
   schedule_app:
