@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_155753) do
     t.integer "price_cents"
     t.string "model"
     t.string "number"
+    t.index ["from_id", "to_id"], name: "index_trips_on_from_id_and_to_id"
   end
 
   add_foreign_key "buses_services", "buses", column: "model", primary_key: "model", name: "buses_services_fk"
