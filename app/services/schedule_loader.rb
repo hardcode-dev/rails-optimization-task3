@@ -11,33 +11,29 @@ class ScheduleLoader
     @services = {}
     @buses = Set.new
 
-    @trips_command = "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, model, number) from stdin with csv delimiter ';'"
-    @trips_command_raw = "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, model, number) from stdin"
-
-    @bus_command = "copy buses (model, number) from stdin with csv delimiter ';'"
-    @buses_services_command = "copy buses_services (service_id, model, number) from stdin with csv delimiter ';'"
-    @buses_services_command_raw = "copy buses_services (service_id, model, number) from stdin"
-
-
     @@services = {}
     Service.pluck(:name, :id).map{|sr| @@services[sr[0].to_sym] = sr[1]}
 
+    # https://koshigoe.github.io/postgresql/ruby/2018/10/31/bulk-insert-vs-copy-in-postgres.html
+    @base_connection = ActiveRecord::Base.connection
+    @raw_conn = ActiveRecord::Base.connection.raw_connection
+    @encoder = PG::TextEncoder::CopyRow.new
+
+    @trips_command_raw = "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, model, number) from stdin"
+    @buses_services_command_raw = "copy buses_services (service_id, model, number) from stdin"
+    @bus_command_raw = "copy buses (model, number) from stdin"
+
+    @nr2 = Array.new(2)
+    @nr3 = Array.new(3)
+    @nr7 = Array.new(7)
+
     ActiveRecord::Base.transaction do
-
-      time_start = Time.now
-
-      ActiveRecord::Base.connection.execute('delete from buses_services;')
-
-      ActiveRecord::Base.connection.execute('delete from buses_services;')
-      ActiveRecord::Base.connection.execute('delete from trips;')
-      ActiveRecord::Base.connection.execute('delete from cities;')
-      ActiveRecord::Base.connection.execute('delete from buses;')
-
-      # Trip.delete_all
-      # City.delete_all
-      # Bus.delete_all
-      ActiveRecord::Base.connection.reset_pk_sequence!('cities')
-      ActiveRecord::Base.connection.reset_pk_sequence!('buses')
+      @raw_conn.exec('delete from buses_services;')
+      @raw_conn.exec('delete from trips;')
+      @raw_conn.exec('delete from cities;')
+      @raw_conn.exec('delete from buses;')
+      @base_connection.reset_pk_sequence!('cities')
+      @base_connection.reset_pk_sequence!('buses')
 
       File.open(file_name) do |ff|
         nesting = 0
@@ -65,8 +61,6 @@ class ScheduleLoader
         end
       end
       City.import @cities.map {|cc| ({id: cc[1], name: cc[0]})}
-      end_time = Time.now
-      pp (end_time - time_start)
     end
   end
 
@@ -83,25 +77,29 @@ class ScheduleLoader
       @cities[trip['to']] = to_id
     end
 
-    bus_key = "#{trip['bus']['number']}-#{trip['bus']['model']}"
-
     bus_number = trip['bus']['number']
     bus_model = trip['bus']['model']
 
+    bus_key = "#{bus_number}-#{bus_model}"
+
     unless @buses.include?(bus_key)
-      ActiveRecord::Base.connection.raw_connection.copy_data @bus_command do
-        ActiveRecord::Base.connection.raw_connection.put_copy_data("#{bus_number};#{bus_model}\n")
+      @raw_conn.copy_data @bus_command_raw, @encoder do
+        @nr2 = bus_number, bus_model
+        @raw_conn.put_copy_data(@nr2)
       end
       @buses << bus_key
-      ActiveRecord::Base.connection.raw_connection.copy_data @buses_services_command do
+
+      @raw_conn.copy_data @buses_services_command_raw, @encoder do
         trip["bus"]["services"].map do |srv|
-          ActiveRecord::Base.connection.raw_connection.put_copy_data("#{@@services[srv.to_sym]};#{bus_number};#{bus_model}\n")
+          @nr3 = @@services[srv.to_sym], bus_number, bus_model
+          @raw_conn.put_copy_data(@nr3)
         end
       end
     end
 
-    ActiveRecord::Base.connection.raw_connection.copy_data @trips_command do
-      ActiveRecord::Base.connection.raw_connection.put_copy_data("#{from_id};#{to_id};#{trip['start_time']};#{trip['duration_minutes']};#{trip['price_cents']};#{bus_number};#{bus_model}\n")
+    @raw_conn.copy_data @trips_command_raw, @encoder do
+      @nr7 = from_id,to_id, trip['start_time'],trip['duration_minutes'],trip['price_cents'],bus_number,bus_model
+      @raw_conn.put_copy_data(@nr7)
     end
   end
 end
