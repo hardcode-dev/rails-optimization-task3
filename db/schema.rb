@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 2020_03_09_155753) do
   create_table "buses", primary_key: ["number", "model"], force: :cascade do |t|
     t.string "number", null: false
     t.string "model", null: false
+    t.index ["model"], name: "index_buses_on_model"
     t.index ["number", "model"], name: "index_buses_on_number_and_model", unique: true
+    t.index ["number"], name: "index_buses_on_number"
   end
 
   create_table "buses_services", force: :cascade do |t|

@@ -6,6 +6,8 @@ class AddIndicesToBusServices < ActiveRecord::Migration[5.2]
     add_index :buses_services, %i[service_id model number], algorithm: :concurrently
     add_index :cities, :name, algorithm: :concurrently
     add_index :trips, %i[from_id to_id], algorithm: :concurrently
+    add_index :buses, :model, algorithm: :concurrently
+    add_index :buses, :number, algorithm: :concurrently
   end
 
   def down
@@ -13,5 +15,7 @@ class AddIndicesToBusServices < ActiveRecord::Migration[5.2]
     remove_index :buses_services, %i[service_id model number]
     remove_index :cities, :name
     remove_index :trips, %i[from_id to_id]
+    remove_index :buses, :model
+    remove_index :buses, :number
   end
 end
