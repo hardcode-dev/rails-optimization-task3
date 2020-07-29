@@ -7,6 +7,7 @@ ruby '2.6.3'
 
 gem 'activerecord-import'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'oj'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
@@ -29,6 +30,7 @@ group :development do
   gem 'rubocop-performance', '~> 1.7.0', require: false
   gem 'rubocop-rails', '~> 2.7.0', require: false
   gem 'rubocop-rspec', '~> 1.42.0', require: false
+  gem 'ruby-prof'
   gem 'stackprof'
   gem 'strong_migrations'
   gem 'web-console', '>= 3.3.0'
