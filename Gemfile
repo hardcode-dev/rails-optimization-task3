@@ -11,6 +11,7 @@ gem 'oj'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
+gem 'strong_migrations'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -32,7 +33,7 @@ group :development do
   gem 'rubocop-rspec', '~> 1.42.0', require: false
   gem 'ruby-prof'
   gem 'stackprof'
-  gem 'strong_migrations'
+
   gem 'web-console', '>= 3.3.0'
 end
 
