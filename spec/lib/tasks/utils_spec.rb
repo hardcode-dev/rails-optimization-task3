@@ -15,6 +15,13 @@ RSpec.describe 'Tasks' do
       to = City.find_by(name: 'Москва')
       trips = Trip.where(from: from, to: to)
       expect(trips.count).to eq 13
+      expect(City.count).to eq 10
+      expect(Service.count).to eq 10
+      expect(Bus.count).to eq 613
+      expect(Trip.count).to eq 1000
+      expect(
+        Bus.find_by(number: '160').staffings.pluck(:service_id)
+      ).to eq ["WiFi", "Работающий туалет", "Кондиционер общий", "Кондиционер Индивидуальный", "Телевизор общий"]
     end
   end
 end
