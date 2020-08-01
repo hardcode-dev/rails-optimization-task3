@@ -7,8 +7,11 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     json = Oj.load(File.read(args.file_name))
 
     ActiveRecord::Base.transaction do
-      tables = ActiveRecord::Base.connection.tables.join(', ')
-      ActiveRecord::Base.connection.execute("TRUNCATE #{tables};")
+      City.delete_all
+      Trip.delete_all
+      Bus.delete_all
+      Service.delete_all
+      Staffing.delete_all
 
       trips = []
       cities = []
