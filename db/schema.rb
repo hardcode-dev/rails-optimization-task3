@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_190043) do
+ActiveRecord::Schema.define(version: 2020_08_01_191752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_190043) do
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.index ["number"], name: "index_buses_on_number"
   end
 
   create_table "buses_services", force: :cascade do |t|
