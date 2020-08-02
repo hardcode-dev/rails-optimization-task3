@@ -9,6 +9,7 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pghero', '~> 2.6'
 gem 'pg_query', '>= 0.9.0'
+gem 'activerecord-import', '~> 1.0', '>= 1.0.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
