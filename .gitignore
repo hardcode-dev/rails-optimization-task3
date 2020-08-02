@@ -2,5 +2,5 @@
 /tmp
 /log
 /public
-/config/database.yml
+config/database.yml
 .idea
