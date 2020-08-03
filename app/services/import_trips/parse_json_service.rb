@@ -31,17 +31,12 @@ module ImportTrips::ParseJsonService
       ActiveRecord::Base.connection.execute('delete from buses_services;')
 
       json.each do |trip|
-        #TODO тут мы могли бы проверять наличие ключа методом has_key? вместо present? - но тут мы хотим убедиться, что есть содерживое
-        cities[trip['from']] = City.select(:id).find_or_create_by(name: trip['from']) unless cities[trip['from']].present?
-        cities[trip['to']] = City.select(:id).find_or_create_by(name: trip['to']) unless cities[trip['to']].present?
-
-        from = cities[trip['from']]
-        to = cities[trip['to']]
+        from = (cities[trip['from']] ||= City.create(name: trip['from']))
+        to = (cities[trip['to']] ||= City.create(name: trip['to']))
         services = []
 
         trip['bus']['services'].each do |service|
-          allowed_services[service] = Service.find_or_create_by(name: service) if allowed_services[service].blank?
-          services << allowed_services[service]
+          services << (allowed_services[service] ||= Service.create(name: service))
         end
 
         if (bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"]).blank?
