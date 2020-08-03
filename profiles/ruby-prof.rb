@@ -5,7 +5,7 @@ GC.disable
 RubyProf.measure_mode = RubyProf::WALL_TIME
 RubyProf.start
 
-ImportTripBusesFromJsonService.call(file_path: 'fixtures/example.json')
+ImportTrips::ParseJsonService.call(file_path: 'fixtures/example.json')
 
 results = RubyProf.stop
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ImportTripBusesFromJsonService do
+describe ImportTrips::ParseJsonService do
   describe '#call' do
     it 'creates 5 trip records, 1 bus and 2 services from file' do
       described_class.call(file_path: 'fixtures/example.json')

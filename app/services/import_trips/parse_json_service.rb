@@ -1,4 +1,4 @@
-module ImportTripBusesFromJsonService
+module ImportTrips::ParseJsonService
   extend self
 
   def call(file_path:)
