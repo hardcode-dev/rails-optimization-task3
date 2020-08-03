@@ -1,13 +1,20 @@
 require 'ruby-prof'
 
-RubyProf.measure_mode = RubyProf::MEMORY
-
 GC.disable
 
-result = RubyProf.profile do
-  work('files/data16000.txt')
+RubyProf.measure_mode = RubyProf::WALL_TIME
+RubyProf.start
+
+ImportTripBusesFromJsonService.call(file_path: 'fixtures/example.json')
+
+results = RubyProf.stop
+
+File.open 'reports/profile-graph.html', 'w' do |file|
+  RubyProf::GraphHtmlPrinter.new(results).print(file)
 end
 
-printer4 = RubyProf::CallTreePrinter.new(result)
-printer4.print(path: 'reports', profile: 'profile')
+File.open 'reports/profile-flat.txt', 'w' do |file|
+  RubyProf::FlatPrinter.new(results).print(file)
+end
 
+RubyProf::CallTreePrinter.new(results).print(path: 'reports', profile: 'profile')
