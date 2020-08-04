@@ -4,6 +4,12 @@ require 'rails_helper'
 
 describe ImportTrips::ParseStreamJsonService do
   describe '#call' do
+    context 'performance' do
+      it 'works under 50ms' do
+        expect { described_class.new(file_path: 'fixtures/example.json').call }.to perform_under(25).ms
+      end
+    end
+
     it 'creates 5 trip records, 1 bus and 2 services from file' do
       described_class.new(file_path: 'fixtures/example.json').call
 
