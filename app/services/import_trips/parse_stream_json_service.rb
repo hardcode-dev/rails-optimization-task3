@@ -17,7 +17,7 @@ class ImportTrips::ParseStreamJsonService
     file.rewind
 
     @io =
-      if first_bytes == GZIP_BYTES
+      if first_bytes == GZIP_BYTES # Проверяем, если GZIP, то умеем работать еще и с архивами
         Yajl::Gzip::StreamReader.parse(file).each
       else
         Yajl::Parser.parse(file).each
@@ -65,7 +65,8 @@ class ImportTrips::ParseStreamJsonService
   private
 
   def city_id_by_name(city_name)
-    city_name = city_name.tr(' ', '')
+    city_name.tr!(' ', '')
+
     cities[city_name] ||= City.create!(name: city_name).id
   end
 
