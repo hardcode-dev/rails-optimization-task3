@@ -6,7 +6,8 @@ class ImportTrips::ParseStreamJsonService
   GZIP_BYTES = "\x1F\x8B".unpack('C*').freeze
 
   attr_reader :io
-  #TODO Такое лучше реализовать через Redis
+
+  #TODO Такие "хранилища" лучше реализовать через Redis
   attr_accessor :cities, :allowed_services, :buses_ids
 
   def initialize(file_path:)
@@ -37,6 +38,7 @@ class ImportTrips::ParseStreamJsonService
         Trip.delete_all
         ActiveRecord::Base.connection.execute('delete from buses_services;')
 
+        cn = 0
         trips_command =
           "COPY trips (from_id, to_id, start_time, duration_minutes, price_cents, bus_id) FROM STDIN with csv delimiter ';'"
 
@@ -50,6 +52,8 @@ class ImportTrips::ParseStreamJsonService
             bus_id = building_bus_id(json_line['bus'])
 
             raw.put_copy_data("#{from_id};#{to_id};#{json_line['start_time']};#{json_line['duration_minutes']};#{json_line['price_cents']};#{bus_id}\n")
+
+            print "\r imported: #{cn += 1}"
           end
         end
       end
@@ -68,8 +72,6 @@ class ImportTrips::ParseStreamJsonService
   def building_bus_id(bus_json)
     buses_ids["#{bus_json['number']}_#{bus_json['model']}"] ||=
       Bus.create(number: bus_json['number'], model: bus_json['model'], services: build_services(bus_json['services'])).id
-
-    buses_ids["#{bus_json['number']}_#{bus_json['model']}"]
   end
 
   def build_services(bus_services)

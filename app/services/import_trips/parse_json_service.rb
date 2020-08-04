@@ -42,10 +42,8 @@ module ImportTrips::ParseJsonService
           services << (allowed_services[service] ||= Service.create(name: service))
         end
 
-        uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"] ||=
+        bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"] ||=
           Bus.create(number: trip['bus']['number'], model: trip['bus']['model'], services: services).id
-
-        bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"]
 
         cn += 1
 
