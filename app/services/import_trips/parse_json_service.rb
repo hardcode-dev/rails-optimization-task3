@@ -22,6 +22,7 @@ module ImportTrips::ParseJsonService
     trips = []
     cn = 0
 
+    # Для импорта по пачкам.
     limit = 2000
 
     ActiveRecord::Base.transaction do
@@ -41,11 +42,10 @@ module ImportTrips::ParseJsonService
           services << (allowed_services[service] ||= Service.create(name: service))
         end
 
-        if (bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"]).blank?
-          uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"] =
-            Bus.create(number: trip['bus']['number'], model: trip['bus']['model'], services: services).id
-          bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"]
-        end
+        uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"] ||=
+          Bus.create(number: trip['bus']['number'], model: trip['bus']['model'], services: services).id
+
+        bus_id = uniq_buses["#{trip['bus']['model']}_#{trip['bus']['number']}"]
 
         cn += 1
 
