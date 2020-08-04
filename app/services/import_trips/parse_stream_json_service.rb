@@ -31,7 +31,7 @@ class ImportTrips::ParseStreamJsonService
   def call
     time = Benchmark.measure do
       ActiveRecord::Base.transaction do
-        PgHero.reset_query_stats
+        # PgHero.reset_query_stats - было удобно, когда очищалась статистика
         City.delete_all
         Bus.delete_all
         Service.delete_all

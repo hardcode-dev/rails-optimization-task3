@@ -26,7 +26,7 @@ module ImportTrips::ParseJsonService
     limit = 2000
 
     ActiveRecord::Base.transaction do
-      PgHero.reset_query_stats
+      # PgHero.reset_query_stats - было удобно, когда очищалась статистика
       City.delete_all
       Bus.delete_all
       Service.delete_all
