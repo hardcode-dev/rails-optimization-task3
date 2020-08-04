@@ -5,7 +5,7 @@ module ImportTrips::ParseJsonService
 
   def call(file_path:)
     time = Benchmark.measure do
-      file_json = Oj.load(File.read(file_path))
+      file_json = Yajl::Parser.parse(File.read(file_path))
 
       parsing(file_json)
     end
