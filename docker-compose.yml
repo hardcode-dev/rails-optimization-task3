@@ -1,0 +1,48 @@
+version: '3'
+services:
+  # PostgreSQL
+  db-postgresql:
+    image: postgres:9.6
+    volumes:
+      - "/opt/shared/postgresql-nfap/data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: rails
+      POSTGRES_PASSWORD: password
+    tty: true
+    stdin_open: true
+    ports:
+      - "15432:5432"
+
+  pghero:
+    image: ankane/pghero
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: "postgres://rails:password@db-postgresql:5432/task-4_development"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db-postgresql
+
+  # schedule app
+  schedule_app:
+    build: .
+    environment:
+      - "PAGER='busybox more'"
+      - "SSH_AUTH_SOCK=/tmp/ssh-agent"
+      - "DISABLE_SPRING=1"
+      - "DEV_SCHD_DATABASE_PORT=5432"
+      - "DEV_SCHD_DATABASE_HOST=db-postgresql"
+      - "DEV_SCHD_DATABASE_USERNAME=rails"
+      - "DEV_SCHD_DATABASE_PASSWORD=password"
+      - "SCHD_DATABASE_NAME=task-4"
+      #- "DEV_REDIS_HOST=redis"
+    tty: true
+    stdin_open: true
+    volumes:
+      - "$PWD:/var/www/schedule_app:Z"
+      - $SSH_AUTH_SOCK:/tmp/ssh-agent:Z
+    ports:
+      - "3078:3000"
+    depends_on:
+      - db-postgresql
