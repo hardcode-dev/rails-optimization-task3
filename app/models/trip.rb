@@ -29,4 +29,19 @@ class Trip < ApplicationRecord
       },
     }
   end
+
+  def to_h_old
+    {
+        'from' => from.name,
+        'to' => to.name,
+        'start_time' => start_time,
+        'duration_minutes' => duration_minutes,
+        'price_cents' => price_cents,
+        'bus' =>  {
+            'number' => bus.number,
+            'model' => bus.model,
+            'services' => bus.services.map(&:name),
+        },
+    }
+  end
 end
