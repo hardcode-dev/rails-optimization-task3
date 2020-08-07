@@ -25,7 +25,7 @@ class Trip < ApplicationRecord
       bus: {
         number: bus.number,
         model: bus.model,
-        services: bus.services.map(&:name),
+        services: bus.services.map(&:name).to_set,
       },
     }
   end

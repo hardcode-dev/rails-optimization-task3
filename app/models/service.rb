@@ -16,4 +16,10 @@ class Service < ApplicationRecord
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }
+
+  def self.setup
+    columns = [:name]
+    values = SERVICES.map { |s| [s] }
+    self.import columns, values, validate: true
+  end
 end
