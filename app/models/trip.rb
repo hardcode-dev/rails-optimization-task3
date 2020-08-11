@@ -5,10 +5,6 @@ class Trip < ApplicationRecord
   belongs_to :to, class_name: 'City'
   belongs_to :bus
 
-  validates :from, presence: true
-  validates :to, presence: true
-  validates :bus, presence: true
-
   validates :start_time, format: { with: HHMM_REGEXP, message: 'Invalid time' }
   validates :duration_minutes, presence: true
   validates :duration_minutes, numericality: { greater_than: 0 }
