@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: services
+#
+#  id   :bigint           not null, primary key
+#  name :string
+#
 class Service < ApplicationRecord
   SERVICES = [
     'WiFi',
@@ -12,7 +19,10 @@ class Service < ApplicationRecord
     'Можно не печатать билет',
   ].freeze
 
-  has_and_belongs_to_many :buses, join_table: :buses_services
+  has_many :buses_services,
+           class_name: 'BusService'
+
+  has_many :buses, through: :buses_services
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }

@@ -1,6 +1,4 @@
 <li>Сервисы в автобусе:</li>
 <ul>
-  <% services.each do |service| %>
-    <%= render "service", service: service %>
-  <% end %>
+  <%= render partial: "service", collection: services  %>
 </ul>

@@ -1,0 +1,38 @@
+[
+  {
+    "bus": {
+      "model": "Икарус",
+      "number": "123",
+      "services": ["Туалет", "WiFi"]
+    },
+    "duration_minutes": 168,
+    "from": "Москва",
+    "price_cents": 474,
+    "start_time": "11:00",
+    "to": "Самара"
+  },
+  {
+    "bus": {
+      "model": "Икарус",
+      "number": "123",
+      "services": ["Туалет", "WiFi"]
+    },
+    "duration_minutes": 37,
+    "from": "Самара",
+    "price_cents": 173,
+    "start_time": "17:30",
+    "to": "Москва"
+  },
+  {
+    "bus": {
+      "model": "Икарус",
+      "number": "123",
+      "services": ["Туалет", "WiFi"]
+    },
+    "duration_minutes": 323,
+    "from": "Москва",
+    "price_cents": 672,
+    "start_time": "12:00",
+    "to": "Самара"
+  }
+]
