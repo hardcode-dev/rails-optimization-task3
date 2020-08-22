@@ -170,7 +170,6 @@ GEM
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
     ruby-prof (0.18.0)
-    ruby-prof-speedscope (0.2.0)
     ruby_dep (1.5.0)
     shellany (0.0.1)
     sprockets (3.7.2)
@@ -211,7 +210,6 @@ DEPENDENCIES
   rspec-benchmark
   rspec-rails
   ruby-prof
-  ruby-prof-speedscope
   tzinfo-data
   web-console (>= 3.3.0)
 
