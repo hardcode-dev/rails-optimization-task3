@@ -53,11 +53,11 @@ class Seed::ReloadDataService
       bus_key = "#{data['bus']['model']}_#{data['bus']['number']}"
       unless @bus_cache[bus_key]
         @bus_cache[bus_key] = { model: data['bus']['model'], number: data['bus']['number'] }
-      end
 
-      data['bus']['services'].each do |service|
-        @bus_service_cache[bus_key] ||= []
-        @bus_service_cache[bus_key] << @service_cache[service]
+        data['bus']['services'].each do |service|
+          @bus_service_cache[bus_key] ||= []
+          @bus_service_cache[bus_key] << @service_cache[service]
+        end
       end
 
       trip[:from_id] = data['from']

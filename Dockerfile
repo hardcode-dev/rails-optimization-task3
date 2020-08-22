@@ -1,5 +1,5 @@
 FROM ruby:2.6.3
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client && apt-get install -y cron
 RUN mkdir /rails-optimization-task3
 WORKDIR /rails-optimization-task3
 COPY Gemfile /rails-optimization-task3/Gemfile

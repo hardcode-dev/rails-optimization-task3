@@ -33,11 +33,11 @@ class Seed::ReloadDataServiceTest < ActiveSupport::TestCase
     end
   end
 
-  test 'big performance test' do
-    big_data_file_path = Rails.root.join('fixtures', 'large.json')
-
-    benchmark_with_limit 55_000 do
-      Seed::ReloadDataService.new(big_data_file_path).call
-    end
-  end
+  # test 'big performance test' do
+  #   big_data_file_path = Rails.root.join('fixtures', 'large.json')
+  #
+  #   benchmark_with_limit 55_000 do
+  #     Seed::ReloadDataService.new(big_data_file_path).call
+  #   end
+  # end
 end
