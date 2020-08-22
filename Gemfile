@@ -7,6 +7,14 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'activerecord-import'
+gem 'ruby-prof'
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
+gem 'whenever', require: false
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -17,6 +25,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'bullet'
 end
 
 group :test do
