@@ -3,8 +3,6 @@
 class ImportTrips
   def initialize(filename)
     @json_data = JSON.parse(File.read(filename), symbolize_names: true)
-    @buses = []
-    @trips = []
   end
 
   def call!
@@ -19,7 +17,7 @@ class ImportTrips
 
   private
 
-  attr_reader :json_data, :trips
+  attr_reader :json_data
 
   def build_bus(trip:)
     bus = fetch_bus(number: trip[:bus][:number])

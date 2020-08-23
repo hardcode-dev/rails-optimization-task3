@@ -21,7 +21,7 @@ RSpec.describe ImportTrips, :type => :service do
     end
 
     context 'with benchmark' do
-      it { expect { import! }.to perform_under(33).ms.sample(5).times }
+      it { expect { import! }.to perform_under(42).ms.sample(5).times }
     end
   end
 end
