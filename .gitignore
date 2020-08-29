@@ -2,3 +2,8 @@
 /tmp
 /log
 /public
+.idea
+.rspec
+.rvmrc
+.env
+.DS_Store

@@ -12,9 +12,22 @@ class Bus < ApplicationRecord
     'Газель',
   ].freeze
 
-  has_many :trips
-  has_and_belongs_to_many :services, join_table: :buses_services
+  SERVICES = [
+    'WiFi',
+    'Туалет',
+    'Работающий туалет',
+    'Ремни безопасности',
+    'Кондиционер общий',
+    'Кондиционер Индивидуальный',
+    'Телевизор общий',
+    'Телевизор индивидуальный',
+    'Стюардесса',
+    'Можно не печатать билет',
+  ].freeze
 
-  validates :number, presence: true, uniqueness: true
+  has_many :trips
+
+  validates :number, presence: true
   validates :model, inclusion: { in: MODELS }
+  validates :services, array_inclusion: { in: SERVICES }
 end

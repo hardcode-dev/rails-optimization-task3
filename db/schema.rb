@@ -10,36 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2020_02_16_211532) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.string "services", array: true
+    t.index ["number"], name: "for_upsert", unique: true
+    t.index ["number"], name: "index_buses_on_number", unique: true
   end
 
-  create_table "buses_services", force: :cascade do |t|
-    t.integer "bus_id"
-    t.integer "service_id"
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at"
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "services", force: :cascade do |t|
-    t.string "name"
+  create_table "pghero_space_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "schema"
+    t.text "relation"
+    t.bigint "size"
+    t.datetime "captured_at"
+    t.index ["database", "captured_at"], name: "index_pghero_space_stats_on_database_and_captured_at"
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "from_id"
-    t.integer "to_id"
     t.string "start_time"
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.string "from"
+    t.string "to"
+    t.index ["from", "to"], name: "index_trips_on_from_and_to"
   end
 
 end

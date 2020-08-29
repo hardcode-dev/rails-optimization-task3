@@ -1,34 +1,48 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
+# rake 'reload_json[fixtures/small.json]'
+
 task :reload_json, [:file_name] => :environment do |_task, args|
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
-    City.delete_all
     Bus.delete_all
-    Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
 
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
-
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-    end
+    import_buses(json).
+      then { |buses| buses.results.to_h }.
+      then { |buses| import_trips(json, buses)}
   end
+end
+
+def import_buses(json)
+  buses = []
+  json.each do |obj|
+    bus_obj = obj['bus']
+    bus = Bus.new(
+      number: bus_obj['number'],
+      model: bus_obj['model'],
+      services: bus_obj['services']
+    )
+    buses << bus
+  end
+  Bus.import(buses, on_duplicate_key_update: {}, returning: [:number, :id])
+end
+
+def import_trips(json, buses)
+  trips = []
+  json.each do |trip_obj|
+    bus_id = buses[trip_obj['bus']['number']]
+
+    trip = Trip.new(
+      from: trip_obj['from'],
+      to: trip_obj['to'],
+      bus_id: bus_id,
+      start_time: trip_obj['start_time'],
+      duration_minutes: trip_obj['duration_minutes'],
+      price_cents: trip_obj['price_cents'],
+    )
+    trips << trip
+  end
+  Trip.import(trips, validate: false)
 end
