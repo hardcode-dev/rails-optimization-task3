@@ -37,6 +37,7 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+  config.log_level = :debug
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
@@ -58,4 +59,20 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.console = true
+    Bullet.add_footer = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+    # Bullet.alert = false
+    # Bullet.growl = false
+    # Bullet.honeybadger = true
+    # Bullet.bugsnag = true
+    # Bullet.airbrake = true
+    # Bullet.rollbar = true
+    Bullet.unused_eager_loading_enable = true
+    Bullet.counter_cache_enable = true
+  end
 end
