@@ -1,0 +1,134 @@
+events: wall_time
+
+fl=
+fn=Kernel::nil?
+0 5
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+fn=ActiveRecord/ConnectionAdapters/ConnectionPool::flush
+616 23
+cfl=
+cfn=Kernel::nil?
+calls=9 617
+617 5
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::synchronize
+calls=9 619
+619 121
+cfl=
+cfn=Array::each
+calls=9 630
+630 3
+
+fl=
+fn=Thread/Mutex::unlock
+0 15
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::mon_check_owner
+267 23
+cfl=
+cfn=Thread::current^
+calls=18 268
+268 8
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::mon_exit
+199 62
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::mon_check_owner
+calls=18 200
+200 31
+cfl=
+cfn=Thread/Mutex::unlock
+calls=18 204
+204 15
+
+fl=
+fn=Array::each
+0 26
+
+fl=
+fn=Thread::alive?
+0 6
+
+fl=
+fn=Array::select
+0 60
+cfl=
+cfn=Thread::alive?
+calls=9 597
+597 6
+
+fl=
+fn=Thread/Mutex::lock
+0 13
+
+fl=
+fn=Thread::current^
+0 27
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::mon_enter
+187 88
+cfl=
+cfn=Thread::current^
+calls=36 188
+188 18
+cfl=
+cfn=Thread/Mutex::lock
+calls=18 189
+189 13
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+fn=MonitorMixin::synchronize
+227 79
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::mon_enter
+calls=18 228
+228 118
+cfl=
+cfn=Array::select
+calls=18 596
+596 66
+cfl=
+cfn=Array::each
+calls=18 596
+596 18
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::mon_exit
+calls=18 232
+232 108
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+fn=ActiveRecord/ConnectionAdapters/ConnectionPool::reap
+594 77
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/2.6.0/monitor.rb
+cfn=MonitorMixin::synchronize
+calls=9 595
+595 270
+cfl=
+cfn=Array::each
+calls=9 603
+603 5
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+fn=ActiveRecord/ConnectionAdapters/ConnectionPool/Reaper::run
+302 95
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+cfn=ActiveRecord/ConnectionAdapters/ConnectionPool::reap
+calls=9 302
+302 351
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+cfn=ActiveRecord/ConnectionAdapters/ConnectionPool::flush
+calls=9 303
+303 153
+cfl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+cfn=Kernel::sleep
+calls=9 301
+301 499125888
+
+fl=/Users/ruslan/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.4.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+fn=Kernel::sleep
+301 123421
+

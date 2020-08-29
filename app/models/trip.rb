@@ -1,8 +1,10 @@
-class Trip < ApplicationRecord
-  HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
+# frozen_string_literal: true
 
-  belongs_to :from, class_name: 'City'
-  belongs_to :to, class_name: 'City'
+class Trip < ApplicationRecord
+  HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/.freeze
+
+  belongs_to :from, class_name: 'City', optional: true
+  belongs_to :to, class_name: 'City', optional: true
   belongs_to :bus
 
   validates :from, presence: true
@@ -15,7 +17,7 @@ class Trip < ApplicationRecord
   validates :price_cents, presence: true
   validates :price_cents, numericality: { greater_than: 0 }
 
-  def to_h
+  def to_h # rubocop:disable Metrics/MethodLength
     {
       from: from.name,
       to: to.name,
@@ -25,8 +27,8 @@ class Trip < ApplicationRecord
       bus: {
         number: bus.number,
         model: bus.model,
-        services: bus.services.map(&:name),
-      },
+        services: bus.services.map(&:name)
+      }
     }
   end
 end
