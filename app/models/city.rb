@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validate :name_has_no_spaces
 
   def name_has_no_spaces

@@ -2,3 +2,12 @@
 /tmp
 /log
 /public
+data_large.txt
+profile*
+result.json
+.idea
+.DS_Store
+/callstack.html
+/flat.txt
+/graph.html
+/graphviz.dot
