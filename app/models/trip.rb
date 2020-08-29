@@ -1,9 +1,13 @@
 class Trip < ApplicationRecord
+  include Dbclear
+
   HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
 
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
   belongs_to :bus
+  has_many :buses_services, through: :bus
+  has_many :services, through: :buses_services
 
   validates :from, presence: true
   validates :to, presence: true
