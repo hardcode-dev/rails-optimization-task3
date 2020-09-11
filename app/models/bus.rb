@@ -9,11 +9,12 @@ class Bus < ApplicationRecord
     'ГАЗ',
     'ПАЗ',
     'Вольво',
-    'Газель',
+    'Газель'
   ].freeze
 
   has_many :trips
-  has_and_belongs_to_many :services, join_table: :buses_services
+  has_many :buses_services, class_name: 'BusesServicesRelation'
+  has_many :services, through: :buses_services
 
   validates :number, presence: true, uniqueness: true
   validates :model, inclusion: { in: MODELS }

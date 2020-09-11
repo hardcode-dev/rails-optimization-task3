@@ -1,34 +1,48 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read(args.file_name))
-
-  ActiveRecord::Base.transaction do
-    City.delete_all
-    Bus.delete_all
-    Service.delete_all
-    Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
-
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
-
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-    end
+  time = Benchmark.realtime do
+    ReloadJsonService.new(args).run
   end
+
+  puts "Finish in #{time.round(2)}"
 end
+
+task :reload_json_stream, [:file_name, :count] => :environment do |_task, args|
+  ReloadJsonServiceStream.new(args).run
+end
+
+task :reload_json_profiler, [:file_name] => :environment do |_task, args|
+  report = MemoryProfiler.report do
+    ReloadJsonService.new(args).run
+  end
+
+  report.pretty_print(scale_bytes: true)
+end
+
+
+task :reload_json_rubyprof, [:file_name] => :environment do |_task, args|
+  RubyProf.measure_mode = RubyProf::ALLOCATIONS
+
+  result = RubyProf.profile do
+    ReloadJsonService.new(args).run
+  end
+
+  printer = RubyProf::GraphHtmlPrinter.new(result)
+  printer.print(File.open('ruby_prof_graph.html', 'w+'))
+
+  printer = RubyProf::CallStackPrinter.new(result)
+  printer.print(File.open('ruby_prof_callstack.html', 'w+'))
+end
+
+task :reload_json_cpu, [:file_name] => :environment do |_task, args|
+  RubyProf.measure_mode = RubyProf::WALL_TIME
+
+  result = RubyProf.profile do
+    ReloadJsonService.new(args).run
+  end
+
+  printer = RubyProf::GraphHtmlPrinter.new(result)
+  printer.print(File.open("/ruby_prof_graph.html", "w+"))
+end
+
