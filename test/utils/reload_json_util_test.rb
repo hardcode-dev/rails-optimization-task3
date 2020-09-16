@@ -59,6 +59,6 @@ class ReloadJsonUtilTest < ActiveSupport::TestCase
       ReloadJsonUtil.new('fixtures/small.json').run
     end
 
-    assert time < 10, 'Reload is too long'
+    assert time < 2, 'Reload is too long'
   end
 end

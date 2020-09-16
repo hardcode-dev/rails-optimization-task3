@@ -10,7 +10,7 @@ module BenchmarkUtil
         yield
       end
 
-      puts "#{name} Finish in #{time.round(2)}"
+      puts "✅ #{name} Finish in #{time.round(2)}"
     end
 
     def memory
@@ -18,7 +18,7 @@ module BenchmarkUtil
     end
 
     def print_memory_usage
-      puts "memory_usage: #{memory} MB"
+      puts "📦 Memory usage: #{memory} MB"
     end
 
     def memory_usage
@@ -26,7 +26,7 @@ module BenchmarkUtil
       yield
       memory_usage_after = memory
       mem_usage = memory_usage_after - memory_usage_before
-      puts "memory_usage: #{mem_usage} MB"
+      puts "📦 Memory usage: #{mem_usage} MB"
     end
   end
 end
