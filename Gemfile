@@ -10,6 +10,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'activerecord-import'
 gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
+gem 'oj'
+gem 'ruby-progressbar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

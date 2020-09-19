@@ -12,3 +12,5 @@ medium:
 large:
 	rails 'reload_json[fixtures/large.json]'
 one_by_one: example small medium large
+stream:
+	rails reload_json_stream

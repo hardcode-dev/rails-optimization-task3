@@ -4,7 +4,7 @@ require 'test_helper'
 
 class ReloadJsonUtilTest < ActiveSupport::TestCase
   test 'reload example.json is correct' do
-    ReloadJsonUtil.new('fixtures/example.json').run
+    ReloadJsonStreamUtil.new('fixtures/example.json').run
 
     assert_equal %w[Москва Самара], City.order(:name).pluck(:name)
     assert_equal [%w[123 Икарус]], Bus.pluck(:number, :model)
@@ -56,7 +56,7 @@ class ReloadJsonUtilTest < ActiveSupport::TestCase
   # large.json   Finish in 616.38
   test 'reload small.json is fast' do
     time = Benchmark.realtime do
-      ReloadJsonUtil.new('fixtures/small.json').run
+      ReloadJsonStreamUtil.new('fixtures/small.json').run
     end
 
     assert time < 2, 'Reload is too long'
