@@ -43,4 +43,17 @@ namespace :profiling do
       end
     end
   end
+
+  desc 'benchmark'
+  task benchmark_hard: :environment do
+    Benchmark.bm do |x|
+      %w[mega.json hardcore.json].each do |file|
+        x.report(file) do
+          file_path = Rails.root.join('fixtures', file)
+          service = TripsReloadService.new(file_path)
+          service.run
+        end
+      end
+    end
+  end
 end

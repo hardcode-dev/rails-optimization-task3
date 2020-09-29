@@ -5,3 +5,6 @@
 
 .idea
 .DS_Store
+
+/fixtures/mega.json
+/fixtures/hardcore.json

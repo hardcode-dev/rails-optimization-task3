@@ -9,28 +9,57 @@ class TripsReloadService
   def run
     ActiveRecord::Base.transaction do
       clear_base
-      import_file
+      create_reference_data
+      import_file_stream
     end
   end
 
   private
 
-  def import_file
-    json = JSON.parse(File.read(@file_path))
+  def create_reference_data
+    json = Oj.load(File.open(@file_path))
 
     json.each do |trip|
-      from = find_city(trip['from'])
-      to = find_city(trip['to'])
-      bus = find_bus(trip['bus'])
+      find_city(trip['from'])
+      find_city(trip['to'])
+      find_bus(trip['bus'])
+    end
+  end
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
+  def import_file_stream
+    trips_command =
+      "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, bus_id) from stdin with csv delimiter ';'"
+
+    ActiveRecord::Base.connection.raw_connection.copy_data trips_command do
+      File.open(@file_path) do |ff|
+        nesting = 0
+        str = +""
+
+        while !ff.eof?
+          ch = ff.read(1) # читаем по одному символу
+          case
+          when ch == '{' # начинается объект, повышается вложенность
+            nesting += 1
+            str << ch
+          when ch == '}' # заканчивается объект, понижается вложенность
+            nesting -= 1
+            str << ch
+            if nesting == 0 # если закончился объкет уровня trip, парсим и импортируем его
+              trip = Oj.load(str)
+
+              from = @cities[trip['from']]
+              to = @cities[trip['to']]
+              bus = @buses[trip['bus']['number']]
+
+              ActiveRecord::Base.connection.raw_connection.put_copy_data("#{from.id};#{to.id};#{trip['start_time']};#{trip['duration_minutes']};#{trip['price_cents']};#{bus.id}\n")
+
+              str = +""
+            end
+          when nesting >= 1
+            str << ch
+          end
+        end
+      end
     end
   end
 
