@@ -9,7 +9,7 @@ namespace :profiling do
     GC.disable
 
     result = RubyProf.profile do
-      file_path = Rails.root.join('fixtures', 'example.json')
+      file_path = Rails.root.join('fixtures', 'medium.json')
       service = TripsReloadService.new(file_path)
       service.run
     end

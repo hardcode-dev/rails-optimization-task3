@@ -21,13 +21,7 @@ class TripsReloadService
     json.each do |trip|
       from = find_city(trip['from'])
       to = find_city(trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = find_service(service)
-        services << s
-      end
-      bus = find_bus(trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+      bus = find_bus(trip['bus'])
 
       Trip.create!(
         from: from,
@@ -57,9 +51,19 @@ class TripsReloadService
     @services[name]
   end
 
-  def find_bus(number)
+  def find_bus(bus)
+    number = bus['number']
     unless @buses.key?(number)
-      @buses[number] = Bus.find_or_create_by(number: number)
+      @buses[number] = Bus.find_or_initialize_by(number: number)
+      @buses[number].model = bus['model']
+
+      services = []
+      bus['services'].each do |service|
+        s = find_service(service)
+        services << s
+      end
+      @buses[number].services = services
+      @buses[number].save
     end
 
     @buses[number]
