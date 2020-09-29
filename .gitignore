@@ -2,3 +2,6 @@
 /tmp
 /log
 /public
+
+.idea
+.DS_Store

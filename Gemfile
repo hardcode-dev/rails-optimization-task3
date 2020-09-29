@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.6'
 
 gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -20,6 +20,8 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails'
+  gem 'rspec-benchmark'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
