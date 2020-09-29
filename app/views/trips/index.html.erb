@@ -8,8 +8,8 @@
 <% @trips.each do |trip| %>
   <ul>
     <%= render "trip", trip: trip %>
-    <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
+    <% if @buses[trip.bus_id].services.present? %>
+      <%= render "services", services: @buses[trip.bus_id].services %>
     <% end %>
   </ul>
   <%= render "delimiter" %>
