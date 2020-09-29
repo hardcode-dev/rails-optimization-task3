@@ -9,8 +9,13 @@
   <ul>
     <%= render "trip", trip: trip %>
     <% if @buses[trip.bus_id].services.present? %>
-      <%= render "services", services: @buses[trip.bus_id].services %>
+      <li>Сервисы в автобусе:</li>
+      <ul>
+        <% @buses[trip.bus_id].services.each do |service| %>
+          <li><%= "#{service.name}" %></li>
+        <% end %>
+      </ul>
     <% end %>
   </ul>
-  <%= render "delimiter" %>
+  ====================================================
 <% end %>
