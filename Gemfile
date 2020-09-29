@@ -12,6 +12,8 @@ gem 'activerecord-import'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pghero'
+  gem 'pg_query', '>= 0.9.0'
 end
 
 group :development do
@@ -19,8 +21,6 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
 
-  gem 'pghero'
-  gem 'pg_query', '>= 0.9.0'
   gem 'meta_request'
 
   gem 'ruby-prof', require: false

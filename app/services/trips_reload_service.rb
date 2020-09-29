@@ -1,6 +1,9 @@
 class TripsReloadService
   def initialize(file_path)
     @file_path = file_path
+    @cities = {}
+    @buses = {}
+    @services = {}
   end
 
   def run
@@ -16,14 +19,14 @@ class TripsReloadService
     json = JSON.parse(File.read(@file_path))
 
     json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
+      from = find_city(trip['from'])
+      to = find_city(trip['to'])
       services = []
       trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
+        s = find_service(service)
         services << s
       end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
+      bus = find_bus(trip['bus']['number'])
       bus.update(model: trip['bus']['model'], services: services)
 
       Trip.create!(
@@ -35,6 +38,31 @@ class TripsReloadService
         price_cents: trip['price_cents'],
       )
     end
+  end
+
+  def find_city(name)
+    unless @cities.key?(name)
+      @cities[name] = City.find_or_create_by(name: name)
+    end
+
+    @cities[name]
+  end
+
+
+  def find_service(name)
+    unless @services.key?(name)
+      @services[name] = Service.find_or_create_by(name: name)
+    end
+
+    @services[name]
+  end
+
+  def find_bus(number)
+    unless @buses.key?(number)
+      @buses[number] = Bus.find_or_create_by(number: number)
+    end
+
+    @buses[number]
   end
 
   def clear_base
