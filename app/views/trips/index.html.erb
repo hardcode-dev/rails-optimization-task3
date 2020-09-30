@@ -7,7 +7,11 @@
 
 <% @trips.each do |trip| %>
   <ul>
-    <%= render "trip", trip: trip %>
+    <li><%= "Отправление: #{trip.start_time}" %></li>
+    <li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
+    <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
+    <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
+    <li><%= "Автобус: #{@buses[trip.bus_id].model} №#{@buses[trip.bus_id].number}" %></li>
     <% if @buses[trip.bus_id].services.present? %>
       <li>Сервисы в автобусе:</li>
       <ul>
