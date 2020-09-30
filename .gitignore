@@ -2,3 +2,9 @@
 /tmp
 /log
 /public
+
+.idea
+.DS_Store
+
+/fixtures/mega.json
+/fixtures/hardcore.json
