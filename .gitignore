@@ -2,3 +2,6 @@
 /tmp
 /log
 /public
+
+# Ignore local RubyMine settings
+.idea/

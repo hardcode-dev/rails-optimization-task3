@@ -7,10 +7,18 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'pghero'
+gem 'activerecord-explain-analyze'
+gem 'activerecord-import'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.9'
+  gem 'ruby-prof'
+  gem 'rack-mini-profiler'
+  gem 'bullet'
 end
 
 group :development do
@@ -20,6 +28,10 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+  gem 'launchy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

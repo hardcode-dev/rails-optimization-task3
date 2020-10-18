@@ -2,7 +2,7 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips.size} рейсов" %>
 </h2>
 
 <% @trips.each do |trip| %>
