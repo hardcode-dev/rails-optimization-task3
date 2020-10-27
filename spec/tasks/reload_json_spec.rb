@@ -9,8 +9,16 @@ describe 'reload_json' do
   describe 'import result' do
     context 'with small file' do
       let(:file) { 'fixtures/small.json' }
+      # let(:file) { 'fixtures/medium.json' }
+      before do
+        DatabaseCleaner.strategy = :truncation
+        DatabaseCleaner.clean
+      end
 
-      after(:each) { DatabaseCleaner.strategy = :truncation; DatabaseCleaner.clean }
+      after(:each) do
+        DatabaseCleaner.strategy = :truncation
+        DatabaseCleaner.clean
+      end
 
       it 'reloads City data to database' do
         expect { task }.to change { City.count }.from(0).to(10)
@@ -21,3 +29,13 @@ describe 'reload_json' do
     end
   end
 end
+#   expect { task }.to change { City.count }.from(0).to(10)
+#                                                .and change { Bus.count }.from(0).to(613)
+#                                                .and change { Service.count }.from(0).to(10)
+#                                                .and change { Trip.count }.from(0).to(1000)
+#
+#           expected `Bus.count` to have changed to 613, but is now 1000
+#
+#        ...and:
+#
+#           expected `Trip.count` to have changed to 1000, but is now 10000
