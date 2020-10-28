@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
@@ -27,7 +29,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
         bus: bus,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
+        price_cents: trip['price_cents']
       )
     end
   end

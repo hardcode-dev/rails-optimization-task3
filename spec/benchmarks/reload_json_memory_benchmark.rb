@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 Rails.application.load_tasks
@@ -7,20 +9,19 @@ describe 'reload_json_performance' do
   describe 'Performance' do
     let(:file) { 'fixtures/small.json' }
     it 'reports' do
+      RubyProf.measure_mode = RubyProf::ALLOCATIONS
+      rb_result = RubyProf.profile do
+        task
+      end
 
-      # RubyProf.measure_mode = RubyProf::ALLOCATIONS
-      # rb_result = RubyProf.profile do
-      #   task
-      # end
+      rb_printer = RubyProf::FlatPrinter.new(rb_result)
+      rb_printer.print(File.open("reports/ruby_prof/memory/alloc_flat_#{Time.now.to_i}.txt", 'w+'))
       #
-      # rb_printer = RubyProf::FlatPrinter.new(rb_result)
-      # rb_printer.print(File.open("reports/ruby_prof/memory/alloc_flat_#{Time.now.to_i}.txt", 'w+'))
-
       # RubyProf.measure_mode = RubyProf::MEMORY
       # rb_result = RubyProf.profile do
       #   task
       # end
-      #
+
       # rb_printer = RubyProf::CallTreePrinter.new(rb_result)
       # rb_printer.print(path: 'reports/ruby_prof/memory', profile: 'profile')
       mp_report = MemoryProfiler.report do
@@ -29,9 +30,9 @@ describe 'reload_json_performance' do
 
       mp_report.pretty_print
 
-      # Benchmark.memory do |x|
-      #   x.report('work') { task }
-      # end
+      Benchmark.memory do |x|
+        x.report('work') { task }
+      end
 
       user_time = Benchmark.realtime do
         task
@@ -40,4 +41,3 @@ describe 'reload_json_performance' do
     end
   end
 end
-

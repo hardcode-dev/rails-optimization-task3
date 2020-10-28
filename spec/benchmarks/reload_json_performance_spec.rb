@@ -25,7 +25,7 @@ describe 'reload_json_performance' do
         user_time = Benchmark.realtime do
           task
         end
-        expect(user_time).to eq(0)
+        expect(user_time < 30)
       end
     end
 

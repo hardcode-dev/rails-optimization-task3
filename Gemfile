@@ -5,13 +5,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'activerecord-import'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'newrelic_rpm'
+gem 'oj'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
-gem 'activerecord-import'
-
 
 group :development, :test do
   gem 'benchmark', '0.1.0'
@@ -21,7 +23,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'fasterer', '0.8.3'
   gem 'memory_profiler'
-  gem 'oj'
   gem 'rspec-benchmark'
   gem 'rspec-rails'
   gem 'rubocop'

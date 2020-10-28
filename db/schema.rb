@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2020_10_28_193101) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.index ["number"], name: "index_buses_on_number"
   end
 
   create_table "buses_services", force: :cascade do |t|
@@ -27,6 +29,17 @@ ActiveRecord::Schema.define(version: 2019_03_30_193044) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at"
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "services", force: :cascade do |t|
