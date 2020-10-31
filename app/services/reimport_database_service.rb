@@ -27,6 +27,7 @@ class ReimportDatabaseService
         s = Service.new(name: service)
         all_services << s
       end
+
       Service.import(all_services)
       service_cache = {}
       Service.select(:name, :id).map do |s|
@@ -34,16 +35,15 @@ class ReimportDatabaseService
       end
       trips = []
       cities = {}
-      buses = []
       buses_services = []
       buses_cache = {}
+
       json.each do |trip|
         from = cities[trip['from']] || City.create(name: trip['from'])
         cities[trip['from']] = from.id if cities[trip['from']].blank?
         to = cities[trip['to']] || City.create(name: trip['to'])
         cities[trip['to']] = to.id if cities[trip['to']].blank?
 
-        services = []
         bus_id = if buses_cache["#{trip['bus']['model']} #{trip['bus']['number']}"]
                    buses_cache["#{trip['bus']['model']} #{trip['bus']['number']}"]
                  else
@@ -53,7 +53,7 @@ class ReimportDatabaseService
                  end
 
         trip['bus']['services'].each do |serv|
-          buses_services << { bus_id: bus_id, service_id: service_cache[serv].to_i }
+          buses_services << BusService.new(bus_id: bus_id, service_id: service_cache[serv] )
         end
 
         trips << Trip.new(
