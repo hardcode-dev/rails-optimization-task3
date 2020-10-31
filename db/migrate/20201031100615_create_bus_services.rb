@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBusServices < ActiveRecord::Migration[5.2]
   def change
     create_table :bus_services do |t|
