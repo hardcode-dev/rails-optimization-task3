@@ -7,7 +7,7 @@ require "rails_helper"
 describe "reload_json_performance" do
   subject(:task) { ReimportDatabaseService.new(file_name: file).call }
   describe "Performance" do
-    let(:file) { "fixtures/medium.json" }
+    let(:file) { "fixtures/large.json" }
     it "reports" do
       user_time = Benchmark.realtime {
         task

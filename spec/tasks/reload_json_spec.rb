@@ -9,7 +9,6 @@ describe "reload_json" do
   describe "import result" do
     context "with small file" do
       let(:file) { "fixtures/small.json" }
-      # let(:file) { 'fixtures/medium.json' }
 
       it "reloads City data to database" do
         expect { task }.to change { City.count }.from(0).to(10)
