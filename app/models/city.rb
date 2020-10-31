@@ -3,6 +3,6 @@ class City < ApplicationRecord
   validate :name_has_no_spaces
 
   def name_has_no_spaces
-    errors.add(:name, "has spaces") if name.include?(' ')
+    errors.add(:name, "has spaces") if name.include?(" ")
   end
 end

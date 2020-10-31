@@ -205,6 +205,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.15)
+    standard (0.8.1)
+      rubocop (= 1.0.0)
+      rubocop-performance (= 1.8.1)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -248,6 +251,7 @@ DEPENDENCIES
   rubocop-performance
   ruby-prof (= 1.4.1)
   stackprof (= 0.2.15)
+  standard
   tzinfo-data
   web-console (>= 3.3.0)
 

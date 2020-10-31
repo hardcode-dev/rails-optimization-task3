@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_193101) do
+ActiveRecord::Schema.define(version: 2020_10_29_175318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_10_28_193101) do
 
   create_table "services", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_services_on_name"
   end
 
   create_table "trips", force: :cascade do |t|
