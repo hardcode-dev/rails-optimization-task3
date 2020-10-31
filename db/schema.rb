@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_100615) do
+ActiveRecord::Schema.define(version: 2020_10_31_201153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_10_31_100615) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.index ["to_id", "from_id"], name: "index_trips_on_to_id_and_from_id"
   end
 
 end
