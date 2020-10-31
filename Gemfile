@@ -29,6 +29,7 @@ group :development, :test do
   gem "rubocop-performance"
   gem "ruby-prof", "1.4.1"
   gem "stackprof", "0.2.15"
+  gem "bullet"
 end
 
 group :development do

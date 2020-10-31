@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_29_175318) do
+ActiveRecord::Schema.define(version: 2020_10_31_080609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_175318) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name"
   end
 
   create_table "pghero_query_stats", force: :cascade do |t|

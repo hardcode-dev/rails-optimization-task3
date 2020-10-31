@@ -18,18 +18,18 @@ describe "reload_json_performance" do
       #   task
       # end
       #
-      RubyProf.measure_mode = RubyProf::WALL_TIME
-      result = RubyProf.profile do
-        task
-      end
+      # RubyProf.measure_mode = RubyProf::WALL_TIME
+      # result = RubyProf.profile do
+      #   task
+      # end
       #
       # printer = RubyProf::CallTreePrinter.new(result)
-      printer2 = RubyProf::GraphHtmlPrinter.new(result)
-      printer3 = RubyProf::FlatPrinter.new(result)
+      # printer2 = RubyProf::GraphHtmlPrinter.new(result)
+      # printer3 = RubyProf::FlatPrinter.new(result)
       #
       # printer.print(path: 'reports/ruby_prof/cpu', profile: 'callgrid')
-      printer2.print(File.open('reports/ruby_prof/cpu/graph.html', 'w+'))
-      printer3.print($stdout)
+      # printer2.print(File.open('reports/ruby_prof/cpu/graph.html', 'w+'))
+      # printer3.print($stdout)
     end
   end
 end

@@ -11,7 +11,6 @@ describe "reload_json_performance" do
     let(:file) { "fixtures/large.json" }
 
     describe "execution time" do
-
       it "performs large file in less than 30 seconds" do
         user_time = Benchmark.realtime {
           task

@@ -21,6 +21,7 @@ class ReimportDatabaseService
       Bus.delete_all
       Service.delete_all
       Trip.delete_all
+
       ActiveRecord::Base.connection.execute("delete from buses_services;")
 
       json.each do |trip|
