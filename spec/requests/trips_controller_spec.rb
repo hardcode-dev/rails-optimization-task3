@@ -1,14 +1,28 @@
 require "rails_helper"
 
 RSpec.describe TripsController, type: :request do
+  subject(:request) { get url }
+
   let(:file) { "fixtures/example.json" }
 
   before { ReimportDatabaseService.new(file_name: file).call }
 
   let(:url) { URI.encode("/автобусы/Москва/Самара").to_s }
-  it "renders correct page" do
-    get url
-    expect(response.body).to eq(required_response)
+
+  describe 'correctness' do
+    it "renders correct page" do
+      request
+
+      expect(response.body).to eq(required_response)
+    end
+  end
+
+  describe 'Performance' do
+    let(:file) { "fixtures/example.json" }
+
+    it "renders correct page" do
+      expect { request }.to perform_under(60).sec
+    end
   end
 
   private
