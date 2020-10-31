@@ -2,6 +2,6 @@ class AddIndexToBusesOnNumber < ActiveRecord::Migration[5.2]
   disable_ddl_transaction!
 
   def change
-    add_index :buses, :number, algorithm: :concurrently
+    add_index :buses, [:model, :number], unique: true, algorithm: :concurrently
   end
 end

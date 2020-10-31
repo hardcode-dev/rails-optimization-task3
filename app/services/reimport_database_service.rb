@@ -14,36 +14,44 @@ class ReimportDatabaseService
   attr_reader :file_name
 
   def reload_json
-    json = JSON.parse(File.read(file_name))
+    json = Oj.load(File.read(file_name))
 
     ActiveRecord::Base.transaction do
-      City.delete_all
-      Bus.delete_all
-      Service.delete_all
-      Trip.delete_all
-
-      ActiveRecord::Base.connection.execute("delete from buses_services;")
+      ActiveRecord::Base.connection.execute("delete from cities;
+                                             delete from buses;
+                                             delete from services;
+                                             delete from trips;
+                                             delete from buses_services;")
+      all_services = []
+      Service::SERVICES.each do |service|
+        s = Service.new(name: service)
+        all_services << s
+      end
+      Service.import(all_services)
+      trips = []
+      cities = {}
+      buses = []
 
       json.each do |trip|
-        from = City.find_or_create_by(name: trip["from"])
-        to = City.find_or_create_by(name: trip["to"])
-        services = []
-        trip["bus"]["services"].each do |service|
-          s = Service.find_or_create_by(name: service)
-          services << s
-        end
-        bus = Bus.find_or_create_by(number: trip["bus"]["number"])
-        bus.update(model: trip["bus"]["model"], services: services)
+        from = cities[trip["from"]] || City.create(name: trip["from"])
+        cities[trip["from"]] = from.id if cities[trip["from"]].blank?
+        to = cities[trip["to"]] || City.create(name: trip["to"])
+        cities[trip["to"]] = to.id if cities[trip["to"]].blank?
 
-        Trip.create!(
-          from: from,
-          to: to,
+        services = []
+        bus = Bus.find_or_create_by(model: trip["bus"]["model"], number: trip["bus"]["number"])
+        bus.services << Service.where(name: trip["bus"]["services"])
+
+        trips << Trip.new(
+          from_id: cities[trip["from"]],
+          to_id: cities[trip["from"]],
           bus: bus,
           start_time: trip["start_time"],
           duration_minutes: trip["duration_minutes"],
           price_cents: trip["price_cents"]
         )
       end
+      Trip.import(trips)
     end
   end
 end

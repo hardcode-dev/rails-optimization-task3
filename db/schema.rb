@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_080609) do
+ActiveRecord::Schema.define(version: 2020_10_31_100615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
+  create_table "bus_services", force: :cascade do |t|
+    t.bigint "service_id"
+    t.bigint "bus_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bus_id"], name: "index_bus_services_on_bus_id"
+    t.index ["service_id"], name: "index_bus_services_on_service_id"
+  end
+
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
-    t.index ["number"], name: "index_buses_on_number"
+    t.index ["model", "number"], name: "index_buses_on_model_and_number"
   end
 
   create_table "buses_services", force: :cascade do |t|
