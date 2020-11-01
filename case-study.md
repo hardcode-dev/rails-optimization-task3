@@ -129,7 +129,7 @@ allocated objects by gem
          3  other
 ```
 
-Профилирование CPU не дало большей подсказки, чем дано в ридми, а значит - образаемся к activerecord_import:
+Профилирование CPU не дало большей подсказки, чем дано в ридми, а значит - обращаемся к activerecord_import:
 
 
 
@@ -183,19 +183,6 @@ allocated memory by location
   15340704  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:37
   10150080  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:404
    6799224  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation.rb:29
-   5722048  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation.rb:25
-   4885456  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activemodel-5.2.3/lib/active_model/errors.rb:189
-   4413600  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n/interpolate/ruby.rb:23
-   4400344  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation.rb:508
-   4204089  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:35
-   4183432  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:132
-   3608932  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/tagged_logging.rb:23
-   3591824  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation.rb:437
-   3590896  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation.rb:36
-   3505818  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/log_subscriber.rb:109
-   3312384  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/autosave_association.rb:159
-   3244000  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:198
-   3138536  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/abstract_adapter.rb:570
 
 
 allocated memory by class
@@ -206,18 +193,6 @@ allocated memory by class
   42622720  PG::Result
    6469440  Proc
    5798696  Class
-   4679168  ActiveRecord::Relation
-   4528440  MatchData
-   3706616  ActiveModel::Attribute::FromDatabase
-   2911136  ActiveSupport::HashWithIndifferentAccess
-   2838528  Enumerator
-   2440360  ActiveRecord::Relation::WhereClause
-     396640  ActiveModel::AttributeMutationTracker
-    354280  Arel::Nodes::JoinSource
-    354280  Arel::Nodes::SqlLiteral
-    354280  Arel::SelectManager
-    354120  Arel::Nodes::And
-    354080  Arel::Nodes::Limit
     354080  Arel::Nodes::Top
     307088  Arel::Nodes::InsertStatement
     290960  ActiveModel::Errors
@@ -229,16 +204,6 @@ allocated objects by gem
 -----------------------------------
    2187313  activerecord-5.2.3
     576369  activesupport-5.2.3
-    386334  activemodel-5.2.3
-    324041  arel-9.0.0
-     67832  i18n-1.6.0
-     38697  rails-optimization-task3/lib
-     13511  logger
-      9922  set
-      2704  bootsnap-1.4.2
-        92  concurrent-ruby-1.1.5
-        91  rails-optimization-task3/app
-        13  rake-12.3.2
          7  monitor
          7  mutex_m
          7  railties-5.2.3
@@ -273,14 +238,6 @@ allocated memory by gem
    2301380  set
    1451622  json
    1161946  logger
-    153682  bootsnap-1.4.2
-     36848  rails-optimization-task3/app
-     14456  concurrent-ruby-1.1.5
-       968  rake-12.3.2
-       504  monitor
-       504  mutex_m
-       415  railties-5.2.3
-       120  other
 
 allocated memory by file
 -----------------------------------
@@ -310,51 +267,6 @@ retained memory by file
      15714  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/has_and_belongs_to_many.rb
      14934  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_methods.rb
      14869  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n/core_ext/hash.rb
-     14033  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/bootsnap-1.4.2/lib/bootsnap/compile_cache/iseq.rb
-     11216  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/non_concurrent_map_backend.rb
-      9463  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activemodel-5.2.3/lib/active_model/attribute_methods.rb
-      9360  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/module/redefine_method.rb
-      8704  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/core.rb
-      8328  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/bus.rb
-      8097  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/class/attribute.rb
-      8096  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/service.rb
-      7424  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/array/extract_options.rb
-      7192  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/hash/except.rb
-      6963  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/bootsnap-1.4.2/lib/bootsnap/compile_cache/yaml.rb
-      6480  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/trip.rb
-      5210  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/statement_cache.rb
-      5012  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/autosave_association.rb
-      4872  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/city.rb
-      4624  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/schema_statements.rb
-      4604  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/join_dependency.rb
-      4528  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/collection_association.rb
-      3936  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/model_schema.rb
-      3584  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_decorators.rb
-      3440  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/predicate_builder.rb
-      3375  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/bootsnap-1.4.2/lib/bootsnap/load_path_cache/loaded_features_index.rb
-      3312  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/legacy_yaml_adapter.rb
-      3240  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/mri_map_backend.rb
-      2768  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/reflection.rb
-      2600  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/application_record.rb
-      2568  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/association_scope.rb
-      2024  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activemodel-5.2.3/lib/active_model/validations.rb
-      1983  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/database_statements.rb
-      1966  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/has_many_through_association.rb
-      1952  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations.rb
-      1848  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/singular_association.rb
-      1656  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/belongs_to.rb
-      1624  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/object/deep_dup.rb
-      1502  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/has_many_association.rb
-      1440  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/schema_cache.rb
-      1390  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/alias_tracker.rb
-      1360  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n.rb
-      1344  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activemodel-5.2.3/lib/active_model/attribute.rb
-      1339  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/dynamic_matchers.rb
-      1310  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/belongs_to_association.rb
-      1270  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_methods/read.rb
-      1265  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql_adapter.rb
-      1226  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/module/delegation.rb
-      1174  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/join_dependency/join_part.rb
 
 retained memory by location
 -----------------------------------
@@ -371,43 +283,6 @@ retained memory by location
       7264  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/service.rb:1
       7192  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/hash/except.rb:13
       6963  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/bootsnap-1.4.2/lib/bootsnap/compile_cache/yaml.rb:28
-      5720  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/core.rb:226
-      5568  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:841
-      5344  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/trip.rb:1
-      4832  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/city.rb:1
-      4512  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:289
-      4240  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:424
-      3375  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/bootsnap-1.4.2/lib/bootsnap/load_path_cache/loaded_features_index.rb:109
-      3360  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:42
-      3240  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/mri_map_backend.rb:14
-      3024  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:462
-      2800  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:450
-      2786  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/class/attribute.rb:104
-      2786  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/class/attribute.rb:99
-      2720  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/autosave_association.rb:153
-      2600  /home/theendcomplete/Documents/projects/my/rails-optimization-task3/app/models/application_record.rb:1
-      2480  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:483
-      2184  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/core.rb:148
-      2053  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n/core_ext/hash.rb:30
-      2016  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:464
-      1983  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
-      1904  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_decorators.rb:67
-      1904  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/schema_statements.rb:653
-      1886  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/join_dependency.rb:261
-      1880  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:302
-      1680  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_decorators.rb:45
-      1656  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/reflection.rb:31
-      1624  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activemodel-5.2.3/lib/active_model/validations.rb:278
-      1624  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:11
-      1624  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/object/deep_dup.rb:44
-      1566  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/association_scope.rb:167
-      1560  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/statement_cache.rb:121
-      1536  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/belongs_to.rb:163
-      1512  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:82
-      1502  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/has_many_association.rb:143
-      1502  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/has_many_through_association.rb:226
-      1464  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:22
-      1456  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:559
 
 retained memory by class
 -----------------------------------
@@ -430,37 +305,6 @@ retained memory by class
       1344  ActiveModel::Attribute::FromDatabase
       1200  ActiveSupport::Callbacks::CallbackChain
       1040  ActiveSupport::Callbacks::CallbackSequence
-       936  ActiveRecord::Reflection::BelongsToReflection
-       720  ActiveRecord::Reflection::HasManyReflection
-       504  Monitor
-       480  ActiveSupport::Callbacks::Conditionals::Value
-       440  ActiveRecord::Validations::PresenceValidator
-       400  ActiveRecord::PredicateBuilder::ArrayHandler
-       280  ActiveRecord::AttributeDecorators::TypeDecorator
-       240  ActiveRecord::Reflection::HasAndBelongsToManyReflection
-       200  ActiveModel::AttributeSet
-       200  ActiveRecord::PredicateBuilder
-       200  ActiveRecord::PredicateBuilder::BaseHandler
-       200  ActiveRecord::PredicateBuilder::BasicObjectHandler
-       200  ActiveRecord::PredicateBuilder::RangeHandler
-       200  ActiveRecord::PredicateBuilder::RelationHandler
-       200  ActiveRecord::TableMetadata
-       200  ActiveRecord::TypeCaster::Map
-       200  Arel::Table
-       160  ActiveModel::AttributeMethods::ClassMethods::AttributeMethodMatcher::AttributeMethodMatch
-       144  ActiveModel::Name
-       120  ActiveModel::AttributeSet::Builder
-       120  ActiveModel::AttributeSet::YAMLEncoder
-       120  ActiveRecord::Reflection::ThroughReflection
-        80  ActiveModel::Validations::InclusionValidator
-        80  ActiveModel::Validations::NumericalityValidator
-        80  ActiveRecord::Associations::Builder::HasAndBelongsToMany::JoinTableResolver::KnownTable
-        80  ActiveRecord::Relation::QueryAttribute
-        80  ActiveRecord::Validations::UniquenessValidator
-        40  ActiveModel::Validations::FormatValidator
-        40  ActiveRecord::Associations::AssociationScope
-        40  ActiveRecord::ConnectionAdapters::TransactionState
-        40  ActiveRecord::Reflection::AbstractReflection::JoinKeys
 
 retained objects by gem
 -----------------------------------
@@ -489,16 +333,6 @@ retained objects by file
        102  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n/core_ext/hash.rb
         97  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb
         76  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/autosave_association.rb
-        70  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/collection_association.rb
-        66  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/predicate_builder.rb
-        57  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/associations/builder/has_and_belongs_to_many.rb
-        53  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/core.rb
-        51  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/schema_statements.rb
-        47  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/non_concurrent_map_backend.rb
-        45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/database_statements.rb
-        45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/mri_map_backend.rb
-        42  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_decorators.rb
-        42  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/model_schema.rb
       
 retained objects by location
 -----------------------------------
@@ -513,19 +347,6 @@ retained objects by location
         47  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:302
         45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
         45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/mri_map_backend.rb:14
-        45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/concurrent-ruby-1.1.5/lib/concurrent/collection/map/non_concurrent_map_backend.rb:16
-        45  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/i18n-1.6.0/lib/i18n/core_ext/hash.rb:15
-        42  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/relation/delegation.rb:17
-        40  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/class/attribute.rb:104
-        40  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/class/attribute.rb:99
-        36  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:464
-        35  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:301
-        34  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/autosave_association.rb:153
-        32  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/core_ext/array/extract_options.rb:30
-        31  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activesupport-5.2.3/lib/active_support/callbacks.rb:483
-        14  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/attribute_decorators.rb:67
-        14  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/connection_adapters/postgresql/quoting.rb:47
-        14  /home/theendcomplete/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/reflection.rb:433
 
 .
 
@@ -537,7 +358,7 @@ Finished in 25.82 seconds (files took 1.09 seconds to load)
 
 ![case-study/Untitled%201.png](case-study/Untitled%201.png)
 
-После добавления индекса время загрузки `small` файла сократилось до 6 секунд:
+После добавления индекса время загрузки `small` файла сократилось до 7 секунд:
 
 ```bash
 Finished in 7.16 seconds (files took 1.18 seconds to load)
@@ -563,7 +384,7 @@ end
 
 Пересмотрел лекции, обратил внимание на постоянный вызов `find_or_create` в скрипте импорта.
 
-Решил попробовать "кэшировать" идентификаторы  по образу задания 2:
+Решил попробовать "кэшировать" идентификаторы по образу задания 2:
 
 ```ruby
 def reload_json
@@ -618,7 +439,9 @@ finished  in 8.821296841000049
 Finished in 8.87 seconds (files took 1.03 seconds to load)
 ```
 
-продолжил кэшировать другие объекты, сверяясь с rspec'ом. сократил скорость загрузки `small` файла до 1,15 секунд:
+Продолжил кэшировать другие объекты, сверяясь с rspec'ом. 
+Пришлось создать еще 1 модель BusService для связи автобуса с услугами, для оптимизации загрузки.
+Сократил скорость загрузки `small` файла до 1,15 секунд:
 
 ```ruby
 def reload_json
