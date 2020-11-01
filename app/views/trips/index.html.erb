@@ -7,10 +7,10 @@
 
 <% @trips.each do |trip| %>
   <ul>
-    <%= render "trip", trip: trip, cached: true %>
+    <%= render "trip", trip: trip %>
     <% if trip.bus.services.load.any? %>
-      <%= render "services", services: trip.bus.services, cached: true %>
+      <%= render "services", services: trip.bus.services %>
     <% end %>
   </ul>
-  <%= render "delimiter", cached: true %>
+  <%= render "delimiter" %>
 <% end %>
