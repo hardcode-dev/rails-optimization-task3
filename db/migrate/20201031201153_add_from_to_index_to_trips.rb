@@ -5,5 +5,6 @@ class AddFromToIndexToTrips < ActiveRecord::Migration[5.2]
 
   def change
     add_index :trips, %i[to_id from_id], algorithm: :concurrently
+    add_index :trips, %i[from_id to_id], algorithm: :concurrently
   end
 end

@@ -5,13 +5,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'actionpack-action_caching'
+gem 'actionpack-page_caching'
 gem 'activerecord-import'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'newrelic_rpm'
 gem 'oj'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
+gem 'pghero'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
 
