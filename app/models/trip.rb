@@ -17,7 +17,7 @@ class Trip < ApplicationRecord
   validates :price_cents, presence: true
   validates :price_cents, numericality: { greater_than: 0 }
 
-  scope :with_bus, -> { includes(bus: :services) }
+  scope :with_bus_and_service, -> { includes(bus: :services) }
 
   def to_h
     {

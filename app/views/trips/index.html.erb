@@ -5,12 +5,7 @@
   <%= "В расписании #{@trip_count} рейсов" %>
 </h2>
 
-<% @trips.each do |trip| %>
-  <ul>
-    <%= render "trip", trip: trip %>
-    <% if trip.bus.services.load.any? %>
-      <%= render "services", services: trip.bus.services %>
-    <% end %>
-  </ul>
-  <%= render "delimiter" %>
-<% end %>
+<%# @trips.each do |trip| %>
+    <%= render partial: "trip", collection: @trips %>
+
+<%# end %>
