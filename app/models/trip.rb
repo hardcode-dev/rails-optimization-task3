@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Trip < ApplicationRecord
-  HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
+  HHMM_REGEXP = /([0-1][0-9]|2[0-3]):[0-5][0-9]/.freeze
 
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
@@ -15,6 +17,8 @@ class Trip < ApplicationRecord
   validates :price_cents, presence: true
   validates :price_cents, numericality: { greater_than: 0 }
 
+  scope :with_bus_and_service, -> { includes(bus: :services) }
+
   def to_h
     {
       from: from.name,
@@ -25,8 +29,8 @@ class Trip < ApplicationRecord
       bus: {
         number: bus.number,
         model: bus.model,
-        services: bus.services.map(&:name),
-      },
+        services: bus.services.map(&:name)
+      }
     }
   end
 end
