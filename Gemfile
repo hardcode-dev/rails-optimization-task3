@@ -20,6 +20,7 @@ group :development do
 end
 
 group :test do
+  gem 'm', '~> 1.5.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
