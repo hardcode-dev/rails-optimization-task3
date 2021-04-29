@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class TripsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    require 'rake'
     Task4::Application.load_tasks
     Rake::Task['reload_json'].invoke('fixtures/example.json')
   end
