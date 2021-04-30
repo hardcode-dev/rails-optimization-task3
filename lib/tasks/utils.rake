@@ -1,11 +1,88 @@
 # frozen_string_literal: true
 
-# rake reload_json[fixtures/large.json]
-task :reload_json, [:file_name] => :environment do |_task, args|
-  at_exit do
-    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+# rake reload_json_online[fixtures/10М.json]
+task :reload_json_oneline, [:file_name] => :environment do |_task, args|
+  def instant_create(klass, attrs)
+    object = klass.new(attrs)
+    object.save(validate: false)
+    object.id
   end
 
+  def parse(line, ix)
+    if ix == 0
+      line.slice!(0)
+    else
+      line.prepend('{')
+      line.delete_suffix!(']')
+    end
+    line.delete_suffix!(',{')
+
+    Oj.load(line)
+  end
+
+  def with_copy(table, *columns)
+    connection = ActiveRecord::Base.connection_pool.checkout.raw_connection
+    connection.copy_data "COPY #{table} (#{columns.join(',')}) FROM STDIN WITH CSV DELIMITER ';'" do
+      yield connection
+    end
+  end
+
+  def do_copy(connection, *data)
+    connection.put_copy_data(data.map(&:to_s).join(';') << "\n")
+  end
+
+  City.delete_all
+  Bus.delete_all
+  Service.delete_all
+  Trip.delete_all
+  ActiveRecord::Base.connection.execute('DELETE FROM buses_services;')
+
+  cities = {}
+  services = {}
+  buses = {}
+
+  with_copy :buses_services,
+            'bus_id', 'service_id' do |buses_services_connection|
+    with_copy :trips,
+              'from_id', 'to_id', 'start_time',
+              'duration_minutes', 'price_cents', 'bus_id' do |trips_connection|
+      pb = ProgressBar.new(1_000_000)
+
+      File.open("fixtures/10M.json").each("},{").with_index do |line, ix|
+        trip = parse(line, ix)
+
+        city_from_id, city_to_id = %w[from to].map do |key|
+          cities[trip[key]] ||= instant_create(City, name: trip[key])
+        end
+
+        bus_h = trip['bus']
+        bus_id = buses[bus_h['number']]
+        if bus_id.nil?
+          bus_id = instant_create(Bus, number: bus_h['number'], model: bus_h['model'])
+          buses[bus_h['number']] = bus_id
+
+          bus_h['services'].each do |service_name|
+            services[service_name] ||= instant_create(Service, name: service_name)
+
+            do_copy buses_services_connection, bus_id, services[service_name]
+          end
+        end
+
+        do_copy trips_connection,
+                city_from_id, city_to_id,
+                trip['start_time'], trip['duration_minutes'], trip['price_cents'],
+                bus_id
+
+        pb.increment!
+      end
+    end
+  end
+
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
+end
+
+# rake reload_json[fixtures/large.json]
+task :reload_json, [:file_name] => :environment do |_task, args|
   benchmark = Benchmark.bm(20) do |bm|
     json = JSON.parse(File.read(args.file_name))
 
@@ -87,4 +164,5 @@ task :reload_json, [:file_name] => :environment do |_task, args|
   puts "Benchmark:"
   puts " - #{benchmark.sum}"
   puts
+  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
