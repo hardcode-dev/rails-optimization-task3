@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TripsController < ApplicationController
   def index
     @from = City.find_by_name!(params[:from])
