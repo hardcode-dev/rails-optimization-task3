@@ -13,7 +13,7 @@ RSpec.describe TripsController, :type => :controller do
     describe 'benchmark' do
       it do
         ReloadJson.new(file_name).call
-        expect { subject }.to perform_under(0.05).ms
+        expect { subject }.to perform_under(0.1).ms
         expect(assigns(:trips).size).to eq 13
       end
     end
