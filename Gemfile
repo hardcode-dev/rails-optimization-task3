@@ -11,6 +11,8 @@ gem 'benchmark-ips'
 gem 'kalibera'
 gem 'activerecord-import'
 gem 'bullet'
+gem 'pghero'
+gem 'pg_query'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
