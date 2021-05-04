@@ -2,6 +2,12 @@ class LoadScheduleService
   attr_reader :file_name
   def initialize(file_name)
     @file_name = file_name
+
+    @cities = {}
+    @services = {}
+    @buses = {}
+    @buses_services = {}
+    @trips = []
   end
 
   def clear_db
@@ -21,22 +27,21 @@ class LoadScheduleService
     json = JSON.parse(File.read(file_name))
     pb = ProgressBar.new(size) if size
 
-    ActiveRecord::Base.transaction do
+   ActiveRecord::Base.transaction do
       clear_db if clear
 
-      puts("Наивная загрузка данных из json-файла в БД")
+      puts("Массовый импорт данных из json-файла в БД")
       json.each do |trip|
-        from = City.find_or_create_by(name: trip['from'])
-        to = City.find_or_create_by(name: trip['to'])
-        services = []
-        trip['bus']['services'].each do |service|
-          s = Service.find_or_create_by(name: service)
-          services << s
-        end
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+        from = city(trip['from'])
+        to = city(trip['to'])
+        bus = autobus(trip['bus']['number'], trip['bus']['model'])
 
-        Trip.create!(
+        trip['bus']['services'].each do |service_name|
+          serv = service(service_name)
+          bus_service(bus.number, serv.id)
+        end
+
+        @trips << Trip.new(
           from: from,
           to: to,
           bus: bus,
@@ -44,8 +49,37 @@ class LoadScheduleService
           duration_minutes: trip['duration_minutes'],
           price_cents: trip['price_cents'],
         )
+
         pb.increment! if size
       end
+      benchmark = Benchmark.bm(20) do |bm|
+        bm.report('Import Cities'){ City.import @cities.values }
+        bm.report('Import Buses'){ Bus.import @buses.values }
+        bm.report('Import Bus Services') do
+          BusesService.import @buses_services.values 
+        end
+        bm.report('Import Trips'){ Trip.import @trips }
+      end
     end
+  end
+
+  protected
+
+  def city(name)
+    @cities[name] ||= City.new(name: name)
+  end
+
+  def autobus(number, model)
+    @buses[number] ||= Bus.new(number: number, model: model)
+  end
+
+  def service(name)
+    @services[name] ||= Service.create!(name: name)
+  end
+
+  def bus_service(bus_number, service_id)
+    key = [bus_number, service_id]
+    @buses_services[key] ||= BusesService.new(bus_id: bus_number, 
+                                              service_id: service_id)
   end
 end
