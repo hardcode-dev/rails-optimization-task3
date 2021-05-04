@@ -76,7 +76,12 @@ Finish in: 6.16
 За счёт увеличения используемой памяти в два раза по сравнению с наивной загрузкой для массовой загрузки получили ускорение в 20 раз.
 
 #### Этап №3
-- 
+- initial checking by Valgrind Massif Visualizer on `small.json`:
+```bash
+$ valgrind --tool=massif bin/rake reload_json[fixtures/small.json,1000,true]
+$ massif-visualizer massif.out.X
+```
+
 
 ### Б. Отображение расписаний
 Сами страницы расписаний формируются не эффективно и при росте объёмов начинают сильно тормозить.
