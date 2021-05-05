@@ -2,15 +2,18 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips.length} рейсов" %>
 </h2>
 
 <% @trips.each do |trip| %>
+  <% cache trip do %>
   <ul>
     <%= render "trip", trip: trip %>
     <% if trip.bus.services.present? %>
+
       <%= render "services", services: trip.bus.services %>
     <% end %>
+    <% end %>
   </ul>
-  <%= render "delimiter" %>
+  <%= "====================================================" %>
 <% end %>

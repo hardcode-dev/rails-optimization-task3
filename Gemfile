@@ -17,6 +17,8 @@ gem 'set'
 group :development, :test do
   gem 'pry'
   gem 'rspec-benchmark'
+  gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 group :development do
