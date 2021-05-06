@@ -8,9 +8,21 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'activerecord-import'
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
+gem 'strong_migrations'
+
+gem 'rack-mini-profiler'
+gem 'memory_profiler'
+gem 'stackprof', '>= 0.2.9'
+gem 'flamegraph'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'bullet'
 end
 
 group :development do
