@@ -17,6 +17,7 @@ gem 'rack-mini-profiler'
 gem 'memory_profiler'
 gem 'stackprof', '>= 0.2.9'
 gem 'flamegraph'
+gem 'oj'
 
 
 group :development, :test do
@@ -36,3 +37,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "rspec", "~> 3.10"
+
+gem "rspec-benchmark", "~> 0.6.0"
