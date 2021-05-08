@@ -1,16 +1,17 @@
 <h1>
-  <%= "Автобусы #{@from.name} – #{@to.name}" %>
+  <%= "Автобусы #{params[:from]} – #{params[:to]}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips.size} рейсов" %>
 </h2>
 
 <% @trips.each do |trip| %>
   <ul>
     <%= render "trip", trip: trip %>
     <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
+      <%= @bus_partials[trip.bus.id].html_safe %>
     <% end %>
   </ul>
-  <%= render "delimiter" %>
+  ====================================================
 <% end %>
+<%= paginate @trips %>

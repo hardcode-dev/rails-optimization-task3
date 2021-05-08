@@ -1,0 +1,117 @@
+require:
+  - rubocop-rspec
+AllCops:
+  TargetRubyVersion: '2.7.1'
+  Exclude:
+    - app/assets/**/*
+    - gem_modules/**/*
+    - db/fixtures/**/*
+  UseCache: false
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/RescueEnsureAlignment:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Metrics/BlockLength:
+  Max: 20
+  Exclude:
+    - config/routes.rb
+    - spec/**/*
+
+Metrics/ClassLength:
+  Max: 200
+  Exclude:
+    - lib/client_based_logic/**/*
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - lib/client_based_logic/**/*
+
+Layout/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 22
+
+Naming/PredicateName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Style/MixinUsage:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/SharedExamples:
+  Enabled: false
