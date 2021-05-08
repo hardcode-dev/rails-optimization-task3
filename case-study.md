@@ -57,7 +57,7 @@ Finish in: 116.15
 Смотрим секции `Time consuming prepare` и `Time consuming bind` и видим здесь небольшие затраты времени на необходивые массовые операции встравки данных `INSERT . INTO`
 
 #### Этап №2
-- реализовали массовую загрузку при поддержке `gem 'activerecord-import'`
+- Реализовали массовую загрузку при поддержке `gem 'activerecord-import'`
 ```bash
 Memory: 88552 KB
 Deleting old data 
@@ -75,12 +75,66 @@ Finish in: 6.16
 ```
 За счёт увеличения используемой памяти в два раза по сравнению с наивной загрузкой для массовой загрузки получили ускорение в 20 раз.
 
-#### Этап №3
-- initial checking by Valgrind Massif Visualizer on `small.json`:
+- По статистике pgBadger самый сложный запрос в `pgBadger/out_Bulk_import.html` стал
+`INSERT INTO "buses_services" ("id","bus_id","service_id") VALUES . ` Он попал в категории:
 ```bash
-$ valgrind --tool=massif bin/rake reload_json[fixtures/small.json,1000,true]
-$ massif-visualizer massif.out.X
+Slowest individual queries  51ms
+Time consuming queries      51ms
+Normalized slowest queries  51ms
+Time consuming prepare      75ms
+Time consuming bind         23ms
 ```
+
+#### Этап №3
+- Реализовали потоковый импорт
+- После обработки файла данных `fixtures/small.json` сгенерировали отчет с помощью **pgBadger** в `pgBadger/out_Streaming_import.html` 
+
+В отчетах появился трудоёмкий сервисный запрос `copy trips (from_id, to_id, start_time, duration_minutes, price_cents, bus_id) from stdin with csv delimiter` на 1s533ms в секциях `Slowest individual queries` и `Time consuming queries` 
+
+Самым долговременным SQL-запросом в статистике оказался `INSERT INTO "buses_services" ("bus_id", "service_id") VALUES . `  по следующим категориям:
+```bash
+Slowest individual queries  49ms
+Time consuming queries      49ms
+Normalized slowest queries  49ms
+Time consuming prepare      22ms
+Time consuming bind         11ms
+```
+ Получили очевидное ускорение по SQL-запросам по сравнению с предыдущим этапом оптимизации алгоритма импорта данных в БД из JSON-файла.
+
+- Статистика по расходу памяти при загрузке файлов различного объема выглядит следующим образом.
+```bash
+$ bin/rake reload_json[fixtures/small.json,1000,true,true]
+Memory: 93396 KB
+Deleting old data 
+Поковый импорт данных из json-файла в БД
+[##############################] [1000/1000] [100.00%] [00:02] [00:00] [ 458.77/s]
+Memory: 97764 KB
+Memory usage: 4368 KB
+Finish in: 3.78
+```
+```bash
+$ bin/rake reload_json[fixtures/medium.json,10000,true,true]
+Memory: 92924 KB
+Deleting old data 
+Поковый импорт данных из json-файла в БД
+[##############################] [10000/10000] [100.00%] [00:17] [00:00] [  585.93/s]
+Memory: 98324 KB
+Memory usage: 5400 KB
+Finish in: 19.7
+```
+```bash
+$ bin/rake reload_json[fixtures/large.json,100000,true,true]
+Memory: 92240 KB
+Deleting old data 
+Поковый импорт данных из json-файла в БД
+[##############################] [100000/100000] [100.00%] [02:36] [00:00] [  637.47/s]
+Memory: 98336 KB
+Memory usage: 6096 KB
+Finish in: 159.28
+```
+Из приведённых данных видно, что изменение объёма импортируемых данных на два порядка даёт прирост в потреблении памяти только на 50%. 
+
+Ускорение обработки данных по сравнению с предыдущим этапом составило порядка 30%.
 
 
 ### Б. Отображение расписаний
