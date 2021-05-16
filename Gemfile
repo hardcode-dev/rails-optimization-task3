@@ -7,6 +7,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 6'
+gem 'pagy'
 
 group :development, :test do
   gem 'byebug'
@@ -16,6 +17,11 @@ group :development, :test do
   gem 'rspec-benchmark'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'ruby-prof'
+  gem 'bullet'
+  gem 'prosopite'
+  gem 'pghero'
+  gem 'pg_query'
+  gem 'strong_migrations'
 end
 
 group :development do
