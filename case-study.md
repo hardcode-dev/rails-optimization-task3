@@ -44,7 +44,11 @@
 - Добавил preload(bus: :services). Заменил has_and_belongs_to_many на has_many through.
   - Рендеринг страницы - 11866ms (Views: 11796.6ms | ActiveRecord: 61.9ms)
   - Bullet Warnings отсутствуют.
-  
+
+### Итерация №3
+- rack-mini-profiler и rails panel указывают на рендеринг большого кол-ва паршалов.
+- убрал лишние паршалы.
+- Рендеринг страницы - 2773ms (Views: 2706.0ms | ActiveRecord: 55.2ms)
   
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы `spec/services/json_loader_spec.rb`
