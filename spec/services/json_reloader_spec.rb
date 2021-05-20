@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'json_reloader' do
   let(:data) { Rails.root.join('fixtures', 'example.json') }
 
-  it 'works under 100 ms' do
+  it 'works under 20 ms' do
     expect {
       JsonReloader.new(data).call
-    }.to perform_under(100).ms.warmup(2).times.sample(10).times
+    }.to perform_under(20).ms.warmup(2).times.sample(10).times
   end
 
   it 'should load data' do
