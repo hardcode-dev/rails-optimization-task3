@@ -37,5 +37,14 @@
     * Loading data from fixtures/small.json - 8.588481 сек -> 1.624000 сек
     * Loading data from fixtures/large.json - 57.876000 сек (в рамках бюджета). MEMORY USAGE: 13 MB
 
+### Итерация №2
+- Рендеринг страницы - 23327ms (Views: 21580.9ms | ActiveRecord: 1678.5ms)
+- Bullet Warnings
+  * USE eager loading detected Trip => [:bus] Add to your query: .includes([:bus])
+- Добавил preload(bus: :services). Заменил has_and_belongs_to_many на has_many through.
+  - Рендеринг страницы - 11866ms (Views: 11796.6ms | ActiveRecord: 61.9ms)
+  - Bullet Warnings отсутствуют.
+  
+  
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы `spec/services/json_loader_spec.rb`
