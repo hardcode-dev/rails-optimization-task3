@@ -22,3 +22,17 @@ SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."i
 
 - добавляю индекс на buses_services.bus_id в надежде, что теперь будет обращение исключительно к индексу
 - Метрика realtime улучшилась 7.30 -> 7.0, в из Explain ушел Seq Scan и сменился на Index Scan using index_buses_services_on_bus_id on buses_services 
+
+Оптимизация 2
+
+- По отчету pghero на втором месте запрос
+
+```
+SELECT  $4 AS one FROM "buses" WHERE "buses"."number" = $1 AND "buses"."id" != $2 LIMIT $3
+```
+
+Analize показывает Seq Scan и Total Cost = 18.2
+
+– Добавил индекс на поле number
+- Seq Scan -> Index Scan и Total Cost стал равен 8.29. Метрика улучшилась 7.0 -> 6.54
+

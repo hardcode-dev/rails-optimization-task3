@@ -18,7 +18,7 @@ def work json
         services << s
       end
       bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+      bus.update(model: trip['bus']['model'], services: services)
       Trip.create!(
         from: from,
         to: to,
