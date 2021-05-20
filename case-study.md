@@ -55,6 +55,15 @@
 - изменил расчет кол-ва трипов.
 - Рендеринг страницы - 2789ms (Views: 2748.7ms | ActiveRecord: 34.7ms)
 - Number of executed queries -= 1
-  
+
+### Итерация №5
+- PGHERO предложил создать индексы:
+```
+CREATE INDEX CONCURRENTLY ON trips (from_id, to_id)
+CREATE INDEX CONCURRENTLY ON buses_services (bus_id)
+```
+- Рендеринг страницы - 2810ms (Views: 2788.8ms | ActiveRecord: 15.5ms)
+
+
 ## Защита от регрессии производительности
 Для защиты от потери достигнутого прогресса при дальнейших изменениях программы `spec/services/json_loader_spec.rb`
