@@ -36,3 +36,12 @@ Analize показывает Seq Scan и Total Cost = 18.2
 – Добавил индекс на поле number
 - Seq Scan -> Index Scan и Total Cost стал равен 8.29. Метрика улучшилась 7.0 -> 6.54
 
+Оптимизация 3
+- По отчету pghero в топе был запрос на добавление
+```
+INSERT INTO "buses_services" ("bus_id", "service_id") VALUES ($1, $2) RETURNING "id"
+```
+Так как данных о сервисах мало, я решил провести денормализацию и перенести сервисы в json поле таблицы buses
+
+- Время обработки small.json сократилось до 3.5 секунд
+

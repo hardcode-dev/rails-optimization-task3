@@ -14,8 +14,7 @@ def work json
       to = City.find_or_create_by(name: trip['to'])
       services = []
       trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
+        services << service
       end
       bus = Bus.find_or_create_by(number: trip['bus']['number'])
       bus.update(model: trip['bus']['model'], services: services)
