@@ -65,3 +65,36 @@ SELECT  "cities".* FROM "cities" WHERE "cities"."name" = $1 LIMIT $2
 - На вкладке Space pghero я вижу что таблица cities небольшая по сравнению с остальными. Создаю массив в памяти CITIES куда буду складывать уже запрошенные из базы города. Так количество запросов к базе должно сократиться
 
 - В результате запрос пропал из топа pghero. А время работы скрипта сократилось до 2.5 секунд
+
+Оптимизация 6
+
+- В топе pghero находился странный запрос
+```
+SELECT  $4 AS one FROM "buses" WHERE "buses"."number" = $1 AND "buses"."id" != $2 LIMIT $3
+```
+По сути он дублировал запрос 
+```
+SELECT  "buses".* FROM "buses" WHERE "buses"."number" = $1 LIMIT $2
+```
+
+- первым дело я изменил индекс по полю number на уникальный. Сходу подумал, что может быть связано с этим. Но не помогло. Затем я посмотрел в логи, в каком месте вызывается этот запрос и увидел, что он вызывается на строчке кода 
+```
+bus.update(model: trip['bus']['model'], services: services)
+```
+Пришла идея, как это оптимизировать – можно не вызывать этот лишний update, а создавать bus сразу с нужными полями
+```
+      bus ||= Bus.create(
+        number: trip['bus']['number'],
+        model: trip['bus']['model'], 
+        services: services
+      )
+```
+
+- В результате дополнительный запрос ушел из топа pghero. Время работы скрипта сократилась до 1.6 секунд
+
+
+
+
+ Bus Exists (3.6ms)  SELECT  1 AS one FROM "buses" WHERE "buses"."number" = $1 AND "buses"."id" != $2 LIMIT $3  [["number", "514"], ["id", 61038], ["LIMIT", 1]]
+  ↳ (pry):4
+  Bus Load (2.5ms)  SELECT "buses".* FROM "buses" WHERE "buses"."number" = $1  [["number", "514"]]

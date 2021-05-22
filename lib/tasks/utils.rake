@@ -21,8 +21,13 @@ def work json
       trip['bus']['services'].each do |service|
         services << service
       end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+      bus = Bus.find_by_number(trip['bus']['number'])
+      bus ||= Bus.create(
+        number: trip['bus']['number'],
+        model: trip['bus']['model'], 
+        services: services
+      )
+
       Trip.create!(
         from: from,
         to: to,
@@ -31,6 +36,7 @@ def work json
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],
       )
+      
       $progressbar.increment
     end
   end
@@ -57,8 +63,8 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       ActiveRecord::Base.connection.execute('delete from buses_services;')
     end
   end
+  
   puts "RealTime deleting: #{time}"
-
   #RubyProf.measure_mode = RubyProf::WALL_TIME
   RubyProf.measure_mode = RubyProf::ALLOCATIONS
   result = nil
