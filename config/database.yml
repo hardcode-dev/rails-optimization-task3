@@ -23,7 +23,11 @@ default: &default
 
 development:
   <<: *default
-  database: task-4_development
+  database: task-3_development
+  username: postgres
+  password: password
+  host: localhost
+  port: 5435
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

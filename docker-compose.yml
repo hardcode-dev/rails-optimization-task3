@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./docker/postgres/config/postgresql.conf:/var/lib/postgresql/data/files/postgresql.conf
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: '/var/lib/postgresql/data/files/'
+    networks:
+      - homeworks
+  pghero:
+    build:
+      context: .
+      dockerfile: docker/pghero/Dockerfile
+    ports:
+      - "${PGHERO_PORT}:8080"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/task-3_development"
+    networks:
+      - homeworks
+
+volumes:
+  pg_data:
+
+networks:
+  homeworks:
+    driver: bridge
