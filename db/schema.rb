@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_042434) do
+ActiveRecord::Schema.define(version: 2021_05_21_155849) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_042434) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name"
   end
 
   create_table "services", force: :cascade do |t|

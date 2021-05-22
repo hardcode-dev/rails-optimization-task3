@@ -45,3 +45,12 @@ INSERT INTO "buses_services" ("bus_id", "service_id") VALUES ($1, $2) RETURNING 
 
 - Время обработки small.json сократилось до 3.5 секунд
 
+
+Оптимизация 4. city name index
+- Топ pghero
+```
+SELECT  "cities".* FROM "cities" WHERE "cities"."name" = $1 LIMIT $2
+
+```
+- добавляю индекс на поле name
+- Результатов эта оптимизация не дала. Время выполнения скрипта не изменилось. Explain запроса по прежнему показывал Seq Scan...
