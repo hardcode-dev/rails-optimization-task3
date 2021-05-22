@@ -47,7 +47,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
   Bullet.enable = true
   Bullet.bullet_logger = true
   json = JSON.parse(File.read(args.file_name))
-  #File.write('./fixtures/tiny.json', json[0..100].to_json); exit(0)
 
   $progressbar = ProgressBar.create(
     total: json.size,

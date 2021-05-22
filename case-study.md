@@ -92,9 +92,3 @@ bus.update(model: trip['bus']['model'], services: services)
 
 - В результате дополнительный запрос ушел из топа pghero. Время работы скрипта сократилась до 1.6 секунд
 
-
-
-
- Bus Exists (3.6ms)  SELECT  1 AS one FROM "buses" WHERE "buses"."number" = $1 AND "buses"."id" != $2 LIMIT $3  [["number", "514"], ["id", 61038], ["LIMIT", 1]]
-  ↳ (pry):4
-  Bus Load (2.5ms)  SELECT "buses".* FROM "buses" WHERE "buses"."number" = $1  [["number", "514"]]
