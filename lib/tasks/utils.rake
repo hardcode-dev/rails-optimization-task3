@@ -5,10 +5,12 @@ require 'ruby-progressbar'
 require 'benchmark'
 require 'ruby-prof'
 require 'pry'
+require 'activerecord-import'
 
 CITIES = {}
 def work json
   ActiveRecord::Base.transaction do
+    trips = []
     json.each do |trip|
 
       from = CITIES[trip['from']]
@@ -28,19 +30,22 @@ def work json
         services: services
       )
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-      
+      trips << Trip.new(
+          from: from,
+          to: to,
+          bus: bus,
+          start_time: trip['start_time'],
+          duration_minutes: trip['duration_minutes'],
+          price_cents: trip['price_cents'],
+        )
+      if trips.size == 10000
+        Trip.import trips
+        trips = []
+      end
       $progressbar.increment
     end
+    Trip.import trips
   end
-  #puts "Time to update buses: #{update_buses_time}"
 end
 
 task :reload_json, [:file_name] => :environment do |_task, args|
