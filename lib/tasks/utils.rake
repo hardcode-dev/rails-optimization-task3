@@ -1,17 +1,22 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
+
 require 'ruby-progressbar'
 require 'benchmark'
 require 'ruby-prof'
 require 'pry'
 
+CITIES = {}
 def work json
   ActiveRecord::Base.transaction do
     json.each do |trip|
-      # вот эти 2 запроса можно объединить в один запрос с IN || OR
-      # но это не главная точка роста
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
+
+      from = CITIES[trip['from']]
+      from = CITIES[trip['from']] = City.find_or_create_by(name: trip['from']) unless from
+         
+      to = CITIES[trip['to']]
+      to = CITIES[trip['to']] = City.find_or_create_by(name: trip['to']) unless to
+      
       services = []
       trip['bus']['services'].each do |service|
         services << service
