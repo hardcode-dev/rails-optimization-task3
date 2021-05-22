@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_155849) do
+ActiveRecord::Schema.define(version: 2021_05_22_034902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_155849) do
     t.string "number"
     t.string "model"
     t.jsonb "services", default: []
-    t.index ["number"], name: "index_buses_on_number"
+    t.index ["number"], name: "index_buses_on_number", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|
