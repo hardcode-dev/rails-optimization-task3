@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class Bus < ApplicationRecord
-  MODELS = [
-    'Икарус',
-    'Мерседес',
-    'Сканиа',
-    'Буханка',
-    'УАЗ',
-    'Спринтер',
-    'ГАЗ',
-    'ПАЗ',
-    'Вольво',
-    'Газель',
+  MODELS = %w[
+    Икарус
+    Мерседес
+    Сканиа
+    Буханка
+    УАЗ
+    Спринтер
+    ГАЗ
+    ПАЗ
+    Вольво
+    Газель
   ].freeze
 
   has_many :trips, dependent: :destroy
