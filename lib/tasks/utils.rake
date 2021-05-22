@@ -11,6 +11,7 @@ CITIES = {}
 def work json
   ActiveRecord::Base.transaction do
     trips = []
+    buses = {}
     json.each do |trip|
 
       from = CITIES[trip['from']]
@@ -23,12 +24,16 @@ def work json
       trip['bus']['services'].each do |service|
         services << service
       end
-      bus = Bus.find_by_number(trip['bus']['number'])
-      bus ||= Bus.create(
-        number: trip['bus']['number'],
-        model: trip['bus']['model'], 
-        services: services
-      )
+      bus = buses[trip['bus']['number']]
+      unless bus
+        bus = Bus.find_by_number(trip['bus']['number'])
+        bus ||= Bus.create(
+          number: trip['bus']['number'],
+          model: trip['bus']['model'], 
+          services: services
+        )
+        buses[trip['bus']['number']] = bus
+      end
 
       trips << Trip.new(
           from: from,
