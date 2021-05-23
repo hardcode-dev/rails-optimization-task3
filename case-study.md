@@ -6,6 +6,18 @@
 - pghero
 - fasterer
 
+### Для удобства работы использовал
+- rails panel
+- explain (analyze) запросов
+- вместо `oj` решил использовать `json-streamer`
+
+### Feedback-Loop
+- поиск больного места
+- профилирование
+- поиск главной точки роста
+- рефакторинг
+- тест
+
 ### Находка №1
 - `gem bullet` обнаружил N + 1: `Add to your query: .includes([:bus])`
 - добавил `preload(bus: :services)`
