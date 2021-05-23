@@ -87,6 +87,7 @@ GEM
     nokogiri (1.11.5)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    oj (3.11.5)
     pg (1.2.3)
     pghero (2.8.1)
       activerecord (>= 5)
@@ -161,6 +162,7 @@ DEPENDENCIES
   fasterer
   json-streamer
   listen (>= 3.0.5, < 3.2)
+  oj
   pg (>= 0.18, < 2.0)
   pghero
   puma (~> 3.11)
