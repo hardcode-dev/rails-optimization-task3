@@ -2,7 +2,7 @@ class ServicesValidator < ActiveModel::Validator
   def validate(record)
     record.services.each do |s|
       unless Bus::SERVICES.include?(s)
-        record.errors.add :services, :inclusion, "Buses do not have such service"
+        record.errors.add :services, "Buses do not have such service"
       end
     end
   end

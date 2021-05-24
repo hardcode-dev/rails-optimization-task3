@@ -140,3 +140,34 @@ expect { job.call }.to change(Bus.all, :count).from(0).to(1)
   .and(change(City.all, :count).from(0).to(2))
 ```
 
+Б. Отображение расписаний
+
+Для подготовки оптимизаций я написал тест для защиты от регрессии
+```
+      it "renders the actual template" do
+        get :index, params: {from: 'Самара', to: 'Москва'}
+        expect(response.body).to match /Автобусы Самара – Москва/
+        expect(response.body).to match /В расписании 5 рейсов/
+
+        expect(response.body).to match /Отправление: 17:30/
+        expect(response.body).to match /Прибытие: 18:07/
+        expect(response.body).to match /В пути: 0ч. 37мин./
+        expect(response.body).to match /Цена: 1р. 73коп./
+        expect(response.body).to match /Автобус: Икарус №123/
+
+        expect(response.body).to match /Сервисы в автобусе:/
+        expect(response.body).to match /Туалет/
+        expect(response.body).to match /WiFi/
+        
+      end
+
+```
+
+Установил rack-mini-profiles, rails-panel и включил буллет
+Оптимизации решил проводить на объеме medium.json
+До начала всех оптимизаций rake-mini-profiler показывал время отображения страницы ~1850ms (не холодный старт)
+
+- Оптимизаций 1
+- Сразу после установки bullet он выдавал предупреждения от N+1 и давал рекомендацию добавить в запрос includes(:bus)
+- Так я и поступил, добавив прелоад автобусов для запроса за трипами
+- Предупреждения bullet исчезло. Время рендера по rack-mini-profiler стало 600ms
