@@ -102,6 +102,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
+    pagy (3.13.0)
     pg (1.1.4)
     pghero (2.8.1)
       activerecord (>= 5)
@@ -210,6 +211,7 @@ DEPENDENCIES
   memory_profiler
   meta_request
   mimemagic!
+  pagy
   pg (>= 0.18, < 2.0)
   pghero
   pry
