@@ -176,7 +176,7 @@ expect { job.call }.to change(Bus.all, :count).from(0).to(1)
 - Предупреждения bullet исчезло. Время рендера по rack-mini-profiler стало 600ms
 
 
-# Оптимизация 2 _service.html.erb
+## Оптимизация 2 _service.html.erb
 По Rails Panel было видно, что ускорять ActiveRecord похоже дальше уже было некуда
 ActiveRecord 16 ms
 Rendering	495 ms
