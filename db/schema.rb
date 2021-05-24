@@ -10,23 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2021_05_22_034902) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.jsonb "services", default: []
+    t.index ["number"], name: "index_buses_on_number", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|
     t.integer "bus_id"
     t.integer "service_id"
+    t.index ["bus_id"], name: "index_buses_services_on_bus_id"
   end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name"
   end
 
   create_table "services", force: :cascade do |t|
