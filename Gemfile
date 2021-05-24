@@ -14,9 +14,18 @@ gem 'ruby-progressbar'
 gem 'activerecord-import'
 gem 'ruby-prof'
 gem 'bullet'
+
+gem 'rack-mini-profiler', require: false
+gem 'memory_profiler'
+gem 'stackprof'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'fabrication', '~> 2.15', '>= 2.15.2', require: false
+  gem 'ffaker'
 end
 
 group :development do
@@ -24,10 +33,12 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry'
-  
+  gem 'meta_request'
 end
 
 group :test do
+  gem 'database_cleaner-active_record'
+  gem 'rspec-benchmark'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -121,3 +121,22 @@ SELECT "buses".* FROM "buses" WHERE "buses"."number" = ? LIMIT ?;
 ```
 
 - в результате SELECT ушел из топа запросов. Скрипт прогнался за 24 секунды на объеме large. Таким образом мы уложились в бюджет
+
+Тестирование
+
+Чтобы обезопасить систему от регресса я добавил тест на время работы скрипта на малом объеме
+```
+  describe "perfomance time" do
+    let(:filename) { 'fixtures/small.json' }
+    it 'must work less a second' do
+      expect{ job.call}.to perform_under(1.5).sec
+    end
+  end
+```
+А также проверку на корректную работу скрипта
+```
+expect { job.call }.to change(Bus.all, :count).from(0).to(1)
+  .and(change(Trip.all, :count).from(0).to(10))
+  .and(change(City.all, :count).from(0).to(2))
+```
+
