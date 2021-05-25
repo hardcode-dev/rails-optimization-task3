@@ -30,6 +30,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
     cities[trip['from']] ||= City.find_or_create_by(name: trip['from'])
     cities[trip['to']] ||= City.find_or_create_by(name: trip['to'])
+
     buses[trip['bus']['number']] ||= Bus.find_or_create_by(
       number: trip['bus']['number'],
       model: trip['bus']['model']
@@ -61,7 +62,10 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       bus_services = []
       print "#{index}\r"
     else
-      Trip.insert_all(trips) if file_stream.eof?
+      if file_stream.eof?
+        BusesServices.insert_all(bus_services.uniq)
+        Trip.insert_all(trips)
+      end
 
       next
     end
