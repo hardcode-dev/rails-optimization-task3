@@ -1,0 +1,1 @@
+class BusesServices < ApplicationRecord; end
