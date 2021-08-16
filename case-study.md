@@ -33,7 +33,14 @@
 * `commit/revert` - фиксация изменений или отказ от изменений
 
 ### Tools
-* 
+Использовал следующие инструменты для анализа:
+- [ ] `pghero`
+- [ ] `new_relic`
+- [ ] `rack-mini-profiler`
+- [ ] `bullet`
+- [ ] `rails panel`
+- [ ] `explain` запросов
+
 
 
 ---
