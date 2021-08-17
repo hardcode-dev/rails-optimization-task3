@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe JsonReloader do
-  context 'load data' do
-    let(:file) { Rails.root.join('spec', 'data', 'example.json') }
-    before { JsonReloader.new(file).call }
+  context 'load example data' do
+    let(:example_file) { Rails.root.join('spec', 'data', 'example.json') }
+    before { JsonReloader.new(example_file).call }
 
     it 'checking the number of objects' do
       expect(Bus.count)     .to eq(1)
@@ -12,5 +12,15 @@ RSpec.describe JsonReloader do
       expect(Trip.count)    .to eq(10)
     end
   end
+
+  # context 'load large(budget) data' do
+  #   let(:budget_file) { Rails.root.join('fixtures', 'large.json') }
+  #   let(:budget) { 60_000 }
+  #
+  #   it 'under budget (X sec)' do
+  #     expect { JsonReloader.new(budget_file).call }
+  #       .to perform_under(budget).ms.warmup(1).times.sample(2).times
+  #   end
+  # end
 end
 

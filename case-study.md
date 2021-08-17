@@ -41,9 +41,13 @@
 - [ ] `rails panel`
 - [ ] `explain` запросов
 
+### Iteration_1
+* Сделал `benchmark` замер загрузки файла `small.json (1K трипов)` --- total: **10.846510sec**
+* Решение: переписать загрузку данных с помощью `zdennis/activerecord-import`
+* Итого:  файл `small.json (1K трипов)` --- total: **_**
+
+
 ЗАВТРА
-* написать тест
-* добавить метрику
 * переписать на active_record import
 
 ---
