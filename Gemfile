@@ -19,6 +19,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 5.0'
   gem 'rspec-benchmark', '~> 0.6.0'
+  gem 'capybara', '~> 3.35'
 end
 
 group :development do
