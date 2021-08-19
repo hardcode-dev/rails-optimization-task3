@@ -68,7 +68,7 @@
 - [ ] `pghero`
 - [ ] `new_relic`
 - [ ] `rack-mini-profiler`
-- [ ] `bullet`
+- [X] `bullet`
 - [ ] `rails panel`
 - [ ] `explain` запросов
 
@@ -76,3 +76,10 @@
 * Начальный замер - рендеринг страницы `автобусы/Самара/Москва` с данными в объеме `fixtures/large.json`
 ===  71165ms (Views: 70026.8ms | ActiveRecord: 1003.5ms)
 * Выскочил warning от bullet, предлагает добавить eager loading
+* добавил `.preload(bus: :services)` при загрузке трипов
+* заменил ассоциацию HABTM на HMT(`buses_service`)
+* Итого:
+=== 64572ms (Views: 64412.5ms | ActiveRecord: 30.4ms)
+* ...не тот результат о котором я мечтал... продолжаю.
+
+### Iteration_2
