@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Bus < ApplicationRecord
   MODELS = %w[Икарус Мерседес Сканиа Буханка УАЗ Спринтер ГАЗ ПАЗ Вольво Газель].freeze
 

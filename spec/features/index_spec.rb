@@ -19,5 +19,11 @@ feature 'Protect right rendering page' do
         expect(page).to have_content bus.number
       end
     end
+
+    it 'contain information about services' do
+      Bus.all.each do |bus|
+        bus.services { |s| expect(page).to have_content s.name } unless bus.services.nil?
+      end
+    end
   end
 end

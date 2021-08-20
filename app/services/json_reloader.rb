@@ -2,11 +2,12 @@
 
 class JsonReloader
   def initialize(file)
-    @file     = file
-    @buses    = {}
-    @cities   = {}
-    @services = {}
-    @trips = []
+    @file           = file
+    @buses          = {}
+    @cities         = {}
+    @services       = {}
+    @buses_services = {}
+    @trips          = []
   end
 
   def call
@@ -61,35 +62,38 @@ class JsonReloader
   def create_or_find_bus(bus_object)
     number   = bus_object['number']
     model    = bus_object['model']
-    services = bus_object['services']
-
-    obj_services = services.collect { |s| create_or_find_service(s) }
-
     bus = @buses[number]
 
     if bus.nil?
-      bus = Bus.new(number: number, model: model, services: obj_services)
+      bus = Bus.new(number: number, model: model)
+      service_processing(bus, bus_object['services'])
+
       @buses[number] = bus
     end
 
     bus
   end
 
-  def create_or_find_service(name)
-    service = @services[name]
+  def service_processing(bus, services)
+    services.each do |name|
+      service = @services[name]
 
-    if service.nil?
-      service = Service.new(name: name)
-      @services[name] = service
+      if service.nil?
+        service = Service.new(name: name)
+        @services[name] = service
+      end
+
+      bus_service = BusesService.new(bus: bus, service: service)
+      @buses_services[bus] ||= {}
+      @buses_services[bus][service] = bus_service
     end
-
-    service
   end
 
   def import_data
-    City.import    @cities.values
-    Bus.import     @buses.values
-    Service.import @services.values
-    Trip.import    @trips
+    City.import         @cities.values
+    Bus.import          @buses.values
+    Service.import      @services.values
+    BusesService.import @buses_services.values.map(&:values).flatten
+    Trip.import         @trips
   end
 end

@@ -16,7 +16,7 @@ RSpec.describe JsonReloader do
   describe 'Performance' do
     context 'load small data' do
       let(:small_file) { Rails.root.join('fixtures', 'small.json') }
-      let(:small_budget) { 3_500 }
+      let(:small_budget) { 3_000 }
 
       it 'under budget (X sec)' do
         expect { JsonReloader.new(small_file).call }
@@ -26,7 +26,7 @@ RSpec.describe JsonReloader do
 
     context 'load large(budget) data' do
       let(:budget_file) { Rails.root.join('fixtures', 'large.json') }
-      let(:budget) { 36_000 }
+      let(:budget) { 40_000 }
 
       it 'under budget (X sec)' do
         expect { JsonReloader.new(budget_file).call }
