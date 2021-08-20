@@ -65,7 +65,7 @@
 
 ### Tools
 Использовал следующие инструменты для анализа и обнаружения точек роста:
-- [ ] `pghero`
+- [X] `pghero`
 - [ ] `new_relic`
 - [ ] `rack-mini-profiler`
 - [X] `bullet`
@@ -83,3 +83,7 @@
 * ...не тот результат о котором я мечтал... продолжаю.
 
 ### Iteration_2
+* `pghero` предлагает добавить индекс `CREATE INDEX CONCURRENTLY ON trips (from_id, to_id)`
+* Замер после добавления индекса:
+=== 69256ms (Views: 69215.5ms | ActiveRecord: 8.1ms)
+* По ActiveRecord время уменьшилось, общее нет
