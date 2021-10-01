@@ -8,6 +8,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'newrelic_rpm'
+gem 'activerecord-import', '~> 1.2'
 
 group :development, :test do
   gem 'database_cleaner'
