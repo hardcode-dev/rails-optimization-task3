@@ -33,7 +33,10 @@ class DataImporter
           duration_minutes: trip['duration_minutes'],
           price_cents: trip['price_cents']
         }
-        Trip.import(trips) if i >= BATCH_SIZE
+        if i >= BATCH_SIZE
+          Trip.import(trips)
+          trips = []
+        end
         i += 1
       end
       Trip.import(trips)
