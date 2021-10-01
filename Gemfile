@@ -7,8 +7,13 @@ gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'newrelic_rpm'
 
 group :development, :test do
+  gem 'database_cleaner'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'rspec-rails', '~> 4.0'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -16,6 +21,7 @@ end
 group :development do
   # Profiling
   gem 'benchmark'
+  gem 'bullet'
   gem 'memory_profiler'
   gem 'rack-mini-profiler'
   gem 'stackprof'
