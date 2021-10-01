@@ -38,15 +38,15 @@ class DataImporter
           duration_minutes: trip['duration_minutes'],
           price_cents: trip['price_cents']
         }
-        if i >= BATCH_SIZE
-          Trip.import(trips)
+        if (i % BATCH_SIZE).zero?
+          Trip.bulk_import(trips)
           trips = []
         end
         i += 1
       end
-      Trip.import(trips)
+      Trip.bulk_import(trips)
       buses.each do |_key, values|
-        BusesService.import(values[:services].map { |service_id| { bus_id: values[:id], service_id: service_id } })
+        BusesService.bulk_import(values[:services].map { |service_id| { bus_id: values[:id], service_id: service_id } })
       end
     end
   end
