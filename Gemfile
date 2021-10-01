@@ -11,6 +11,7 @@ gem 'newrelic_rpm'
 gem 'activerecord-import', '~> 1.2'
 
 group :development, :test do
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 6.1'
   gem 'rspec-rails', '~> 4.0'
@@ -24,6 +25,7 @@ group :development do
   # Profiling
   gem 'benchmark'
   gem 'bullet'
+  gem 'meta_request'
   gem 'memory_profiler'
   gem 'rack-mini-profiler'
   gem 'stackprof'
