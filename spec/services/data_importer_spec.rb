@@ -25,7 +25,7 @@ RSpec.describe DataImporter do
     end
 
     it 'returns services count' do
-      expect(Service.all.map(&:name)).to match_array(%w[Туалет WiFi])
+      expect(Service.all.map(&:name)).to match_array(Service::SERVICES)
     end
 
     it 'returns trips count' do
