@@ -13,16 +13,17 @@ class DataImporter
 
       all_services = Service::SERVICES.map { |s| [s, Service.create(name: s).id] }.to_h
       buses_services = {}
+      cities = {}
       json.each do |trip|
-        from = City.find_or_create_by(name: trip['from'])
-        to = City.find_or_create_by(name: trip['to'])
+        cities[trip['from']] ||= City.create(name: trip['from']).id
+        cities[trip['to']] ||= City.create(name: trip['to']).id
         bus = Bus.find_or_create_by(model: trip['bus']['model'], number: trip['bus']['number'])
         buses_services[bus.id] ||= []
         buses_services[bus.id] |= trip['bus']['services'].map{ |el| all_services[el] }
 
         Trip.create!(
-          from: from,
-          to: to,
+          from_id: cities[trip['from']],
+          to_id: cities[trip['to']],
           bus: bus,
           start_time: trip['start_time'],
           duration_minutes: trip['duration_minutes'],

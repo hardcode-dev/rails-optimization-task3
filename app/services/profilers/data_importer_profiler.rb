@@ -2,7 +2,7 @@
 
 module Profilers
   class DataImporterProfiler
-    FILE_NAME = 'small'.freeze
+    FILE_NAME = 'medium'.freeze
 
     def self.call
       time = Benchmark.realtime do
