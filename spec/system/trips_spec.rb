@@ -18,7 +18,11 @@ describe 'Schedule', type: :feature do
   end
 
   it 'visit trips page' do
-    visit '/%D0%B0%D0%B2%D1%82%D0%BE%D0%B1%D1%83%D1%81%D1%8B/%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0'
+    visit_trips_page
     expect(Nokogiri::HTML(page.html).css('li').map(&:text)).to match_array(result)
+  end
+
+  def visit_trips_page
+    visit '/%D0%B0%D0%B2%D1%82%D0%BE%D0%B1%D1%83%D1%81%D1%8B/%D0%A1%D0%B0%D0%BC%D0%B0%D1%80%D0%B0/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0'
   end
 end
