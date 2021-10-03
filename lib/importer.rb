@@ -25,7 +25,7 @@ class Importer
     Bus.delete_all
     Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
+    BusesService.delete_all
   end
 
   def import
