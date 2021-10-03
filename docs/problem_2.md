@@ -31,3 +31,9 @@
 - Добавил render collection: services
 - Время формирования страницы: 16495ms (Views: 14751.6ms | ActiveRecord: 1737.5ms)
 - исправленная проблема перестала быть главной точкой роста
+
+### Находка №2
+- Большое количество раз рендерится(анализируя данные rack-mini-profiler) trip.html.erb и delimiter.html.erb
+- Добавил render collection: trips и spacer_template: 'delimiter'
+- Время формирования страницы: 8794ms (Views: 7172.4ms | ActiveRecord: 1592.9ms)
+- исправленная проблема перестала быть главной точкой роста

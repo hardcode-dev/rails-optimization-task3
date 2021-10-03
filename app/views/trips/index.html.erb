@@ -5,15 +5,4 @@
   <%= "В расписании #{@trips.count} рейсов" %>
 </h2>
 
-<% @trips.each do |trip| %>
-  <ul>
-    <%= render "trip", trip: trip %>
-    <% if trip.bus.services.present? %>
-      <li>Сервисы в автобусе:</li>
-      <ul>
-        <%= render partial: "service", collection: trip.bus.services %>
-      </ul>
-    <% end %>
-  </ul>
-  <%= render "delimiter" %>
-<% end %>
+<%= render partial: 'trip', collection: @trips, spacer_template: 'delimiter' %>
