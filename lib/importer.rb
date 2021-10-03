@@ -29,23 +29,44 @@ class Importer
   end
 
   def import
+    cities = {}
+    services = {}
+    buses = {}
     json = JSON.parse(File.read(@filename))
 
     json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+      # Collect cities
+      cities[trip['from']] ||= City.create(name: trip['from']).id
+      cities[trip['to']] ||= City.create(name: trip['to']).id
 
+      # Collect services
+      service_ids = Set.new
+      trip['bus']['services'].map do |service_name|
+        services[service_name] ||= Service.create(name: service_name).id
+        service_ids << services[service_name]
+      end
+
+      # Collect buses
+      buses[trip['bus']['number']] ||=
+        {
+          id: Bus.create(number: trip['bus']['number'], model: trip['bus']['model']).id,
+          service_ids: service_ids
+        }
+
+      # Collect bus services
+      unless buses[trip['bus']['number']][:service_ids].superset?(service_ids)
+        buses[trip['bus']['number']][:service_ids].merge(service_ids)
+        (buses[trip['bus']['number']][:service_ids] - service_ids).each do |service_id|
+          BusesService.create(bus_id: buses[trip['bus']['number']][:id],
+                              service_id: service_id)
+        end
+      end
+
+      # Create trip
       Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
+        from_id: cities[trip['from']],
+        to_id: cities[trip['to']],
+        bus_id: buses[trip['bus']['number']][:id],
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],

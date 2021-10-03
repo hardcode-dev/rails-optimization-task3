@@ -8,8 +8,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'mimemagic', '~> 0.3.10'
+gem 'activerecord-import'
 
 group :development, :test do
+  gem 'rspec-rails', '~> 5.0.2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -25,6 +27,5 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
   gem 'rspec-benchmark'
 end
