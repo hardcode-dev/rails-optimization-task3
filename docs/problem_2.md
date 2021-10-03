@@ -37,3 +37,9 @@
 - Добавил render collection: trips и spacer_template: 'delimiter'
 - Время формирования страницы: 8794ms (Views: 7172.4ms | ActiveRecord: 1592.9ms)
 - исправленная проблема перестала быть главной точкой роста
+
+### Находка №3
+- ![before](profiling/problem_2/1.png) N + 1 запрос, анализируя данные rack-mini-profiler видим подгрузку автобусов к поездке и сервисов к автобусам
+- Добавил Trip.preload(bus: :services)
+- Время формирования страницы: 2783ms (Views: 2736.8ms | ActiveRecord: 40.3ms)
+- исправленная проблема перестала быть главной точкой роста
