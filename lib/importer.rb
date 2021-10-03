@@ -2,6 +2,9 @@ class Importer
 
   def initialize(filename)
     @filename = filename || 'fixtures/small.json'
+    @cities = {}
+    @services = {}
+    @buses = {}
   end
 
   def perform(profiler = nil)
@@ -29,44 +32,31 @@ class Importer
   end
 
   def import
-    cities = {}
-    services = {}
-    buses = {}
     json = JSON.parse(File.read(@filename))
 
     json.each do |trip|
       # Collect cities
-      cities[trip['from']] ||= City.create(name: trip['from']).id
-      cities[trip['to']] ||= City.create(name: trip['to']).id
+      @cities[trip['from']] ||= City.create(name: trip['from']).id
+      @cities[trip['to']] ||= City.create(name: trip['to']).id
 
-      # Collect services
-      service_ids = Set.new
-      trip['bus']['services'].map do |service_name|
-        services[service_name] ||= Service.create(name: service_name).id
-        service_ids << services[service_name]
-      end
+      # Collect bus and its services
+      unless @buses[trip['bus']['number']]
+        service_ids = trip['bus']['services'].map do |service_name|
+          @services[service_name] ||= Service.create(name: service_name).id
+        end
 
-      # Collect buses
-      buses[trip['bus']['number']] ||=
-        {
-          id: Bus.create(number: trip['bus']['number'], model: trip['bus']['model']).id,
-          service_ids: service_ids
-        }
+        @buses[trip['bus']['number']] = Bus.create(number: trip['bus']['number'], model: trip['bus']['model']).id
 
-      # Collect bus services
-      unless buses[trip['bus']['number']][:service_ids].superset?(service_ids)
-        buses[trip['bus']['number']][:service_ids].merge(service_ids)
-        (buses[trip['bus']['number']][:service_ids] - service_ids).each do |service_id|
-          BusesService.create(bus_id: buses[trip['bus']['number']][:id],
-                              service_id: service_id)
+        service_ids.each do |service_id|
+          BusesService.create(bus_id: @buses[trip['bus']['number']], service_id: service_id)
         end
       end
 
       # Create trip
       Trip.create!(
-        from_id: cities[trip['from']],
-        to_id: cities[trip['to']],
-        bus_id: buses[trip['bus']['number']][:id],
+        from_id: @cities[trip['from']],
+        to_id: @cities[trip['to']],
+        bus_id: @buses[trip['bus']['number']],
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],

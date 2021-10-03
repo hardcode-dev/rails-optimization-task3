@@ -154,7 +154,7 @@
       "model": "Икарус",
       "number": "123",
       "services": [
-        "Телевизор индивидуальный",
+        "Туалет",
         "WiFi"
       ]
     },
@@ -163,5 +163,35 @@
     "price_cents": 1337,
     "start_time": "16:30",
     "to": "Москва"
+  },
+  {
+    "bus": {
+      "model": "УАЗ",
+      "number": "228",
+      "services": [
+        "Телевизор индивидуальный",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 228,
+    "from": "Москва",
+    "price_cents": 1337,
+    "start_time": "16:30",
+    "to": "Самара"
+  },
+  {
+    "bus": {
+      "model": "УАЗ",
+      "number": "228",
+      "services": [
+        "Телевизор индивидуальный",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 424,
+    "from": "Калуга",
+    "price_cents": 677,
+    "start_time": "16:30",
+    "to": "Реутов"
   }
 ]
