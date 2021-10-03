@@ -9,7 +9,10 @@
   <ul>
     <%= render "trip", trip: trip %>
     <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
+      <li>Сервисы в автобусе:</li>
+      <ul>
+        <%= render partial: "service", collection: trip.bus.services %>
+      </ul>
     <% end %>
   </ul>
   <%= render "delimiter" %>
