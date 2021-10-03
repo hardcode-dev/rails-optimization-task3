@@ -148,5 +148,20 @@
     "price_cents": 846,
     "start_time": "21:30",
     "to": "Москва"
+  },
+  {
+    "bus": {
+      "model": "Икарус",
+      "number": "123",
+      "services": [
+        "Телевизор индивидуальный",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 228,
+    "from": "Балашиха",
+    "price_cents": 1337,
+    "start_time": "16:30",
+    "to": "Москва"
   }
 ]
