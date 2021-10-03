@@ -32,10 +32,15 @@ gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dab
 
 gem 'activerecord-import'
 
-# Profiling
+# profiling
 gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
 gem 'rack-mini-profiler'
 
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'oj'
+
+# # rubocop
+# gem 'rubocop', require: false
+# gem 'rubocop-performance', require: false
+# gem 'rubocop-rails', require: false

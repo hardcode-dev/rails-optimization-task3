@@ -33,3 +33,12 @@
 - Загрузка данных с помощью activerecord-import gem
     * Loading data from fixtures/small.json - 23.2 сек -> 7.5 сек
     * Loading data from fixtures/large.json - 58.31 сек (в рамках бюджета).
+
+### Итерация №2
+- Рендеринг страницы - 730ms (Views: 607.3ms | ActiveRecord: 86.6ms)
+- Bullet Warnings
+  * USE eager loading detected Trip => [:bus] Add to your query: .includes([:bus])
+- Добавил preload(bus: :services). Заменил has_and_belongs_to_many на has_many through.
+  - Рендеринг страницы - 518ms (Views: 447.1ms | ActiveRecord: 44.4ms)
+  - Rendering: trips/index.html.erb 19 sql --> 12 sql
+  - Bullet Warnings отсутствуют.
