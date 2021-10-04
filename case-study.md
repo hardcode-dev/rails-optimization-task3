@@ -27,4 +27,24 @@ Ruby-prof в отчете показывает какую-то ерунду, а 
 
 После оптимизации для `medium.json` -- 5.4 секунд, для `large.json` -- 19 секунд. Цель достигнута.
 
-#
+# Оптимизация TripsController#index
+
+## Шаг 1
+
+Изначально для 1003 рейсов -- 21 секунда.
+
+`bullet` показывает, что присутствует проблема `N + 1` (на `bus`). 
+PgHero также фиксирует 648 запросов к таблице `buses` и 648 к `services`.
+
+```sql
+SELECT  "buses".* FROM "buses" WHERE "buses"."id" = $1 LIMIT $2
+```
+
+```sql
+SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."id" = "buses_services"."service_id" WHERE "buses_services"."bus_id" = $1
+```
+
+После оптимизации -- 12.8 секунд
+
+## Шаг 2
+
