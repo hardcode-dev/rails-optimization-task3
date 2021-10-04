@@ -1,7 +1,7 @@
 class Importer
 
   def initialize(filename)
-    @filename = filename || 'fixtures/small.json'
+    @filename = filename || 'fixtures/large.json'
     @cities = {}
     @services = {}
     @buses = {}
@@ -32,9 +32,7 @@ class Importer
   end
 
   def import
-    json = JSON.parse(File.read(@filename))
-
-    json.each do |trip|
+    trips_attrs = JSON.parse(File.read(@filename)).map do |trip|
       # Collect cities
       @cities[trip['from']] ||= City.create(name: trip['from']).id
       @cities[trip['to']] ||= City.create(name: trip['to']).id
@@ -52,16 +50,18 @@ class Importer
         end
       end
 
-      # Create trip
-      Trip.create!(
+      # Trip attrs
+      {
         from_id: @cities[trip['from']],
         to_id: @cities[trip['to']],
         bus_id: @buses[trip['bus']['number']],
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-        )
+        price_cents: trip['price_cents']
+      }
     end
+
+    Trip.import! trips_attrs, validate: true
   end
 
   def memory_callgrind_import
