@@ -15,6 +15,18 @@ class Trip < ApplicationRecord
   validates :price_cents, presence: true
   validates :price_cents, numericality: { greater_than: 0 }
 
+  def arrival_time
+    (Time.strptime(start_time, '%R') + duration_minutes.minutes).strftime('%H:%M')
+  end
+
+  def travel_time
+    @travel_time ||= duration_minutes.divmod(60)
+  end
+
+  def prices
+    @prices ||= price_cents.divmod(100)
+  end
+
   def to_h
     {
       from: from.name,
