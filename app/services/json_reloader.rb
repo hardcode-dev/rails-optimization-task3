@@ -11,10 +11,10 @@ class JsonReloader
   end
 
   def call
-	json = Oj.load(File.read(@file_name))
+  	json = Oj.load(File.read(@file_name))
 
-	ActiveRecord::Base.transaction do
-	  delete_old_data
+  	ActiveRecord::Base.transaction do
+  	  delete_old_data
 
       add_new_data(json)
     end
@@ -34,7 +34,8 @@ class JsonReloader
     json.each do |trip|
       from = get_city(@cities, trip['from'])
       to = get_city(@cities, trip['to'])
-      bus = get_bus_and_services(trip['bus'])
+      
+      calculate_bus_and_services(trip['bus'])
 
       trip = Trip.new(
         from: from,
@@ -51,7 +52,7 @@ class JsonReloader
   end
 
   def get_city(cities, name)
-	if cities[name].nil?
+	  if cities[name].nil?
       city = City.find_or_create_by(name: name)
       cities[name] = city
     else
@@ -61,9 +62,7 @@ class JsonReloader
     cities[name]
   end
 
-  def get_bus_and_services(bus_object)
-  	bus = nil
-
+  def calculate_bus_and_services(bus_object)
     if @buses[bus_object['number']].nil?
       bus_services = []
       bus_object['services'].each do |service|
@@ -75,7 +74,5 @@ class JsonReloader
       bus = Bus.find_or_create_by(number: bus_object['number'], model: bus_object['model'], services: bus_services)
       @buses[bus_object['number']] = bus
     end
-
-    bus
   end
 end

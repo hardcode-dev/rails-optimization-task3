@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -37,10 +39,10 @@ gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
 gem 'rack-mini-profiler'
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 gem 'oj'
 
-# # rubocop
-# gem 'rubocop', require: false
-# gem 'rubocop-performance', require: false
-# gem 'rubocop-rails', require: false
+# rubocop
+gem 'rubocop', require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false

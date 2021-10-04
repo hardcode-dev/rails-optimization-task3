@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Service < ApplicationRecord
   SERVICES = [
     'WiFi',
@@ -9,7 +11,7 @@ class Service < ApplicationRecord
     'Телевизор общий',
     'Телевизор индивидуальный',
     'Стюардесса',
-    'Можно не печатать билет',
+    'Можно не печатать билет'
   ].freeze
 
   has_many :buses_services, dependent: :destroy

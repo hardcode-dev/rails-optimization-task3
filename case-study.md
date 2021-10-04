@@ -42,3 +42,8 @@
   - Рендеринг страницы - 518ms (Views: 447.1ms | ActiveRecord: 44.4ms)
   - Rendering: trips/index.html.erb 19 sql --> 12 sql
   - Bullet Warnings отсутствуют.
+
+### Итерация №3
+- rack-mini-profiler показал аж 12 (!) паршалов services.html.erb Rendering trips/_services.html.erb, с помощью рендеринга коллекций, удалось убрать этот лишний паршал.
+- Убрал один лишний запрос заменой @trips.count на @trips.load.size
+- Рендеринг страницы - 495ms (Views: 424.9ms | ActiveRecord: 43.0ms)
