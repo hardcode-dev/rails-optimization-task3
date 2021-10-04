@@ -148,5 +148,50 @@
     "price_cents": 846,
     "start_time": "21:30",
     "to": "Москва"
+  },
+  {
+    "bus": {
+      "model": "Икарус",
+      "number": "123",
+      "services": [
+        "Туалет",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 228,
+    "from": "Балашиха",
+    "price_cents": 1337,
+    "start_time": "16:30",
+    "to": "Москва"
+  },
+  {
+    "bus": {
+      "model": "УАЗ",
+      "number": "228",
+      "services": [
+        "Телевизор индивидуальный",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 228,
+    "from": "Москва",
+    "price_cents": 1337,
+    "start_time": "16:30",
+    "to": "Самара"
+  },
+  {
+    "bus": {
+      "model": "УАЗ",
+      "number": "228",
+      "services": [
+        "Телевизор индивидуальный",
+        "WiFi"
+      ]
+    },
+    "duration_minutes": 424,
+    "from": "Калуга",
+    "price_cents": 677,
+    "start_time": "16:30",
+    "to": "Реутов"
   }
 ]

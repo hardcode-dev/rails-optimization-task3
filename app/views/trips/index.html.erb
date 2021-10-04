@@ -2,15 +2,24 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips.length} рейсов" %>
 </h2>
 
 <% @trips.each do |trip| %>
   <ul>
-    <%= render "trip", trip: trip %>
+    <li><%= "Отправление: #{trip.start_time}" %></li>
+    <li><%= "Прибытие: #{trip.arrival_time}" %></li>
+    <li><%= "В пути: #{trip.travel_time.first}ч. #{trip.travel_time.last}мин." %></li>
+    <li><%= "Цена: #{trip.prices.first}р. #{trip.prices.last}коп." %></li>
+    <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
     <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
+      <li>Сервисы в автобусе:</li>
+      <ul>
+        <% trip.bus.services.each do |service| %>
+          <li><%= service.name %></li>
+        <% end %>
+      </ul>
     <% end %>
   </ul>
-  <%= render "delimiter" %>
+  ====================================================
 <% end %>
