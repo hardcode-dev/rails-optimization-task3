@@ -13,11 +13,14 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     json.each do |trip|
       from = City.find_or_create_by(name: trip['from'])
       to = City.find_or_create_by(name: trip['to'])
+
       services = []
+
       trip['bus']['services'].each do |service|
         s = Service.find_or_create_by(name: service)
         services << s
       end
+
       bus = Bus.find_or_create_by(number: trip['bus']['number'])
       bus.update(model: trip['bus']['model'], services: services)
 
