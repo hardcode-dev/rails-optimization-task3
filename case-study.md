@@ -49,3 +49,11 @@
 - Рендеринг страницы - 495ms (Views: 424.9ms | ActiveRecord: 43.0ms)
 
 ### Итерация №4
+- PgHero предложил создать индексы:
+```
+CREATE INDEX CONCURRENTLY ON trips (from_id, to_id)
+CREATE INDEX CONCURRENTLY ON buses_services (bus_id)
+CREATE INDEX CONCURRENTLY ON buses (number)
+```
+- Рендеринг страницы не изменился (?)- 514ms (Views: 438.1ms | ActiveRecord: 46.6ms)
+- find_by_name! --> find_by!
