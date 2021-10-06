@@ -47,3 +47,5 @@
 - rack-mini-profiler показал аж 12 (!) паршалов services.html.erb Rendering trips/_services.html.erb, с помощью рендеринга коллекций, удалось убрать этот лишний паршал.
 - Убрал один лишний запрос заменой @trips.count на @trips.load.size
 - Рендеринг страницы - 495ms (Views: 424.9ms | ActiveRecord: 43.0ms)
+
+### Итерация №4

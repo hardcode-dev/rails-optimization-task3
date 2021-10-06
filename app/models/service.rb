@@ -17,6 +17,5 @@ class Service < ApplicationRecord
   has_many :buses_services, dependent: :destroy
   has_many :buses, through: :buses_services
 
-  validates :name, presence: true
-  validates :name, inclusion: { in: SERVICES }
+  validates :name, presence: true, inclusion: { in: SERVICES }
 end
