@@ -30,13 +30,8 @@ describe ImportJson do
       expect(bus.services.count).to eq 2
     end
 
-    it 'creates right amount of services' do
-      expect { subject }.to change(Service, :count).by(2)
-    end
-
-    it 'saves correct service attrs' do
-      subject
-      expect(Service.all.pluck(:name)).to match_array(%w[Туалет WiFi])
+    it 'creates all services' do
+      expect { subject }.to change(Service, :count).by(10)
     end
 
     it 'creates right amount of trips' do
