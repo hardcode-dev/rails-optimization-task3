@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
-task :reload_json, [:file_name] => :environment do |_task, args|
+task :reload_json, [:file_name, :disable_gc] => :environment do |_task, args|
+  GC.disable if args.disable_gc
+
+  start = Time.now
+
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
@@ -31,4 +37,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       )
     end
   end
+
+  finish = Time.now
+  puts "Benchmark realtime: #{finish - start}"
 end
