@@ -7,7 +7,7 @@ class Profiler
 
   def check_benchmark
     time = Benchmark.realtime do
-      ImportJson.perform(file_path)
+      ImportJson.new(file_path).perform
     end
 
     # GC.start(full_mark: true, immediate_sweep: true)
@@ -19,7 +19,7 @@ class Profiler
 
   def profile_memory
     report = MemoryProfiler.report do
-      ImportJson.perform(file_path)
+      ImportJson.new(file_path).perform
     end
 
     report.pretty_print(scale_bytes: true, to_file: "reports/mp-#{Time.now.to_s}.txt")
@@ -27,7 +27,7 @@ class Profiler
 
   def profile_cpu
     profile = StackProf.run(mode: :wall, raw: true) do
-      ImportJson.perform(file_path)
+      ImportJson.new(file_path).perform
     end
     File.write("reports/stackprof-#{Time.now.to_s}.json", JSON.generate(profile))
   end

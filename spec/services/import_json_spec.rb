@@ -1,14 +1,9 @@
 require 'rails_helper'
 
 describe ImportJson do
-
-  subject { described_class.perform('fixtures/example.json') }
+  subject { described_class.new('fixtures/example.json').perform }
 
   describe '#perform' do
-    it 'performs' do
-      expect { subject }.to_not raise_exception
-    end
-
     it 'creates right amount of cities' do
       expect { subject }.to change(City, :count).by(2)
     end
