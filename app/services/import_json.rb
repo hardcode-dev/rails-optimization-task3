@@ -9,16 +9,16 @@ class ImportJson
       Trip.delete_all
       ActiveRecord::Base.connection.execute('delete from buses_services;')
 
+      buses_services_list = Set.new
+
       json.each do |trip|
         from = City.find_or_create_by(name: trip['from'])
         to = City.find_or_create_by(name: trip['to'])
-        services = []
-        trip['bus']['services'].each do |service|
-          s = Service.find_or_create_by(name: service)
-          services << s
+        bus = find_or_create_bus(trip['bus'])
+        trip['bus']['services'].each do |service_name|
+          service = Service.find_or_create_by(name: service_name)
+          buses_services_list.add("(#{bus.id}, #{service.id})")
         end
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
 
         Trip.create!(
           from: from,
@@ -29,6 +29,24 @@ class ImportJson
           price_cents: trip['price_cents'],
         )
       end
+      insert_buses_services(buses_services_list)
     end
+  end
+
+  private
+
+  def self.insert_buses_services(buses_services_list)
+    sql = <<~SQL.squish
+      INSERT INTO buses_services (bus_id, service_id)
+      VALUES #{buses_services_list.to_a.join(',')}
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
+  def self.find_or_create_bus(attrs)
+    bus = Bus.find_or_initialize_by(number: attrs['number'])
+    bus.model = attrs['model']
+    bus.save if bus.will_save_change_to_model?
+    bus
   end
 end

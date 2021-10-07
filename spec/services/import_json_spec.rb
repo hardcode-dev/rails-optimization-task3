@@ -25,8 +25,9 @@ describe ImportJson do
     it 'saves correct bus attrs' do
       subject
       bus = Bus.last
-      expect(bus.number).to eq '123'
+      expect(bus.number).to eq 123
       expect(bus.model).to eq 'Икарус'
+      expect(bus.services.count).to eq 2
     end
 
     it 'creates right amount of services' do
