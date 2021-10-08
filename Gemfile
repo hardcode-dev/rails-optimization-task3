@@ -28,6 +28,8 @@ group :development do
   gem 'benchmark'
   gem 'stackprof'
   gem 'memory_profiler'
+  gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
