@@ -22,15 +22,27 @@ describe ImportJson do
       bus = Bus.last
       expect(bus.number).to eq 123
       expect(bus.model).to eq 'Икарус'
-      expect(bus.services.count).to eq 2
+      expect(bus.services.map(&:name)).to match_array %w[Туалет WiFi]
     end
 
     it 'creates all services' do
-      expect { subject }.to change(Service, :count).by(10)
+      subject
+      expect(Service.all.pluck(:name)).to match_array Service::SERVICES
     end
 
     it 'creates right amount of trips' do
       expect { subject }.to change(Trip, :count).by(10)
+    end
+
+    it 'saves correct attributes to trip' do
+      subject
+      trip = Trip.first
+      expect(trip.from.name).to eq 'Москва'
+      expect(trip.to.name).to eq 'Самара'
+      expect(trip.start_time).to eq '11:00'
+      expect(trip.duration_minutes).to eq 168
+      expect(trip.price_cents).to eq 474
+      expect(trip.bus_number).to eq 123
     end
   end
 end

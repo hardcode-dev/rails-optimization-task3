@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_134907) do
+ActiveRecord::Schema.define(version: 2021_10_07_162918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_134907) do
   end
 
   create_table "buses_services", force: :cascade do |t|
-    t.integer "bus_id"
+    t.integer "bus_number"
     t.integer "service_id"
   end
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_10_07_134907) do
     t.string "start_time"
     t.integer "duration_minutes"
     t.integer "price_cents"
-    t.integer "bus_id"
+    t.integer "bus_number"
   end
 
 end
