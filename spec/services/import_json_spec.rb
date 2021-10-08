@@ -44,5 +44,12 @@ describe ImportJson do
       expect(trip.price_cents).to eq 474
       expect(trip.bus_number).to eq 123
     end
+
+
+    it 'performs large data under 20 sec' do
+      expect {
+        described_class.new('fixtures/large.json').perform
+      }.to perform_under(20).sec
+    end
   end
 end

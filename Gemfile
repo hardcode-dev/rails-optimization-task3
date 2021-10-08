@@ -11,6 +11,7 @@ gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
 gem 'dotenv-rails'
 gem 'activerecord-import'
+gem 'oj'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -30,6 +31,7 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-benchmark'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
