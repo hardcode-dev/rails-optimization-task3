@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Service < ApplicationRecord
   SERVICES = [
     'WiFi',
@@ -12,7 +14,7 @@ class Service < ApplicationRecord
     'Можно не печатать билет',
   ].freeze
 
-  has_and_belongs_to_many :buses, join_table: :buses_services
+  has_many :buses, through: :buses_services, dependent: :destroy
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }

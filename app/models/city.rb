@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class City < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validate :name_has_no_spaces
