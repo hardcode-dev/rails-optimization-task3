@@ -2,3 +2,8 @@
 /tmp
 /log
 /public
+
+/reports
+/fixtures/1M.json
+.byebug_history
+.env

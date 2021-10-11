@@ -3,11 +3,11 @@ class Trip < ApplicationRecord
 
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
-  belongs_to :bus
+  belongs_to :bus, foreign_key: :bus_number, primary_key: :number
 
   validates :from, presence: true
   validates :to, presence: true
-  validates :bus, presence: true
+  validates :bus_number, presence: true
 
   validates :start_time, format: { with: HHMM_REGEXP, message: 'Invalid time' }
   validates :duration_minutes, presence: true
