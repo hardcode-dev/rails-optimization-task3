@@ -31,6 +31,7 @@ class DatabaseSeeder
         bus = buses.find{|b| b.number == trip['bus']['number']}
         if bus.nil?
           services = all_servises.select{|s| trip['bus']['services'].include?(s.name)}
+          # byebug
           bus = Bus.new(id: last_bus_id += 1, number: trip['bus']['number'], model: trip['bus']['model'], services: services)
           buses << bus
         end
@@ -46,6 +47,7 @@ class DatabaseSeeder
       end
 
       Bus.import buses
+      BusesService.import buses.map(&:buses_services).flatten
       Trip.import trips
     end
   end

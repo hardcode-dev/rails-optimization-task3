@@ -16,6 +16,7 @@ describe 'database seeder' do
     expect(City.count).to eq 10
     expect(Bus.count).to eq 613
     expect(Service.count).to eq 10
+    expect(BusesService.count).to eq 2632
     expect(Trip.count).to eq 1000
   end
 

@@ -43,8 +43,8 @@
 Нужно найти и устранить проблемы, замедляющие формирование этих страниц.
 
 Попробуйте воспользоваться
-- [ ] `rack-mini-profiler`
-- [ ] `rails panel`
+- [X] `rack-mini-profiler`
+- [X] `rails panel`
 - [ ] `bullet`
 - [ ] `explain` запросов
 
