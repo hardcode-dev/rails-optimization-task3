@@ -16,4 +16,8 @@ class Service < ApplicationRecord
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }
+
+  def self.services
+    SERVICES
+  end
 end
