@@ -8,6 +8,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'activerecord-import'
+gem 'oj'
 
 
 group :development, :test do
@@ -17,6 +18,7 @@ group :development, :test do
   gem 'memory_profiler'
   gem 'stackprof'
   gem 'meta_request'
+  gem 'bullet'
 end
 
 group :development do

@@ -45,7 +45,7 @@
 Попробуйте воспользоваться
 - [X] `rack-mini-profiler`
 - [X] `rails panel`
-- [ ] `bullet`
+- [X] `bullet`
 - [ ] `explain` запросов
 
 ### Сдача задания
