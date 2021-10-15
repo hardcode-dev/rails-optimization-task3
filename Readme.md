@@ -43,9 +43,9 @@
 Нужно найти и устранить проблемы, замедляющие формирование этих страниц.
 
 Попробуйте воспользоваться
-- [ ] `rack-mini-profiler`
-- [ ] `rails panel`
-- [ ] `bullet`
+- [X] `rack-mini-profiler`
+- [X] `rails panel`
+- [X] `bullet`
 - [ ] `explain` запросов
 
 ### Сдача задания
