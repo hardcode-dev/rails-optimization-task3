@@ -22,6 +22,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'memory_profiler'
   gem 'ruby-prof'
+  gem 'rack-mini-profiler'
+  gem 'bullet'
+  gem 'pghero'
 end
 
 group :test do
