@@ -1,9 +1,8 @@
 #### Setup
 в начале когда я разворачивал проект
-я столкнулся с проблемами гема `mimemagic`
-помогло
+я столкнулся с проблемами в геме `mimemagic`
+нужно апдейтнуть
 ```bash
-HOMEBREW_NO_AUTO_UPDATE=1 brew install shared-mime-info
 bundle update mimemagic
 ```
 дальше я решил развернуть постгрес и pghero но все через docker
@@ -47,6 +46,7 @@ end
 и постепенно увеличивать объем данных по мере оптимизации
 
 далле я добавил feedback_loop для импорта
+и убрал лишний код из основной таски
 
 ```ruby
 TEST_DATA_SIZE = 100
@@ -85,7 +85,6 @@ callgrind - генерит для каждого треда свой репор�
       1414  (33.9%)        1307  (31.3%)     ActiveRecord::ConnectionAdapters::PostgreSQLAdapter#exec_cache
       102   (2.4%)         101   (2.4%)     ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#query
 ```
-
 еще я посмотрел и flamegraph
 всюды были методы с namespace - Activerecord
 
@@ -225,25 +224,112 @@ end
 без валидаций
 100_000 - 8s (2.5x быстрее)
 
+
+
  чтобы защить достигнутый прогресс от деградации
  расширил спеку
 ```ruby
   context 'performance' do
-	  let(:file_name) { 'fixtures/medium.json' }
-	  let(:tables_count) { 5 }
+	let(:file_name) { 'fixtures/medium.json' }
+	let(:tables_count) { 5 }
 
     it "doesn't send unnecessary requests to db" do
       expect { subject.call }.not_to exceed_query_limit(15)
     end
 
-	  it 'does only bulk insert' do
+	it 'does only bulk insert' do
       expect { subject.call }.not_to exceed_query_limit(tables_count).with(/^INSERT/)
     end
 
-	  it 'works fast' do
+	it 'works fast' do
       expect { subject.call }.to perform_under(3).sec
     end
   end
 ```
 
 ### ОПТИМИЗАЦИЯ загрузки страницы
+
+Перед оптимизациями добавил прстой классс
+чтобы защититься от изменений в html
+
+```ruby
+# frozen_string_literal: true
+require 'diffy'
+require 'addressable'
+
+class PageChangesChecker
+  DEFAULT_PAGE = '/автобусы/Самара/Москва'
+  LATEST_PAGE_FILE_NAME = 'tmp/latest_page.html'
+
+  attr_reader :page, :app
+
+  def initialize(page: DEFAULT_PAGE)
+    @page = page
+    @app = ActionDispatch::Integration::Session.new(Rails.application)
+  end
+
+  def dump_page
+    app.get url
+    File.write(LATEST_PAGE_FILE_NAME, clean_up_html(app.response.body))
+  end
+
+  def check_page
+    elapsed_time = Benchmark.realtime { app.get url }
+    latest_page = File.read(LATEST_PAGE_FILE_NAME)
+    new_page = clean_up_html(app.response.body)
+
+    puts Diffy::Diff.new(latest_page, new_page).to_s(:html)
+    puts '====================='
+    puts "TIME: #{elapsed_time}"
+  end
+
+  private
+
+  def url
+    @url ||= Addressable::URI.parse("http://localhost:3000/#{page}").display_uri.to_s
+  end
+
+  def clean_up_html(html)
+    doc = Nokogiri::HTML(html)
+    doc.xpath("//script").remove
+    doc.to_s
+  end
+end
+```
+
+сейчас страница грузится ~ 37s
+
+#### unnecessary partials rendering 
+с помощью минипрофайлера и rails panel я обноружил кучу вызовов render
+также bullet подсветил n+1 (к этому вернусь позже)
+
+в flamegraph обноружил что значительное время тратилось в методе `find_template_paths`
+решил переисать вьюху c использованием render collection
+
+```ruby
+<%= render partial: 'trip', collection: @trips, as: :trip %>
+```
+время загрузки уменьшилось до 17s
+
+#### N+1
+благодоря буллету добавил `.prelaod(bus: :services)`
+время загрузки уменьшилось до 6s
+
+#### unnecessary partials rendering
+в консоли и в flamegraph видно что онсновное время все еще уходит на рендеринг
+я убрал partial :service
+
+в итоге текущее время ~ 3s
+(в отчете видно что много времени уходит на буллет)
+(когда выключил буллет время стало 1.6s)
+(c включенным кэшом < 0.5s)
+
+но рендеринг все еще главная точка роста
+ActionView::PartialRenderer#render_collection ~ 40%
+
+Но на этом я остановлюсь :)
+
+### Выводы
+мне очень понравился гем pg_hero
+удобно смотреть стату запросов, и классно что гем дает советы каких индексов не хватает и тд
+также минипрофайлер оказался очень удбным а rails pannel классно иользовать для повседневных дел
