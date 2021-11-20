@@ -39,9 +39,8 @@ module FeedbackLoop
   end
 
   def prepare_test_json(size)
-    test_data = JSON(File.read('fixtures/medium.json')).first(size)
+    test_data = JSON(File.read('fixtures/large.json')).first(size)
     File.write(TEST_DATA_FILE_NAME, JSON(test_data))
     TEST_DATA_FILE_NAME
   end
-
 end

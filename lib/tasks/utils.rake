@@ -8,7 +8,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
   puts Benchmark.realtime { JsonReloader.new(args.file_name).call }
 end
 
-TEST_DATA_SIZE = 100
+TEST_DATA_SIZE = 1_000_000
 
 namespace :feedback_loop do
 	task benchmark_import: :environment do
@@ -27,7 +27,7 @@ namespace :feedback_loop do
 		FeedbackLoop.stackprof_profiler { JsonReloader.new(file_name).call }
 	end
 
-	task flameraph: :environment do
+	task flamegraph: :environment do
 		file_name = FeedbackLoop.prepare_test_json(TEST_DATA_SIZE)
 		FeedbackLoop.stackprof_profiler_flamegraph { JsonReloader.new(file_name).call }
 	end

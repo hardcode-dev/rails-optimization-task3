@@ -134,3 +134,86 @@ RSpec.describe JsonReloader do
   end
 end
 ```
+
+### Оптимизация Импорта
+#### уменьшить количество вызовов active_record
+- репорты профилировщиков показали что куча вречени проводится
+  в #exec_no_cache (который триггерится из ActiveRecord::Persistence#update)
+  и #exec_cache (который триггерится из ActiveRecord::Querying#find_or_create_by)
+  (увидел в flamegraph)
+  
+- было принято решения использовать bulk_insert (activerecord-import)
+  чтобы убрать вызовы find_or_create_by и update
+  
+- до отимизации на 100 записях ~ 5s
+- после ~ 0.5s
+
+```ruby
+  buses = {}
+  cities = {}
+  services = {}
+  buses_services_records = []
+  trip_records = []
+
+  json.each do |trip|
+    from = find_or_add_record!(key: trip['from'], result_hash: cities) { |id| Hash[id: id, name: trip['from']] }
+    to = find_or_add_record!(key: trip['to'], result_hash: cities) { |id| Hash[id: id, name: trip['to']] }
+    bus_key = "#{trip.dig('bus','number')}#{trip.dig('bus','model')}"
+    bus = find_or_add_record!(key: bus_key, result_hash: buses) do |id|
+      source = trip['bus']
+      bus_record = {
+        id: id,
+        number: source['number'],
+        model: source['model']
+      }
+
+      source['services'].each do |service|
+        service = find_or_add_record!(key: service, result_hash: services) { |id| Hash[id: id, name: service] }
+        buses_services_records << [bus_record[:id], service[:id]]
+      end
+
+      bus_record
+    end
+
+    trip_record = {
+      from_id: from[:id],
+      to_id: to[:id],
+      bus_id: bus[:id],
+      start_time: trip['start_time'],
+      duration_minutes: trip['duration_minutes'],
+      price_cents: trip['price_cents']
+    }
+
+    trip_records << trip_record
+  end
+
+  Service.import services.values
+  Bus.import buses.values
+
+  ActiveRecord::Base.connection.execute(<<~SQL)
+    INSERT INTO buses_services (bus_id, service_id) VALUES
+    #{buses_services_records.map { |bus_id, service_id| "(#{bus_id},#{service_id})" }.join(', ')}
+  SQL
+
+  City.import cities.values
+  Trip.import trip_records
+end
+```
+
+увеличил датасет в 10 раз время поднялось до ~ 0.8s (1000)
+10_000 ~ 2.7s
+100_000 ~ 19s
+
+в целом импорт укладывается в заданный бюджет
+
+отчеты stackprof сильно изменились
+```bash
+1.48s    (16%)	 ActiveRecord::ConnectionAdapters::PostgreSQLAdapter#exec_no_cache
+921.84ms (10.0%) ActiveSupport::Callbacks::CallTemplate#expand
+821.76ms (8.9%)	 ActiveModel::AttributeSet#[]
+```
+(последние два метода триггерятся валидациями)
+без валидаций
+100_000 - 8s (2.5x быстрее)
+
+### ОПТИМИЗАЦИЯ загрузки страницы
