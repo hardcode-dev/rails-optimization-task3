@@ -198,6 +198,15 @@ end
   City.import cities.values
   Trip.import trip_records
 end
+# ...
+
+def find_or_add_record!(key:, result_hash:)
+  record = result_hash[key]
+  return record if record
+    
+  id = result_hash.size + 1
+  result_hash[key] = yield(id)
+end
 ```
 
 увеличил датасет в 10 раз время поднялось до ~ 0.8s (1000)
@@ -215,5 +224,26 @@ end
 (последние два метода триггерятся валидациями)
 без валидаций
 100_000 - 8s (2.5x быстрее)
+
+ чтобы защить достигнутый прогресс от деградации
+ расширил спеку
+```ruby
+  context 'performance' do
+	  let(:file_name) { 'fixtures/medium.json' }
+	  let(:tables_count) { 5 }
+
+    it "doesn't send unnecessary requests to db" do
+      expect { subject.call }.not_to exceed_query_limit(15)
+    end
+
+	  it 'does only bulk insert' do
+      expect { subject.call }.not_to exceed_query_limit(tables_count).with(/^INSERT/)
+    end
+
+	  it 'works fast' do
+      expect { subject.call }.to perform_under(3).sec
+    end
+  end
+```
 
 ### ОПТИМИЗАЦИЯ загрузки страницы

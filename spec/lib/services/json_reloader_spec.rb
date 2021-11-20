@@ -38,4 +38,21 @@ RSpec.describe JsonReloader do
       end
     end
   end
+
+  context 'performance' do
+	  let(:file_name) { 'fixtures/medium.json' }
+	  let(:tables_count) { 5 }
+
+    it "doesn't send unnecessary requests to db" do
+      expect { subject.call }.not_to exceed_query_limit(15)
+    end
+
+	  it 'does only bulk insert' do
+      expect { subject.call }.not_to exceed_query_limit(tables_count).with(/^INSERT/)
+    end
+
+	  it 'works fast' do
+      expect { subject.call }.to perform_under(3).sec
+    end
+  end
 end
