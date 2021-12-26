@@ -1,7 +1,11 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read(args.file_name))
+  RubyProf.measure_mode = RubyProf::WALL_TIME
+  RubyProf.start
+
+  json = JSON.load(File.open(args.file_name))
+  binding.pry
 
   ActiveRecord::Base.transaction do
     City.delete_all
@@ -10,18 +14,17 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Trip.delete_all
     ActiveRecord::Base.connection.execute('delete from buses_services;')
 
-    json.each do |trip|
+    trips = json.map do |trip|
       from = City.find_or_create_by(name: trip['from'])
       to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
+
+      services = trip['bus']['services'].map do |service|
+        Service.find_or_create_by(name: service)
       end
       bus = Bus.find_or_create_by(number: trip['bus']['number'])
       bus.update(model: trip['bus']['model'], services: services)
 
-      Trip.create!(
+      Trip.new(
         from: from,
         to: to,
         bus: bus,
@@ -30,5 +33,18 @@ task :reload_json, [:file_name] => :environment do |_task, args|
         price_cents: trip['price_cents'],
       )
     end
+
+    Trip.import trips
   end
+
+  result = RubyProf.stop
+
+  # printer = RubyProf::FlatPrinter.new(result)
+  # printer.print(STDOUT, {})
+
+  printer = RubyProf::GraphHtmlPrinter.new(result)
+  printer.print(File.open('graph.html', 'w+'))
+
+  printer = RubyProf::CallStackPrinter.new(result)
+  printer.print(File.open('call_stack.html', 'w+'))
 end
