@@ -20,7 +20,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
     cities = {}
     services = {}
-    buses = []
+    buses = {}
     buses_services = []
 
     trips = json.map do |trip|
@@ -43,7 +43,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       end
 
       buses_services << buses_services_values
-      buses << bus if buses.exclude?(bus)
+      buses[trip['bus']['number']] = bus if buses[trip['bus']['number']].nil?
 
       {
         from_id: cities[trip['from']][:id],
@@ -57,7 +57,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
     City.import cities.values
     Service.import services.values
-    Bus.import buses
+    Bus.import buses.values
     Trip.import trips
 
     bs_data = buses_services.flatten.map { |bs| "(#{bs[:bus_id]},#{bs[:service_id]})" }.join(',')
