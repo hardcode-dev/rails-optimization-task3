@@ -1,14 +1,14 @@
 # Наивная загрузка данных из json-файла в БД
-# rake reload_json[fixtures/small.json]
+# rake reload_json\[fixtures/small.json\]
 task :reload_json, [:file_name] => :environment do |_task, args|
   def add_to_hash(hash, key)
-    return if hash[key].present?
-
-    hash[key] = { id: hash.size + 1, name: key }
+    hash[key] ||= { id: hash.size + 1, name: key }
   end
 
   # RubyProf.measure_mode = RubyProf::WALL_TIME
   # RubyProf.start
+
+  starts_at = Time.current
 
   json = JSON.load(File.open(args.file_name))
 
@@ -16,6 +16,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     City.delete_all
     Bus.destroy_all
     Service.destroy_all
+    BusService.delete_all
     Trip.delete_all
 
     cities = {}
@@ -42,27 +43,30 @@ task :reload_json, [:file_name] => :environment do |_task, args|
         { service_id: service_id, bus_id: buses.size + 1 }
       end
 
-      buses_services << buses_services_values
-      buses[trip['bus']['number']] = bus if buses[trip['bus']['number']].nil?
+      if buses[trip['bus']['number']].nil?
+        buses_services << buses_services_values
+        buses[trip['bus']['number']] = bus
+      end
 
       {
         from_id: cities[trip['from']][:id],
         to_id: cities[trip['to']][:id],
-        bus_id: bus[:id],
+        bus_id: buses[trip['bus']['number']][:id],
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents']
       }
     end
 
-    City.import cities.values
+    City.import cities.values, validate: false
     Service.import services.values
-    Bus.import buses.values
-    Trip.import trips
-
-    bs_data = buses_services.flatten.map { |bs| "(#{bs[:bus_id]},#{bs[:service_id]})" }.join(',')
-    ActiveRecord::Base.connection.execute("INSERT INTO buses_services (bus_id, service_id) VALUES #{bs_data}")
+    Bus.import buses.values, validate: false
+    Trip.import trips, validate: false
+    BusService.import buses_services.flatten, validate: false
   end
+
+  ends_at = Time.current
+  puts "Time spent: #{ends_at.to_i - starts_at.to_i} sec."
 
   # result = RubyProf.stop
   #
