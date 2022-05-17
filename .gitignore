@@ -2,3 +2,9 @@
 /tmp
 /log
 /public
+
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/rails-optimization-task3.iml
+.idea/vcs.xml
