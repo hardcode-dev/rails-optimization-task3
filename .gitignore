@@ -8,3 +8,5 @@
 .idea/modules.xml
 .idea/rails-optimization-task3.iml
 .idea/vcs.xml
+lib/profilers/ruby_prof_reports/callstack.html
+lib/profilers/ruby_prof_reports/graph.html
