@@ -26,13 +26,11 @@ RSpec.describe JsonLoader do
       expect(bus.model).to eq('Икарус')
 
       # Service
-      services = Service.order(:name).to_a
-      expect(services.size).to eq(2)
-      expect(services[0].name).to eq('WiFi')
-      expect(services[1].name).to eq('Туалет')
+      services = Service.pluck(:name)
+      expect(services).to include('WiFi', 'Туалет')
 
       # Bus Services
-      expect(bus.services).to include(services[0], services[1])
+      expect(bus.services).to include(Service.find_by(name: 'WiFi'), Service.find_by(name: 'Туалет'))
 
       # Trip
       trips = Trip.order(:start_time).to_a

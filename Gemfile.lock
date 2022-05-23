@@ -102,6 +102,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
+    oj (3.13.13)
     pg (1.1.4)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -165,6 +166,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
+    ruby-progressbar (1.11.0)
     ruby_dep (1.5.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.1.0)
@@ -208,6 +210,7 @@ DEPENDENCIES
   memory_profiler
   meta_request
   mimemagic (~> 0.3.10)
+  oj
   pg (>= 0.18, < 2.0)
   pry
   pry-byebug
@@ -215,6 +218,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 5.2.3)
   rspec-rails
+  ruby-progressbar
   selenium-webdriver
   stackprof
   tzinfo-data

@@ -3,3 +3,5 @@
 /log
 /public
 .DS_Store
+fixtures/1M.json
+fixtures/10M.json
