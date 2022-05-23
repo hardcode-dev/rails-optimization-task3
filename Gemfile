@@ -10,8 +10,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'mimemagic', '~> 0.3.10'
 gem 'activerecord-import'
 
-gem 'rack-mini-profiler', require: false
-
 # For memory profiling
 gem 'memory_profiler'
 
@@ -31,6 +29,7 @@ group :development do
   gem 'pry-byebug'
   gem 'meta_request' # for Rails Panel
   gem 'bullet'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
