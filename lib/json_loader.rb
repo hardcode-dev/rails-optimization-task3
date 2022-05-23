@@ -1,6 +1,12 @@
 require 'benchmark'
 
 class JsonLoader
+  def initialize
+    @cities = {}
+    @buses = {}
+    @services = {}
+  end
+
   def perform(filename)
     time = Benchmark.realtime do
       load_from_file(filename)
@@ -21,26 +27,56 @@ class JsonLoader
       Trip.delete_all
       ActiveRecord::Base.connection.execute('delete from buses_services;')
 
+      trips = []
+
       json.each do |trip|
-        from = City.find_or_create_by(name: trip['from'])
-        to = City.find_or_create_by(name: trip['to'])
+        from = find_or_create_city(trip['from'])
+        to = find_or_create_city(trip['to'])
+
         services = []
         trip['bus']['services'].each do |service|
-          s = Service.find_or_create_by(name: service)
+          s = find_or_create_service(service)
           services << s
         end
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+        bus = find_or_create_bus(trip['bus']['number'], trip['bus']['model'], services)
 
-        Trip.create!(
+        trips << Trip.new(
           from: from,
           to: to,
           bus: bus,
           start_time: trip['start_time'],
           duration_minutes: trip['duration_minutes'],
-          price_cents: trip['price_cents'],
+          price_cents: trip['price_cents']
         )
       end
+      Trip.import(trips)
     end
+  end
+
+  def find_or_create_city(name)
+    unless @cities[name]
+      city = City.create(name: name)
+      @cities[name] = city
+    end
+
+    @cities[name]
+  end
+
+  def find_or_create_service(name)
+    unless @services[name]
+      service = Service.create(name: name)
+      @services[name] = service
+    end
+
+    @services[name]
+  end
+
+  def find_or_create_bus(number, model, services)
+    unless @buses[number]
+      bus = Bus.create(number: number, model: model, services: services)
+      @buses[number] = bus
+    end
+
+    @buses[number]
   end
 end
