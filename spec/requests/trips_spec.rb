@@ -3,7 +3,7 @@ require 'rails_helper'
 require_relative '../../lib/json_importer'
 
 RSpec.describe 'Trips', type: :request do
-  before(:all) { JSONImporter.call('fixtures/example.json') }
+  before(:all) { JSONImporter.new.call('fixtures/example.json') }
   after(:all) { [City, Bus, Service, Trip].each(&:delete_all) }
 
   describe 'GET /trips' do

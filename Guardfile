@@ -1,9 +1,9 @@
-# guard :shell do
-#   watch('./lib/json_importer.rb') do |_m|
-#     system('ruby ./profiling/ruby-prof_graph.rb')
-#     system('ruby ./profiling/ruby-prof_callstack.rb')
-#   end
-# end
+guard :shell do
+  watch('./lib/json_importer.rb') do |_m|
+    system('ruby ./script/benchmarks/benchmark_bm_bench.rb')
+    # system('ruby ./profiling/ruby-prof_callstack.rb')
+  end
+end
 
 guard :rspec, cmd: 'bundle exec rspec' do
   watch('spec/spec_helper.rb')                        { "spec" }

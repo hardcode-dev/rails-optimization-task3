@@ -6,11 +6,20 @@ require 'rails_helper'
 require_relative '../../lib/json_importer'
 
 RSpec.describe JSONImporter do
-  subject(:result) { described_class.call(path) }
+  subject(:service) { described_class.new }
 
-  let(:path) { Rails.root.join('fixtures' , 'example.json') }
+  describe 'work efficiency' do
+    let(:path) { Rails.root.join('fixtures', 'small.json') }
+
+    it 'matches the timing' do
+      expect { service.call(path) }.to perform_under(0.2)
+    end
+  end
 
   describe 'result' do
+    subject(:result) { service.call(path) }
+    let(:path) { Rails.root.join('fixtures', 'example.json') }
+
     it 'creates cities' do
       expect { result }.to change(City, :count).by(2)
       expect(City).to be_exists(name: 'Москва').and(
