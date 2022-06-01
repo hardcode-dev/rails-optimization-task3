@@ -10,6 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'pghero'
 gem 'pg_query', '~> 2.1', '>= 2.1.3'
+gem 'progress_bar', '~> 1.3', '>= 1.3.3'
 gem 'rails', '~> 5.2.3'
 gem "strong_migrations"
 

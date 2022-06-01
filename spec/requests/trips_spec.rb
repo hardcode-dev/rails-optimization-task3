@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'nokogiri'
 
 require_relative '../../lib/json_importer'
 
@@ -10,12 +11,16 @@ RSpec.describe 'Trips', type: :request do
     it 'renders buses list' do
       get trips_path('Самара', 'Москва')
       expect(response).to have_http_status(200)
-      expect(response.body).to include(proper_content)
+      expect(sanitize(response.body.to_s)).to include(sanitize(proper_content))
     end
   end
 
+  def sanitize(html)
+    html.gsub(/\n/, '').gsub(/>\s+</, '><')
+  end
+
   def proper_content
-    <<~TEXT
+    <<~HTML
       <body>
           <h1>
         Автобусы Самара – Москва
@@ -116,6 +121,6 @@ RSpec.describe 'Trips', type: :request do
 
 
         </body>
-    TEXT
+    HTML
   end
 end

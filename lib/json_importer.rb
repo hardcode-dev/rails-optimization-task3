@@ -5,6 +5,8 @@ require 'activerecord-import/base'
 require 'activerecord-import/active_record/adapters/postgresql_adapter'
 
 require 'oj'
+require 'progress_bar'
+require 'progress_bar/core_ext/enumerable_with_progress'
 
 class JSONImporter
   BATCH_SIZE = 2000
@@ -30,7 +32,7 @@ class JSONImporter
     ActiveRecord::Base.transaction do
       flush_db
 
-      json.each_slice(BATCH_SIZE) do |slice|
+      json.with_progress(:bar, :elapsed).each_slice(BATCH_SIZE) do |slice|
         trip_slice = []
         buses_slice = []
         buses_services = Hash.new([])
