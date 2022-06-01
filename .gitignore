@@ -2,3 +2,6 @@
 /tmp
 /log
 /public
+/stackprof_reports
+/ruby_prof_reports
+/memory_profiler_reports
