@@ -29,4 +29,24 @@ class Trip < ApplicationRecord
       },
     }
   end
+
+  def arrive_at
+    (Time.parse(start_time) + duration_minutes.minutes).strftime('%H:%M')
+  end
+
+  def travel_time
+    "#{duration_minutes / 60}ч. #{duration_minutes % 60}мин."
+  end
+
+  def formatted_price
+    "#{price_cents / 100}р. #{price_cents % 100}коп."
+  end
+
+  def bus_info
+    "#{bus.model} №#{bus.number}"
+  end
+
+  def bus_services
+    @bus_services ||= bus.services
+  end
 end
