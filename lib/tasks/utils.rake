@@ -1,34 +1,22 @@
-# Наивная загрузка данных из json-файла в БД
+# frozen_string_literal: true
 # rake reload_json[fixtures/small.json]
+require_relative '../services/load_data'
+require 'benchmark'
+
 task :reload_json, [:file_name] => :environment do |_task, args|
   json = JSON.parse(File.read(args.file_name))
 
   ActiveRecord::Base.transaction do
-    City.delete_all
-    Bus.delete_all
-    Service.delete_all
-    Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
-
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
+    Benchmark.bm do |x|
+      x.report('Clearing database') do
+        ActiveRecord::Base.connection.execute(
+          'TRUNCATE TABLE cities, buses, services, trips, buses_services;'
+        )
       end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
+      x.report('Creating data') do
+        LoadData.new(json).load
+      end
     end
   end
 end
