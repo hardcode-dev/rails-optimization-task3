@@ -22,7 +22,7 @@ class ReloadSchedule
     Bus.delete_all
     Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('DELETE FROM buses_services;')
+    BusService.delete_all
   end
 
   def import_from_json(json)
@@ -101,10 +101,6 @@ class ReloadSchedule
     Service.insert_all(service_hashes)
     Bus.insert_all(bus_hashes)
     Trip.insert_all(trip_hashes)
-    bus_services.each do |hash|
-      ActiveRecord::Base.connection.execute(
-        "INSERT INTO buses_services (bus_id, service_id) values (#{hash[:bus_id]}, #{hash[:service_id]})"
-      )
-    end
+    BusService.insert_all(bus_services)
   end
 end
