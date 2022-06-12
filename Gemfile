@@ -16,6 +16,7 @@ group :development, :test do
   gem 'rspec-benchmark'
   gem 'rack-mini-profiler', require: false
   gem 'meta_request'
+  gem 'bullet'
 end
 
 group :development do
