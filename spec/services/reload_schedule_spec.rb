@@ -87,6 +87,12 @@ RSpec.describe ReloadSchedule do
 
         expect(bus_123).to be_present
       end
+
+      it 'creates correct relations' do
+        subject
+
+        expect(bus_123.services.count).to eq 2
+      end
     end
   end
 end
