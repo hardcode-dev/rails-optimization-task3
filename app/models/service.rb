@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: services
+#
+#  id   :bigint           not null, primary key
+#  name :string
+#
 class Service < ApplicationRecord
   SERVICES = [
     'WiFi',
