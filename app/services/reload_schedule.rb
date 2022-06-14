@@ -38,7 +38,7 @@ class ReloadSchedule
 
     trip_hashes = []
 
-    trips.each_with_index do |trip, i|
+    trips.each do |trip|
       @from_id = fetch_city_id(trip['from'])
       @to_id = fetch_city_id(trip['to'])
       @bus_id = fetch_bus_id(trip)
