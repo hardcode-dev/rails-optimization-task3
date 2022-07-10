@@ -1,10 +1,9 @@
 require 'rails_helper'
 require 'rake'
+Rails.application.load_tasks
 
 describe 'view schedule', type: :feature do
-  before :each do
-    Rake.application.rake_require 'tasks/utils'
-    Rake::Task.define_task(:environment)
+  before do
     Rake::Task['reload_json'].invoke('fixtures/example.json')
   end
 
