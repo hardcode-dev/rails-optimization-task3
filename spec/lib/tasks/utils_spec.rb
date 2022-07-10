@@ -2,10 +2,14 @@ require 'rails_helper'
 require 'rake'
 Rails.application.load_tasks
 
-describe 'view schedule', type: :feature do
-  subject do
+describe 'reload_json' do
+  subject { invoke }
+
+  let(:file) { 'fixtures/example.json' }
+
+  def invoke
     Rake::Task['reload_json'].reenable
-    Rake::Task['reload_json'].invoke('fixtures/example.json')
+    Rake::Task['reload_json'].invoke(file)
   end
 
   it 'creates 10 trips' do
@@ -22,5 +26,13 @@ describe 'view schedule', type: :feature do
 
   it 'creates 2 buses' do
     expect { subject }.to change(Bus, :count).by(1)
+  end
+
+  describe 'performance' do
+    let(:file) { 'fixtures/small.json' }
+
+    it 'executes less than 1 sec' do
+      expect { invoke }.to perform_under(0.4).sec
+    end
   end
 end
