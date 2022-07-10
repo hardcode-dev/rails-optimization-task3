@@ -1,9 +1,12 @@
 require 'rails_helper'
 require 'rake'
+# require 'addressable/uri'
+
 Rails.application.load_tasks
 
 describe 'view schedule', type: :feature do
   before do
+    Rake::Task['reload_json'].reenable
     Rake::Task['reload_json'].invoke('fixtures/example.json')
   end
 
@@ -73,7 +76,7 @@ describe 'view schedule', type: :feature do
   }
 
   it 'shows schedule for Moscow - Samara' do
-    visit URI.escape('/автобусы/Самара/Москва')
+    visit Addressable::URI.escape('/автобусы/Самара/Москва')
 
     expect(page).to have_content('В расписании 5 рейсов')
     expect(all('li').count).to eq(40)

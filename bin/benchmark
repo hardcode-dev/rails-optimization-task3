@@ -11,9 +11,24 @@ def system!(*args)
 end
 
 chdir APP_ROOT do
-  time = Benchmark.realtime do
+  time_example = Benchmark.realtime do
     system! 'bin/rake reload_json[fixtures/example.json]'
   end
 
-  puts "Finish in #{time.round(2)}"
+  time_small = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/small.json]'
+  end
+
+  time_medium = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/medium.json]'
+  end
+
+  time_large = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/large.json]'
+  end
+
+  puts "Finish in #{time_example.round(2)}"
+  puts "Finish in #{time_small.round(2)}"
+  puts "Finish in #{time_medium.round(2)}"
+  puts "Finish in #{time_large.round(2)}"
 end
