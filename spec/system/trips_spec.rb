@@ -1,8 +1,4 @@
 require 'rails_helper'
-require 'rake'
-# require 'addressable/uri'
-
-Rails.application.load_tasks
 
 describe 'view schedule', type: :feature do
   before do

@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'rake'
-Rails.application.load_tasks
 
 describe 'reload_json' do
   subject { invoke }
