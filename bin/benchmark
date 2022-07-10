@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'benchmark'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  time_example = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/example.json]'
+  end
+
+  time_small = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/small.json]'
+  end
+
+  time_medium = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/medium.json]'
+  end
+
+  time_large = Benchmark.realtime do
+    system! 'bin/rake reload_json[fixtures/large.json]'
+  end
+
+  puts "Finish in #{time_example.round(2)}"
+  puts "Finish in #{time_small.round(2)}"
+  puts "Finish in #{time_medium.round(2)}"
+  puts "Finish in #{time_large.round(2)}"
+end
