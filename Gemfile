@@ -9,6 +9,15 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'sprockets-rails'
 
+gem 'rack-mini-profiler'
+# Дополнительные возможности
+gem 'memory_profiler'
+gem 'stackprof', '>= 0.2.9'
+gem 'flamegraph'
+
+gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
