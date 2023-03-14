@@ -1,7 +1,15 @@
+require 'benchmark'
+
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read("fixtures/small.json"))
+  Benchmark.bm do |x|
+    x.report { reload_json(args.file_name) }
+  end
+end
+
+def reload_json(file_name)
+  json = JSON.parse(File.read(file_name))
 
   ActiveRecord::Base.transaction do
     City.delete_all
