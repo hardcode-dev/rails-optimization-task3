@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14.4
+    container_name: trip-app_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - trip-app_db:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - trip-app_network
+    restart: unless-stopped
+
+volumes:
+  trip-app_db:
+
+networks:
+  trip-app_network:
+    driver: bridge
+
