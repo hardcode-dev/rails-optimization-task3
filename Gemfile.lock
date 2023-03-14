@@ -104,6 +104,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    memory_profiler (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
@@ -178,6 +179,7 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    ruby-prof (1.6.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -222,11 +224,13 @@ DEPENDENCIES
   debug
   factory_bot_rails
   importmap-rails
+  memory_profiler
   pg (~> 1.1)
   pry
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
   rspec-rails
+  ruby-prof
   sassc-rails
   sprockets-rails
   stimulus-rails
