@@ -67,7 +67,7 @@ def reload_json(file_name)
       bus_service_relations: []
     }
 
-    cache[:cities] = Hash[City.pluck(:id, :name).map {|id, name| [id, name]}]
+    cache[:cities] = Hash[City.pluck(:id, :name).map {|id, name| [name, id]}]
     cache[:buses] = Hash[Bus.pluck(:id, :number).map {|id, number| [number, id]}]
     cache[:services] = Hash[Service.pluck(:id, :name).map {|id, name| [name, id]}]
 
