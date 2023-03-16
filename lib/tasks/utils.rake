@@ -42,38 +42,58 @@ def reload_json(file_name)
     Trip.delete_all
     ActiveRecord::Base.connection.execute('delete from buses_services;')
 
+    uniq_cities = {}
+    uniq_buses = {}
+    uniq_services = {}
+
+    json.each do |trip|
+      uniq_cities[trip['from']] ||= {name: trip['from']}
+      uniq_cities[trip['to']] ||= {name: trip['to']}
+      uniq_buses[trip['bus']['number']] ||= { number: trip['bus']['number'], model: trip['bus']['model'] }
+
+      trip['bus']['services'].each do |service_name|
+        uniq_services[service_name] = { name: service_name }
+      end
+    end
+
+    City.upsert_all(uniq_cities.values, unique_by: :index_cities_on_name) if uniq_cities.present?
+    Bus.upsert_all(uniq_buses.values, unique_by: :index_buses_on_number) if uniq_buses.present?
+    Service.upsert_all(uniq_services.values, unique_by: :index_services_on_name) if uniq_services.present?
+
     cache = {
       cities: {},
+      buses: {},
       services: {},
-      buses: {}
+      bus_service_relations: []
     }
 
-    trips = json.map do |trip|
-      from = cache[:cities][trip['from']] ||= City.find_or_create_by(name: trip['from'])
-      to = cache[:cities][trip['to']] ||= City.find_or_create_by(name: trip['to'])
-      bus = cache[:buses][trip['bus']['number']] ||= Bus.find_or_create_by(number: trip['bus']['number'], model: trip['bus']['model'])
+    cache[:cities] = Hash[City.pluck(:id, :name).map {|id, name| [id, name]}]
+    cache[:buses] = Hash[Bus.pluck(:id, :number).map {|id, number| [number, id]}]
+    cache[:services] = Hash[Service.pluck(:id, :name).map {|id, name| [name, id]}]
 
-      services = []
-      trip['bus']['services'].each do |service|
-        s = cache[:services][service] ||= Service.find_or_create_by(name: service)
-        services << {
-          service_id: s.id,
-          bus_id: bus.id
+    trips = json.map do |trip|
+      from_id = cache[:cities][trip['from']]
+      to_id = cache[:cities][trip['to']]
+      bus_id = cache[:buses][trip['bus']['number']]
+
+      trip['bus']['services'].map do |service_name|
+        cache[:bus_service_relations] << {
+          service_id: cache[:services][service_name],
+          bus_id: bus_id
         }
       end
 
-      BusesService.upsert_all(services, unique_by: :index_buses_services_on_bus_id_and_service_id) if services.present?
-
       {
-        from_id: from.id,
-        to_id: to.id,
-        bus_id: bus.id,
+        from_id: from_id,
+        to_id: to_id,
+        bus_id: bus_id,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],
       }
     end
 
+    BusesService.upsert_all(cache[:bus_service_relations], unique_by: :index_buses_services_on_bus_id_and_service_id) if cache[:bus_service_relations].present?
     Trip.insert_all(trips)
   end
 end
