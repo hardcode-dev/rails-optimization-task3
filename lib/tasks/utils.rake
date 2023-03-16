@@ -48,7 +48,7 @@ def reload_json(file_name)
       buses: {}
     }
 
-    json.each do |trip|
+    trips = json.map do |trip|
       from = cache[:cities][trip['from']] ||= City.find_or_create_by(name: trip['from'])
       to = cache[:cities][trip['to']] ||= City.find_or_create_by(name: trip['to'])
       bus = cache[:buses][trip['bus']['number']] ||= Bus.find_or_create_by(number: trip['bus']['number'], model: trip['bus']['model'])
@@ -64,14 +64,16 @@ def reload_json(file_name)
 
       BusesService.upsert_all(services, unique_by: :index_buses_services_on_bus_id_and_service_id) if services.present?
 
-      Trip.insert({
+      {
         from_id: from.id,
         to_id: to.id,
         bus_id: bus.id,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],
-      })
+      }
     end
+
+    Trip.insert_all(trips)
   end
 end
