@@ -3,9 +3,9 @@ require 'benchmark'
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  # Benchmark.bm do |x|
-  #   x.report { reload_json(args.file_name) }
-  # end
+  Benchmark.bm do |x|
+    x.report { reload_json(args.file_name) }
+  end
 
   # report = MemoryProfiler.report do
   #   reload_json(args.file_name)
@@ -13,23 +13,23 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
   # report.pretty_print(scale_bytes: true)
 
-  result = RubyProf.profile do
-    reload_json(args.file_name)
-  end
+  # result = RubyProf.profile do
+  #   reload_json(args.file_name)
+  # end
 
   # RubyProf.measure_mode = RubyProf::MEMORY
 
-  printer = RubyProf::FlatPrinter.new(result)
-  printer.print(File.open("./reports/memory_flat.txt", "w+"))
+  # printer = RubyProf::FlatPrinter.new(result)
+  # printer.print(File.open("./reports/memory_flat.txt", "w+"))
 
-  printer = RubyProf::GraphHtmlPrinter.new(result)
-  printer.print(File.open("./reports/memory_graph.html", "w+"))
+  # printer = RubyProf::GraphHtmlPrinter.new(result)
+  # printer.print(File.open("./reports/memory_graph.html", "w+"))
 
-  printer = RubyProf::CallStackPrinter.new(result)
-  printer.print(File.open("./reports/memory_callstack.html", "w+"))
+  # printer = RubyProf::CallStackPrinter.new(result)
+  # printer.print(File.open("./reports/memory_callstack.html", "w+"))
 
-  printer = RubyProf::CallTreePrinter.new(result)
-  printer.print(path: './reports/', profile: 'profile')
+  # printer = RubyProf::CallTreePrinter.new(result)
+  # printer.print(path: './reports/', profile: 'profile')
 end
 
 def reload_json(file_name)

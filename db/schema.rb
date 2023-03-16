@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_16_062536) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_16_065510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.index ["number", "model"], name: "index_buses_on_number_and_model", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_062536) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name", unique: true
   end
 
   create_table "services", force: :cascade do |t|
