@@ -15,9 +15,21 @@ services:
     networks:
       - trip-app_network
     restart: unless-stopped
+  
+  redis:
+    image: redis:7
+    container_name: trip-app_redis
+    volumes: 
+      - trip-app_redis:/data
+    ports:
+      - '6379:6379'
+    networks:
+      - trip-app_network
+    restart: unless-stopped
 
 volumes:
   trip-app_db:
+  trip-app_redis:
 
 networks:
   trip-app_network:
