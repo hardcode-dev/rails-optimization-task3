@@ -21,9 +21,12 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "ruby-prof"
   gem "memory_profiler"
+  gem "stackprof"
 end
 
 group :development do
   gem "web-console"
+  gem "rack-mini-profiler"
+  gem "meta_request"
 end
 

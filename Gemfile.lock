@@ -105,6 +105,9 @@ GEM
       net-smtp
     marcel (1.0.2)
     memory_profiler (1.0.1)
+    meta_request (0.7.4)
+      rack-contrib (>= 1.1, < 3)
+      railties (>= 3.0.0, < 7.1)
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
@@ -131,6 +134,10 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.4)
+    rack-contrib (2.3.0)
+      rack (~> 2.0)
+    rack-mini-profiler (3.0.0)
+      rack (>= 1.2.0)
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.4.3)
@@ -195,6 +202,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stackprof (0.2.23)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
@@ -225,14 +233,17 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails
   memory_profiler
+  meta_request
   pg (~> 1.1)
   pry
   puma (~> 5.0)
+  rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.2)
   rspec-rails
   ruby-prof
   sassc-rails
   sprockets-rails
+  stackprof
   stimulus-rails
   turbo-rails
   tzinfo-data
