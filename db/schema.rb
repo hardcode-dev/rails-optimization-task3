@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_193044) do
+ActiveRecord::Schema.define(version: 2023_03_26_184440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,4 +42,6 @@ ActiveRecord::Schema.define(version: 2019_03_30_193044) do
     t.integer "bus_id"
   end
 
+  add_foreign_key "buses_services", "buses", on_delete: :cascade
+  add_foreign_key "buses_services", "services", on_delete: :cascade
 end

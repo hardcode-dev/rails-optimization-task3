@@ -8,7 +8,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Bus.delete_all
     Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
 
     json.each do |trip|
       from = City.find_or_create_by(name: trip['from'])
