@@ -8,7 +8,7 @@ class DataImport
     @buses_services = {}
   end
 
-  def start
+  def call
     time = Benchmark.realtime do
       @cities = {}
       @buses = {}
