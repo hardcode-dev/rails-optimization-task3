@@ -13,10 +13,10 @@ class InitialSeedService
 
     def prepare_db
       Trip.delete_all
-      City.delete_all
-      Bus.delete_all
+      BusesService.delete_all
       Service.delete_all
-      ActiveRecord::Base.connection.execute('delete from buses_services;')
+      Bus.delete_all
+      City.delete_all
     end
 
     def parsed_data(file_name)
