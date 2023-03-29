@@ -22,14 +22,13 @@ describe ImportDataService do
     expect { service_call }
       .to change { [City.count, Bus.count, Service.count, Trip.count, BusesService.count] }
       .from([0, 0, 0, 0, 0])
-      .to([2, 1, 2, 10, 2])
+      .to([2, 1, 10, 10, 2])
 
       expect(created_cities.as_json)
         .to match_array([{ 'id' => be_a(Integer), 'name' => 'Москва' }, { 'id' => be_a(Integer), 'name' =>  'Самара' }])
       expect(created_buses.as_json)
         .to match_array([{ 'id' => be_a(Integer), 'model' => 'Икарус', 'number' => '123' }])
-      expect(created_services.as_json)
-        .to match_array([{ 'id' => be_a(Integer), 'name' => 'Туалет' }, { 'id' => be_a(Integer), 'name' => 'WiFi' }])
+      expect(created_services.pluck(:name)).to match_array(Service::SERVICES)
       expect(created_trips).to match_array([{
         'id' => be_a(Integer),
         'from_id' => city_1.id,
