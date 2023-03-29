@@ -9,6 +9,7 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'strong_migrations'
 gem 'oj'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'rspec-rails'
