@@ -10,6 +10,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'strong_migrations'
 gem 'oj'
 gem 'activerecord-import'
+gem 'rack-mini-profiler', require: false
 
 group :development, :test do
   gem 'rspec-rails'
