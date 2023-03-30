@@ -26,3 +26,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'perfolab', github: 'Tab10id/perfolab', branch: :temp_26
+
+gem "activerecord-import", "~> 1.4"
