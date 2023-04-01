@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_185556) do
+ActiveRecord::Schema.define(version: 2023_04_01_160654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,4 +46,7 @@ ActiveRecord::Schema.define(version: 2023_03_29_185556) do
 
   add_foreign_key "buses_services", "buses", on_delete: :cascade
   add_foreign_key "buses_services", "services", on_delete: :cascade
+  add_foreign_key "trips", "buses"
+  add_foreign_key "trips", "cities", column: "from_id"
+  add_foreign_key "trips", "cities", column: "to_id"
 end
