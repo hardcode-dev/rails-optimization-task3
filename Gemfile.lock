@@ -96,6 +96,8 @@ GEM
     pg (1.1.4)
     puma (3.12.1)
     rack (2.0.6)
+    rack-mini-profiler (3.0.0)
+      rack (>= 1.2.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -166,6 +168,7 @@ DEPENDENCIES
   perfolab!
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
+  rack-mini-profiler
   rails (~> 5.2.3)
   tzinfo-data
   web-console (>= 3.3.0)
