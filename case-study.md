@@ -189,3 +189,16 @@ Development: Views: 1714.1ms | ActiveRecord: 242.4ms.
 Подключение rack-mini-profiler сразу же ухудшило показатели
 Views: 5273.9ms | ActiveRecord: 737.0ms, тем не менее общая картина должна
 быть той же.
+
+## Двойная проблема N+1 (автобусы и сервисы)
+
+Даже без установки bullet в логе видно огромное количество однотипных запросов.
+Добавил preload на обе модели.
+Время генерации страницы сократилось вдвое, при этом на работу ActiveRecord
+теперь уходит всего 22ms (если верить логу rails)
+Views: 2928.7ms | ActiveRecord: 22.0ms.
+Предполагаю что уменьшение времени на вьюхи обусловлено меньшим временем для
+формирования отчёта rack-mini-profiler.
+С отключенным rack-mini-profiler:
+Production: Views: 345.8ms | ActiveRecord: 22.2ms
+Development: Views: 984.0ms | ActiveRecord: 17.3ms
