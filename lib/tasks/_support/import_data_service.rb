@@ -44,10 +44,10 @@ class ImportDataService
   attr_reader :file_name, :grouped_cities, :grouped_buses, :trips, :grouped_services
 
   def delete_data!
+    Trip.delete_all
     City.delete_all
     Bus.delete_all
     Service.delete_all
-    Trip.delete_all
     BusesService.delete_all
   end
 
