@@ -4,6 +4,7 @@ module MyApp
 
     def initialize(file_name)
       @file_name = file_name
+      @imported_buses = {}
     end
 
     def call
@@ -50,8 +51,12 @@ module MyApp
     end
 
     def find_or_create_bus(bus_number, model, services)
-      bus = Bus.find_or_create_by(number: bus_number)
-      bus.update(model: model, services: services)
+      bus = @imported_buses[bus_number]
+      unless bus
+        bus = Bus.create!(number: bus_number, model: model)
+        bus.update(services: services)
+        @imported_buses[bus_number] = bus
+      end
       bus
     end
 
