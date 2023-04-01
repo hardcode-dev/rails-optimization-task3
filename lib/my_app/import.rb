@@ -6,6 +6,7 @@ module MyApp
     def initialize(file_name)
       @file_name = file_name
       @imported_buses = {}
+      @imported_services = {}
       @buses_services = []
     end
 
@@ -49,8 +50,8 @@ module MyApp
       end
     end
 
-    def find_or_create_service(service)
-      Service.find_or_create_by(name: service)
+    def find_or_create_service(service_name)
+      @imported_services[service_name] ||= Service.create(name: service_name)
     end
 
     def find_or_create_bus(bus_number, model, services)
