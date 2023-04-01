@@ -1,10 +1,12 @@
 module MyApp
   class Import
     attr_reader :file_name
+    BusesService = Class.new(ActiveRecord::Base)
 
     def initialize(file_name)
       @file_name = file_name
       @imported_buses = {}
+      @buses_services = []
     end
 
     def call
@@ -31,6 +33,7 @@ module MyApp
           price = trip['price_cents']
           add_trip(bus, duration, from, price, start_time, to)
         end
+        BusesService.import(@buses_services)
       end
     end
 
@@ -54,7 +57,9 @@ module MyApp
       bus = @imported_buses[bus_number]
       unless bus
         bus = Bus.create!(number: bus_number, model: model)
-        bus.update(services: services)
+        services.each do |service|
+          @buses_services << {bus_id: bus.id, service_id: service.id}
+        end
         @imported_buses[bus_number] = bus
       end
       bus
