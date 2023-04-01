@@ -1,34 +1,52 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read(args.file_name))
+  json = FastJsonparser.parse(File.read(args.file_name), symbolize_keys: false)
 
   ActiveRecord::Base.transaction do
-    City.delete_all
-    Bus.delete_all
-    Service.delete_all
-    Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
+    [
+      City.table_name, Bus.table_name, Service.table_name,
+      Trip.table_name, BusesService.table_name
+    ].each do |table|
+      ActiveRecord::Base.connection.truncate(table)
+    end
+
+    cities = {}
+    trips = []
+    services = {}
+    busses = {}
+    busses_services = {}
+    trips = []
 
     json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+      cities[trip['from']] ||= City.create!(name: trip['from'])
+      cities[trip['to']] ||= City.create!(name: trip['to'])
+      from = cities[trip['from']]
+      to = cities[trip['to']]
+      busses[trip['bus']['number']] ||= Bus.create!(
+        number: trip['bus']['number'],
+        model: trip['bus']['model']
+      )
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
+      trip['bus']['services'].each do |service|
+        services[service] ||= Service.create!(name: service)
+        bs_key = "#{trip['bus']['number']}_#{trip['bus']['model']}"
+        busses_services[bs_key] ||= BusesService.create!(
+          bus: busses[trip['bus']['number']],
+          service: services[service]
+        )
+      end
+
+      trips << {
+        from_id: from.id,
+        to_id: to.id,
+        bus_id: busses[trip['bus']['number']].id,
         start_time: trip['start_time'],
         duration_minutes: trip['duration_minutes'],
         price_cents: trip['price_cents'],
-      )
+      }
     end
+
+    Trip.import!(trips)
   end
 end
