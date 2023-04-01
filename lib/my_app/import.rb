@@ -7,6 +7,7 @@ module MyApp
       @file_name = file_name
       @imported_buses = {}
       @imported_services = {}
+      @imported_trips = []
       @buses_services = []
     end
 
@@ -35,6 +36,7 @@ module MyApp
           add_trip(bus, duration, from, price, start_time, to)
         end
         BusesService.import(@buses_services)
+        Trip.import(@imported_trips)
       end
     end
 
@@ -67,14 +69,15 @@ module MyApp
     end
 
     def add_trip(bus, duration, from, price, start_time, to)
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: start_time,
-        duration_minutes: duration,
-        price_cents: price,
-      )
+      @imported_trips <<
+        Trip.new(
+          from: from,
+          to: to,
+          bus: bus,
+          start_time: start_time,
+          duration_minutes: duration,
+          price_cents: price,
+        )
     end
   end
 end
