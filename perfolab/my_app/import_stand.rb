@@ -12,7 +12,7 @@ loop =
         raw: true
       },
       runner_options: {
-        arguments: ['small']
+        arguments: ['medium']
       }
     )
     toolbox.add_tool(
@@ -20,11 +20,7 @@ loop =
       type: :benchmark,
       runner_options: {
         warmup: 1,
-        arguments: [
-          'small',
-          # 'medium',
-          # 'large'
-        ]
+        arguments: ['medium']
       }
     )
   end

@@ -7,6 +7,7 @@ module MyApp
       @file_name = file_name
       @imported_buses = {}
       @imported_services = {}
+      @imported_cities = {}
       @imported_trips = []
       @buses_services = []
     end
@@ -43,7 +44,7 @@ module MyApp
     private
 
     def find_or_create_city(city_name)
-      City.find_or_create_by(name: city_name)
+      @imported_cities[city_name] ||= City.create(name: city_name)
     end
 
     def find_or_create_services(service_names)
