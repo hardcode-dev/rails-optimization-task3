@@ -168,8 +168,8 @@
 
 ## Основные инструменты для исследования
 
-* rack-mini-profiler + stackprof
-* bullet
+* rails log
+* rack-mini-profiler
 
 ## Первичный анализ
 
