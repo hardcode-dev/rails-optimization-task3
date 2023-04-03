@@ -3,6 +3,24 @@ module MyApp
     attr_reader :file_name
     BusesService = Class.new(ActiveRecord::Base)
 
+    class TripsJsonStreamHandler < ::Oj::ScHandler
+      def hash_start
+        {}
+      end
+
+      def hash_set(h,k,v)
+        h[k] = v
+      end
+
+      def array_start
+        []
+      end
+
+      def array_append(a,v)
+        a << v
+      end
+    end
+
     def initialize(file_name)
       @file_name = file_name
       @imported_buses = {}
@@ -13,7 +31,7 @@ module MyApp
     end
 
     def call
-      json = JSON.parse(File.read(file_name))
+      json = parse
 
       ActiveRecord::Base.transaction do
         City.delete_all
@@ -42,6 +60,13 @@ module MyApp
     end
 
     private
+
+    def parse
+      io = File.open(file_name, 'r')
+      Oj.sc_parse(TripsJsonStreamHandler.new, io)
+    ensure
+      io.close
+    end
 
     def find_or_create_city(city_name)
       @imported_cities[city_name] ||= City.create(name: city_name)

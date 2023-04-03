@@ -30,3 +30,4 @@ gem 'perfolab', github: 'Tab10id/perfolab', branch: :temp_26
 gem "activerecord-import", "~> 1.4"
 
 gem "rack-mini-profiler"
+gem "oj", "~> 3.14"
