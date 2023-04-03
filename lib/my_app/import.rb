@@ -62,7 +62,12 @@ module MyApp
     private
 
     def parse
-      io = File.open(file_name, 'r')
+      io =
+        if File.extname(file_name).downcase == '.gz'
+          Zlib::GzipReader.open(file_name)
+        else
+          File.open(file_name, 'r')
+        end
       Oj.sc_parse(TripsJsonStreamHandler.new, io)
     ensure
       io.close
