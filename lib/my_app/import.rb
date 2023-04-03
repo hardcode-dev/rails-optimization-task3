@@ -31,35 +31,41 @@ module MyApp
     end
 
     def call
-      json = parse
-
       ActiveRecord::Base.transaction do
-        City.delete_all
-        Bus.delete_all
-        Service.delete_all
-        Trip.delete_all
-        ActiveRecord::Base.connection.execute('delete from buses_services;')
-
-        json.each do |trip|
-          from = find_or_create_city(trip['from'])
-          to = find_or_create_city(trip['to'])
-          service_names = trip['bus']['services']
-          services = find_or_create_services(service_names)
-          bus_number = trip['bus']['number']
-          bus_model = trip['bus']['model']
-          bus = find_or_create_bus(bus_number, bus_model, services)
-
-          start_time = trip['start_time']
-          duration = trip['duration_minutes']
-          price = trip['price_cents']
-          add_trip(bus, duration, from, price, start_time, to)
-        end
-        BusesService.import(@buses_services)
-        Trip.import(@imported_trips)
+        db_clear
+        import
       end
     end
 
     private
+
+    def import
+      json = parse
+      json.each do |trip|
+        from = find_or_create_city(trip['from'])
+        to = find_or_create_city(trip['to'])
+        service_names = trip['bus']['services']
+        services = find_or_create_services(service_names)
+        bus_number = trip['bus']['number']
+        bus_model = trip['bus']['model']
+        bus = find_or_create_bus(bus_number, bus_model, services)
+
+        start_time = trip['start_time']
+        duration = trip['duration_minutes']
+        price = trip['price_cents']
+        add_trip(bus, duration, from, price, start_time, to)
+      end
+      BusesService.import(@buses_services)
+      Trip.import(@imported_trips)
+    end
+
+    def db_clear
+      City.delete_all
+      Bus.delete_all
+      Service.delete_all
+      Trip.delete_all
+      ActiveRecord::Base.connection.execute('delete from buses_services;')
+    end
 
     def parse
       io =
