@@ -1,28 +1,43 @@
 module MyApp
   class Import
-    attr_reader :file_name
+    attr_reader :file_name, :batch_size
     BusesService = Class.new(ActiveRecord::Base)
 
     class TripsJsonStreamHandler < ::Oj::ScHandler
+      def initialize(&block)
+        @root = true
+        @block = block
+      end
+
       def hash_start
         {}
       end
 
-      def hash_set(h,k,v)
+      def hash_set(h, k, v)
         h[k] = v
       end
 
       def array_start
-        []
+        if @root
+          @root = false
+          return
+        else
+          []
+        end
       end
 
-      def array_append(a,v)
-        a << v
+      def array_append(a, v)
+        if a
+          a << v
+        else
+          @block.call(v)
+        end
       end
     end
 
-    def initialize(file_name)
+    def initialize(file_name, batch_size: 1000)
       @file_name = file_name
+      @batch_size = batch_size
       @imported_buses = {}
       @imported_services = {}
       @imported_cities = {}
@@ -40,8 +55,7 @@ module MyApp
     private
 
     def import
-      json = parse
-      json.each do |trip|
+      parse do |trip|
         from = find_or_create_city(trip['from'])
         to = find_or_create_city(trip['to'])
         service_names = trip['bus']['services']
@@ -67,14 +81,14 @@ module MyApp
       ActiveRecord::Base.connection.execute('delete from buses_services;')
     end
 
-    def parse
+    def parse(&block)
       io =
         if File.extname(file_name).downcase == '.gz'
           Zlib::GzipReader.open(file_name)
         else
           File.open(file_name, 'r')
         end
-      Oj.sc_parse(TripsJsonStreamHandler.new, io)
+      Oj.sc_parse(TripsJsonStreamHandler.new(&block), io)
     ensure
       io.close
     end
@@ -98,11 +112,19 @@ module MyApp
       unless bus
         bus = Bus.create!(number: bus_number, model: model)
         services.each do |service|
-          @buses_services << {bus_id: bus.id, service_id: service.id}
+          add_bus_service(bus, service)
         end
         @imported_buses[bus_number] = bus
       end
       bus
+    end
+
+    def add_bus_service(bus, service)
+      @buses_services << { bus_id: bus.id, service_id: service.id }
+      if @buses_services.size == batch_size
+        BusesService.import(@buses_services)
+        @buses_services = []
+      end
     end
 
     def add_trip(bus, duration, from, price, start_time, to)
@@ -115,6 +137,11 @@ module MyApp
           duration_minutes: duration,
           price_cents: price,
         )
+
+      if @imported_trips.size == batch_size
+        Trip.import(@imported_trips)
+        @imported_trips = []
+      end
     end
   end
 end
