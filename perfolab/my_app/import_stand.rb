@@ -19,6 +19,7 @@ loop =
       :benchmark,
       type: :benchmark,
       runner_options: {
+        gc_disable: false,
         warmup: 1,
         arguments: ['medium']
       }
