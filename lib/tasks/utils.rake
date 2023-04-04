@@ -1,34 +1,19 @@
+require_relative '_support/import_data_service'
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 task :reload_json, [:file_name] => :environment do |_task, args|
-  json = JSON.parse(File.read(args.file_name))
+  puts "=> Import started"
 
-  ActiveRecord::Base.transaction do
-    City.delete_all
-    Bus.delete_all
-    Service.delete_all
-    Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
+  process_get_time = -> { Process.clock_gettime(Process::CLOCK_MONOTONIC) }
+  start_time = process_get_time.call
+  current_time = Time.current
 
-    json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
+  ImportDataService.new(args.file_name).call
 
-      Trip.create!(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-    end
-  end
+  end_time = process_get_time.call
+  elapsed_time = end_time - start_time
+  min, sec = elapsed_time.divmod(60.0)
+
+  puts "=> Import ended, took#{"%3d:%04.2f"%[min.to_i, sec]}"
+  puts "Trips count: #{Trip.count}, Buses count: #{Bus.count}, Cities count: #{City.count}, Services count: #{Service.count}"
 end
