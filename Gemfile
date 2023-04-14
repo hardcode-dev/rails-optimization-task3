@@ -1,26 +1,34 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby "3.2.0"
 
-gem 'rails', '~> 5.2.3'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.11'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem "rails", "~> 7.0.4", ">= 7.0.4.2"
+gem "sprockets-rails"
+gem "pg", "~> 1.1"
+gem "puma", "~> 5.0"
+gem "importmap-rails"
+gem "turbo-rails"
+gem "stimulus-rails"
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem "bootsnap", require: false
+gem "sassc-rails"
+gem "redis"
+gem "hiredis"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "pry"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "ruby-prof"
+  gem "memory_profiler"
+  gem "stackprof"
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem "web-console"
+  gem "rack-mini-profiler"
+  gem "meta_request"
 end
 
-group :test do
-end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
