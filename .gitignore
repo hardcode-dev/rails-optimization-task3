@@ -1,4 +1,7 @@
 /.bundle
+/.idea
 /tmp
 /log
 /public
+.env
+fixtures/1M.json

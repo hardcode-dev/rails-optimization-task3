@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_PASSWORD: $DB_PASSWORD
+    ports:
+      - "5432:5432"
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_preload_libraries=pg_stat_statements"
+      - "-c"
+      - "pg_stat_statements.track=all"
+      - "-p"
+      - "5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+  web:
+    tty: true
+    stdin_open: true
+    image: rails-optimization-task3
+    build:
+      context: .
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/opt/app:cached
+#    tmpfs:
+#      - /opt/app/tmp/
+#      - /opt/app/log/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: $RAILS_ENV
+volumes:
+  db:
