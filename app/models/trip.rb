@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 class Trip < ApplicationRecord
-  HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
+  HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/.freeze
 
   belongs_to :from, class_name: 'City'
   belongs_to :to, class_name: 'City'
