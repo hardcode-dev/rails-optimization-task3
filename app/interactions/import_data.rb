@@ -32,29 +32,38 @@ class ImportData < ActiveInteraction::Base
     trips = []
 
     json.each do |trip|
-      from = City.find_or_create_by(name: trip['from'])
-      to = City.find_or_create_by(name: trip['to'])
-      services = []
-      trip['bus']['services'].each do |service|
-        s = Service.find_or_create_by(name: service)
-        services << s
-      end
-      bus = Bus.find_or_create_by(number: trip['bus']['number'])
-      bus.update(model: trip['bus']['model'], services: services)
-
-      trips << Trip.new(
-        from: from,
-        to: to,
-        bus: bus,
-        start_time: trip['start_time'],
-        duration_minutes: trip['duration_minutes'],
-        price_cents: trip['price_cents'],
-      )
-
+      trips << trip_new(trip)
       print '.'
     end
 
     Trip.import trips
+  end
+
+  def trip_new(trip)
+    Trip.new(
+      from: fetch_city(trip['from']),
+      to: fetch_city(trip['to']),
+      bus: fetch_bus(trip),
+      start_time: trip['start_time'],
+      duration_minutes: trip['duration_minutes'],
+      price_cents: trip['price_cents'],
+    )
+  end
+
+  def fetch_city(name)
+    City.find_or_create_by(name: name)
+  end
+
+  def fetch_bus(trip)
+    bus = Bus.find_or_create_by(number: trip['bus']['number'])
+    bus.update(model: trip['bus']['model'], services: fetch_bus_services(trip))
+    bus
+  end
+
+  def fetch_bus_services(trip)
+    trip['bus']['services'].map do |service|
+      Service.find_or_create_by(name: service)
+    end
   end
 
   def print_memory_usage
