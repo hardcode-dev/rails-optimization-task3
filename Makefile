@@ -11,3 +11,9 @@ open:
 	open http://localhost:3000/автобусы/Самара/Москва
 pghero:
 	open http://localhost:3000/pghero
+
+profile_memory:
+	bundle exec rake reload_json[fixtures/example.json,memory]
+
+mv_reports:
+	mv reports/tmp reports/${step}

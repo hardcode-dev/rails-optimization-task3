@@ -24,6 +24,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_interaction (4.1.0)
+      activemodel (>= 5, < 8)
+      activesupport (>= 5, < 8)
     activejob (5.2.3)
       activesupport (= 5.2.3)
       globalid (>= 0.3.6)
@@ -45,6 +48,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
+    benchmark-malloc (0.2.0)
+    benchmark-perf (0.6.0)
+    benchmark-trend (0.4.0)
     bindex (0.6.0)
     bootsnap (1.4.2)
       msgpack (~> 1.0)
@@ -52,6 +58,7 @@ GEM
     byebug (11.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    diff-lcs (1.5.0)
     erubi (1.8.0)
     ffi (1.10.0)
     globalid (0.4.2)
@@ -79,6 +86,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
+    oj (3.14.2)
     pg (1.1.4)
     pghero (2.8.3)
       activerecord (>= 5)
@@ -116,6 +124,32 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
+    rspec-benchmark (0.6.0)
+      benchmark-malloc (~> 0.2)
+      benchmark-perf (~> 0.6)
+      benchmark-trend (~> 0.4)
+      rspec (>= 3.0)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (5.1.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
+    rspec-support (3.12.0)
     ruby_dep (1.5.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
@@ -142,16 +176,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_interaction
   activerecord-import
   bootsnap (>= 1.1.0)
   byebug
   listen (>= 3.0.5, < 3.2)
   memory_profiler
+  oj
   pg (>= 0.18, < 2.0)
   pghero
   puma (~> 3.11)
   rack-mini-profiler
   rails (~> 5.2.3)
+  rspec
+  rspec-benchmark
+  rspec-rails
   stackprof
   tzinfo-data
   web-console (>= 3.3.0)

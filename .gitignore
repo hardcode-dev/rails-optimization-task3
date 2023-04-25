@@ -2,3 +2,7 @@
 /tmp
 /log
 /public
+
+.byebug_history
+
+reports/tmp/*
