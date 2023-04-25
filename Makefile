@@ -6,3 +6,6 @@ reload_medium:
 	bundle exec rake reload_json[fixtures/medium.json]
 reload_small:
 	bundle exec rake reload_json[fixtures/small.json]
+
+pghero:
+	open http://localhost:3000/pghero
