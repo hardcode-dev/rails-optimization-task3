@@ -1,5 +1,7 @@
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
+require 'activerecord-import'
+
 task :reload_json, [:file_name] => :environment do |_task, args|
   start_time = Time.now
   json = JSON.parse(File.read(args.file_name))
@@ -10,6 +12,8 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     Service.delete_all
     Trip.delete_all
     ActiveRecord::Base.connection.execute('delete from buses_services;')
+
+    trips = []
 
     json.each do |trip|
       from = City.find_or_create_by(name: trip['from'])
@@ -22,7 +26,7 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       bus = Bus.find_or_create_by(number: trip['bus']['number'])
       bus.update(model: trip['bus']['model'], services: services)
 
-      Trip.create!(
+      trips << Trip.new(
         from: from,
         to: to,
         bus: bus,
@@ -33,6 +37,8 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
       print '.'
     end
+
+    Trip.import trips
 
     puts "\nFinished! Time: #{Time.now - start_time}"
   end
