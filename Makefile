@@ -7,5 +7,7 @@ reload_medium:
 reload_small:
 	bundle exec rake reload_json[fixtures/small.json]
 
+open:
+	open http://localhost:3000/автобусы/Самара/Москва
 pghero:
 	open http://localhost:3000/pghero
