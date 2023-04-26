@@ -8,8 +8,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'activerecord-import'
-gem 'oj', require: false
 gem 'active_interaction'
+gem 'fast_jsonparser', require: false
 
 # Profiling
 gem 'pghero'
@@ -33,6 +33,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'rspec-benchmark'
+  gem 'rspec-sqlimit'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

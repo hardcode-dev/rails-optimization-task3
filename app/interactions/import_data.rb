@@ -1,8 +1,10 @@
 # frozen_string_literal: true
-require 'activerecord-import'
+require 'fast_jsonparser'
 
 class ImportData < ActiveInteraction::Base
   string :file_name
+
+  attr_reader :trips, :services, :buses, :cities
 
   def execute
     start_time = Time.now
@@ -23,19 +25,25 @@ class ImportData < ActiveInteraction::Base
     Bus.delete_all
     Service.delete_all
     Trip.delete_all
-    ActiveRecord::Base.connection.execute('delete from buses_services;')
+    BusesService.delete_all
   end
 
   def import_data
-    json = JSON.parse(File.read(file_name))
+    @trips = []
+    @buses = {}
+    @services = {}
+    @cities = {}
 
-    trips = []
+    json = FastJsonparser.parse(File.read(file_name), symbolize_keys: false)
 
     json.each do |trip|
       trips << trip_new(trip)
       print '.'
     end
 
+    Service.import services.values
+    Bus.import buses.values, recursive: true
+    City.import cities.values
     Trip.import trips
   end
 
@@ -51,18 +59,24 @@ class ImportData < ActiveInteraction::Base
   end
 
   def fetch_city(name)
-    City.find_or_create_by(name: name)
+    cities[name] ||= City.new(name: name)
   end
 
   def fetch_bus(trip)
-    bus = Bus.find_or_create_by(number: trip['bus']['number'])
-    bus.update(model: trip['bus']['model'], services: fetch_bus_services(trip))
-    bus
+    bus = buses[trip['bus']['number']]
+    return bus if bus
+
+    buses[trip['bus']['number']] =
+      Bus.new(
+        number: trip['bus']['number'],
+        model: trip['bus']['model'],
+        services: fetch_bus_services(trip)
+      )
   end
 
   def fetch_bus_services(trip)
     trip['bus']['services'].map do |service|
-      Service.find_or_create_by(name: service)
+      services[service] ||= Service.new(name: service)
     end
   end
 
