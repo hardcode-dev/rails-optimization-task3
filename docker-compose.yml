@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  postgres:
+    container_name: "optimization_task_3_postgres"
+    hostname: 'postgres'
+    image: 'postgres:14'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    ports:
+      - "5434:5432"
+    command: postgres -c shared_preload_libraries='pg_stat_statements' -c pg_stat_statements.track=all
