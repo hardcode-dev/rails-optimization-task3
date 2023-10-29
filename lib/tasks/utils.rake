@@ -33,14 +33,19 @@ task :reload_json, [:file_name] => :environment do |_task, args|
     # assign services to buses
     services_ids_by_name = Service.all.map { |s| [s.name, s.id] }.to_h
     buses_ids_by_number = Bus.all.map { |b| [b.number, b.id] }.to_h
+    with_assigned_services = []
     buses_services = []
     json.each do |trip|
       bus = trip['bus']
-      bus_id = buses_ids_by_number[bus['number']]
+      bus_number = bus['number']
+      next if with_assigned_services.include?(bus_number)
+
+      bus_id = buses_ids_by_number[bus_number]
       bus['services'].each do |service_name|
         service_id = services_ids_by_name[service_name]
         buses_services << [bus_id, service_id]
       end
+      with_assigned_services << bus_number
     end
     sql = <<~HEREDOC
     INSERT INTO buses_services ( bus_id, service_id ) VALUES
