@@ -35,60 +35,31 @@ irb(main):005:0> Bus.last.services
 
 ```
 
-# Загрузка файла
+# Загрузка страницы
 
-Начинаем с того, что дождаться загрузки страницы не удается:
+Начальное время - 16 секунд.
 ```
-  CACHE Bus Load (0.0ms)  SELECT  "buses".* FROM "buses" WHERE "buses"."id" = $1 LIMIT $2  [["id", 813], ["LIMIT", 1]]
+Completed 200 OK in 16361ms (Views: 15437.2ms | ActiveRecord: 910.2ms)
+```
+Судя по логам, есть работа для `bullet`.
+
+```
+ CACHE Bus Load (0.0ms)  SELECT  "buses".* FROM "buses" WHERE "buses"."id" = $1 LIMIT $2  [["id", 793], ["LIMIT", 1]]
   ↳ app/views/trips/_trip.html.erb:5
-  Rendered trips/_trip.html.erb (1.5ms)
-  CACHE Service Load (0.0ms)  SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."id" = "buses_services"."service_id" WHERE "buses_services"."bus_id" = $1  [["bus_id", 813]]
-  ↳ app/views/trips/index.html.erb:11
-  Rendered trips/_service.html.erb (0.0ms)
-  # ...
-  Rendered trips/_services.html.erb (173.9ms)
-  Rendered trips/_delimiter.html.erb (0.0ms)
-  Bus Load (0.4ms)  SELECT  "buses".* FROM "buses" WHERE "buses"."id" = $1 LIMIT $2  [["id", 106], ["LIMIT", 1]]
-  ↳ app/views/trips/_trip.html.erb:5
-  Rendered trips/_trip.html.erb (1.6ms)
-  Service Load (33.1ms)  SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."id" = "buses_services"."service_id" WHERE "buses_services"."bus_id" = $1  [["bus_id", 106]]
-  ↳ app/views/trips/index.html.erb:11
-  Rendered trips/_service.html.erb (0.0ms)
-  # ...
+  Rendered trips/_trip.html.erb (3.4ms)
+  CACHE Service Load (0.0ms)  SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."id" = "buses_services"."service_id" WHERE "buses_services"."bus_id" = $1  [["bus_id", 793]]
 ```
 
-Нам нужно что-то сделать с повторяющейся:
+Гем говорит о целесообразности добавления `.includes(:bus)`. Правда, что странно - предлагает это сделать во вью. Мне кажется, лучше будет сделать в контроллере - и будем использовать `preload` в вместо `includes`.
+
+Время изменилось, но не существенно:
 ```
- Rendered collection of services/_service.html.erb [535 times] (3.4ms)
+Completed 200 OK in 13197ms (Views: 12532.7ms | ActiveRecord: 649.9ms)
 ```
 
-Заменяем запись на:
-```
-  <% render services %>
-```
+Молодец, `bullet`! Подсказывает не забыть подгрузить `services` тоже. Все, больше для него работы нет.
 
-Убеждаемся, что `rails` помогает нам более эффективно рендерить коллекции:
-```
-  Rendered collection of services/_service.html.erb [495 times] (3.1ms)
-```
 
-Ура! страница теперь грузится. Время: 40 секунд.
-
-Обращаем внимание на повторяющиеся запросы `bus` и `service`:
 ```
- CACHE Bus Load (0.0ms)  SELECT  "buses".* FROM "buses" WHERE "buses"."id" = $1 LIMIT $2  [["id", 771], ["LIMIT", 1]]
-  ↳ app/views/trips/_trip.html.erb:5
-  Rendered trips/_trip.html.erb (2.3ms)
-  CACHE Service Load (0.0ms)  SELECT "services".* FROM "services" INNER JOIN "buses_services" ON "services"."id" = "buses_services"."service_id" WHERE "buses_services"."bus_id" = $1  [["bus_id", 771]]
-  ↳ app/views/trips/index.html.erb:11
-  Rendered collection of services/_service.html.erb [279 times] (1.9ms)
-  Rendered trips/_services.html.erb (3.9ms)
-  Rendered trips/_delimiter.html.erb (0.0ms)
+Completed 200 OK in 13902ms (Views: 13840.6ms | ActiveRecord: 47.7ms)
 ```
-
-Добавим `preload` в `TripsController`:
-```
-@trips = Trip.where(from: @from, to: @to).order(:start_time).preload(bus: :services)
-```
-
-Обратил внимание, что у меня не отображаются услуги по автобусам. Вероятно, какая-то проблема с миграцией. Проверим.

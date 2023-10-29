@@ -18,6 +18,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request'
+  gem 'bullet'
 end
 
 group :test do
@@ -28,3 +29,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "pghero"
+gem 'rack-mini-profiler'
