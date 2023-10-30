@@ -8,11 +8,24 @@
 <% @trips.each do |trip| %>
   <% cache trip do %>
     <ul>
-      <%= render "trip", trip: trip %>
-      <% if trip.bus.services.any? %>
-        <%= render "services", services: trip.bus.services %>
+      <li><%= "Отправление: #{trip.start_time}" %></li>
+      <li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
+      <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
+      <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
+      <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+
+      <% services = trip.bus.services %>
+      <% if services.any? %>
+        <li>Сервисы в автобусе:</li>
+        <ul>
+          <% services.each do |service| %>
+            <% cache service do %>
+              <li><%= "#{service.name}" %></li>
+            <% end %>
+          <% end %>
+        </ul>
       <% end %>
     </ul>
-    <%= render "delimiter" %>
+    ====================================================
   <% end %>
 <% end %>

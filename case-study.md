@@ -104,5 +104,25 @@ add_index :buses_services, :bus_id
 add_index :trips, [:from_id, :to_id]
 ```
 
-Время снова улучшилось:
-Completed 200 OK in 860ms (Views: 830.1ms | ActiveRecord: 23.0ms)
+Так. Давайте все же считать кэширование "нечестным" способом оптимизации здесь, и посмотрим, что сможем "выжать" из страницы без него.
+
+Снимаем показатели:
+```
+Completed 200 OK in 4403ms (Views: 4382.7ms | ActiveRecord: 15.7ms)
+```
+
+Много времени занимает `delimiter`. Видимо, подхватывание `partial` не бесплатно, и раз уж мы говорим об оптимизации, нам можно обойтись без отдельного темплейта в данном случае.
+
+```
+Completed 200 OK in 3043ms (Views: 3022.1ms | ActiveRecord: 16.9ms)
+```
+
+Что ж, пойдем дальше - и весь код `html` соберем в `index.html.erb`.
+
+Уже неплохой результат!
+```
+Completed 200 OK in 455ms (Views: 434.0ms | ActiveRecord: 17.1ms)
+Completed 200 OK in 473ms (Views: 449.4ms | ActiveRecord: 15.2ms)
+```
+
+Стремимся к 50 ms.
