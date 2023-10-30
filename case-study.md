@@ -126,3 +126,8 @@ Completed 200 OK in 473ms (Views: 449.4ms | ActiveRecord: 15.2ms)
 ```
 
 Стремимся к 50 ms.
+
+Заменили тип `start_time` на `time` в БД, стало немного лучше:
+```
+Completed 200 OK in 397ms (Views: 381.6ms | ActiveRecord: 11.5ms)
+```
