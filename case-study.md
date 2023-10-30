@@ -63,3 +63,35 @@ Completed 200 OK in 13197ms (Views: 12532.7ms | ActiveRecord: 649.9ms)
 ```
 Completed 200 OK in 13902ms (Views: 13840.6ms | ActiveRecord: 47.7ms)
 ```
+
+Установили `rack-mini-profiler`. Обращаем внимание на то, что его включение в `initializer` добавляет добрых 10 секунд!
+
+```
+Completed 200 OK in 20086ms (Views: 20004.5ms | ActiveRecord: 64.6ms)
+```
+
+Видим, что много занимает рендеринг `_services`.
+
+Пробуем воспользоваться рельсовым рендерингом коллекции:
+```
+  <% render services %>
+```
+
+Видим результат!
+
+```
+Completed 200 OK in 14502ms (Views: 14465.4ms | ActiveRecord: 31.2ms)
+```
+
+Не совсем ясно, что можно улучшить с `services`. Смотрим в соседний по весу `_trip` и видим использование `present?`. Но ведь мы знаем, что `any?` в данном случае лучше!
+```
+Completed 200 OK in 12502ms (Views: 12462.2ms | ActiveRecord: 33.8ms)
+```
+
+Учитывая большое кол-во данных, кажется, нам не обойтись без кэширования `partials`.
+Добавили `cache` в темплейты, включили `rails dev:cache`.
+
+В результате имеем результат:
+```
+Completed 200 OK in 979ms (Views: 939.0ms | ActiveRecord: 35.3ms)
+```

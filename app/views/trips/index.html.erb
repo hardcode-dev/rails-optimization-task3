@@ -1,4 +1,4 @@
-<h1>
+  <h1>
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
@@ -6,11 +6,13 @@
 </h2>
 
 <% @trips.each do |trip| %>
-  <ul>
-    <%= render "trip", trip: trip %>
-    <% if trip.bus.services.present? %>
-      <%= render "services", services: trip.bus.services %>
-    <% end %>
-  </ul>
-  <%= render "delimiter" %>
+  <% cache trip do %>
+    <ul>
+      <%= render "trip", trip: trip %>
+      <% if trip.bus.services.any? %>
+        <%= render "services", services: trip.bus.services %>
+      <% end %>
+    </ul>
+    <%= render "delimiter" %>
+  <% end %>
 <% end %>
