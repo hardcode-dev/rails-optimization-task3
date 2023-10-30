@@ -7,7 +7,7 @@
 
 <% @trips.each do |trip| %>
   <ul>
-    <li><%= "Отправление: #{trip.start_time}" %></li>
+    <li><%= "Отправление: #{trip.start_time.strftime('%H:%M')}" %></li>
     <li><%= "Прибытие: #{(trip.start_time + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
     <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
     <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>

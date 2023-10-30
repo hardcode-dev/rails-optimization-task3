@@ -34,6 +34,9 @@ chdir APP_ROOT do
   puts "\n== Loading data from fixtures/large.json =="
   system! 'bin/rake reload_json[fixtures/large.json]'
 
+  # puts "\n== Loading data from fixtures/example.json =="
+  # system! 'bin/rake reload_json[fixtures/example.json]'
+
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
 
