@@ -95,3 +95,14 @@ Completed 200 OK in 12502ms (Views: 12462.2ms | ActiveRecord: 33.8ms)
 ```
 Completed 200 OK in 979ms (Views: 939.0ms | ActiveRecord: 35.3ms)
 ```
+
+До сих пор мы (помимо `preload` и `any?`) занимались улучшением загрузки `partials`.
+Что кажется верным, т.к. бд не видится боттлнеком в данном примере. Но все же добавим индексы:
+```
+add_index :cities, :name, unique: true
+add_index :buses_services, :bus_id
+add_index :trips, [:from_id, :to_id]
+```
+
+Время снова улучшилось:
+Completed 200 OK in 860ms (Views: 830.1ms | ActiveRecord: 23.0ms)
