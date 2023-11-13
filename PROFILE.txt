@@ -1,0 +1,1985 @@
+Total allocated: 434.78 MB (5551850 objects)
+Total retained:  16.29 MB (92199 objects)
+
+allocated memory by gem
+-----------------------------------
+ 264.84 MB  activerecord-5.2.8.1
+  64.41 MB  activesupport-5.2.8.1
+  24.14 MB  activemodel-5.2.8.1
+  17.11 MB  arel-9.0.0
+  16.23 MB  bootsnap-1.17.0
+  13.29 MB  rubygems
+   5.60 MB  i18n-1.14.1
+   5.21 MB  listen-3.1.5
+   4.44 MB  pathname
+   2.34 MB  logger
+   2.28 MB  rails-optimization-task3/lib
+   1.61 MB  bundler-2.0.2
+   1.44 MB  json
+   1.19 MB  sprockets-4.2.1
+   1.05 MB  timeout-0.4.1
+ 986.00 kB  msgpack-1.7.2
+ 985.30 kB  tzinfo-1.2.11
+ 833.79 kB  set
+ 707.95 kB  thor-1.3.0
+ 645.29 kB  uri
+ 591.90 kB  railties-5.2.8.1
+ 588.17 kB  rake-13.1.0
+ 517.36 kB  actionpack-5.2.8.1
+ 397.38 kB  pg-1.5.4
+ 348.87 kB  delegate
+ 343.77 kB  concurrent-ruby-1.2.2
+ 337.90 kB  arm64-darwin22
+ 331.18 kB  nokogiri-1.15.4
+ 321.89 kB  marcel-1.0.2
+ 180.24 kB  actionview-5.2.8.1
+ 133.39 kB  forwardable
+ 129.55 kB  loofah-2.21.4
+ 126.92 kB  optparse
+ 108.19 kB  rack-2.2.8
+ 106.26 kB  tsort
+  83.98 kB  fileutils
+  73.12 kB  2.7.0
+  70.14 kB  psych
+  64.16 kB  erb
+  55.78 kB  other
+  55.50 kB  openssl
+  35.29 kB  actioncable-5.2.8.1
+  33.95 kB  rails-optimization-task3/app
+  33.26 kB  minitest-5.20.0
+  32.64 kB  sprockets-rails-3.4.2
+  31.72 kB  rails-html-sanitizer-1.6.0
+  28.78 kB  activestorage-5.2.8.1
+  24.57 kB  rails-optimization-task3/bin
+  23.21 kB  racc-1.7.3
+  19.19 kB  rack-test-2.1.0
+
+allocated memory by file
+-----------------------------------
+ 140.28 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb
+  21.34 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb
+  14.36 MB  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb
+  11.80 MB  activerecord-5.2.8.1/lib/active_record/transactions.rb
+   9.43 MB  activerecord-5.2.8.1/lib/active_record/relation.rb
+   8.49 MB  activerecord-5.2.8.1/lib/active_record/relation/query_methods.rb
+   8.12 MB  activesupport-5.2.8.1/lib/active_support/concurrency/load_interlock_aware_monitor.rb
+   7.98 MB  activerecord-5.2.8.1/lib/active_record/reflection.rb
+   7.84 MB  activerecord-5.2.8.1/lib/active_record/relation/where_clause.rb
+   7.34 MB  ruby/lib/rubygems.rb
+   6.80 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb
+   6.13 MB  activemodel-5.2.8.1/lib/active_model/attribute.rb
+   5.92 MB  activemodel-5.2.8.1/lib/active_model/errors.rb
+   5.82 MB  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb
+   5.37 MB  activerecord-5.2.8.1/lib/active_record/autosave_association.rb
+   4.45 MB  activesupport-5.2.8.1/lib/active_support/logger.rb
+   4.44 MB  ruby/lib/pathname.rb
+   4.38 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract_adapter.rb
+   4.32 MB  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb
+   4.27 MB  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb
+   4.20 MB  listen-3.1.5/lib/listen/internals/thread_pool.rb
+   4.01 MB  activerecord-5.2.8.1/lib/active_record/relation/spawn_methods.rb
+   3.65 MB  activerecord-5.2.8.1/lib/active_record/persistence.rb
+   3.47 MB  activerecord-5.2.8.1/lib/active_record/querying.rb
+   3.45 MB  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb
+   3.20 MB  activemodel-5.2.8.1/lib/active_model/attribute_set.rb
+   3.15 MB  arel-9.0.0/lib/arel/visitors/to_sql.rb
+   3.14 MB  activerecord-5.2.8.1/lib/active_record/core.rb
+   3.08 MB  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb
+   3.08 MB  i18n-1.14.1/lib/i18n/backend/base.rb
+   2.96 MB  activemodel-5.2.8.1/lib/active_model/attribute_set/builder.rb
+   2.93 MB  activesupport-5.2.8.1/lib/active_support/subscriber.rb
+   2.82 MB  activesupport-5.2.8.1/lib/active_support/notifications/instrumenter.rb
+   2.76 MB  ruby/lib/rubygems/core_ext/kernel_require.rb
+   2.73 MB  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb
+   2.65 MB  activerecord-5.2.8.1/lib/active_record/result.rb
+   2.50 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb
+   2.39 MB  activesupport-5.2.8.1/lib/active_support/core_ext/hash/except.rb
+   2.33 MB  ruby/lib/logger.rb
+   2.33 MB  activerecord-5.2.8.1/lib/active_record/relation/merger.rb
+   2.28 MB  rails-optimization-task3/lib/tasks/utils.rake
+   2.15 MB  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb
+   2.13 MB  arel-9.0.0/lib/arel/nodes/select_core.rb
+   2.06 MB  activesupport-5.2.8.1/lib/active_support/core_ext/object/deep_dup.rb
+   2.02 MB  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb
+   2.01 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/database_statements.rb
+   1.93 MB  activerecord-5.2.8.1/lib/active_record/associations.rb
+   1.91 MB  arel-9.0.0/lib/arel/select_manager.rb
+   1.88 MB  arel-9.0.0/lib/arel/collectors/plain_string.rb
+   1.80 MB  activerecord-5.2.8.1/lib/active_record/table_metadata.rb
+
+allocated memory by location
+-----------------------------------
+ 110.71 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:103
+  10.15 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb:404
+  10.04 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+   9.72 MB  activerecord-5.2.8.1/lib/active_record/transactions.rb:385
+   8.00 MB  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+   7.33 MB  ruby/lib/rubygems.rb:786
+   6.33 MB  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:64
+   4.45 MB  activesupport-5.2.8.1/lib/active_support/logger.rb:104
+   4.28 MB  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb:132
+   4.27 MB  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb:23
+   4.22 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:35
+   4.20 MB  listen-3.1.5/lib/listen/internals/thread_pool.rb:6
+   4.15 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:108
+   4.06 MB  activesupport-5.2.8.1/lib/active_support/concurrency/load_interlock_aware_monitor.rb:21
+   4.06 MB  activesupport-5.2.8.1/lib/active_support/concurrency/load_interlock_aware_monitor.rb:25
+   3.45 MB  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+   3.37 MB  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:159
+   3.24 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb:198
+   3.14 MB  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+   3.08 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:43
+   3.08 MB  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb:109
+   2.85 MB  activerecord-5.2.8.1/lib/active_record/reflection.rb:802
+   2.54 MB  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+   2.52 MB  activerecord-5.2.8.1/lib/active_record/relation.rb:36
+   2.45 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:89
+   2.44 MB  activerecord-5.2.8.1/lib/active_record/relation/query_methods.rb:874
+   2.36 MB  activemodel-5.2.8.1/lib/active_model/attribute.rb:9
+   2.32 MB  ruby/lib/logger.rb:475
+   2.27 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract_adapter.rb:570
+   2.27 MB  activesupport-5.2.8.1/lib/active_support/notifications/instrumenter.rb:60
+   2.27 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:82
+   2.16 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:107
+   2.14 MB  activerecord-5.2.8.1/lib/active_record/relation/spawn_methods.rb:11
+   2.11 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb:425
+   2.11 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb:426
+   2.11 MB  activemodel-5.2.8.1/lib/active_model/attribute_set.rb:37
+   2.11 MB  activerecord-5.2.8.1/lib/active_record/relation.rb:25
+   2.03 MB  activemodel-5.2.8.1/lib/active_model/attribute.rb:13
+   2.03 MB  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb:60
+   2.01 MB  activesupport-5.2.8.1/lib/active_support/callbacks.rb:103
+   1.88 MB  arel-9.0.0/lib/arel/collectors/plain_string.rb:6
+   1.77 MB  activerecord-5.2.8.1/lib/active_record/transactions.rb:404
+   1.77 MB  activesupport-5.2.8.1/lib/active_support/core_ext/hash/reverse_merge.rb:15
+   1.73 MB  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+   1.69 MB  activerecord-5.2.8.1/lib/active_record/relation.rb:508
+   1.67 MB  ruby/lib/pathname.rb:42
+   1.62 MB  activesupport-5.2.8.1/lib/active_support/subscriber.rb:100
+   1.57 MB  arel-9.0.0/lib/arel/visitors/to_sql.rb:820
+   1.55 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/query_cache.rb:106
+   1.55 MB  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:75
+
+allocated memory by class
+-----------------------------------
+  97.38 MB  Array
+  85.70 MB  String
+  74.40 MB  Thread::Backtrace::Location
+  61.96 MB  Hash
+  30.74 MB  Thread::Backtrace
+   8.18 MB  File
+   7.94 MB  Class
+   7.22 MB  Proc
+   6.30 MB  Thread
+   5.82 MB  MatchData
+   4.68 MB  ActiveRecord::Relation
+   3.71 MB  ActiveModel::Attribute::FromDatabase
+   3.10 MB  Enumerator
+   2.79 MB  Time
+   2.44 MB  ActiveRecord::Relation::WhereClause
+   2.43 MB  Binding
+   2.07 MB  ActiveRecord::Relation::QueryAttribute
+   2.03 MB  ActiveModel::Attribute::FromUser
+   1.30 MB  ActiveSupport::Notifications::Event
+   1.29 MB  Arel::Attributes::Attribute
+   1.28 MB  Arel::Nodes::BindParam
+   1.01 MB  RubyVM::InstructionSequence
+ 972.30 kB  ActiveRecord::Result
+ 921.14 kB  Arel::Nodes::SelectCore
+ 867.60 kB  Service
+ 863.92 kB  Regexp
+ 779.42 kB  Arel::Nodes::SelectStatement
+ 720.99 kB  ActiveModel::LazyAttributeHash
+ 708.16 kB  ActiveModel::Attribute::WithCastValue
+ 684.60 kB  ActiveModel::AttributeSet
+ 668.39 kB  Module
+ 656.02 kB  ActiveRecord::AssociationRelation
+ 624.00 kB  ActiveRecord::Relation::WhereClauseFactory
+ 606.92 kB  ActiveSupport::Callbacks::Filters::Environment
+ 593.14 kB  PG::Result
+ 585.74 kB  ActiveRecord::Associations::BelongsToAssociation
+ 572.96 kB  ActiveRecord::Relation::Merger
+ 524.88 kB  Arel::Collectors::Bind
+ 524.88 kB  Arel::Collectors::Composite
+ 524.88 kB  Arel::Collectors::SQLString
+ 502.09 kB  ActiveSupport::HashWithIndifferentAccess
+ 466.36 kB  Arel::Nodes::Equality
+ 463.23 kB  HABTM_Services
+ 434.08 kB  Set
+ 396.64 kB  ActiveModel::AttributeMutationTracker
+ 354.28 kB  Arel::Nodes::JoinSource
+ 354.28 kB  Arel::Nodes::SqlLiteral
+ 354.28 kB  Arel::SelectManager
+ 354.12 kB  Arel::Nodes::And
+ 354.08 kB  Arel::Nodes::Limit
+
+allocated objects by gem
+-----------------------------------
+   3500864  activerecord-5.2.8.1
+    739946  activesupport-5.2.8.1
+    379905  activemodel-5.2.8.1
+    321248  arel-9.0.0
+    168461  bootsnap-1.17.0
+     83357  rubygems
+     82149  pathname
+     52778  i18n-1.14.1
+     27108  logger
+     22252  json
+     21202  bundler-2.0.2
+     18830  tzinfo-1.2.11
+     17471  rails-optimization-task3/lib
+     15297  listen-3.1.5
+     11587  msgpack-1.7.2
+     11434  set
+     10409  sprockets-4.2.1
+      8911  uri
+      6325  rake-13.1.0
+      5426  marcel-1.0.2
+      5155  railties-5.2.8.1
+      5125  actionpack-5.2.8.1
+      4563  delegate
+      3852  pg-1.5.4
+      3734  thor-1.3.0
+      3663  arm64-darwin22
+      3140  nokogiri-1.15.4
+      2405  loofah-2.21.4
+      2327  concurrent-ruby-1.2.2
+      1511  optparse
+      1403  tsort
+      1195  forwardable
+       953  2.7.0
+       917  rack-2.2.8
+       849  fileutils
+       847  actionview-5.2.8.1
+       594  psych
+       421  openssl
+       388  other
+       351  sprockets-rails-3.4.2
+       327  erb
+       327  racc-1.7.3
+       259  minitest-5.20.0
+       205  actioncable-5.2.8.1
+       205  cgi
+       202  ipaddr
+       194  rails-html-sanitizer-1.6.0
+       177  date-3.3.4
+       172  ostruct
+       154  activestorage-5.2.8.1
+
+allocated objects by file
+-----------------------------------
+   1500689  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb
+    263413  activesupport-5.2.8.1/lib/active_support/callbacks.rb
+    194190  activerecord-5.2.8.1/lib/active_record/reflection.rb
+    177031  activerecord-5.2.8.1/lib/active_record/relation/where_clause.rb
+    155932  activerecord-5.2.8.1/lib/active_record/relation/query_methods.rb
+    150825  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb
+    136848  activerecord-5.2.8.1/lib/active_record/relation.rb
+    114807  activerecord-5.2.8.1/lib/active_record/transactions.rb
+    114242  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb
+    108859  activemodel-5.2.8.1/lib/active_model/errors.rb
+    101621  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb
+     89285  activemodel-5.2.8.1/lib/active_model/attribute.rb
+     86163  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb
+     82149  ruby/lib/pathname.rb
+     66100  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract_adapter.rb
+     58788  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb
+     58089  activerecord-5.2.8.1/lib/active_record/relation/merger.rb
+     54180  activesupport-5.2.8.1/lib/active_support/subscriber.rb
+     53178  arel-9.0.0/lib/arel/nodes/select_core.rb
+     50815  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb
+     50479  activerecord-5.2.8.1/lib/active_record/persistence.rb
+     50245  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/database_statements.rb
+     48989  arel-9.0.0/lib/arel/visitors/to_sql.rb
+     44520  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/quoting.rb
+     43504  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb
+     43100  activerecord-5.2.8.1/lib/active_record/relation/spawn_methods.rb
+     42306  activesupport-5.2.8.1/lib/active_support/concurrency/load_interlock_aware_monitor.rb
+     42169  activerecord-5.2.8.1/lib/active_record/core.rb
+     39665  activerecord-5.2.8.1/lib/active_record/result.rb
+     39446  activemodel-5.2.8.1/lib/active_model/attribute_set.rb
+     37705  activerecord-5.2.8.1/lib/active_record/querying.rb
+     37048  arel-9.0.0/lib/arel/select_manager.rb
+     36776  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb
+     35487  activerecord-5.2.8.1/lib/active_record/associations/association.rb
+     33729  activerecord-5.2.8.1/lib/active_record/autosave_association.rb
+     32821  ruby/lib/rubygems/core_ext/kernel_require.rb
+     32357  arel-9.0.0/lib/arel/table.rb
+     32228  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb
+     31980  activerecord-5.2.8.1/lib/active_record/relation/where_clause_factory.rb
+     30977  activesupport-5.2.8.1/lib/active_support/hash_with_indifferent_access.rb
+     30604  arel-9.0.0/lib/arel/visitors/postgresql.rb
+     28383  activemodel-5.2.8.1/lib/active_model/attribute_set/builder.rb
+     27970  activerecord-5.2.8.1/lib/active_record/scoping.rb
+     27083  activesupport-5.2.8.1/lib/active_support/notifications/instrumenter.rb
+     27078  ruby/lib/logger.rb
+     27073  activesupport-5.2.8.1/lib/active_support/logger.rb
+     27054  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb
+     27034  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb
+     26595  arel-9.0.0/lib/arel/nodes/select_statement.rb
+     25984  activerecord-5.2.8.1/lib/active_record/timestamp.rb
+
+allocated objects by location
+-----------------------------------
+   1156624  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:103
+    149334  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+    106468  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+     96858  activerecord-5.2.8.1/lib/active_record/transactions.rb:385
+     86161  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+     85004  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:35
+     78375  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+     71166  activerecord-5.2.8.1/lib/active_record/reflection.rb:802
+     58614  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb:132
+     52866  activesupport-5.2.8.1/lib/active_support/callbacks.rb:404
+     52866  activesupport-5.2.8.1/lib/active_support/callbacks.rb:425
+     52866  activesupport-5.2.8.1/lib/active_support/callbacks.rb:426
+     48046  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:89
+     40590  activesupport-5.2.8.1/lib/active_support/subscriber.rb:100
+     40550  activesupport-5.2.8.1/lib/active_support/callbacks.rb:198
+     36848  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+     35624  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:83
+     32339  arel-9.0.0/lib/arel/table.rb:81
+     30988  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/quoting.rb:161
+     30988  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:58
+     30602  arel-9.0.0/lib/arel/visitors/postgresql.rb:49
+     29542  activemodel-5.2.8.1/lib/active_model/attribute.rb:9
+     29316  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+     29307  activerecord-5.2.8.1/lib/active_record/relation.rb:29
+     28972  ruby/lib/pathname.rb:42
+     28648  activerecord-5.2.8.1/lib/active_record/relation/where_clause.rb:109
+     28648  activerecord-5.2.8.1/lib/active_record/relation/where_clause.rb:25
+     28648  activerecord-5.2.8.1/lib/active_record/relation/where_clause.rb:26
+     27596  ruby/lib/pathname.rb:46
+     27022  ruby/lib/logger.rb:475
+     27022  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:107
+     27022  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:108
+     27022  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb:109
+     27022  activesupport-5.2.8.1/lib/active_support/logger.rb:104
+     27022  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb:23
+     26244  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract_adapter.rb:612
+     25870  activemodel-5.2.8.1/lib/active_model/attribute_set.rb:37
+     25426  activemodel-5.2.8.1/lib/active_model/attribute.rb:13
+     25426  activemodel-5.2.8.1/lib/active_model/attribute.rb:71
+     25081  activesupport-5.2.8.1/lib/active_support/callbacks.rb:103
+     24664  activerecord-5.2.8.1/lib/active_record/relation.rb:25
+     23848  activerecord-5.2.8.1/lib/active_record/result.rb:128
+     23446  activerecord-5.2.8.1/lib/active_record/scoping.rb:17
+     23233  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb:60
+     23233  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb:61
+     23161  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:279
+     22137  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb:447
+     21461  activesupport-5.2.8.1/lib/active_support/callbacks.rb:424
+     21238  ruby/lib/json/common.rb:156
+     21150  activesupport-5.2.8.1/lib/active_support/concurrency/load_interlock_aware_monitor.rb:21
+
+allocated objects by class
+-----------------------------------
+   1802280  Array
+   1209628  String
+   1162448  Thread::Backtrace::Location
+    507254  Hash
+     90210  Proc
+     61010  ActiveRecord::Relation::WhereClause
+     46334  ActiveModel::Attribute::FromDatabase
+     39133  ActiveRecord::Relation
+     34493  MatchData
+     32467  Time
+     32339  Arel::Attributes::Attribute
+     32085  Arel::Nodes::BindParam
+     27627  Binding
+     25426  ActiveModel::Attribute::FromUser
+     23620  ActiveRecord::Relation::QueryAttribute
+     22829  Enumerator
+     17115  ActiveModel::AttributeSet
+     15600  ActiveRecord::Relation::WhereClauseFactory
+     15452  Class
+     15173  ActiveSupport::Callbacks::Filters::Environment
+     14999  Thread::Backtrace
+     14324  ActiveRecord::Relation::Merger
+     13536  PG::Result
+     13530  ActiveSupport::Notifications::Event
+     13504  ActiveRecord::Result
+     13122  Arel::Collectors::Bind
+     13122  Arel::Collectors::Composite
+     13122  Arel::Collectors::SQLString
+     12549  ActiveSupport::HashWithIndifferentAccess
+     11659  Arel::Nodes::Equality
+     10852  Set
+      9916  ActiveModel::AttributeMutationTracker
+      8857  Arel::Nodes::JoinSource
+      8857  Arel::Nodes::SelectCore
+      8857  Arel::Nodes::SelectStatement
+      8857  Arel::Nodes::SqlLiteral
+      8857  Arel::SelectManager
+      8853  Arel::Nodes::And
+      8852  ActiveModel::Attribute::WithCastValue
+      8852  Arel::Nodes::Limit
+      8852  Arel::Nodes::Top
+      8193  ActiveModel::LazyAttributeHash
+      7274  ActiveModel::Errors
+      5826  Service
+      5652  ActiveRecord::AssociationRelation
+      5632  ActiveRecord::Associations::BelongsToAssociation
+      5254  Pathname
+      4265  Arel::InsertManager
+      4265  Arel::Nodes::InsertStatement
+      4265  Arel::Nodes::Values
+
+retained memory by gem
+-----------------------------------
+   4.30 MB  listen-3.1.5
+   2.85 MB  bootsnap-1.17.0
+   1.67 MB  activerecord-5.2.8.1
+   1.05 MB  timeout-0.4.1
+ 868.50 kB  rubygems
+ 729.53 kB  bundler-2.0.2
+ 539.55 kB  activesupport-5.2.8.1
+ 363.22 kB  msgpack-1.7.2
+ 322.36 kB  actionpack-5.2.8.1
+ 286.70 kB  marcel-1.0.2
+ 282.55 kB  tzinfo-1.2.11
+ 270.06 kB  arm64-darwin22
+ 268.52 kB  pg-1.5.4
+ 223.14 kB  concurrent-ruby-1.2.2
+ 216.42 kB  uri
+ 194.89 kB  nokogiri-1.15.4
+ 184.42 kB  railties-5.2.8.1
+ 147.20 kB  sprockets-4.2.1
+ 134.19 kB  rake-13.1.0
+ 132.60 kB  arel-9.0.0
+ 128.42 kB  delegate
+ 124.39 kB  set
+ 124.18 kB  activemodel-5.2.8.1
+ 119.28 kB  actionview-5.2.8.1
+  79.04 kB  thor-1.3.0
+  65.31 kB  rack-2.2.8
+  49.91 kB  i18n-1.14.1
+  44.60 kB  psych
+  39.25 kB  openssl
+  35.68 kB  2.7.0
+  31.92 kB  loofah-2.21.4
+  30.28 kB  actioncable-5.2.8.1
+  29.82 kB  rails-optimization-task3/app
+  29.78 kB  minitest-5.20.0
+  27.51 kB  fileutils
+  26.49 kB  rails-html-sanitizer-1.6.0
+  23.66 kB  activestorage-5.2.8.1
+  20.98 kB  sprockets-rails-3.4.2
+  16.19 kB  date-3.3.4
+  13.51 kB  erb
+  12.34 kB  cgi
+  11.87 kB  rack-test-2.1.0
+  11.34 kB  other
+  10.97 kB  json
+   9.96 kB  globalid-1.1.0
+   8.62 kB  logger
+   8.15 kB  method_source-1.0.0
+   8.15 kB  forwardable
+   8.00 kB  open-uri
+   7.76 kB  web-console-3.7.0
+
+retained memory by file
+-----------------------------------
+   4.20 MB  listen-3.1.5/lib/listen/internals/thread_pool.rb
+   2.15 MB  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb
+   1.06 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+   1.05 MB  timeout-0.4.1/lib/timeout.rb
+ 460.39 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb
+ 345.31 kB  msgpack-1.7.2/lib/msgpack.rb
+ 269.70 kB  marcel-1.0.2/lib/marcel/tables.rb
+ 255.72 kB  pg-1.5.4/lib/pg_ext.bundle
+ 249.11 kB  bundler-2.0.2/lib/bundler/index.rb
+ 241.09 kB  ruby/lib/rubygems/core_ext/kernel_require.rb
+ 236.86 kB  ruby/lib/rubygems/stub_specification.rb
+ 188.04 kB  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb
+ 171.89 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb
+ 153.99 kB  ruby/lib/rubygems.rb
+ 132.40 kB  ruby/lib/arm64-darwin22/openssl.bundle
+ 128.42 kB  ruby/lib/delegate.rb
+ 124.39 kB  ruby/lib/set.rb
+ 107.58 kB  ruby/lib/uri/rfc2396_parser.rb
+  91.15 kB  ruby/lib/uri/common.rb
+  88.94 kB  ruby/lib/rubygems/version.rb
+  79.85 kB  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb
+  78.18 kB  nokogiri-1.15.4/lib/nokogiri/html4/element_description_defaults.rb
+  77.41 kB  bundler-2.0.2/lib/bundler/stub_specification.rb
+  76.84 kB  activesupport-5.2.8.1/lib/active_support/callbacks.rb
+  75.63 kB  bundler-2.0.2/lib/bundler/remote_specification.rb
+  59.74 kB  nokogiri-1.15.4/lib/nokogiri/nokogiri.bundle
+  49.72 kB  ruby/lib/arm64-darwin22/socket.bundle
+  49.64 kB  rake-13.1.0/lib/rake/task.rb
+  46.31 kB  railties-5.2.8.1/lib/rails/initializable.rb
+  41.98 kB  ruby/lib/rubygems/specification.rb
+  41.30 kB  activesupport-5.2.8.1/lib/active_support/dependencies/autoload.rb
+  37.31 kB  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/promises.rb
+  36.94 kB  listen-3.1.5/lib/listen/adapter/base.rb
+  36.82 kB  bundler-2.0.2/lib/bundler/lockfile_parser.rb
+  36.59 kB  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb
+  36.10 kB  bundler-2.0.2/lib/bundler/spec_set.rb
+  31.62 kB  tzinfo-1.2.11/lib/tzinfo/country_timezone.rb
+  31.40 kB  ruby/lib/rubygems/util.rb
+  31.39 kB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb
+  31.07 kB  actionpack-5.2.8.1/lib/action_dispatch/routing/route_set.rb
+  30.39 kB  activesupport-5.2.8.1/lib/active_support/inflector/inflections.rb
+  30.11 kB  railties-5.2.8.1/lib/rails/paths.rb
+  29.80 kB  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb
+  29.50 kB  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/atomic/lock_local_var.rb
+  29.27 kB  ruby/lib/rubygems/requirement.rb
+  27.70 kB  actionpack-5.2.8.1/lib/action_dispatch/routing/mapper.rb
+  27.51 kB  ruby/lib/fileutils.rb
+  26.65 kB  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb
+  26.57 kB  bundler-2.0.2/lib/bundler/current_ruby.rb
+  25.12 kB  ruby/lib/rubygems/basic_specification.rb
+
+retained memory by location
+-----------------------------------
+   4.20 MB  listen-3.1.5/lib/listen/internals/thread_pool.rb:6
+   2.14 MB  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+   1.05 MB  timeout-0.4.1/lib/timeout.rb:98
+   1.05 MB  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:299
+ 339.75 kB  msgpack-1.7.2/lib/msgpack.rb:32
+ 255.72 kB  pg-1.5.4/lib/pg_ext.bundle:0
+ 245.26 kB  bundler-2.0.2/lib/bundler/index.rb:24
+ 241.09 kB  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+ 229.47 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb:126
+ 188.14 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb:221
+ 153.83 kB  ruby/lib/rubygems.rb:786
+ 132.40 kB  ruby/lib/arm64-darwin22/openssl.bundle:0
+ 114.78 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb:28
+  95.57 kB  ruby/lib/rubygems/stub_specification.rb:65
+  78.97 kB  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:214
+  75.37 kB  bundler-2.0.2/lib/bundler/stub_specification.rb:9
+  73.60 kB  bundler-2.0.2/lib/bundler/remote_specification.rb:34
+  69.08 kB  ruby/lib/rubygems/stub_specification.rb:129
+  65.08 kB  ruby/lib/set.rb:94
+  64.16 kB  ruby/lib/delegate.rb:412
+  59.74 kB  nokogiri-1.15.4/lib/nokogiri/nokogiri.bundle:0
+  57.44 kB  marcel-1.0.2/lib/marcel/tables.rb:10
+  57.41 kB  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:384
+  49.72 kB  ruby/lib/arm64-darwin22/socket.bundle:0
+  47.78 kB  ruby/lib/set.rb:136
+  43.94 kB  ruby/lib/rubygems/version.rb:206
+  36.80 kB  ruby/lib/rubygems/stub_specification.rb:48
+  35.89 kB  ruby/lib/delegate.rb:389
+  32.85 kB  activesupport-5.2.8.1/lib/active_support/dependencies/autoload.rb:47
+  31.40 kB  ruby/lib/rubygems/util.rb:105
+  30.10 kB  tzinfo-1.2.11/lib/tzinfo/country_timezone.rb:32
+  29.50 kB  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/atomic/lock_local_var.rb:14
+  29.49 kB  listen-3.1.5/lib/listen/adapter/base.rb:72
+  28.77 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb:127
+  28.77 kB  marcel-1.0.2/lib/marcel/tables.rb:1261
+  28.09 kB  nokogiri-1.15.4/lib/nokogiri/html4/element_description_defaults.rb:2031
+  27.14 kB  bundler-2.0.2/lib/bundler/spec_set.rb:175
+  24.48 kB  activesupport-5.2.8.1/lib/active_support/core_ext/module/redefine_method.rb:29
+  22.74 kB  ruby/lib/uri/common.rb:14
+  22.50 kB  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb:17
+  22.46 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb:45
+  21.99 kB  ruby/lib/uri/rfc2396_parser.rb:511
+  20.84 kB  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb:46
+  19.59 kB  ruby/lib/arm64-darwin22/zlib.bundle:0
+  19.20 kB  bundler-2.0.2/lib/bundler/current_ruby.rb:88
+  18.60 kB  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:498
+  18.04 kB  ruby/lib/uri/common.rb:342
+  18.02 kB  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:488
+  17.97 kB  ruby/lib/rubygems/stub_specification.rb:38
+  17.84 kB  ruby/lib/arm64-darwin22/etc.bundle:0
+
+retained memory by class
+-----------------------------------
+   6.30 MB  Thread
+   3.54 MB  String
+   2.12 MB  Class
+   1.18 MB  Hash
+ 777.52 kB  Regexp
+ 668.39 kB  Module
+ 652.20 kB  Array
+ 222.96 kB  Proc
+ 127.87 kB  RubyVM::InstructionSequence
+ 101.58 kB  Gem::StubSpecification
+  75.37 kB  Bundler::StubSpecification
+  69.08 kB  Gem::StubSpecification::StubLine
+  35.88 kB  Rational
+  30.10 kB  TZInfo::CountryTimezone
+  29.50 kB  Fiber
+  26.95 kB  Gem::Version
+  23.33 kB  Thread::Mutex
+  19.26 kB  Gem::Specification
+  17.94 kB  TZInfo::ZoneinfoCountryInfo
+  15.42 kB  Rails::Initializable::Initializer
+  14.88 kB  Symbol
+  14.16 kB  Gem::Dependency
+  14.14 kB  ActiveRecord::AttributeMethods::GeneratedAttributeMethods
+  13.68 kB  Struct::HTMLElementDescription
+  13.34 kB  Rake::Task
+  11.28 kB  Gem::Requirement
+  10.28 kB  Range
+   9.79 kB  Rails::Paths::Path
+   8.31 kB  PG::TypeMapByOid
+   7.62 kB  Monitor
+   6.82 kB  ActiveSupport::Callbacks::Callback
+   6.53 kB  Bundler::LazySpecification
+   5.44 kB  Bundler::LazySpecification::Identifier
+   5.14 kB  Thor::Option
+   4.88 kB  ActiveSupport::OrderedOptions
+   4.32 kB  ActiveSupport::Callbacks::CallbackChain
+   4.21 kB  PG::TypeMapByClass
+   4.06 kB  Thor::Command
+   3.90 kB  ActiveSupport::Callbacks::CallTemplate
+   3.87 kB  Time
+   3.64 kB  ActionDispatch::Journey::Nodes::Cat
+   3.44 kB  Set
+   2.72 kB  Object
+   2.62 kB  Bundler::Dependency
+   2.56 kB  Concurrent::Map
+   2.53 kB  Mime::Type
+   2.30 kB  ActionDispatch::Journey::Route
+   2.28 kB  Pathname
+   2.10 kB  ActiveRecord::Type::Registration
+   1.91 kB  ActiveRecord::ConnectionAdapters::PostgreSQLColumn
+
+retained objects by gem
+-----------------------------------
+     34272  bootsnap-1.17.0
+     11810  rubygems
+      5927  bundler-2.0.2
+      4829  marcel-1.0.2
+      4741  msgpack-1.7.2
+      4559  activesupport-5.2.8.1
+      4016  tzinfo-1.2.11
+      2768  activerecord-5.2.8.1
+      2052  actionpack-5.2.8.1
+      1991  arm64-darwin22
+      1609  pg-1.5.4
+      1489  rake-13.1.0
+      1368  railties-5.2.8.1
+      1172  nokogiri-1.15.4
+      1067  uri
+       875  delegate
+       827  sprockets-4.2.1
+       791  activemodel-5.2.8.1
+       719  concurrent-ruby-1.2.2
+       533  listen-3.1.5
+       521  thor-1.3.0
+       480  arel-9.0.0
+       349  actionview-5.2.8.1
+       334  2.7.0
+       270  rack-2.2.8
+       244  psych
+       239  set
+       227  i18n-1.14.1
+       216  openssl
+       172  minitest-5.20.0
+       118  rails-html-sanitizer-1.6.0
+       115  date-3.3.4
+       115  loofah-2.21.4
+       113  actioncable-5.2.8.1
+        98  other
+        80  cgi
+        80  sprockets-rails-3.4.2
+        72  forwardable
+        66  fileutils
+        66  securerandom
+        58  activestorage-5.2.8.1
+        58  erb
+        54  rails-optimization-task3/app
+        45  json
+        45  ostruct
+        38  pathname
+        38  rack-test-2.1.0
+        36  logger
+        35  globalid-1.1.0
+        26  ruby_dep-1.5.0
+
+retained objects by file
+-----------------------------------
+     31458  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb
+      4638  msgpack-1.7.2/lib/msgpack.rb
+      4506  marcel-1.0.2/lib/marcel/tables.rb
+      3376  ruby/lib/rubygems/core_ext/kernel_require.rb
+      3136  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb
+      3039  ruby/lib/rubygems/stub_specification.rb
+      1953  ruby/lib/rubygems/version.rb
+      1581  bundler-2.0.2/lib/bundler/remote_specification.rb
+      1561  pg-1.5.4/lib/pg_ext.bundle
+      1262  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb
+      1148  bundler-2.0.2/lib/bundler/index.rb
+       965  ruby/lib/arm64-darwin22/openssl.bundle
+       900  rake-13.1.0/lib/rake/task.rb
+       885  ruby/lib/uri/common.rb
+       875  ruby/lib/delegate.rb
+       855  activesupport-5.2.8.1/lib/active_support/callbacks.rb
+       794  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb
+       793  bundler-2.0.2/lib/bundler/stub_specification.rb
+       788  ruby/lib/rubygems.rb
+       785  ruby/lib/rubygems/util.rb
+       773  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb
+       728  ruby/lib/rubygems/requirement.rb
+       668  ruby/lib/rubygems/specification.rb
+       567  nokogiri-1.15.4/lib/nokogiri/html4/element_description_defaults.rb
+       476  ruby/lib/arm64-darwin22/socket.bundle
+       455  railties-5.2.8.1/lib/rails/initializable.rb
+       436  activesupport-5.2.8.1/lib/active_support/dependencies/autoload.rb
+       423  tzinfo-1.2.11/lib/tzinfo/country_timezone.rb
+       417  bundler-2.0.2/lib/bundler/current_ruby.rb
+       416  bundler-2.0.2/lib/bundler/spec_set.rb
+       394  bundler-2.0.2/lib/bundler/lockfile_parser.rb
+       387  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb
+       359  activesupport-5.2.8.1/lib/active_support/core_ext/class/attribute.rb
+       306  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb
+       306  activesupport-5.2.8.1/lib/active_support/core_ext/module/redefine_method.rb
+       306  railties-5.2.8.1/lib/rails/paths.rb
+       294  ruby/lib/rubygems/basic_specification.rb
+       275  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb
+       270  nokogiri-1.15.4/lib/nokogiri/nokogiri.bundle
+       251  tzinfo-1.2.11/lib/tzinfo/zoneinfo_country_info.rb
+       245  actionpack-5.2.8.1/lib/action_dispatch/journey/parser.rb
+       240  actionpack-5.2.8.1/lib/action_dispatch/routing/route_set.rb
+       239  ruby/lib/set.rb
+       237  activesupport-5.2.8.1/lib/active_support/lazy_load_hooks.rb
+       218  actionpack-5.2.8.1/lib/action_dispatch/routing/mapper.rb
+       212  ruby/lib/arm64-darwin22/etc.bundle
+       198  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb
+       190  activesupport-5.2.8.1/lib/active_support/inflector/inflections.rb
+       182  sprockets-4.2.1/lib/sprockets/transformers.rb
+       179  listen-3.1.5/lib/listen/adapter/base.rb
+
+retained objects by location
+-----------------------------------
+     31429  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+      4564  msgpack-1.7.2/lib/msgpack.rb:32
+      3376  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+      1568  bundler-2.0.2/lib/bundler/remote_specification.rb:34
+      1561  pg-1.5.4/lib/pg_ext.bundle:0
+      1161  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb:221
+      1121  bundler-2.0.2/lib/bundler/index.rb:24
+       965  ruby/lib/arm64-darwin22/openssl.bundle:0
+       862  ruby/lib/rubygems/version.rb:206
+       802  ruby/lib/delegate.rb:412
+       785  bundler-2.0.2/lib/bundler/stub_specification.rb:9
+       785  ruby/lib/rubygems.rb:786
+       785  ruby/lib/rubygems/stub_specification.rb:129
+       785  ruby/lib/rubygems/util.rb:105
+       784  ruby/lib/rubygems/stub_specification.rb:48
+       765  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:214
+       738  ruby/lib/rubygems/stub_specification.rb:65
+       552  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:384
+       476  ruby/lib/arm64-darwin22/socket.bundle:0
+       465  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:498
+       451  ruby/lib/uri/common.rb:342
+       441  ruby/lib/rubygems/version.rb:229
+       435  ruby/lib/rubygems/stub_specification.rb:38
+       418  tzinfo-1.2.11/lib/tzinfo/country_timezone.rb:32
+       418  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:446
+       404  activesupport-5.2.8.1/lib/active_support/dependencies/autoload.rb:47
+       379  ruby/lib/rubygems/specification.rb:2041
+       360  bundler-2.0.2/lib/bundler/current_ruby.rb:88
+       336  bundler-2.0.2/lib/bundler/spec_set.rb:175
+       323  ruby/lib/rubygems/version.rb:407
+       319  ruby/lib/rubygems/version.rb:386
+       318  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb:45
+       311  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:500
+       306  activesupport-5.2.8.1/lib/active_support/core_ext/module/redefine_method.rb:29
+       300  bootsnap-1.17.0/lib/bootsnap/load_path_cache/loaded_features_index.rb:46
+       287  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+       270  nokogiri-1.15.4/lib/nokogiri/nokogiri.bundle:0
+       257  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:36
+       255  ruby/lib/rubygems/requirement.rb:132
+       251  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:488
+       249  tzinfo-1.2.11/lib/tzinfo/zoneinfo_country_info.rb:10
+       249  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:484
+       249  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:485
+       242  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:466
+       218  ruby/lib/rubygems/stub_specification.rb:123
+       212  ruby/lib/arm64-darwin22/etc.bundle:0
+       206  rake-13.1.0/lib/rake/task.rb:105
+       202  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:447
+       181  ruby/lib/rubygems/requirement.rb:64
+       175  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+
+retained objects by class
+-----------------------------------
+     60863  String
+     12396  Array
+      2917  Class
+      2787  Proc
+      2589  Hash
+      1193  Regexp
+       897  Rational
+       785  Bundler::StubSpecification
+       785  Gem::StubSpecification
+       785  Gem::StubSpecification::StubLine
+       779  Module
+       441  Gem::Version
+       418  TZInfo::CountryTimezone
+       372  Symbol
+       324  Thread::Mutex
+       282  Gem::Requirement
+       257  Range
+       249  TZInfo::ZoneinfoCountryInfo
+       214  Rails::Initializable::Initializer
+       177  Gem::Dependency
+       135  RubyVM::InstructionSequence
+       119  Monitor
+        98  Rake::Task
+        94  Rails::Paths::Path
+        91  ActionDispatch::Journey::Nodes::Cat
+        90  Struct::HTMLElementDescription
+        86  Set
+        71  ActiveSupport::Callbacks::Callback
+        68  Bundler::LazySpecification
+        68  Bundler::LazySpecification::Identifier
+        68  Object
+        64  Concurrent::Map
+        57  Pathname
+        54  ActiveSupport::Callbacks::CallTemplate
+        54  ActiveSupport::Callbacks::CallbackChain
+        45  Time
+        44  Rake::Scope
+        43  ActionDispatch::Journey::Nodes::Slash
+        43  Gem::Specification
+        39  Thor::Command
+        38  Sprockets::ProcessorUtils::CompositeProcessor
+        37  Rails::Initializable::Collection
+        35  Mime::Type
+        35  Thor::Option
+        30  ActionDispatch::Journey::Nodes::Literal
+        29  ActiveRecord::Type::Registration
+        26  ActionDispatch::Journey::Format
+        24  ActionDispatch::MiddlewareStack::Middleware
+        23  Sprockets::Transformers::Transformer
+        22  ActionDispatch::Journey::Format::Parameter
+
+
+Allocated String Report
+-----------------------------------
+     44987  "buses_services"
+     36131  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      5264  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+      2632  activerecord-5.2.8.1/lib/active_record/associations/has_many_through_association.rb:69
+       937  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+         4  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:32
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         3  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:99
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:28
+         2  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/utils.rb:71
+         1  activerecord-5.2.8.1/lib/active_record/associations.rb:1840
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/schema_cache.rb:114
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:400
+
+     35091  "name"
+      6616  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:83
+      6616  activerecord-5.2.8.1/lib/active_record/result.rb:128
+      6239  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:219
+      6229  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb:29
+      6229  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:46
+      2662  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+       396  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        32  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+        20  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        10  activerecord-5.2.8.1/lib/active_record/validations/uniqueness.rb:102
+        10  activerecord-5.2.8.1/lib/active_record/validations/uniqueness.rb:73
+         7  pg-1.5.4/lib/pg/coder.rb:21
+         5  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+         3  loofah-2.21.4/lib/loofah/metahelpers.rb:12
+         2  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         2  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         2  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb:96
+         2  activerecord-5.2.8.1/lib/active_record/relation/delegation.rb:97
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:198
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/quoting.rb:68
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:173
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:201
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:203
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:205
+
+     29652  "service"
+     24348  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      2632  activerecord-5.2.8.1/lib/active_record/associations/association.rb:183
+      2632  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+         5  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         3  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:400
+         3  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+         2  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:72
+         2  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:94
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:107
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:108
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:115
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:116
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:98
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:19
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:20
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:28
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:32
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:33
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:36
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:651
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:658
+         1  activesupport-5.2.8.1/lib/active_support/dependencies.rb:423
+         1  activesupport-5.2.8.1/lib/active_support/ordered_options.rb:42
+         1  pg-1.5.4/lib/pg/connection.rb:330
+         1  pg-1.5.4/lib/pg/connection.rb:346
+         1  pg-1.5.4/lib/pg/connection.rb:778
+         1  pg-1.5.4/lib/pg/connection.rb:779
+
+     22512  "1"
+     13119  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+      8854  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+       163  ruby/lib/rubygems/version.rb:407
+       163  ruby/lib/rubygems/version.rb:408
+        33  ruby/lib/uri/common.rb:349
+        33  ruby/lib/uri/common.rb:350
+        33  ruby/lib/uri/common.rb:351
+        33  ruby/lib/uri/common.rb:352
+        30  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         6  nokogiri-1.15.4/lib/nokogiri/version/info.rb:41
+         4  ruby/lib/ipaddr.rb:647
+         4  ruby/lib/ipaddr.rb:654
+         3  ruby/lib/uri/common.rb:342
+         3  bundler-2.0.2/lib/bundler/current_ruby.rb:25
+         3  nokogiri-1.15.4/lib/nokogiri/version/info.rb:39
+         2  ruby/lib/ipaddr.rb:618
+         2  ruby/lib/json/common.rb:156
+         2  activemodel-5.2.8.1/lib/active_model/type/string.rb:18
+         2  globalid-1.1.0/lib/global_id/uri/gid.rb:149
+         2  globalid-1.1.0/lib/global_id/uri/gid.rb:152
+         2  pg-1.5.4/lib/pg/connection.rb:330
+         2  pg-1.5.4/lib/pg/connection.rb:346
+         2  pg-1.5.4/lib/pg/connection.rb:779
+         1  ruby/lib/psych.rb:233
+         1  ruby/lib/securerandom.rb:309
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:36
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:89
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         1  bundler-2.0.2/lib/bundler/feature_flag.rb:28
+         1  pg-1.5.4/lib/pg/connection.rb:38
+         1  pg-1.5.4/lib/pg/connection.rb:778
+         1  rake-13.1.0/lib/rake/version.rb:6
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+
+     19647  "id"
+     11881  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:83
+      7616  activerecord-5.2.8.1/lib/active_record/result.rb:128
+        72  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        60  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+        10  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         5  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         3  loofah-2.21.4/lib/loofah/metahelpers.rb:12
+
+     15961  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/"
+     13511  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:107
+      1408  ruby/lib/pathname.rb:46
+      1042  ruby/lib/pathname.rb:42
+
+     14722  "number"
+      3226  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      2613  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:219
+      1613  activerecord-5.2.8.1/lib/active_record/validations/uniqueness.rb:102
+      1613  activerecord-5.2.8.1/lib/active_record/validations/uniqueness.rb:73
+      1000  ruby/lib/json/common.rb:156
+      1000  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:83
+      1000  activerecord-5.2.8.1/lib/active_record/relation/predicate_builder.rb:29
+      1000  activerecord-5.2.8.1/lib/active_record/result.rb:128
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:46
+       613  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        22  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        16  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+         1  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/quoting.rb:68
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+
+     13863  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3"
+     13511  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:107
+       114  ruby/lib/pathname.rb:332
+        57  ruby/lib/pathname.rb:147
+        42  railties-5.2.8.1/lib/rails/paths.rb:193
+        22  railties-5.2.8.1/lib/rails/paths.rb:196
+        15  ruby/lib/rubygems/util.rb:89
+        11  ruby/lib/pathname.rb:375
+        11  ruby/lib/pathname.rb:42
+        10  ruby/lib/rubygems/util.rb:86
+         9  bundler-2.0.2/lib/bundler/shared_helpers.rb:72
+         8  bundler-2.0.2/lib/bundler.rb:252
+         8  railties-5.2.8.1/lib/rails/engine.rb:692
+         6  bundler-2.0.2/lib/bundler/shared_helpers.rb:274
+         6  bundler-2.0.2/lib/bundler/shared_helpers.rb:276
+         5  ruby/lib/rubygems/bundler_version_finder.rb:54
+         4  railties-5.2.8.1/lib/rails/engine.rb:684
+         2  ruby/lib/pathname.rb:351
+         2  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         2  railties-5.2.8.1/lib/rails/application.rb:107
+         2  railties-5.2.8.1/lib/rails/engine.rb:685
+         2  /Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/Rakefile:4
+         1  actionmailer-5.2.8.1/lib/action_mailer/railtie.rb:33
+         1  actionview-5.2.8.1/lib/action_view/template/resolver.rb:349
+         1  bootsnap-1.17.0/lib/bootsnap.rb:91
+         1  bundler-2.0.2/lib/bundler.rb:554
+         1  bundler-2.0.2/lib/bundler.rb:80
+         1  railties-5.2.8.1/lib/rails/application.rb:329
+         1  railties-5.2.8.1/lib/rails/application/configuration.rb:42
+         1  railties-5.2.8.1/lib/rails/paths.rb:128
+         1  rake-13.1.0/lib/rake/application.rb:58
+         1  rake-13.1.0/lib/rake/application.rb:703
+         1  rake-13.1.0/lib/rake/application.rb:711
+         1  rake-13.1.0/lib/rake/application.rb:732
+         1  sprockets-4.2.1/lib/sprockets/paths.rb:22
+         1  sprockets-rails-3.4.2/lib/sprockets/railtie.rb:188
+
+     13595  "2"
+     13098  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+       147  ruby/lib/rubygems/version.rb:407
+       146  ruby/lib/rubygems/version.rb:408
+        33  ruby/lib/uri/common.rb:349
+        33  ruby/lib/uri/common.rb:350
+        33  ruby/lib/uri/common.rb:351
+        33  ruby/lib/uri/common.rb:352
+         9  bundler-2.0.2/lib/bundler/current_ruby.rb:25
+         6  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         4  nokogiri-1.15.4/lib/nokogiri/version/info.rb:28
+         4  nokogiri-1.15.4/lib/nokogiri/version/info.rb:30
+         3  ruby/lib/json/common.rb:156
+         3  ruby/lib/uri/common.rb:342
+         3  activemodel-5.2.8.1/lib/active_model/type/string.rb:18
+         3  ruby/lib/rubygems/requirement.rb:115
+         2  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:89
+         2  bundler-2.0.2/lib/bundler/compatibility_guard.rb:5
+         2  tzinfo-1.2.11/lib/tzinfo/ruby_core_support.rb:158
+         2  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+         2  ruby/lib/rubygems/version.rb:229
+         2  <internal:pack>:258
+         1  ruby/lib/json/version.rb:5
+         1  ruby/lib/psych.rb:233
+         1  ruby/lib/securerandom.rb:309
+         1  actioncable-5.2.8.1/lib/action_cable/gem_version.rb:15
+         1  actionmailer-5.2.8.1/lib/action_mailer/gem_version.rb:15
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:36
+         1  actionpack-5.2.8.1/lib/action_pack/gem_version.rb:15
+         1  actionview-5.2.8.1/lib/action_view/gem_version.rb:15
+         1  activejob-5.2.8.1/lib/active_job/gem_version.rb:15
+         1  activemodel-5.2.8.1/lib/active_model/gem_version.rb:15
+         1  activerecord-5.2.8.1/lib/active_record/gem_version.rb:15
+         1  activestorage-5.2.8.1/lib/active_storage/gem_version.rb:15
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  activesupport-5.2.8.1/lib/active_support/gem_version.rb:15
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         1  bundler-2.0.2/lib/bundler/feature_flag.rb:28
+         1  railties-5.2.8.1/lib/rails/gem_version.rb:15
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_timezone_info.rb:362
+         1  ruby/lib/rubygems/requirement.rb:110
+         1  ruby/lib/rubygems/requirement.rb:112
+         1  ruby/lib/rubygems/version.rb:165
+         1  ruby/lib/rubygems/version.rb:176
+         1  ruby/lib/rubygems/version.rb:246
+
+     13568  "active_record"
+     13530  activesupport-5.2.8.1/lib/active_support/subscriber.rb:100
+        15  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        14  railties-5.2.8.1/lib/rails/railtie/configuration.rb:92
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:198
+         2  msgpack-1.7.2/lib/msgpack.rb:32
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:201
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:203
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:205
+         1  activesupport-5.2.8.1/lib/active_support/subscriber.rb:68
+         1  railties-5.2.8.1/lib/rails/railtie/configuration.rb:93
+
+     13566  "sql"
+     13530  activesupport-5.2.8.1/lib/active_support/subscriber.rb:100
+        33  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  activesupport-5.2.8.1/lib/active_support/subscriber.rb:66
+         1  activesupport-5.2.8.1/lib/active_support/subscriber.rb:68
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:53
+
+     13511  "lib/tasks/utils.rake"
+     13511  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:108
+
+     13118  "$1"
+     13118  arel-9.0.0/lib/arel/visitors/postgresql.rb:49
+
+     13097  "$2"
+     13097  arel-9.0.0/lib/arel/visitors/postgresql.rb:49
+
+     12021  "model"
+      3065  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:140
+      1839  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:141
+      1226  activemodel-5.2.8.1/lib/active_model/translation.rb:46
+      1000  ruby/lib/json/common.rb:156
+      1000  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:83
+      1000  activerecord-5.2.8.1/lib/active_record/result.rb:128
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:407
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:415
+       613  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:145
+        27  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        16  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+         4  i18n-1.14.1/lib/i18n.rb:415
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         1  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+
+      9385  "0.1"
+      9372  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+         7  ruby/lib/rubygems/version.rb:165
+         2  ruby/lib/rubygems/requirement.rb:115
+         2  ruby/lib/rubygems/version.rb:229
+         1  ruby/lib/rubygems/version.rb:176
+         1  ruby/lib/rubygems/version.rb:206
+
+      9264  "  ↳ lib/tasks/utils.rake:26"
+      4632  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:111
+      4632  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb:23
+
+      9245  "services"
+      5264  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+      1000  ruby/lib/json/common.rb:156
+      1000  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+       936  activerecord-5.2.8.1/lib/active_record/reflection.rb:278
+         5  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:400
+         5  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+         4  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:32
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         2  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         2  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:72
+         1  activerecord-5.2.8.1/lib/active_record/associations.rb:1841
+         1  activerecord-5.2.8.1/lib/active_record/associations.rb:1856
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:107
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:108
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:115
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:116
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:54
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:55
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:64
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:65
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:72
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:88
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:99
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/utils.rb:71
+         1  activerecord-5.2.8.1/lib/active_record/model_schema.rb:513
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+
+      8852  "\"LIMIT\""
+      8852  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+
+      8852  "[\"LIMIT\", 1]"
+      8852  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+
+      8478  "  ↳ lib/tasks/utils.rake:22"
+      4239  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:111
+      4239  activesupport-5.2.8.1/lib/active_support/tagged_logging.rb:23
+
+      7026  "duration_minutes"
+      1000  ruby/lib/json/common.rb:156
+      1000  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:382
+      1000  activemodel-5.2.8.1/lib/active_model/validations/numericality.rb:128
+      1000  activemodel-5.2.8.1/lib/active_model/validations/numericality.rb:26
+      1000  activerecord-5.2.8.1/lib/active_record/attribute_methods/before_type_cast.rb:49
+      1000  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        16  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         3  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+
+      7026  "price_cents"
+      1000  ruby/lib/json/common.rb:156
+      1000  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:382
+      1000  activemodel-5.2.8.1/lib/active_model/validations/numericality.rb:128
+      1000  activemodel-5.2.8.1/lib/active_model/validations/numericality.rb:26
+      1000  activerecord-5.2.8.1/lib/active_record/attribute_methods/before_type_cast.rb:49
+      1000  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        16  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         3  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+
+      6925  "bus"
+      3002  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  ruby/lib/json/common.rb:156
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:407
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:408
+       613  activemodel-5.2.8.1/lib/active_model/translation.rb:58
+        10  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+         8  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:94
+         6  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         5  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:140
+         5  i18n-1.14.1/lib/i18n.rb:415
+         4  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:400
+         3  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:141
+         3  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:107
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:108
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:115
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:116
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:19
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:20
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:28
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:29
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:32
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:33
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:36
+         2  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:37
+         2  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         2  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         2  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         2  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+         2  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:72
+         1  activemodel-5.2.8.1/lib/active_model/naming.rb:196
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/has_and_belongs_to_many.rb:98
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:651
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:658
+         1  activesupport-5.2.8.1/lib/active_support/dependencies.rb:423
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:145
+
+      6805  ""
+      1856  ruby/lib/pathname.rb:42
+      1842  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:141
+       924  ruby/lib/pathname.rb:46
+       614  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:140
+       268  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:97
+       228  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+       195  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+       188  listen-3.1.5/lib/listen/record.rb:33
+       142  listen-3.1.5/lib/listen/record.rb:17
+       123  listen-3.1.5/lib/listen/record.rb:45
+        64  ruby/lib/pathname.rb:149
+        39  pg-1.5.4/lib/pg/connection.rb:330
+        39  pg-1.5.4/lib/pg/connection.rb:346
+        39  pg-1.5.4/lib/pg/connection.rb:779
+        38  pg-1.5.4/lib/pg/connection.rb:778
+        32  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:394
+        29  listen-3.1.5/lib/listen/record.rb:80
+        13  ruby/lib/pathname.rb:382
+        13  ruby/lib/uri/common.rb:13
+        12  marcel-1.0.2/lib/marcel/mime_type.rb:7
+        10  listen-3.1.5/lib/listen/record/entry.rb:33
+         5  ruby/lib/ipaddr.rb:644
+         4  ruby/lib/ipaddr.rb:646
+         4  actionpack-5.2.8.1/lib/action_dispatch/routing/mapper.rb:1801
+         4  activerecord-5.2.8.1/lib/active_record/inheritance.rb:185
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+         4  bootsnap-1.17.0/lib/bootsnap/load_path_cache/cache.rb:79
+         4  nokogiri-1.15.4/lib/nokogiri/css/xpath_visitor.rb:233
+         4  ruby/lib/rubygems/ext/builder.rb:9
+         3  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:262
+         3  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:76
+         3  bootsnap-1.17.0/lib/bootsnap/setup.rb:3
+         3  ruby/lib/rubygems/specification.rb:1164
+         2  ruby/lib/erb.rb:509
+         2  ruby/lib/erb.rb:905
+         2  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:20
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache.rb:15
+         2  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:74
+         2  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:75
+         2  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:77
+         2  bootsnap-1.17.0/lib/bootsnap/load_path_cache/path_scanner.rb:3
+         2  bundler-2.0.2/lib/bundler/yaml_serializer.rb:57
+         2  globalid-1.1.0/lib/global_id/uri/gid.rb:149
+         1  (eval):1
+         1  ruby/lib/erb.rb:621
+         1  ruby/lib/ipaddr.rb:647
+         1  ruby/lib/json/common.rb:70
+         1  ruby/lib/json/common.rb:71
+         1  ruby/lib/json/common.rb:72
+         1  ruby/lib/json/common.rb:73
+         1  ruby/lib/pathname.rb:116
+         1  ruby/lib/pathname.rb:35
+         1  ruby/lib/pathname.rb:65
+         1  ruby/lib/psych.rb:456
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:23
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:35
+         1  actionview-5.2.8.1/lib/action_view/template/resolver.rb:349
+         1  activerecord-5.2.8.1/lib/active_record/dynamic_matchers.rb:38
+         1  activesupport-5.2.8.1/lib/active_support/inflector/inflections.rb:62
+         1  activesupport-5.2.8.1/lib/active_support/inflector/inflections.rb:63
+         1  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:79
+         1  bundler-2.0.2/lib/bundler/definition.rb:76
+         1  erubi-1.12.0/lib/erubi.rb:17
+         1  listen-3.1.5/lib/listen/adapter/bsd.rb:21
+         1  listen-3.1.5/lib/listen/adapter/darwin.rb:14
+         1  listen-3.1.5/lib/listen/adapter/linux.rb:24
+         1  listen-3.1.5/lib/listen/adapter/windows.rb:8
+         1  memory_profiler-1.0.1/lib/memory_profiler/cli.rb:47
+         1  minitest-5.20.0/lib/minitest/assertions.rb:201
+         1  pg-1.5.4/lib/pg/connection.rb:38
+         1  rake-13.1.0/lib/rake/application.rb:734
+         1  sprockets-4.2.1/lib/sprockets/manifest.rb:47
+         1  sprockets-4.2.1/lib/sprockets/utils.rb:37
+         1  sprockets-rails-3.4.2/lib/sprockets/railtie.rb:133
+         1  ruby/lib/rubygems/dependency.rb:282
+
+      6313  "\"name\""
+      6259  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+        32  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:372
+        20  arel-9.0.0/lib/arel/visitors/to_sql.rb:128
+         2  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/quoting.rb:47
+
+      6280  "empty?"
+      6000  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:454
+       252  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         4  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:400
+         4  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:198
+         3  ruby/lib/json/common.rb:61
+         2  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:401
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:201
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:203
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:205
+         1  ruby/lib/forwardable.rb:207
+         1  ruby/lib/forwardable.rb:211
+         1  ruby/lib/forwardable.rb:214
+         1  ruby/lib/forwardable.rb:215
+         1  ruby/lib/forwardable.rb:218
+         1  ruby/lib/forwardable.rb:226
+         1  ruby/lib/forwardable/impl.rb:5
+         1  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/thread_safe/util/data_structures.rb:32
+         1  rake-13.1.0/lib/rake/file_list.rb:44
+
+      5941  "/"
+      2224  ruby/lib/pathname.rb:42
+      1112  ruby/lib/pathname.rb:46
+       974  ruby/lib/pathname.rb:116
+       974  ruby/lib/pathname.rb:66
+       320  ruby/lib/pathname.rb:149
+       133  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        64  ruby/lib/pathname.rb:148
+        64  ruby/lib/pathname.rb:332
+        31  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+         5  ruby/lib/pathname.rb:35
+         4  ruby/lib/uri/rfc3986_parser.rb:44
+         2  ruby/lib/json/common.rb:61
+         2  ruby/lib/pathname.rb:34
+         2  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:22
+         2  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:24
+         2  actionpack-5.2.8.1/lib/action_dispatch/routing/mapper.rb:99
+         2  globalid-1.1.0/lib/global_id/uri/gid.rb:149
+         2  globalid-1.1.0/lib/global_id/uri/gid.rb:166
+         2  rack-2.2.8/lib/rack/utils.rb:604
+         2  sprockets-4.2.1/lib/sprockets/path_utils.rb:91
+         1  ruby/lib/uri/common.rb:13
+         1  ruby/lib/uri/common.rb:342
+         1  ruby/lib/uri/common.rb:349
+         1  ruby/lib/uri/common.rb:350
+         1  ruby/lib/uri/common.rb:351
+         1  ruby/lib/uri/common.rb:352
+         1  actionview-5.2.8.1/lib/action_view/template/resolver.rb:349
+         1  bootsnap-1.17.0/lib/bootsnap.rb:5
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache.rb:15
+         1  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:74
+         1  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:75
+         1  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:76
+         1  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:79
+         1  bootsnap-1.17.0/lib/bootsnap/setup.rb:3
+         1  nokogiri-1.15.4/lib/nokogiri/css/xpath_visitor.rb:233
+         1  rack-2.2.8/lib/rack/utils.rb:181
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/ext/builder.rb:9
+
+      5285  "to_ary"
+      5264  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:279
+        19  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  ruby/lib/json/common.rb:61
+         1  rake-13.1.0/lib/rake/file_list.rb:44
+
+      5275  "bus_id="
+      2632  activemodel-5.2.8.1/lib/active_model/attribute_assignment.rb:49
+      2632  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:279
+         6  activerecord-5.2.8.1/lib/active_record/attribute_methods/write.rb:26
+         3  activerecord-5.2.8.1/lib/active_record/attribute_methods/write.rb:20
+         2  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:406
+
+      5274  "after_add"
+      5264  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+         5  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:32
+         5  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+      5274  "before_add"
+      5264  activerecord-5.2.8.1/lib/active_record/associations/collection_association.rb:481
+         5  activerecord-5.2.8.1/lib/active_record/associations/builder/collection_association.rb:32
+         5  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+      5269  "service="
+      2632  activemodel-5.2.8.1/lib/active_model/attribute_assignment.rb:49
+      2632  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:279
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  activesupport-5.2.8.1/lib/active_support/ordered_options.rb:42
+
+      5110  "to"
+      3000  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  ruby/lib/json/common.rb:156
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        82  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         6  listen-3.1.5/lib/listen/fsm.rb:33
+         2  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/nodes/node.rb:85
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:107
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:108
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:115
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:116
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:19
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:20
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:28
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:32
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:33
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:36
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:658
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+
+      5071  "from"
+      3000  activerecord-5.2.8.1/lib/active_record/reflection.rb:116
+      1000  ruby/lib/json/common.rb:156
+      1000  activesupport-5.2.8.1/lib/active_support/core_ext/hash/keys.rb:40
+        37  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         4  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:198
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:201
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:203
+         2  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:205
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         1  ruby/lib/cgi/core.rb:448
+         1  actionpack-5.2.8.1/lib/action_dispatch/http/request.rb:49
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/nodes/node.rb:85
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:107
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:108
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:115
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/association.rb:116
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:19
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:20
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:28
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:32
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:33
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:36
+         1  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:181
+         1  activerecord-5.2.8.1/lib/active_record/autosave_association.rb:212
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:348
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:37
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:658
+         1  activerecord-5.2.8.1/lib/active_record/relation/query_methods.rb:66
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:405
+
+      4706  "\n"
+      2471  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+       743  ruby/lib/rubygems/stub_specification.rb:118
+       167  ruby/lib/rubygems/specification.rb:1164
+       166  ruby/lib/rubygems/ext/builder.rb:9
+       115  rake-13.1.0/lib/rake/file_list.rb:76
+        90  ruby/lib/erb.rb:905
+        85  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+        83  activesupport-5.2.8.1/lib/active_support/core_ext/module/attribute_accessors.rb:57
+        82  activesupport-5.2.8.1/lib/active_support/core_ext/module/attribute_accessors.rb:124
+        75  activesupport-5.2.8.1/lib/active_support/callbacks.rb:814
+        65  ruby/lib/uri/common.rb:13
+        50  nokogiri-1.15.4/lib/nokogiri/xml/parse_options.rb:172
+        40  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:76
+        26  msgpack-1.7.2/lib/msgpack.rb:13
+        24  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/object.rb:92
+        23  activerecord-5.2.8.1/lib/active_record/relation/query_methods.rb:68
+        23  msgpack-1.7.2/lib/msgpack.rb:15
+        22  ruby/lib/forwardable/impl.rb:14
+        22  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:75
+        22  bootsnap-1.17.0/lib/bootsnap/setup.rb:3
+        19  activesupport-5.2.8.1/lib/active_support/core_ext/string/output_safety.rb:256
+        19  bootsnap-1.17.0/lib/bootsnap/compile_cache.rb:15
+        19  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:77
+        16  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:79
+        16  rake-13.1.0/lib/rake/file_list.rb:67
+        15  ruby/lib/rubygems/dependency.rb:282
+        14  activerecord-5.2.8.1/lib/active_record/associations/builder/singular_association.rb:27
+        13  bootsnap-1.17.0/lib/bootsnap.rb:5
+        13  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:74
+        12  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:78
+        10  ruby/lib/uri/common.rb:14
+        10  msgpack-1.7.2/lib/msgpack.rb:16
+        10  nokogiri-1.15.4/lib/nokogiri/xml/node/save_options.rb:52
+         9  bootsnap-1.17.0/lib/bootsnap/load_path_cache/store.rb:5
+         8  i18n-1.14.1/lib/i18n.rb:68
+         7  activerecord-5.2.8.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb:56
+         7  bootsnap-1.17.0/lib/bootsnap.rb:6
+         6  activesupport-5.2.8.1/lib/active_support/core_ext/module/delegation.rb:262
+         6  bundler-2.0.2/lib/bundler/dsl.rb:47
+         6  concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/object.rb:134
+         6  msgpack-1.7.2/lib/msgpack.rb:11
+         6  msgpack-1.7.2/lib/msgpack.rb:12
+         5  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:44
+         5  bootsnap-1.17.0/lib/bootsnap/load_path_cache/path_scanner.rb:3
+         4  ruby/lib/psych/tree_builder.rb:44
+         4  actionview-5.2.8.1/lib/action_view/lookup_context.rb:28
+         4  bootsnap-1.17.0/lib/bootsnap.rb:4
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:46
+         4  bootsnap-1.17.0/lib/bootsnap/load_path_cache.rb:45
+         3  ruby/lib/mutex_m.rb:46
+         3  msgpack-1.7.2/lib/msgpack.rb:17
+         3  rails-optimization-task3/bin/rake:3
+         2  actionpack-5.2.8.1/lib/action_dispatch/routing/polymorphic_routes.rb:148
+         2  msgpack-1.7.2/lib/msgpack.rb:14
+         2  /Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/config/boot.rb:4
+         1  ruby/lib/erb.rb:507
+         1  ruby/lib/erb.rb:508
+         1  ruby/lib/erb.rb:573
+         1  ruby/lib/erb.rb:634
+         1  ruby/lib/json/common.rb:79
+         1  ruby/lib/json/common.rb:80
+         1  ruby/lib/openssl/config.rb:130
+         1  ruby/lib/uri/common.rb:342
+         1  ruby/lib/uri/common.rb:349
+         1  ruby/lib/uri/common.rb:350
+         1  ruby/lib/uri/common.rb:351
+         1  ruby/lib/uri/common.rb:352
+         1  bootsnap-1.17.0/lib/bootsnap.rb:3
+         1  msgpack-1.7.2/lib/msgpack.rb:10
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_timezone_info.rb:430
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_timezone_info.rb:431
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_timezone_info.rb:432
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_timezone_info.rb:54
+         1  ruby/lib/rubygems/ext/builder.rb:10
+         1  rails-optimization-task3/bin/rake:7
+
+      4658  "26"
+      4632  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+         9  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:439
+         5  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:440
+         2  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+         2  pg-1.5.4/lib/pg_ext.bundle:0
+         1  ruby/lib/uri/common.rb:342
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:36
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb:828
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:442
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:443
+         1  ruby/lib/rubygems/version.rb:407
+         1  ruby/lib/rubygems/version.rb:408
+
+      4632  "  ↳ lib/tasks/utils.rake:26\n"
+      4632  activesupport-5.2.8.1/lib/active_support/logger.rb:104
+
+      4616  "Service Load"
+      4616  activerecord-5.2.8.1/lib/active_record/querying.rb:41
+
+      4344  "22"
+      4239  activesupport-5.2.8.1/lib/active_support/core_ext/numeric/conversions.rb:107
+        69  pg-1.5.4/lib/pg_ext.bundle:0
+         9  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:439
+         7  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:440
+         5  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+         4  ruby/lib/rubygems/version.rb:407
+         4  ruby/lib/rubygems/version.rb:408
+         3  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:442
+         1  ruby/lib/uri/common.rb:342
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:36
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  tzinfo-1.2.11/lib/tzinfo/zoneinfo_data_source.rb:443
+
+      4239  "  ↳ lib/tasks/utils.rake:22\n"
+      4239  activesupport-5.2.8.1/lib/active_support/logger.rb:104
+
+      4230  "\"services\".*"
+      4230  arel-9.0.0/lib/arel/visitors/to_sql.rb:729
+
+      4229  "\e[1m\e[34mSELECT  \"services\".* FROM \"services\" WHERE \"services\".\"name\" = $1 LIMIT $2\e[0m"
+      4229  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb:109
+
+      4229  "\"$user\", public-SELECT  \"services\".* FROM \"services\" WHERE \"services\".\"name\" = $1 LIMIT $2"
+      4229  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql_adapter.rb:666
+
+      4229  "\"services\".\"name\""
+      4229  arel-9.0.0/lib/arel/visitors/to_sql.rb:729
+
+      4229  "SELECT  \"services\".* FROM \"services\" WHERE \"services\".\"name\" = $1 LIMIT $2"
+      4229  arel-9.0.0/lib/arel/collectors/plain_string.rb:6
+
+      4052  "\"bus_id\""
+      4019  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:37
+        32  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:372
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/quoting.rb:47
+
+      3876  "\e[1m\e[36mService Load (0.1ms)\e[0m"
+      3876  activesupport-5.2.8.1/lib/active_support/log_subscriber.rb:109
+
+      3876  "Service Load (0.1ms)"
+      3876  activerecord-5.2.8.1/lib/active_record/log_subscriber.rb:28
+
+      3696  "inclusion"
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:407
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:408
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:410
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:415
+       613  activemodel-5.2.8.1/lib/active_model/errors.rb:416
+       613  i18n-1.14.1/lib/i18n/backend/simple.rb:100
+         5  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         5  i18n-1.14.1/lib/i18n.rb:415
+         4  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:72
+         2  activemodel-5.2.8.1/lib/active_model/validations/validates.rb:116
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+
+
+Retained String Report
+-----------------------------------
+        51  ","
+        49  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+
+        46  "b"
+        42  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+         1  ruby/lib/securerandom.rb:309
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+        43  "array_in"
+        42  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        31  "load_config"
+        29  rake-13.1.0/lib/rake/task.rb:375
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+        26  "rb"
+        20  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:144
+         4  railties-5.2.8.1/lib/rails/paths.rb:184
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        19  ""
+        12  marcel-1.0.2/lib/marcel/mime_type.rb:7
+         4  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+         1  actionpack-5.2.8.1/lib/action_dispatch/journey/router/utils.rb:35
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  minitest-5.20.0/lib/minitest/assertions.rb:201
+
+        18  "environment"
+        15  rake-13.1.0/lib/rake/task.rb:375
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  rake-13.1.0/lib/rake/task.rb:100
+         1  rake-13.1.0/lib/rake/task_manager.rb:29
+
+        18  "validate"
+        18  activesupport-5.2.8.1/lib/active_support/callbacks.rb:462
+
+        17  "rails"
+        10  actionpack-5.2.8.1/lib/action_dispatch/journey/scanner.rb:54
+         2  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:94
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  bundler-2.0.2/lib/bundler/lockfile_parser.rb:194
+         1  bundler-2.0.2/lib/bundler/lockfile_parser.rb:216
+         1  bundler-2.0.2/lib/bundler/lockfile_parser.rb:222
+         1  /Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/Gemfile:6
+
+        13  "5.2.8.1"
+         2  ruby/lib/rubygems/version.rb:229
+         1  actioncable-5.2.8.1/lib/action_cable/gem_version.rb:15
+         1  actionmailer-5.2.8.1/lib/action_mailer/gem_version.rb:15
+         1  actionpack-5.2.8.1/lib/action_pack/gem_version.rb:15
+         1  actionview-5.2.8.1/lib/action_view/gem_version.rb:15
+         1  activejob-5.2.8.1/lib/active_job/gem_version.rb:15
+         1  activemodel-5.2.8.1/lib/active_model/gem_version.rb:15
+         1  activerecord-5.2.8.1/lib/active_record/gem_version.rb:15
+         1  activestorage-5.2.8.1/lib/active_storage/gem_version.rb:15
+         1  activesupport-5.2.8.1/lib/active_support/gem_version.rb:15
+         1  railties-5.2.8.1/lib/rails/gem_version.rb:15
+         1  ruby/lib/rubygems/version.rb:206
+
+        12  ":format"
+        11  actionpack-5.2.8.1/lib/action_dispatch/journey/scanner.rb:50
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        12  "activesupport"
+        11  bundler-2.0.2/lib/bundler/lockfile_parser.rb:222
+         1  bundler-2.0.2/lib/bundler/spec_set.rb:175
+
+        12  "format"
+        11  actionpack-5.2.8.1/lib/action_dispatch/journey/nodes/node.rb:85
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        11  "id"
+        10  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        10  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3"
+         2  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         2  railties-5.2.8.1/lib/rails/engine.rb:692
+         1  ruby/lib/pathname.rb:351
+         1  ruby/lib/pathname.rb:42
+         1  actionview-5.2.8.1/lib/action_view/template/resolver.rb:349
+         1  rake-13.1.0/lib/rake/application.rb:58
+         1  rake-13.1.0/lib/rake/application.rb:711
+         1  sprockets-4.2.1/lib/sprockets/paths.rb:22
+
+        10  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/helpers"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         2  railties-5.2.8.1/lib/rails/paths.rb:211
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:193
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+
+        10  "active_storage"
+         5  actionpack-5.2.8.1/lib/action_dispatch/journey/scanner.rb:54
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:94
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/railtie.rb:179
+         1  rake-13.1.0/lib/rake/dsl_definition.rb:136
+
+        10  "buses"
+         6  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:400
+         1  activemodel-5.2.8.1/lib/active_model/naming.rb:163
+         1  activerecord-5.2.8.1/lib/active_record/connection_adapters/schema_cache.rb:114
+         1  activerecord-5.2.8.1/lib/active_record/model_schema.rb:513
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+        10  "r"
+         6  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb:18
+         1  ruby/lib/securerandom.rb:309
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+
+         9  "/Users/igor.arkhipov/.rbenv/versions/2.7.7/lib/ruby/gems/2.7.0"
+         2  bundler-2.0.2/lib/bundler.rb:80
+         2  ruby/lib/rubygems/path_support.rb:81
+         2  ruby/lib/rubygems/specification.rb:2104
+         1  ruby/lib/rubygems/path_support.rb:80
+         1  ruby/lib/rubygems/specification.rb:2106
+         1  ruby/lib/rubygems/specification.rb:800
+
+         9  "1"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/common.rb:342
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:25
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         1  rake-13.1.0/lib/rake/version.rb:6
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+
+         9  "2"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/common.rb:342
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:25
+         1  bundler-2.0.2/lib/bundler/current_ruby.rb:82
+         1  bundler-2.0.2/lib/bundler/environment_preserver.rb:24
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+         1  ruby/lib/rubygems/version.rb:229
+
+         9  "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:21
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:22
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:23
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:24
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:25
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:26
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:27
+
+         9  "yml"
+         4  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:144
+         4  railties-5.2.8.1/lib/rails/paths.rb:184
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/assets"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/channels"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/controllers"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/jobs"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/mailers"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/app/models"
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  listen-3.1.5/lib/listen/record.rb:13
+         1  msgpack-1.7.2/lib/msgpack.rb:32
+         1  railties-5.2.8.1/lib/rails/paths.rb:197
+         1  railties-5.2.8.1/lib/rails/paths.rb:211
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/config/locales"
+         2  ruby/lib/pathname.rb:332
+         2  activesupport-5.2.8.1/lib/active_support/evented_file_update_checker.rb:140
+         2  listen-3.1.5/lib/listen/adapter/config.rb:17
+         1  activesupport-5.2.8.1/lib/active_support/i18n_railtie.rb:114
+         1  listen-3.1.5/lib/listen/record.rb:13
+
+         8  "/Users/igor.arkhipov/Documents/Work/Ruby/thinknetica/rails-optimization-task3/public"
+         3  railties-5.2.8.1/lib/rails/paths.rb:193
+         2  actionpack-5.2.8.1/lib/action_dispatch/middleware/static.rb:19
+         2  railties-5.2.8.1/lib/rails.rb:111
+         1  rack-2.2.8/lib/rack/files.rb:30
+
+         8  "actionpack"
+         7  bundler-2.0.2/lib/bundler/lockfile_parser.rb:222
+         1  bundler-2.0.2/lib/bundler/spec_set.rb:175
+
+         8  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:14
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:15
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:16
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:17
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:18
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:19
+
+         8  "application/zip"
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:14
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:21
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:29
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:30
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:31
+         1  marcel-1.0.2/lib/marcel/mime_type/definitions.rb:9
+
+         8  "check_protected_environments"
+         6  rake-13.1.0/lib/rake/task.rb:375
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+         8  "ext/extconf.rb"
+         8  ruby/lib/rubygems/stub_specification.rb:123
+
+         8  "integer"
+         7  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+         7  "bigint"
+         5  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+
+         7  "bus_id"
+         2  activerecord-5.2.8.1/lib/active_record/connection_adapters/postgresql/database_statements.rb:24
+         1  activemodel-5.2.8.1/lib/active_model/attribute_methods.rb:380
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods.rb:29
+         1  activerecord-5.2.8.1/lib/active_record/attribute_methods/time_zone_conversion.rb:84
+         1  activerecord-5.2.8.1/lib/active_record/reflection.rb:658
+         1  activesupport-5.2.8.1/lib/active_support/inflector/methods.rb:251
+
+         7  "index"
+         5  actionpack-5.2.8.1/lib/action_dispatch/routing/mapper.rb:337
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  rake-13.1.0/lib/rake/file_list.rb:44
+
+         7  "tmp"
+         4  rake-13.1.0/lib/rake/file_list.rb:423
+         1  bootsnap-1.17.0/lib/bootsnap/setup.rb:3
+         1  rake-13.1.0/lib/rake/dsl_definition.rb:136
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+         6  "4"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/common.rb:342
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/version.rb:206
+         1  ruby/lib/rubygems/version.rb:229
+
+         6  "May"
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         2  bootsnap-1.17.0/lib/bootsnap/compile_cache/yaml.rb:286
+         2  date-3.3.4/lib/date_core.bundle:0
+
+         6  "a"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/ftp.rb:43
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+         6  "d"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/ftp.rb:43
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+         6  "ext/ddtrace_profiling_native_extension/extconf.rb"
+         6  ruby/lib/rubygems/stub_specification.rb:123
+
+         6  "ext/racc/cparse/extconf.rb"
+         6  ruby/lib/rubygems/stub_specification.rb:123
+
+         6  "info"
+         3  actionpack-5.2.8.1/lib/action_dispatch/journey/scanner.rb:54
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  ruby_dep-1.5.0/lib/ruby_dep/logger.rb:20
+         1  ruby/lib/rubygems/core_ext/kernel_require.rb:86
+
+         6  "z"
+         1  ruby/lib/securerandom.rb:309
+         1  ruby/lib/uri/common.rb:342
+         1  activesupport-5.2.8.1/lib/active_support/core_ext/range/each.rb:9
+         1  bootsnap-1.17.0/lib/bootsnap/compile_cache/iseq.rb:53
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:400
+         1  sprockets-4.2.1/lib/sprockets/source_map_utils.rb:401
+
