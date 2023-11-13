@@ -16,10 +16,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'bullet'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request'
-  gem 'pghero'
   gem 'pg_query'
   gem 'rack-mini-profiler'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -27,7 +25,13 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails'
   gem 'rspec-benchmark'
+end
+
+group :development, :test do
+  gem 'bullet'
+  gem 'pghero'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
