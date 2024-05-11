@@ -5,7 +5,7 @@
 
 task :reload_json, [:file_name] => :environment do |_task, args|
   # Vernier.run(out: "time_profile.json") do
-  profile = StackProf.run(mode: :wall, raw: true) do
+  # profile = StackProf.run(mode: :wall, raw: true) do
     # Rails.logger.level = Logger::DEBUG
     # ActiveRecord::Base.logger = Logger.new STDOUT
 
@@ -54,9 +54,9 @@ task :reload_json, [:file_name] => :environment do |_task, args|
 
       BusesService.import %i[bus_id service_id], services, validate: false, on_duplicate_key_ignore: true
       Trip.import %i[from_id to_id start_time duration_minutes price_cents bus_id], trips, validate: false
-      puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
+      # puts format('MEMORY USAGE: %d MB', (`ps -o rss= -p #{Process.pid}`.to_i / 1024))
     end
-  end
+  # end
 
   ActiveRecord::Base.connection.execute <<-SQL
       ALTER TABLE buses_services DROP CONSTRAINT IF EXISTS for_upsert;

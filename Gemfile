@@ -12,6 +12,9 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 6.1'
 gem 'stackprof'
 gem 'vernier', '~> 1.0'
+gem 'rack-mini-profiler'
+gem 'bullet'
+gem 'memory_profiler'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
