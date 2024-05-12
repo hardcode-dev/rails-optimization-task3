@@ -2,3 +2,6 @@
 /tmp
 /log
 /public
+
+fixtures/1M.json
+fixtures/10M.json
