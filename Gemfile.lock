@@ -48,6 +48,7 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
+    coderay (1.1.3)
     concurrent-ruby (1.2.3)
     crass (1.0.6)
     date (3.3.4)
@@ -89,6 +90,9 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.5.6)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     puma (3.12.6)
     racc (1.7.3)
     rack (2.2.9)
@@ -153,6 +157,7 @@ DEPENDENCIES
   byebug
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
+  pry
   puma (~> 3.11)
   rails (~> 5.2.3)
   tzinfo-data
