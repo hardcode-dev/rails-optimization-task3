@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: $DB_PASSWORD
+
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    env_file: .env
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+
+  adminer:
+    image: adminer
+    ports:
+      - ${ADMINER_PORT:-8080}:8080
+
+volumes:
+  postgres_data:
