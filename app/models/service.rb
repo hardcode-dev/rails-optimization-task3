@@ -19,7 +19,8 @@ class Service < ApplicationRecord
     'Можно не печатать билет',
   ].freeze
 
-  has_and_belongs_to_many :buses, join_table: :buses_services
+  has_many :service_buses
+  has_many :buses, through: :service_buses
 
   validates :name, presence: true
   validates :name, inclusion: { in: SERVICES }

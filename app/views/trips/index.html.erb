@@ -2,11 +2,11 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips.length} рейсов" %>
 </h2>
 
 <%= render partial: "trip", collection: @trips, spacer_template: 'delimiter' %>
 
-<% if @trips.size > 0 %>
+<% if @trips.length > 0 %>
     <%= render "delimiter" %>
 <% end %>
