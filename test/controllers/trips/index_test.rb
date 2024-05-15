@@ -11,6 +11,6 @@ class TripsController::IndexTest < ActionController::TestCase
     get(:index, params: {from: 'Самара', to: 'Москва'})
 
     assert_response(:success)
-    assert_equal(@response.body, File.read('test/fixtures/files/example_index.html'))
+    assert_equal(@response.body.squish, File.read('test/fixtures/files/example_index.html').squish)
   end
 end

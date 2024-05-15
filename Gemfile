@@ -26,6 +26,8 @@ group :development do
   gem 'annotate'
 end
 
+gem 'strong_migrations'
+
 group :test do
 end
 
