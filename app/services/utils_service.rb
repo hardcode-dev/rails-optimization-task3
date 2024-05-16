@@ -9,18 +9,19 @@ class UtilsService
 
   def initialize
     @cities = {}
-    @buses = {}
-    @buses_services = {}
-    @services = {}
+    @buses = Hash.new { |h, k| h[k] = {} }
+    @services = Service::SERVICES.map.with_index(1).to_h
+    @services_buses = @services.map { |_, index| [index, []] }.to_h
+    @next_bus_id = 0
   end
 
   def call(file_name)
     ActiveRecord::Base.transaction do
       truncate
+      copy_services
       copy_trips(file_name)
       copy_cities
       copy_buses
-      copy_services
       copy_buses_services
     end
   end
@@ -59,12 +60,12 @@ class UtilsService
               trip = FastJsonparser.parse(str)
 
               copy(
-                fetch_city_id(trip, :from),
-                fetch_city_id(trip, :to),
-                trip[:start_time],
-                trip[:duration_minutes],
-                trip[:price_cents],
-                fetch_bus_id(trip[:bus])
+                fetch_city_id(trip[:from]).to_s << ';' <<
+                fetch_city_id(trip[:to]).to_s << ';' <<
+                trip[:start_time].to_s << ';' <<
+                trip[:duration_minutes].to_s << ';' <<
+                trip[:price_cents].to_s << ';' <<
+                fetch_bus_id(trip[:bus]).to_s << "\n"
               )
 
               str.clear
@@ -77,37 +78,25 @@ class UtilsService
     end
   end
 
-  def fetch_city_id(trip, key)
-    id = @cities[trip[key]]
+  def fetch_city_id(key)
+    id = @cities[key]
     if !id
       id = @cities.size + 1
-      @cities[trip[key]] = id
+      @cities[key] = id
     end
 
     id
   end
 
   def fetch_bus_id(bus)
-    bus_key = [bus[:model], bus[:number]]
-    bus_id = @buses[bus_key]
+    bus_id = @buses[bus[:model]][bus[:number]]
 
     if !bus_id
-      bus_id = @buses.size + 1
-      @buses[bus_key] = bus_id
+      bus_id = @next_bus_id += 1
+      @buses[bus[:model]][bus[:number]] = bus_id
 
       bus[:services].each do |service|
-        service_id = @services[service]
-
-        if !service_id
-          service_id = @services.size + 1
-          @services[service] ||= service_id
-        end
-
-        buses_service_id = @buses_services[[bus_id, service_id]]
-        if !buses_service_id
-          buses_service_id = @buses_services.size + 1
-          @buses_services[[bus_id, service_id]] = buses_service_id
-        end
+        @services_buses[@services[service]] << bus_id
       end
     end
 
@@ -121,11 +110,9 @@ class UtilsService
 
     ActiveRecord::Base.connection.raw_connection.copy_data(sql) do
       @cities.each do |name, id|
-        copy(id, name)
+        copy(id.to_s << ';' << name << "\n")
       end
     end
-
-    @cities.clear
   end
 
   def copy_buses
@@ -134,12 +121,12 @@ class UtilsService
     SQL
 
     ActiveRecord::Base.connection.raw_connection.copy_data(sql) do
-      @buses.each do |(model, number), id|
-        copy(id, model, number)
+      @buses.each do |model, numbers|
+        numbers.each do |number, id|
+          copy(id.to_s << ';' << model << ';' << number << "\n")
+        end
       end
     end
-
-    @buses.clear
   end
 
   def copy_services
@@ -149,29 +136,27 @@ class UtilsService
 
     ActiveRecord::Base.connection.raw_connection.copy_data(sql) do
       @services.each do |name, id|
-        copy(id, name)
+        copy(id.to_s << ';' << name << "\n")
       end
     end
-
-    @services.clear
   end
 
   def copy_buses_services
     sql = <<~SQL
-      copy buses_services (id, bus_id, service_id) from stdin with csv delimiter ';'
+      copy buses_services (bus_id, service_id) from stdin with csv delimiter ';'
     SQL
 
     ActiveRecord::Base.connection.raw_connection.copy_data(sql) do
-      @buses_services.each do |(bus_id, service_id), id|
-        copy(id, bus_id, service_id)
+      @services_buses.each do |service_id, bus_ids|
+        bus_ids.each do |bus_id|
+          copy(bus_id.to_s << ';' << service_id.to_s << "\n")
+        end
       end
     end
-
-    @buses_services.clear
   end
 
-  def copy(*values)
+  def copy(values)
     # стримим подготовленный чанк данных в postgres
-    ActiveRecord::Base.connection.raw_connection.put_copy_data(values.join(';') << "\n")
+    ActiveRecord::Base.connection.raw_connection.put_copy_data(values)
   end
 end
