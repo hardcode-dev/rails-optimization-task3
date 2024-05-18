@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16
@@ -10,8 +8,20 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./custom_postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+
+  pghero:
+    image: ankane/pghero
+    container_name: pghero
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/task-4_development
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres_data:

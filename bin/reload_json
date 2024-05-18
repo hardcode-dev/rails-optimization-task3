@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'ruby-prof'
+
+require_relative '../config/environment'
+
+require 'rake'
+Rails.application.load_tasks
+
+# profile = RubyProf::Profile.new(measure_mode: RubyProf::WALL_TIME)
+# GC.disable
+
+# result = profile.profile do
+#   Rake::Task['reload_json'].invoke('fixtures/small.json')
+# end
+
+# printer = RubyProf::GraphHtmlPrinter.new(result)
+# printer.print(File.open('tmp/ruby_prof_result/graph.html', 'w+'))
+
+Rake::Task['reload_json'].invoke('fixtures/small.json')
