@@ -74,7 +74,6 @@ class TripsImporter
         BusesService.import!(buses_services, on_duplicate_key_ignore: true)
         Trip.import!(trips)
       end
-      puts "#{trips.count} - #{Trip.count}"
     end
   end
 end

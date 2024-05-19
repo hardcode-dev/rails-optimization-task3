@@ -31,7 +31,7 @@ RSpec.describe TripsController, type: :controller do
         from:             from,
         to:               to,
         bus:              buses[t % buses.size],
-        start_time:       "16:11",
+        start_time:       "16:0#{t}",
         duration_minutes: '81',
         price_cents:      '12345',
       )
