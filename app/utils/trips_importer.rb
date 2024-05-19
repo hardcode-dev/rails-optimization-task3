@@ -1,9 +1,8 @@
 class TripsImporter
   class << self
     def call(filename)
-
       file_stream = File.open(filename, 'r')
-      chunk_size = 10000
+      chunk_size = 1000
       streamer = Json::Streamer.parser(file_io: file_stream, chunk_size: chunk_size)
 
       ActiveRecord::Base.connection.execute <<~EOF
@@ -17,7 +16,7 @@ class TripsImporter
       batch = []
 
       streamer.get(nesting_level: 1) do |trip|
-        if batch.size == 10000
+        if batch.size == 1000
           process_batch(batch)
           batch = []
         end
