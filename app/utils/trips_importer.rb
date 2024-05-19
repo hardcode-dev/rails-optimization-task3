@@ -3,7 +3,7 @@ class TripsImporter
     def call(filename)
       # json = JSON.parse(File.read(filename))
       file_stream = File.open(filename, 'r')
-      chunk_size = 100
+      chunk_size = 1000
       streamer = Json::Streamer.parser(file_io: file_stream, chunk_size: chunk_size)
 
       ActiveRecord::Base.connection.execute <<~EOF
@@ -16,28 +16,30 @@ class TripsImporter
 
       batch = []
       services_by_names = Service::SERVICES.map { |service_name| Service.create!(name: service_name) }.index_by(&:name)
+      cities = {}
 
       streamer.get(nesting_level: 1) do |trip|
       # json.each do |trip|
-        if batch.size == 100
-          process_batch(batch, services_by_names)
+        if batch.size == 1000
+          process_batch(batch, services_by_names, cities)
           batch = []
         end
 
         batch << trip
       end
 
-      process_batch(batch, services_by_names) if batch.size > 0
+      process_batch(batch, services_by_names, cities) if batch.size > 0
     end
 
     private
 
-    def process_batch(batch, services_by_names)
-      cities = {}
+    def process_batch(batch, services_by_names, cities)
       buses = {}
       services = {}
       trips = []
       buses_services = []
+
+      storage = Hash.new(0)
 
       batch.each do |trip_hash|
         from  = cities[trip_hash['from']] ||= City.new(name: trip_hash['from'])
@@ -54,6 +56,8 @@ class TripsImporter
           BusesService.new(bus: bus, service: services_by_names[service_name])
         end
 
+        storage[[from.name, to.name, bus.number, bus.model]] += 1
+
         trips << Trip.new(
           from:             from,
           to:               to,
@@ -68,8 +72,9 @@ class TripsImporter
         City.import!(cities.values, on_duplicate_key_ignore: true)
         Bus.import!(buses.values, on_duplicate_key_ignore: true)
         BusesService.import!(buses_services, on_duplicate_key_ignore: true)
-        Trip.import!(trips, on_duplicate_key_ignore: true)
+        Trip.import!(trips)
       end
+      puts "#{trips.count} - #{Trip.count}"
     end
   end
 end
