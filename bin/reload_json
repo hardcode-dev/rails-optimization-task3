@@ -19,6 +19,7 @@ Rails.application.load_tasks
 
 time = Benchmark.realtime do
   Rake::Task['reload_json'].invoke('fixtures/large.json')
+  puts "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 
 puts time

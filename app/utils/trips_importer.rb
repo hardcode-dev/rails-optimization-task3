@@ -1,8 +1,9 @@
 class TripsImporter
   class << self
     def call(filename)
+      # json = JSON.parse(File.read(filename))
       file_stream = File.open(filename, 'r')
-      chunk_size = 1000
+      chunk_size = 100
       streamer = Json::Streamer.parser(file_io: file_stream, chunk_size: chunk_size)
 
       ActiveRecord::Base.connection.execute <<~EOF
@@ -14,22 +15,24 @@ class TripsImporter
       EOF
 
       batch = []
+      services_by_names = Service::SERVICES.map { |service_name| Service.create!(name: service_name) }.index_by(&:name)
 
       streamer.get(nesting_level: 1) do |trip|
-        if batch.size == 1000
-          process_batch(batch)
+      # json.each do |trip|
+        if batch.size == 100
+          process_batch(batch, services_by_names)
           batch = []
         end
 
         batch << trip
       end
 
-      process_batch(batch) if batch.size > 0
+      process_batch(batch, services_by_names) if batch.size > 0
     end
 
     private
 
-    def process_batch(batch)
+    def process_batch(batch, services_by_names)
       cities = {}
       buses = {}
       services = {}
@@ -47,9 +50,8 @@ class TripsImporter
           model: trip_hash['bus']['model'],
         )
 
-        buses_services = Service.where(name: trip_hash['bus']['services']).map do |service_name|
-          service = services[service_name] ||= Service.new(name: service_name)
-          BusesService.new(bus: bus, service: service)
+        buses_services = trip_hash['bus']['services'].map do |service_name|
+          BusesService.new(bus: bus, service: services_by_names[service_name])
         end
 
         trips << Trip.new(
@@ -63,7 +65,6 @@ class TripsImporter
       end
 
       ActiveRecord::Base.transaction do
-        City.import!(services.values, on_duplicate_key_ignore: true)
         City.import!(cities.values, on_duplicate_key_ignore: true)
         Bus.import!(buses.values, on_duplicate_key_ignore: true)
         BusesService.import!(buses_services, on_duplicate_key_ignore: true)
