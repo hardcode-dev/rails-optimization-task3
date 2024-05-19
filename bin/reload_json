@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils'
-require 'ruby-prof'
+require 'benchmark'
 
 require_relative '../config/environment'
 
@@ -17,4 +17,8 @@ Rails.application.load_tasks
 # printer = RubyProf::GraphHtmlPrinter.new(result)
 # printer.print(File.open('tmp/ruby_prof_result/graph.html', 'w+'))
 
-Rake::Task['reload_json'].invoke('fixtures/small.json')
+time = Benchmark.realtime do
+  Rake::Task['reload_json'].invoke('fixtures/large.json')
+end
+
+puts time

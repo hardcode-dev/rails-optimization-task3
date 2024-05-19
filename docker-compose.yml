@@ -8,25 +8,81 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./pg_logs:/var/log/postgresql
       - ./custom_postgresql.conf:/etc/postgresql/postgresql.conf
     ports:
       - "5432:5432"
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - my-network
 
   pghero:
     image: ankane/pghero
     container_name: pghero
     environment:
-      DATABASE_URL: postgres://postgres:password@postgres:5432/task-4_development
+      DATABASE_URL: postgres://postgres:password@postgres16:5432/task-4_development
     depends_on:
       - postgres
     ports:
       - "8080:8080"
+    networks:
+      - my-network
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #   ports:
+  #     - "9090:9090"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - my-network
+
+  # postgres_exporter:
+  #   image: prometheuscommunity/postgres-exporter
+  #   container_name: postgres_exporter
+  #   environment:
+  #     DATA_SOURCE_NAME: postgres://postgres:password@postgres16:5432/task-4_development?sslmode=disable
+  #   ports:
+  #     - "9187:9187"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - my-network
+
+  # grafana:
+  #   image: grafana/grafana
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - grafana_data:/var/lib/grafana
+  #   networks:
+  #     - my-network
+
+  # pgbadger:
+  #   image: matsuu/pgbadger
+  #   container_name: pgbadger
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - ./pg_logs:/var/log/postgresql
+  #     - ./pgbadger_reports:/pgbadger_reports
+  #   entrypoint: ["sh", "-c", "pgbadger /var/log/postgresql/postgresql.log -o /pgbadger_reports/pgbadger.html && tail -f /dev/null"]
 
 volumes:
+  pg_logs:
+  pgbadger_reports:
+  grafana_data:
   postgres_data:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ~/dev/postgres
+
+networks:
+  my-network:
+    driver: bridge
