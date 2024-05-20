@@ -15,6 +15,7 @@ namespace :demo do
 
         cities_hash = {}
         services_hash = {}
+        buses_hash = {}
 
         fetch_city = lambda do |name|
           return cities_hash[name] if cities_hash.key?(name)
@@ -25,8 +26,6 @@ namespace :demo do
         end
 
         fetch_service_id = lambda do |service|
-          #services_hash[service] ||= Service.find_or_create_by(name: service)
-
           return services_hash[service] if services_hash.key?(service)
 
           service_id = Service.create(name: service).id
@@ -34,20 +33,21 @@ namespace :demo do
           service_id
         end
 
+        fetch_bus = lambda do |number, model, bus_services|
+          return buses_hash["#{number}-#{model}"] if buses_hash.key?("#{number}-#{model}")
+
+          service_ids = bus_services.map! { |service| fetch_service_id.call(service) }
+          bus = Bus.create(number: number, model: model)
+          bus.service_ids = service_ids
+          buses_hash["#{number}-#{model}"] = bus
+          bus
+        end
+
         json.each do |trip|
           from_city = fetch_city.call(trip['from'])
           to_city = fetch_city.call(trip['to'])
 
-          service_ids = []
-          trip['bus']['services'].each do |service|
-            
-            service_ids << fetch_service_id.call(service)
-          end
-
-          bus = Bus.find_or_create_by(number: trip['bus']['number'])
-          bus.service_ids = service_ids
-          #bus.update(model: trip['bus']['model'], services: services)
-
+          bus = fetch_bus.call(trip['bus']['number'], trip['bus']['model'], trip['bus']['services'])
 
           Trip.create!(
             from: from_city,
