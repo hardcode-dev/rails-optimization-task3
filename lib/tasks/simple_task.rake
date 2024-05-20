@@ -37,8 +37,7 @@ namespace :demo do
           return buses_hash["#{number}-#{model}"] if buses_hash.key?("#{number}-#{model}")
 
           service_ids = bus_services.map! { |service| fetch_service_id.call(service) }
-          bus = Bus.create(number: number, model: model)
-          bus.service_ids = service_ids
+          bus = Bus.create(number: number, model: model, service_ids: service_ids)
           buses_hash["#{number}-#{model}"] = bus
           bus
         end
