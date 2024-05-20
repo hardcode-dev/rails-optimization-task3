@@ -13,53 +13,28 @@ namespace :demo do
         Trip.delete_all
         ActiveRecord::Base.connection.execute('delete from buses_services;')
 
-        cities_hash = {}
-        services_hash = {}
-        buses_hash = {}
-
-        fetch_city = lambda do |name|
-          return cities_hash[name] if cities_hash.key?(name)
-
-          city = City.create(name: name)
-          cities_hash[name] = city
-          city
-        end
-
-        fetch_service_id = lambda do |service|
-          return services_hash[service] if services_hash.key?(service)
-
-          service_id = Service.create(name: service).id
-          services_hash[service] = service_id
-          service_id
-        end
-
-        fetch_bus = lambda do |number, model, bus_services|
-          return buses_hash["#{number}-#{model}"] if buses_hash.key?("#{number}-#{model}")
-
-          service_ids = bus_services.map! { |service| fetch_service_id.call(service) }
-          bus = Bus.create(number: number, model: model, service_ids: service_ids)
-          buses_hash["#{number}-#{model}"] = bus
-          bus
-        end
+        cities = {}
+        services = {}
+        buses = {}
 
         json.each do |trip|
-          from_city = fetch_city.call(trip['from'])
-          to_city = fetch_city.call(trip['to'])
+          from = cities[trip['from']] ||= City.create(name: trip['from'])
+          to = cities[trip['to']] ||= City.create(name: trip['to'])
 
-          bus = fetch_bus.call(trip['bus']['number'], trip['bus']['model'], trip['bus']['services'])
+          bus_services = trip['bus']['services'].map! { |s| services[s] ||= Service.create(name: s) }
+
+          bus = buses[trip['bus']['number']] ||= Bus.create(number: trip['bus']['number'], model: trip['bus']['model'], services: bus_services)
 
           Trip.create!(
-            from: from_city,
-            to: to_city,
+            from: from,
+            to: to,
             bus: bus,
             start_time: trip['start_time'],
             duration_minutes: trip['duration_minutes'],
             price_cents: trip['price_cents'],
           )
-        end
-        
+        end        
       end      
-
     end
 
     puts "Done in #{time.real} seconds"
