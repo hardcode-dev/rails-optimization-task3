@@ -13,6 +13,9 @@ gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
 gem 'activerecord-import'
 gem 'rack-mini-profiler'
+gem "strong_migrations"
+# gem 'meta_request'
+# gem 'rails_performance'
 
 
 group :development, :test do
