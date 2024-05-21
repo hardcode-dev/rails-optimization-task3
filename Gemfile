@@ -11,6 +11,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pghero'
 # pg_query is used by pghero to provide suggestions to add indexes
 gem 'pg_query', '>= 0.9.0'
+gem 'activerecord-import'
 gem 'rack-mini-profiler'
 
 group :development, :test do

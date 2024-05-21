@@ -1,6 +1,6 @@
 namespace :demo do
   # Наивная загрузка данных из json-файла в БД  
-  # rake reload_json[fixtures/small.json]
+  # rake demo:reload_json[fixtures/small.json]
   task :reload_json, [:file_name] => :environment do |_task, args|
 
     time = Benchmark.measure do
@@ -16,16 +16,22 @@ namespace :demo do
         cities = {}
         services = {}
         buses = {}
+        buses_services = {}
+
+        trips = []
 
         json.each do |trip|
-          from = cities[trip['from']] ||= City.create(name: trip['from'])
-          to = cities[trip['to']] ||= City.create(name: trip['to'])
+          from = cities[trip['from']] ||= City.new(name: trip['from'])
+          to = cities[trip['to']] ||= City.new(name: trip['to'])          
 
-          bus_services = trip['bus']['services'].map! { |s| services[s] ||= Service.create(name: s) }
+          bus = buses[trip['bus']['number']] ||= Bus.new(number: trip['bus']['number'], model: trip['bus']['model'])
 
-          bus = buses[trip['bus']['number']] ||= Bus.create(number: trip['bus']['number'], model: trip['bus']['model'], services: bus_services)
+          trip['bus']['services'].each do |service|
+            bus_service = services[service] ||= Service.new(name: service)
+            buses_services[[bus, bus_service]] ||= BusesService.new(bus: bus, service: bus_service)
+          end          
 
-          Trip.create!(
+          trips << Trip.new(
             from: from,
             to: to,
             bus: bus,
@@ -33,10 +39,19 @@ namespace :demo do
             duration_minutes: trip['duration_minutes'],
             price_cents: trip['price_cents'],
           )
-        end        
+        end
+
+        City.import cities.values
+        Bus.import buses.values
+        Service.import services.values
+        BusesService.import buses_services.values
+        Trip.import trips
+
+        cities, services, buses, trips = nil
       end      
     end
 
     puts "Done in #{time.real} seconds"
+    puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
   end
 end
