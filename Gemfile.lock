@@ -153,6 +153,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stackprof (0.2.26)
     thor (0.20.3)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
@@ -184,6 +185,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 5.2.3)
   rspec-rails (~> 4.0.0)
+  stackprof
   tzinfo-data
   web-console (>= 3.3.0)
 

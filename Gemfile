@@ -14,6 +14,7 @@ gem 'pg_query', '>= 0.9.0'
 gem 'activerecord-import'
 gem 'rack-mini-profiler'
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -26,6 +27,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'database_cleaner-active_record', '~> 2.0.1'
   gem 'bullet'
+  gem 'stackprof'
 end
 
 group :test do

@@ -1,6 +1,5 @@
-namespace :demo do
-  # Наивная загрузка данных из json-файла в БД  
   # rake demo:reload_json[fixtures/small.json]
+namespace :demo do
   task :reload_json, [:file_name] => :environment do |_task, args|
 
     time = Benchmark.measure do
