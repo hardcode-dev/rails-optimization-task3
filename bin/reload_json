@@ -18,7 +18,7 @@ Rails.application.load_tasks
 # printer.print(File.open('tmp/ruby_prof_result/graph.html', 'w+'))
 
 time = Benchmark.realtime do
-  Rake::Task['reload_json'].invoke('fixtures/medium.json')
+  Rake::Task['reload_json'].invoke('fixtures/large.json')
   puts "%d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
 

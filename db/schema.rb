@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_19_201121) do
+ActiveRecord::Schema.define(version: 2024_05_22_214507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2024_05_19_201121) do
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.index ["number", "model"], name: "index_buses_on_number_and_model", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|
@@ -42,7 +43,6 @@ ActiveRecord::Schema.define(version: 2024_05_19_201121) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
-    t.index ["from_id", "to_id", "bus_id", "start_time"], name: "index_trips_on_from_id_and_to_id_and_bus_id_and_start_time", unique: true
   end
 
 end
