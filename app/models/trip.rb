@@ -17,16 +17,16 @@ class Trip < ApplicationRecord
 
   def to_h
     {
-      from: from.name,
-      to: to.name,
-      start_time: start_time,
-      duration_minutes: duration_minutes,
-      price_cents: price_cents,
-      bus: {
-        number: bus.number,
-        model: bus.model,
-        services: bus.services.map(&:name),
+      'bus' => {
+        'model' => bus.model,
+        'number' => bus.number,        
+        'services' => bus.services.map(&:name),
       },
+      'duration_minutes' => duration_minutes,
+      'from' => from.name,
+      'price_cents' => price_cents,
+      'start_time' => start_time,
+      'to' => to.name
     }
   end
 end

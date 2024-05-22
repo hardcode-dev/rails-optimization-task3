@@ -1,8 +1,6 @@
-# rake reload_json[fixtures/small.json]
-task :reload_json, [:file_name] => :environment do |_task, args|
-
-  time = Benchmark.measure do
-    json = JSON.parse(File.read(args.file_name))
+class ImportTripsService
+  def self.call(filename)
+    json = JSON.parse(File.read(filename))
 
     ActiveRecord::Base.transaction do
       City.delete_all
@@ -46,9 +44,6 @@ task :reload_json, [:file_name] => :environment do |_task, args|
       Trip.import trips
 
       cities, services, buses, trips = nil
-    end      
+    end   
   end
-
-  puts "Done in #{time.real} seconds"
-  puts "MEMORY USAGE: %d MB" % (`ps -o rss= -p #{Process.pid}`.to_i / 1024)
 end
