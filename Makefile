@@ -1,9 +1,6 @@
 include make-compose.mk
 include make-services-app.mk
 
-test:
-	bin/rails test
-
 
 backend:
 	rm -rf tmp/pids/server.pid
@@ -17,7 +14,7 @@ setup-app:
 	bin/setup
 
 fixtures-load:
-	bin/rake utils:reload_json[fixtures/small.json]
+	bin/rake utils:reload_json[fixtures/medium.json]
 
 clean:
 	bin/rails db:drop
@@ -37,12 +34,11 @@ db-reset:
 start:
 	bin/rails s
 
-lint: lint-code lint-style
-
 linter-code-fix:
 	bundle exec rubocop -A
 
 test:
-	bundle exec rspec
+	bin/rails test
+
 
 .PHONY: test

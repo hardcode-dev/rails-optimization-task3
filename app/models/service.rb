@@ -15,5 +15,5 @@ class Service < ApplicationRecord
   has_and_belongs_to_many :buses, join_table: :buses_services
 
   validates :name, presence: true
-  validates :name, inclusion: { in: SERVICES }
+  enum :name, enum_from_array(SERVICES)
 end

@@ -1,19 +1,13 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'test_helper'
 require 'rake'
 
-describe 'rake reload_json' do
-  before do
-    Rails.application.load_tasks
-  end
-
-  after { task.reenable }
-
-  let(:task) { Rake::Task['utils:reload_json'] }
-  let(:path) { 'spec/fixtures/data.json' }
-  let(:expected_result) do
-    {
+class UtilsTest < ActiveSupport::TestCase
+  def setup
+    Rails.application.load_tasks if Rake::Task.tasks.empty?
+    @path = 'test/fixtures/files/data.json'
+    @expected_result = {
       from: 'Сочи',
       to: 'Тула',
       start_time:'16:11',
@@ -34,8 +28,10 @@ describe 'rake reload_json' do
     }
   end
 
-  it 'fixtures load' do
-    task.invoke(path)
-    expect(Trip.last.to_h).to eq(expected_result)  
+  test 'fixtures load' do
+
+    Rake::Task['utils:reload_json'].invoke(@path)
+
+    assert_equal Trip.last.to_h, @expected_result
   end
 end
