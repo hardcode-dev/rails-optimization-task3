@@ -33,7 +33,7 @@
 `rake reload_json[fixtures/large.json]`
 
 Для импорта этого объёма данных
-- вам может помочь гем https://github.com/zdennis/activerecord-import
+- вам может помочь batch-import
 - избегайте создания лишних транзакций
 - профилируйте скрипт импорта изученными инструментами и оптимизируйте его!
 
@@ -44,6 +44,7 @@
 
 Попробуйте воспользоваться
 - [ ] `rack-mini-profiler`
+- [ ] `pghero`
 - [ ] `rails panel`
 - [ ] `bullet`
 - [ ] `explain` запросов
