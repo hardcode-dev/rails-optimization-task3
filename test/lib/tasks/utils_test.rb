@@ -10,13 +10,13 @@ class UtilsTest < ActiveSupport::TestCase
     @expected_result = {
       from: 'Сочи',
       to: 'Тула',
-      start_time:'16:11',
-      duration_minutes:83,
-      price_cents:23354,
-      bus:{
-        number:'229',
-        model:'Икарус',
-        services:[
+      start_time: '16:11',
+      duration_minutes: 83,
+      price_cents: 23_354,
+      bus: {
+        number: '229',
+        model: 'Икарус',
+        services: [
           'Ремни безопасности',
           'Кондиционер общий',
           'Кондиционер Индивидуальный',
@@ -29,7 +29,6 @@ class UtilsTest < ActiveSupport::TestCase
   end
 
   test 'fixtures load' do
-
     Rake::Task['utils:reload_json'].invoke(@path)
 
     assert_equal Trip.last.to_h, @expected_result

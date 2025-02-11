@@ -1,0 +1,8 @@
+DEFAULTS: &DEFAULTS
+  name: Moskow
+
+moskow:
+   <<: *DEFAULTS
+
+volgograd:
+  name: Volgograd

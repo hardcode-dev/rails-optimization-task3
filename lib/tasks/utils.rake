@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Наивная загрузка данных из json-файла в БД
 # rake reload_json[fixtures/small.json]
 require 'importer'
@@ -7,7 +9,7 @@ namespace :utils do
     abort 'Send file path' unless args.file_name
 
     # json = JSON.parse(File.read(args.file_name))
-    # 
+    #
     stream = File.open(args.file_name)
 
     Importer.call(stream)

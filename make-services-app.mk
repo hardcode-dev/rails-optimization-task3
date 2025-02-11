@@ -25,7 +25,7 @@ app-test:
 	docker-compose run --rm app make test
 
 app-fixtures-load:
-	docker-compose run --rm app make fixtures-load
+	docker-compose run --rm app make fixtures-load-json
 
 app-benchmark:
 	docker-compose run --rm app lib/benchmark.rb $(T)
@@ -41,4 +41,10 @@ app-benchmark-large:
 
 app-report:
 	docker-compose run --rm app bin/rake reports:build[$(T)]
+
+app-lint-fix:
+	docker-compose run --rm app make linter-code-fix
+
+app-sistem-test:
+	docker-compose run --rm app bin/rails test:system
 

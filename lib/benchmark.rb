@@ -6,13 +6,12 @@ require 'benchmark'
 
 path = ARGV[0]
 
-
 time = Benchmark.realtime do
   system "bin/rake utils:reload_json[fixtures/#{path}.json]"
 end
 
 def printer(time)
-  pp "Processing time from file: #{time.round(4)}" 
+  Rails.logger.debug { "Processing time from file: #{time.round(4)}" }
 end
 
 printer(time)

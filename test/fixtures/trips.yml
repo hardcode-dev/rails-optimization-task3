@@ -1,0 +1,7 @@
+moscow-volga:
+  from: moskow
+  to: volgograd
+  start_time: "12:00"
+  duration_minutes: 0
+  price_cents: 0
+  bus: ickarus

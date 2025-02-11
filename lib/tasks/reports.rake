@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'profiler'
 
 namespace :reports do

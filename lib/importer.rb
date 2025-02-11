@@ -5,10 +5,10 @@ class Importer
     TRUNCATE trips, services, cities, buses_services, buses  CASCADE;
   SQL
 
-  TRIPS_COMMAND = "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, bus_id) from stdin with csv delimiter ';'".freeze
-  CITIES_COMMAND = "copy cities (id, name) from stdin with csv delimiter ';'".freeze
-  BUSES_COMMAND = "copy buses (id, number, model) from stdin with csv delimiter ';'".freeze
-  BUSES_SERVICES_COMMAND =  "copy buses_services (bus_id, service_id) from stdin with csv delimiter ';'".freeze
+  TRIPS_COMMAND = "copy trips (from_id, to_id, start_time, duration_minutes, price_cents, bus_id) from stdin with csv delimiter ';'"
+  CITIES_COMMAND = "copy cities (id, name) from stdin with csv delimiter ';'"
+  BUSES_COMMAND = "copy buses (id, number, model) from stdin with csv delimiter ';'"
+  BUSES_SERVICES_COMMAND = "copy buses_services (bus_id, service_id) from stdin with csv delimiter ';'"
 
   @@city_by_name = {}
   @@buses_by_number = {}
@@ -17,9 +17,9 @@ class Importer
   def self.call(stream)
     ActiveRecord::Base.connection.execute(TRUNCATE_SQL)
     ActiveRecord::Base.transaction do
-      Service::SERVICES.each_with_index do |s, i| 
+      Service::SERVICES.each_with_index do |s, i|
         @@services[s] ||= {}
-        @@services[s] = {id: i, name: s}
+        @@services[s] = { id: i, name: s }
       end
 
       Service.import @@services.values
@@ -33,12 +33,11 @@ class Importer
         nested_obj_lvl = 0
         nested_arr_lvl = 0
 
-
         parser = JSON::Stream::Parser.new
-        parser.start_object   do 
+        parser.start_object do
           nested_obj_lvl += 1
         end
-        parser.end_object do 
+        parser.end_object do
           nested_obj_lvl -= 1
           if nested_obj_lvl.zero?
             transaction(current_obj, raw)
@@ -75,22 +74,23 @@ class Importer
 
       ActiveRecord::Base.connection.raw_connection.copy_data CITIES_COMMAND do
         raw = ActiveRecord::Base.connection.raw_connection
-        @@city_by_name.each do |_k, v|
+        @@city_by_name.each_value do |v|
           raw.put_copy_data("#{v[:id]};#{v[:name]}\n")
         end
       end
 
       ActiveRecord::Base.connection.raw_connection.copy_data BUSES_COMMAND do
         raw_bus = ActiveRecord::Base.connection.raw_connection
-        @@buses_by_number.each do |_k, v|
+        @@buses_by_number.each_value do |v|
           raw_bus.put_copy_data("#{v[:id]};#{v[:number]};#{v[:model]}\n")
         end
       end
 
       ActiveRecord::Base.connection.raw_connection.copy_data BUSES_SERVICES_COMMAND do
         raw_services = ActiveRecord::Base.connection.raw_connection
-        @@buses_by_number.each do |_k, v|
+        @@buses_by_number.each_value do |v|
           next unless v[:services]
+
           v[:services].each do |service|
             raw_services.put_copy_data("#{v[:id]};#{@@services[service][:id]}\n")
           end
@@ -102,15 +102,15 @@ class Importer
   def self.transaction(trip, connection)
     from_obj = @@city_by_name[trip['from']]
 
-    if !from_obj
-      from_obj = {name: trip['from'], id: @@city_by_name.keys.size + 1}
+    unless from_obj
+      from_obj = { name: trip['from'], id: @@city_by_name.keys.size + 1 }
       @@city_by_name[trip['from']] = from_obj
     end
-    
+
     to_obj = @@city_by_name[trip['to']]
 
-    if !to_obj
-      to_obj = {name: trip['to'], id: @@city_by_name.keys.size + 1}
+    unless to_obj
+      to_obj = { name: trip['to'], id: @@city_by_name.keys.size + 1 }
       @@city_by_name[trip['to']] = to_obj
     end
 
@@ -118,12 +118,13 @@ class Importer
 
     buses_obj = @@buses_by_number[bus_number]
 
-    if !buses_obj
-      buses_obj = { id: @@buses_by_number.keys.size + 1 ,number: bus_number,  model: trip['bus']['model'], services: trip['bus']['services'] }
+    unless buses_obj
+      buses_obj = { id: @@buses_by_number.keys.size + 1, number: bus_number, model: trip['bus']['model'],
+                    services: trip['bus']['services'] }
       @@buses_by_number[bus_number] = buses_obj
     end
-    
-      data = "#{from_obj[:id]};#{to_obj[:id]};#{trip['start_time']};#{trip['duration_minutes']};#{trip['price_cents']};#{buses_obj[:id]}\n"
-      connection.put_copy_data(data)
+
+    data = "#{from_obj[:id]};#{to_obj[:id]};#{trip['start_time']};#{trip['duration_minutes']};#{trip['price_cents']};#{buses_obj[:id]}\n"
+    connection.put_copy_data(data)
   end
 end

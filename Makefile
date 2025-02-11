@@ -13,7 +13,7 @@ setup-app:
 	cp -n .env.example .env || true
 	bin/setup
 
-fixtures-load:
+fixtures-load-json:
 	bin/rake utils:reload_json[fixtures/medium.json]
 
 clean:
@@ -39,6 +39,9 @@ linter-code-fix:
 
 test:
 	bin/rails test
+
+system-test:
+	bin/rails test:system
 
 
 .PHONY: test
