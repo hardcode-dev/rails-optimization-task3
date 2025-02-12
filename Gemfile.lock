@@ -123,6 +123,18 @@ GEM
       reline (>= 0.4.2)
     json (2.10.1)
     json-stream (1.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     language_server-protocol (3.17.0.4)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -338,6 +350,7 @@ DEPENDENCIES
   capybara
   flamegraph
   json-stream
+  kaminari
   listen
   memory_profiler
   meta_request

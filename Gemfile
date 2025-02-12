@@ -9,6 +9,7 @@ gem 'activerecord-import'
 gem 'bootsnap', require: false
 gem 'flamegraph'
 gem 'json-stream'
+gem 'kaminari'
 gem 'meta_request'
 gem 'pg'
 gem 'puma'

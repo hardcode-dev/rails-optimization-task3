@@ -2,9 +2,9 @@
   <%= "Автобусы #{@from.name} – #{@to.name}" %>
 </h1>
 <h2>
-  <%= "В расписании #{@trips.count} рейсов" %>
+  <%= "В расписании #{@trips_count} рейсов" %>
 </h2>
-
+<%= paginate @trips %>
 <% @trips.each do |trip| %>
   <ul>
     <%= render "trip", trip: trip %>
@@ -14,3 +14,5 @@
   </ul>
   <%= render "delimiter" %>
 <% end %>
+
+<%= paginate @trips %>

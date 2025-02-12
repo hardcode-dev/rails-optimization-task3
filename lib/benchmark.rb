@@ -11,7 +11,7 @@ time = Benchmark.realtime do
 end
 
 def printer(time)
-  Rails.logger.debug { "Processing time from file: #{time.round(4)}" }
+  puts "Processing time from file: #{time.round(4)}" 
 end
 
 printer(time)
