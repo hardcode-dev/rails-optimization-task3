@@ -8,6 +8,9 @@ gem 'pg'
 gem 'puma'
 gem 'listen'
 gem 'bootsnap'
+gem 'pry'
+gem 'rspec'
+gem 'rspec-rails'
 gem 'rack-mini-profiler'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
