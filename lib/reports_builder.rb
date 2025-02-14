@@ -8,7 +8,7 @@ begin
   prof_type = ARGV[0]
 
   available_types = %w[
-    memeory_prof
+    memory_prof
     stack_prof
     ruby_prof
   ]

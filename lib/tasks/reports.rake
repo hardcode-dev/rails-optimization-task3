@@ -7,7 +7,7 @@ namespace :reports do
     reporter_type = args.reporter_type
 
     available_types = %w[
-      memeory_prof
+      memory_prof
       stack_prof
       ruby_prof
     ]

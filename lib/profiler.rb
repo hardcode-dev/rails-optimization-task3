@@ -12,7 +12,7 @@ class Profiler
       send(reporter_type)
     end
 
-    def memeory_prof
+    def memory_prof
       report = MemoryProfiler.report do
         system 'bin/rake utils:reload_json[fixtures/medium.json]'
       end
