@@ -10,50 +10,55 @@ class TripsImporter
   def call
     json = JSON.parse(File.read(file))
 
+    ActiveRecord::Base.logger = nil
+
     clean_database
 
     ActiveRecord::Base.transaction do
-      # TODO
-      # файл large довольно быстро читается на самом деле
+      city_names = Set.new
+      service_names = Set.new
+      buses = {}
 
-
-      # unique index + insert cities
-      # bulk insert типа
-      # insert buses_services + test
-      #
-      # bus = Bus.create!(model: "Икарус", number: "100")
-      trips = []
+      # первый проход - собираем "справочные" данные - города, услуги, автобусы
+      # собираем в Set или хэш, так чтобы удобно было вставлять в бд
       json.each do |trip|
-        from = City.find_or_create_by(name: trip['from'])
-        to = City.find_or_create_by(name: trip['to'])
+        city_names.add trip['from']
+        city_names.add trip['to']
 
-        service_names = trip['bus']['services'].map { |name| { name: name } }
-        service_ids = Service.upsert_all(service_names, unique_by: :name).rows.flatten
+        service_names.merge trip['bus']['services']
+        buses[trip['bus']['number']] = trip['bus']['model']
+      end
 
-        number = trip['bus']['number']
+      # вставляем справочное
+      City.insert_all city_names.map { |name| { name: name } }
+      Service.insert_all service_names.map { |name| { name: name } }
+      Bus.insert_all buses.map { |number, model| {  number: number, model: model }}
 
-        bus = Bus.upsert_all([number: number, model: trip['bus']['model']], unique_by: :number, on_duplicate: :update)
-        # bus = Bus.find(bus.first["id"])
-        # bus.update(service_ids: service_ids.rows.flatten)
-        bus_id = bus.first["id"]
+      # формируем хэши, чтобы удобно получить доступ к id при втором проходе
+      cities = City.all.each_with_object({}) { |city, hash| hash[city.name] = city.id }
+      services = Service.all.each_with_object({}) { |service, hash| hash[service.name] = service.id }
+      buses = Bus.all.each_with_object({}) { |bus, hash| hash[bus.number] = bus.id }
 
-        # TODO!!! + test
-        # #   "insert into buses_services(bus_id, service_id) values (?, ?)",
+      # тут соберём пары автобус-услуга
+      buses_services = Set.new
 
-        if service_ids.present?
-          values = service_ids.map { |service_id| "(#{bus_id}, #{service_id})" }.join(", ")
-          # binding.pry
-          sql = "INSERT INTO buses_services (bus_id, service_id) VALUES #{values};"
-          ActiveRecord::Base.connection.execute(sql)
+      # тут данные по поездкам для вставки
+      trips = []
+
+      json.each do |trip|
+        from_id = cities[trip['from']]
+        to_id = cities[trip['to']]
+        bus_id = buses[trip['bus']['number']]
+
+        # заполняем пары автобус-услуга
+        service_ids = services.values_at(*trip['bus']['services'])
+        service_ids.each do |service_id|
+          buses_services.add([bus_id, service_id])
         end
 
-        # binding.pry
-        # bus = Bus.find_or_create_by(number: number)
-        # bus.update(model: trip['bus']['model'], service_ids: service_ids.rows.flatten)
-
         trips.push({
-          from_id: from.id,
-          to_id: to.id,
+          from_id: from_id,
+          to_id: to_id,
           bus_id: bus_id,
           start_time: trip['start_time'],
           duration_minutes: trip['duration_minutes'],
@@ -61,7 +66,19 @@ class TripsImporter
           })
       end
 
+      # вставка данных о поездках
+      # пока не стала батчить, т.к. и так довольно быстро происходит
       Trip.insert_all trips
+
+      # тоже uniqueness надо добавить
+      # вот такой нелегальный insert buses_services
+      # вообще чаще используем has_and_belongs_to_many , потому что часто в связке потом нужны доп. данные и таймстемпы, и свой id
+      # тогда можно было бы insert использовать
+      if buses_services.present?
+        values = buses_services.map { |arr| "(#{arr[0]}, #{arr[1]})" }.join(", ")
+        sql = "INSERT INTO buses_services (bus_id, service_id) VALUES #{values};"
+        ActiveRecord::Base.connection.execute(sql)
+      end
     end
   end
 
