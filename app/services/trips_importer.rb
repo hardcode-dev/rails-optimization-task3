@@ -15,14 +15,15 @@ class TripsImporter
     ActiveRecord::Base.transaction do
       # TODO
       # файл large довольно быстро читается на самом деле
-      # нужно написать тест сначала
-      # вынести в класс для этого будет удобно, я думаю
-      # bulk insert (cities, buses, services, trips)
-      # in batches надо, видимо
 
-      # cities = Set.new
-      # trip_services = Set.new
-      # buses = []
+
+      # unique index + insert cities
+      # bulk insert типа
+      # insert buses_services + test
+      #
+      # bus = Bus.create!(model: "Икарус", number: "100")
+
+
 
       json.each do |trip|
         from = City.find_or_create_by(name: trip['from'])
@@ -31,16 +32,28 @@ class TripsImporter
         service_names = trip['bus']['services'].map { |name| { name: name } }
         service_ids = Service.upsert_all(service_names, unique_by: :name)
 
-        bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], service_ids: service_ids.rows.flatten)
+        number = trip['bus']['number']
 
-        Trip.create!(
-          from: from,
-          to: to,
-          bus: bus,
+        bus = Bus.upsert_all([number: number, model: trip['bus']['model']], unique_by: :number, on_duplicate: :update)
+        # bus = Bus.find(bus.first["id"])
+        # bus.update(service_ids: service_ids.rows.flatten)
+
+        # TODO!!! + test
+        # # "insert into buses_services(bus_id, service_id) values (?)",
+
+        bus_id = bus.first["id"]
+        # binding.pry
+        # bus = Bus.find_or_create_by(number: number)
+        # bus.update(model: trip['bus']['model'], service_ids: service_ids.rows.flatten)
+
+        Trip.insert_all([{
+          from_id: from.id,
+          to_id: to.id,
+          bus_id: bus_id,
           start_time: trip['start_time'],
           duration_minutes: trip['duration_minutes'],
           price_cents: trip['price_cents'],
+          }]
         )
       end
     end

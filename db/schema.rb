@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_163423) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_164236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
     t.string "model"
+    t.index ["number"], name: "index_buses_on_number", unique: true
   end
 
   create_table "buses_services", force: :cascade do |t|

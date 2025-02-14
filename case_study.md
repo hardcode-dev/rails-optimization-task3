@@ -22,5 +22,15 @@ bus.update(model: trip['bus']['model'], service_ids: service_ids.rows.flatten)
 ```
 
 Теперь на small - 6 сек
+medium - 54сек
 -----------------
-Теперь автобусы, добавим уникальный индекс:
+Теперь автобусы, добавим уникальный индекс на number:
+
+
+        # bus = Bus.upsert_all([number: number, model: trip['bus']['model']], unique_by: :number, on_duplicate: :update)
+        # bus = Bus.find(bus.first["id"])
+        # bus.update(service_ids: service_ids.rows.flatten)
+        # # "insert into buses_services(bus_id, service_id) values (?)",
+
+        # bus.first["id"]
+        # binding.pry
