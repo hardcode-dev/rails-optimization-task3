@@ -10,13 +10,9 @@ class TripsImporter
   def call
     json = JSON.parse(File.read(file))
 
-    ActiveRecord::Base.transaction do
-      City.delete_all
-      Bus.delete_all
-      Service.delete_all
-      Trip.delete_all
-      ActiveRecord::Base.connection.execute('delete from buses_services;')
+    clean_database
 
+    ActiveRecord::Base.transaction do
       # TODO
       # файл large довольно быстро читается на самом деле
       # нужно написать тест сначала
@@ -31,13 +27,12 @@ class TripsImporter
       json.each do |trip|
         from = City.find_or_create_by(name: trip['from'])
         to = City.find_or_create_by(name: trip['to'])
-        services = []
-        trip['bus']['services'].each do |service|
-          s = Service.find_or_create_by(name: service)
-          services << s
-        end
+
+        service_names = trip['bus']['services'].map { |name| { name: name } }
+        service_ids = Service.upsert_all(service_names, unique_by: :name)
+
         bus = Bus.find_or_create_by(number: trip['bus']['number'])
-        bus.update(model: trip['bus']['model'], services: services)
+        bus.update(model: trip['bus']['model'], service_ids: service_ids.rows.flatten)
 
         Trip.create!(
           from: from,
@@ -54,4 +49,12 @@ class TripsImporter
   private
 
   attr_reader :file
+
+  def clean_database
+    City.delete_all
+    Bus.delete_all
+    Service.delete_all
+    Trip.delete_all
+    ActiveRecord::Base.connection.execute('delete from buses_services;')
+  end
 end
