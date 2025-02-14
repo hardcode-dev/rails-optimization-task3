@@ -2,8 +2,8 @@
 # rake reload_json[fixtures/small.json]
 
 task :reload_json, [:file_name] => :environment do |_task, args|
-
-  require 'ruby-prof'
+  # ActiveRecord::Base.logger = Logger.new STDOUT
+  # require 'ruby-prof'
   start_time = Time.current
 
   # GC.disable
