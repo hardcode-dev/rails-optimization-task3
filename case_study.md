@@ -44,3 +44,29 @@ task :reload_json, [:file_name] => :environment do |_task, args|
   p end_time - start_time
 end
 ```
+
+## Б. Отображение расписаний
+
+Изначально время: 8329сек  
+
+Сразу видим в rack-mini-profiler 1437 sql-запросов, делаем includes:
+```ruby
+@trips = Trip.where(from: @from, to: @to).includes(bus: :services).order(:start_time)
+```
+
+Время: 3930
+
+Дальше видно, что очень много partials загружается:
+
+- убрала `partial` `service` (незачем в отдельном файле рендерить одну строчку, это не бесплатно)  
+
+Время: 2336  
+
+- убрала аналогично `partial` `delimiter` 
+
+Время: 632
+
+
+
+
+
