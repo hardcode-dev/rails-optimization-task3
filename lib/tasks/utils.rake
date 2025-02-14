@@ -2,8 +2,6 @@
 # rake reload_json[fixtures/small.json]
 
 task :reload_json, [:file_name] => :environment do |_task, args|
-  ActiveRecord::Base.logger = nil
-
   start_time = Time.current
 
   TripsImporter.call(args.file_name)

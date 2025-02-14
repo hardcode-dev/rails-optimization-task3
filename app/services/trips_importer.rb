@@ -10,8 +10,6 @@ class TripsImporter
   def call
     json = JSON.parse(File.read(file))
 
-    ActiveRecord::Base.logger = nil
-
     clean_database
 
     ActiveRecord::Base.transaction do
