@@ -68,12 +68,12 @@ class TripsImporter
       # пока не стала батчить, т.к. и так довольно быстро происходит
       Trip.insert_all trips
 
-      # тоже uniqueness надо добавить
-      # вот такой нелегальный insert buses_services
+      # вот такой insert into buses_services
       # вообще чаще используем has_and_belongs_to_many , потому что часто в связке потом нужны доп. данные и таймстемпы, и свой id
-      # тогда можно было бы insert использовать
+      # тогда можно было бы insert_all использовать
       if buses_services.present?
-        values = buses_services.map { |arr| "(#{arr[0]}, #{arr[1]})" }.join(", ")
+        # что-то решила на всякий случай подготовить строки )
+        values = buses_services.map { |arr| sprintf("(%s, %s)", arr[0], arr[1]) }.join(", ")
         sql = "INSERT INTO buses_services (bus_id, service_id) VALUES #{values};"
         ActiveRecord::Base.connection.execute(sql)
       end
