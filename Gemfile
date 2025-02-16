@@ -10,6 +10,10 @@ gem 'listen'
 gem 'bootsnap'
 gem 'rack-mini-profiler'
 gem 'rubocop', require: false
+gem 'pghero'
+gem 'benchmark'
+gem 'ruby-prof'
+gem 'stackprof'
 
 group :development, :test do
   gem 'rspec-rails', '~> 7.1.1'
