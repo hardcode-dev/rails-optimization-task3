@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class JsonStreamer
   def self.stream(filename)
     new(filename).stream
@@ -23,7 +25,7 @@ class JsonStreamer
 
   def object
     nesting = 0
-    str = ''
+    str = +''
 
     while nesting > 0 || str.empty?
       ch = file.getc
