@@ -9,6 +9,7 @@ gem 'puma'
 gem 'listen'
 gem 'bootsnap'
 gem 'rack-mini-profiler'
+gem 'rubocop', require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 7.1.1'
