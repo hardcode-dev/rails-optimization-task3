@@ -70,3 +70,89 @@ bin/rake reload_json[file]
 "7 29.495458"
 "Result Time 29.50383200000215"
 ```
+
+## Страница Отображение расписаний
+Когда рейсов становится слишком много страница с расписанием грузится очень медленно.
+С файлом `medium.json` время страницы `http://localhost:3000/автобусы/Самара/Москва` - 595ms
+С файлом `large.json` время страницы `http://localhost:3000/автобусы/Самара/Москва` - 11363ms
+
+
+### Формирование метрики
+Для того, чтобы понимать, дают ли мои изменения положительный эффект на быстродействие программы, найти очевидые слабые точки и решить их.
+
+### Ваша находка 1
+- на данных из medium.json, посещаю страницу
+- для начала смотрим на rack-mini-profiler
+```
+Rendering: trips/index.html.erb	295.5	+8.0	138 sql	57.6
+    Rendering: trips/_trip.html.erb	3.0	+16.0	1 sql	0.5
+```
+
+так же смотрим через bullet, он подсвечивает что есть N+1
+```
+USE eager loading detected
+  Trip => [:bus]
+  Add to your query: .includes([:bus])
+```
+- добавим preload, чтобы заранее подтянуть все необходимые данные:
+```
+@trips = Trip.where(from: @from, to: @to).order(:start_time).preload(bus: :services)
+```
+- смотрим как результата bullet больше не выдаёт предупреждение, а в rack-mini-profiler видно что мы избивились от N+1
+```
+ Executing: trips#index	5.4	+3.0	2 sql	0.5
+   Rendering: trips/index.html.erb	228.3	+7.5	5 sql	8.5
+```
+
+время запроса уменьшилось для medium.json с 600ms до 357ms, а для large.json c 11363ms до 8529.1 ms
+
+### Ваша находка 2
+- для начала смотрим на rack-mini-profiler, видно что лишних запросов больше нету, но тратится много времени на рендеринг _services
+- 
+```
+GET http://localhost:3000/%D0%B0%D0%B2%D1%82%...	1109.9	+0.0	
+  Executing: trips#index	17.0	+2.0	2 sql	1.2
+   Rendering: trips/index.html.erb	3060.9	+7.3	5 sql	95.2
+    Rendering: trips/_services.html.erb	2.0	+1405.0	
+    Rendering: trips/_services.html.erb	2.0	+1410.9	
+```
+- заменяем обычный rednder на `render partial`
+- скорость загрузки страницы упала с 8529ms до 3485.5ms
+  ```
+  GET http://localhost:3000/%D0%B0%D0%B2%D1%82%...	1131.7	+0.0	
+    Executing: trips#index	5.2	+3.0	2 sql	0.6
+    Rendering: trips/index.html.erb	2348.6	+7.4	5 sql	52.8
+  ```
+
+### Ваша находка 3
+1) через rack-mini-profiler видим что есть один запрос с фильтрами, можем попробовать ускорить его через индексы
+```
+T+18.3 ms
+SELECT "trips".* FROM "trips" WHERE "trips"."from_id" = $1 AND "trips"."to_id" = $2 ORDER BY "trips"."start_time" ASC; 
+```
+2) добавил индекс на фильтруемые данные сразу отсортированные
+`add_index :trips, %i[from_id to_id start_time], order: {start_time: :asc}, algorithm: :concurrently`
+3) как результат запрос стал немного быстрее
+``` 
+T+9.5 ms
+  SELECT "trips".* FROM "trips" WHERE "trips"."from_id" = $1 AND "trips"."to_id" = $2 ORDER BY "trips"."start_time" ASC; 
+```
+
+но так же прибавил в памяти, для нас пока не влияет но надо учитывать index_trips_on_from_id_and_to_id_and_start_time	2.19 MB.
+Выйгрыш по скорости не такой большой
+
+### Ваша находка 4
+1) через rack-mini-profiler видим что есть запрос на count, попробуем заменить его на обработку через ruby.
+```
+T+8.6 ms
+SELECT COUNT(*) FROM "trips" WHERE "trips"."from_id" = $1 AND "trips"."to_id" = $2; 
+```
+
+общее время 3194.9 ms
+2) заменил count на size (пришлось добавить еще load в trips controller: `@trips = Trip.where(from: @from, to: @to).order(:start_time).preload(bus: :services).load` )
+3) как результат запрос в базу пропал, скорость всего запроса упала в среднем до 2993.5 ms
+
+
+## Результаты
+- В результате проделанной оптимизации наконец удалось обработать файл с данными и уложиться в поставленные нами метрики.
+- Удалось улучшить отрисовку страницы расписаний с 11.3с до 0.3с.

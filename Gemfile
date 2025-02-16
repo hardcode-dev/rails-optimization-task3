@@ -10,6 +10,9 @@ gem 'listen'
 gem 'bootsnap'
 gem 'rack-mini-profiler'
 gem 'activerecord-import'
+gem 'pghero'
+gem 'pg_query'
+gem 'bullet'
 
 group :development, :test do
   gem 'rspec-rails', '~> 7.0.0'
