@@ -14,6 +14,7 @@ gem 'pghero'
 gem 'benchmark'
 gem 'ruby-prof'
 gem 'stackprof'
+gem 'oj'
 
 group :development, :test do
   gem 'rspec-rails', '~> 7.1.1'
