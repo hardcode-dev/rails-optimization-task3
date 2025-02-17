@@ -3,3 +3,11 @@
 <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
 <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
 <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+<% if trip.bus.services.present? %>
+  <li>Сервисы в автобусе:</li>
+    <ul>
+      <%= render partial: "service", collection: trip.bus.services %>
+    </ul>
+<% end %>
+
+<%= render "delimiter" %>
