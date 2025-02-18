@@ -3,7 +3,7 @@ namespace :profile do
   task time: :environment do
     require 'benchmark'
 
-    puts(Benchmark.measure { DataLoader.load('fixtures/small.json') })
+    puts(Benchmark.measure { DataLoader.load('fixtures/1M.json') })
   end
 
   desc 'Ruby prof'
@@ -39,7 +39,23 @@ namespace :profile do
       io.close
     end
 
-    DataLoader.load('fixtures/small.json')
+    DataLoader.load('fixtures/1M.json')
     monitor_thread.kill
+  end
+
+  desc 'Stackprof cli'
+  task stackprof_cli: :environment do
+    StackProf.run(mode: :wall, out: Rails.root.join('profile', 'stackprof_reports/stackprof.dump'), interval: 1000) do
+      DataLoader.load('fixtures/small.json')
+    end
+  end
+
+  desc 'Stackprof speedscope'
+  task stackprof_speedscope: :environment do
+    profile = StackProf.run(mode: :wall, raw: true) do
+      DataLoader.load('fixtures/small.json')
+    end
+
+    File.write(Rails.root.join('profile', 'stackprof_reports/stackprof.json'), JSON.generate(profile))
   end
 end
