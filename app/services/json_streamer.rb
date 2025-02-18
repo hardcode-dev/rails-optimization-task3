@@ -32,16 +32,11 @@ class JsonStreamer
 
       return if file.eof?
 
-      case
-      when ch == '{'
-        nesting += 1
-        str << ch
-      when ch == '}'
-        nesting -= 1
-        str << ch
-      when nesting >= 1
-        str << ch
-      end
+      nesting += 1 if ch == '{'
+      str << ch if nesting >= 1
+      nesting -= 1 if ch == '}'
+
+      str
     end
 
     str
