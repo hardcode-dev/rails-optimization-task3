@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: buses
+#
+#  id     :bigint           not null, primary key
+#  model  :string
+#  number :string
+#
 class Bus < ApplicationRecord
   MODELS = [
     'Икарус',

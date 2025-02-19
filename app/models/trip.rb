@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: trips
+#
+#  id               :bigint           not null, primary key
+#  duration_minutes :integer
+#  price_cents      :integer
+#  start_time       :string
+#  bus_id           :integer
+#  from_id          :integer
+#  to_id            :integer
+#
 class Trip < ApplicationRecord
   HHMM_REGEXP = /([0-1][0-9]|[2][0-3]):[0-5][0-9]/
 

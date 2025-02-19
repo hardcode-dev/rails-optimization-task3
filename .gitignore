@@ -2,3 +2,8 @@
 /tmp
 /log
 /public
+/lib/profilers/reports
+.rspec
+spec/spec_helper.rb
+spec/rails_helper.rb
+/fixtures
