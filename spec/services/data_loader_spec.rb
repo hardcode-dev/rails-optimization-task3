@@ -52,4 +52,8 @@ RSpec.describe DataLoader do
       have_attributes(start_time: '21:30', duration_minutes: 183, price_cents: 846, from_id: samara.id, to_id: moscow.id, bus_id: bus.id)
     )
   end
+
+  it 'performs example under 0.05s' do
+    expect { load }.to perform_under(50).ms.warmup(2).times.sample(5).times
+  end
 end

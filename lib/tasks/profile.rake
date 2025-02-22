@@ -3,7 +3,7 @@ namespace :profile do
   task time: :environment do
     require 'benchmark'
 
-    puts(Benchmark.measure { DataLoader.load('fixtures/1M.json') })
+    puts(Benchmark.measure { DataLoader.load('fixtures/10M.json') })
   end
 
   desc 'Ruby prof'

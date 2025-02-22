@@ -7,7 +7,7 @@ RSpec.describe TripsController, type: :controller do
     let!(:trip) { create(:trip, from: city_from, to: city_to, start_time: 1.day.from_now) }
     let!(:other_trip) { create(:trip, from: create(:city), to: create(:city)) }
 
-    context 'with valid city names' do
+    describe 'response' do
       before do
         get :index, params: { from: 'Samara', to: 'Moscow' }
       end
@@ -20,5 +20,11 @@ RSpec.describe TripsController, type: :controller do
         expect(response).to render_template(:index)
       end
     end
+
+    # describe 'limit database queries' do
+    #   it 'performs under 7 queries' do
+    #     expect { get :index, params: { from: 'Samara', to: 'Moscow' } }.not_to exceed_query_limit(7)
+    #   end
+    # end
   end
 end
