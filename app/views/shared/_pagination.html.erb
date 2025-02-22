@@ -1,0 +1,9 @@
+<% if @total_count > @per %>
+  <% if @page < (@total_count / @per) %>
+    <%= link_to 'Следующая страница', trips_path(@from.name, @to.name, page: @page + 1) %>
+  <% end %>
+
+  <% if @page > 1 %>
+    <%= link_to 'Предыдущая страница', trips_path(@from.name, @to.name, page: @page - 1) %>
+  <% end %>
+<% end %>
