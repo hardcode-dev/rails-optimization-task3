@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2019_03_30_193044) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_23_092208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "buses", force: :cascade do |t|
     t.string "number"
@@ -26,6 +27,26 @@ ActiveRecord::Schema[8.0].define(version: 2019_03_30_193044) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_cities_on_name", unique: true
+  end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at", precision: nil
+  end
+
+  create_table "pghero_space_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "schema"
+    t.text "relation"
+    t.bigint "size"
+    t.datetime "captured_at", precision: nil
+    t.index ["database", "captured_at"], name: "index_pghero_space_stats_on_database_and_captured_at"
   end
 
   create_table "services", force: :cascade do |t|
@@ -39,5 +60,6 @@ ActiveRecord::Schema[8.0].define(version: 2019_03_30_193044) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.index ["from_id", "to_id"], name: "index_trips_on_from_id_and_to_id"
   end
 end
