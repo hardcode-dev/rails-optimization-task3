@@ -19,3 +19,7 @@ group :development do
   gem "ruby-prof"
   gem "memory_profiler"
 end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 7.0.0'
+end
