@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_27_171011) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_02_140320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_27_171011) do
   create_table "buses_services", force: :cascade do |t|
     t.integer "bus_id"
     t.integer "service_id"
+    t.index ["bus_id"], name: "index_buses_services_on_bus_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -60,5 +61,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_27_171011) do
     t.integer "duration_minutes"
     t.integer "price_cents"
     t.integer "bus_id"
+    t.index ["from_id", "to_id"], name: "index_trips_on_from_id_and_to_id"
   end
 end

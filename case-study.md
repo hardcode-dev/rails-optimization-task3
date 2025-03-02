@@ -31,7 +31,7 @@ CPU usage
 Построен быстрый цикл обратной связи:
 
 Для импорта:
-Подготовлены тестовые JSON файлы разного размера (small.json, medium.jsom, large.json)
+Подготовлены тестовые JSON файлы разного размера (small.json, medium.json, large.json)
 Добавил lib/profilers/profile.rb (запуск через rails runner lib/profilers/profile.rb), который позволил мне оперативно оценивать изменение метрики.
 
 Для отображения:
@@ -48,7 +48,7 @@ stackprof для профилирования CPU
 
 Для отображения:
 rack-mini-profiler
-bullet для выявления N+1 запросов
+bullet для выявления N+1 запросов (в итоге не стал им пользоваться, инструмента rack-mini-profiler хватило с головой)
 pghero для анализа производительности PostgreSQL
 
 ## Результаты оптимизации
@@ -76,3 +76,30 @@ pghero для анализа производительности PostgreSQL
 ## Итого:
 Время выполнения для small.json  уменьшилось с 27 секунд до 0.3 секунд.
 Время выполнения для large.json составила 12 секунд, что укладывается в бюджет.
+
+### №4 Устранение N+1 запросов
+- rack-mini-profiler
+- Каждая итерация по @trips.each порождала дополнительные запросы к связанным таблицам
+- Метрика изменилась с 12 секунд и 1768 sql запросов на странице "/автобусы/Москва/Самара" на файле large.json до 2.3 секунд и 7 sql запросов
+
+### №5 Медленный запрос 
+```
+  Trip Count (21.2ms)  SELECT COUNT(*) FROM "trips" WHERE "trips"."from_id" = $1 AND "trips"."to_id" = $2  [["from_id", 252], ["to_id", 254]]
+```
+- Логи rails и rack-mini-profiler
+- Проверил как выполняется запрос в pg_hero, используется Seq Scan, Pg_hero предложил добавить индекс CREATE INDEX CONCURRENTLY ON trips (from_id, to_id)
+- Скорость выполнения запроса сократилась с 21ms до 1.5ms
+
+### №6 Медленный запрос
+```
+    SELECT "buses_services".* FROM "buses_services" WHERE "buses_services"."bus_id" IN (...)
+```
+- rack-mini-profiler
+- Проверил как выполняется запрос в pg_hero, используется Seq Scan, Pg_hero предложил добавить индекс CREATE INDEX CONCURRENTLY ON trips (from_id, to_id)
+- Скорость выполнения запроса сократилась с 28ms до 20ms
+
+### №7 Множественный рендеринг partial
+- В логах rack-mini-profiler видно множественный рендеринг одного и того же partial _services.html.erb
+- Текущая реализация в index.html.erb использует цикл с отдельным рендерингом для каждой поездки
+- Заменили на использование collection rendering
+- Время рендеринга страницы сократилось с 2с до 1с
