@@ -1,5 +1,11 @@
-<li><%= "Отправление: #{trip.start_time}" %></li>
-<li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
-<li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
-<li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
-<li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+<ul class="trip-details" data-bus-id="<%= trip.bus.id %>">
+  <li><%= "Отправление: #{trip.start_time}" %></li>
+  <li><%= "Прибытие: #{(Time.parse(trip.start_time) + trip.duration_minutes.minutes).strftime('%H:%M')}" %></li>
+  <li><%= "В пути: #{trip.duration_minutes / 60}ч. #{trip.duration_minutes % 60}мин." %></li>
+  <li><%= "Цена: #{trip.price_cents / 100}р. #{trip.price_cents % 100}коп." %></li>
+  <li><%= "Автобус: #{trip.bus.model} №#{trip.bus.number}" %></li>
+
+  <% if trip.bus.services.present? %>
+    <%= render "services", services: trip.bus.services %>
+  <% end %>
+</ul>

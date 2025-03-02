@@ -30,7 +30,7 @@
 
 Нужно оптимизировать механизм перезагрузки расписания из файла так, чтобы он импортировал файл `large.json` **в пределах минуты**.
 
-`rake reload_json[fixtures/large.json]`
+`rake "reload_json[fixtures/large.json]"`
 
 Для импорта этого объёма данных
 - вам может помочь batch-import
